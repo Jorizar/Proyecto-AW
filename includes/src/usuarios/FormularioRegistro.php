@@ -13,11 +13,10 @@ class FormularioRegistro extends Formulario
     protected function generaCamposFormulario(&$datos)
     {
         $nombreUsuario = $datos['nombreUsuario'] ?? '';
-        $nombre = $datos['nombre'] ?? '';
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['nombreUsuario', 'nombre', 'password', 'password2'], $this->errores, 'span', array('class' => 'error'));
+        $erroresCampos = self::generaErroresCampos(['nombreUsuario', 'password', 'password2'], $this->errores, 'span', array('class' => 'error'));
 
         $html = <<<EOF
         $htmlErroresGlobales
@@ -27,11 +26,6 @@ class FormularioRegistro extends Formulario
                 <label for="nombreUsuario">Nombre de usuario:</label>
                 <input id="nombreUsuario" type="text" name="nombreUsuario" value="$nombreUsuario" />
                 {$erroresCampos['nombreUsuario']}
-            </div>
-            <div>
-                <label for="nombre">Nombre:</label>
-                <input id="nombre" type="text" name="nombre" value="$nombre" />
-                {$erroresCampos['nombre']}
             </div>
             <div>
                 <label for="password">Password:</label>
@@ -62,12 +56,6 @@ class FormularioRegistro extends Formulario
             $this->errores['nombreUsuario'] = 'El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.';
         }
 
-        $nombre = trim($datos['nombre'] ?? '');
-        $nombre = filter_var($nombre, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if ( ! $nombre || mb_strlen($nombre) < 5) {
-            $this->errores['nombre'] = 'El nombre tiene que tener una longitud de al menos 5 caracteres.';
-        }
-
         $password = trim($datos['password'] ?? '');
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password || mb_strlen($password) < 5 ) {
@@ -86,7 +74,7 @@ class FormularioRegistro extends Formulario
             if ($usuario) {
                 $this->errores[] = "El usuario ya existe";
             } else {
-                $usuario = Usuario::crea($nombreUsuario, $password, $nombre, Usuario::USER_ROLE);
+                $usuario = Usuario::crea($nombreUsuario, $password);
                 $app = Aplicacion::getInstance();
                 $app->login($usuario);
             }
