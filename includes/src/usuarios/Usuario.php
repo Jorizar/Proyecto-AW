@@ -144,7 +144,7 @@ class Usuario
 
     private $foto;   //Ruta para cargar la imagen de perfil
 
-    private function __construct($nombreUsuario, $password, $id = null, $rol = null, $email = null, $foto ='./imagenes/fotosPerfil/')
+    private function __construct($nombreUsuario, $password, $id = null, $rol = null, $email = null, $foto = '/img/fotosPerfil/1')
     {
         $this->id = $id;
         $this->nombreUsuario = $nombreUsuario;
