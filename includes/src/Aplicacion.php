@@ -251,6 +251,7 @@ class Aplicacion
         $_SESSION['nombre'] = $user->getNombreUsuario();
         $_SESSION['idUsuario'] = $user->getId();
         $_SESSION['rol'] = $user->getRol();
+        $_SESSION['fotoPerfil'] = $user->getFoto();
     }
 
     public function logout()
@@ -260,6 +261,7 @@ class Aplicacion
         unset($_SESSION['login']);
         unset($_SESSION['nombre']);
         unset($_SESSION['idUsuario']);
+        unset($_SESSION['fotoPerfil']);
         unset($_SESSION['rol']);
 
 
@@ -285,6 +287,18 @@ class Aplicacion
         return $_SESSION['idUsuario'] ?? '';
     }
 
+    public function rol()
+    {
+        $this->compruebaInstanciaInicializada();
+        return $_SESSION['rol'] ?? '';
+    }
+
+    public function fotoPerfil()
+    {
+        $this->compruebaInstanciaInicializada();
+        return $_SESSION['fotoPerfil'] ?? '';
+    }
+    
     public function esAdmin()
     {
         $this->compruebaInstanciaInicializada();

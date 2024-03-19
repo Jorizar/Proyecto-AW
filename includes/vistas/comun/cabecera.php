@@ -27,7 +27,7 @@ function mostrarSaludo()
 ?>
 <header>
     <div class ="logo">
-        <img src="./imagenes/logo_proyecto.jpg" alt="Logo">
+        <img src="./img/logo_proyecto.jpg" alt="Logo">
     </div>
     <div class="saludo-menu-container"> <!-- Contenedor para el saludo y el menú -->
         <nav class="menu">

@@ -4,9 +4,9 @@
  * Parámetros de conexión a la BD
  */
 define('BD_HOST', 'localhost');
-define('BD_NAME', 'aw');
-define('BD_USER', 'aw');
-define('BD_PASS', 'aw');
+define('BD_NAME', 'proyectoaw');
+define('BD_USER', 'proyectoAW');
+define('BD_PASS', '');
 
 /**
  * Parámetros de configuración utilizados para generar las URLs y las rutas a ficheros en la aplicación

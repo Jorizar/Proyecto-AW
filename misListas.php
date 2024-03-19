@@ -1,18 +1,18 @@
 <?php
 require_once __DIR__.'/includes/config.php';
 
-$tituloPagina = 'Admin';
+$tituloPagina = 'Contenido';
 $contenidoPrincipal='';
 
-if ($app->tieneRol('admin')) {
+if ($app->usuarioLogueado()) {
   $contenidoPrincipal=<<<EOS
-    <h1>Consola de administración</h1>
-    <p>Aquí estarían todos los controles de administración</p>
+    <h2>Mis listas de películas</h2>
+    <p>Aquí podrás crear listas de películas, así como eliminar y agregar películas a estas</p>
   EOS;
 } else {
   $contenidoPrincipal=<<<EOS
-  <h1>Acceso Denegado!</h1>
-  <p>No tienes permisos suficientes para administrar la web.</p>
+    <h2>Usuario no registrado!</h2>
+    <p>Debes iniciar sesión para ver el contenido.</p>
   EOS;
 }
 
