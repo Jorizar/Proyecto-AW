@@ -26,8 +26,19 @@ function mostrarSaludo()
 
 ?>
 <header>
-    <h1><?= $params['cabecera'] ?? 'Mi gran página web' ?></h1>
-    <div class="saludo">
-        <?= mostrarSaludo(); ?>
+    <div class ="logo">
+        <img src="./imagenes/logo_proyecto.jpg" alt="Logo">
+    </div>
+    <div class="saludo-menu-container"> <!-- Contenedor para el saludo y el menú -->
+        <nav class="menu">
+            <a href="<?= $app->resuelve('/index.php')?>">Inicio</a>
+            <a href="<?= $app->resuelve('/admin.php')?>">Administrar</a>
+            <a href="<?= $app->resuelve('/noticias.php')?>">Noticias</a>
+            <a href="<?= $app->resuelve('/peliculas_fav.php')?>"> Películas <img src="/img/fav.png" alt="Películas" width="50" height="50"></a>
+            <a href="<?= $app->resuelve('/perfil.php')?>">Perfil</a>
+        </nav>
+        <div class="saludo">
+            <?= mostrarSaludo(); ?>
+        </div>
     </div>
 </header>
