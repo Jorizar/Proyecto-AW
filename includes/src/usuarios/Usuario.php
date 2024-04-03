@@ -204,4 +204,68 @@ class Usuario
         }
         return false;
     }
+
+
+    public function cambiaFoto($nuevaFoto)
+    {
+        $this->foto = $nuevaFoto;
+        return self::actualizaFoto($this->id, $nuevaFoto);
+    }
+
+    // Actualiza la ruta de la foto en la base de datos
+    private static function actualizaFoto($idUsuario, $nuevaFoto)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE Usuarios SET foto='%s' WHERE user_id=%d",
+            $conn->real_escape_string($nuevaFoto),
+            $idUsuario
+        );
+        if ($conn->query($query)) {
+            return true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarNombre($idUsuario, $nuevoNombre)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE Usuarios SET username='%s' WHERE user_id=%d",
+            $conn->real_escape_string($nuevoNombre),
+            $idUsuario
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+
+    }
+
+
+    public static function cambiarEmail($idUsuario, $nuevoEmail)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE Usuarios SET email='%s' WHERE user_id=%d",
+            $conn->real_escape_string($nuevoEmail),
+            $idUsuario
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+
 }
+
+
+    
+
+

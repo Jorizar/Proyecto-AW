@@ -25,6 +25,8 @@ function mostrarSaludo()
 }
 
 ?>
+
+<body>
 <header>
     <div class ="logo">
         <img src="./img/logo_proyecto.jpg" alt="Logo">
@@ -42,3 +44,4 @@ function mostrarSaludo()
         </div>
     </div>
 </header>
+</body>
