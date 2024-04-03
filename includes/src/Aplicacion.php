@@ -252,6 +252,7 @@ class Aplicacion
         $_SESSION['idUsuario'] = $user->getId();
         $_SESSION['rol'] = $user->getRol();
         $_SESSION['fotoPerfil'] = $user->getFoto();
+        $_SESSION['email'] = $user->getEmail();
     }
 
     public function logout()
@@ -262,6 +263,7 @@ class Aplicacion
         unset($_SESSION['nombre']);
         unset($_SESSION['idUsuario']);
         unset($_SESSION['fotoPerfil']);
+        unset($_SESSION['email']);
         unset($_SESSION['rol']);
 
 
@@ -297,6 +299,11 @@ class Aplicacion
     {
         $this->compruebaInstanciaInicializada();
         return $_SESSION['fotoPerfil'] ?? '';
+    }
+
+    public function email(){
+        $this->compruebaInstanciaInicializada();
+        return $_SESSION['email'] ?? '';
     }
     
     public function esAdmin()
