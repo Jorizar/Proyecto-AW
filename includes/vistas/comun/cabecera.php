@@ -37,7 +37,7 @@ function mostrarSaludo()
             <a href="<?= $app->resuelve('/index.php')?>">Inicio</a>
             <a href="<?= $app->resuelve('/admin.php')?>">Administrar</a>
             <a href="<?= $app->resuelve('/noticias.php')?>">Noticias</a>
-            <a href="<?= $app->resuelve('/peliculas_fav.php')?>"> Películas <img src="/img/fav.png" alt="Películas" width="50" height="50"></a>
+            <a href="<?= $app->resuelve('/peliculas_fav.php')?>"> Películas <img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
             <a href="<?= $app->resuelve('/perfil.php')?>">Perfil</a>
         </nav>
         <div class="saludo">
