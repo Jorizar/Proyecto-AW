@@ -30,7 +30,7 @@ class FormularioLogin extends Formulario
                 {$erroresCampos['nombreUsuario']}
             </div>
             <div>
-                <label for="password">Password:</label>
+                <label for="password">Contraseña:</label>
                 <input id="password" type="password" name="password" />
                 {$erroresCampos['password']}
             </div>
@@ -54,14 +54,14 @@ class FormularioLogin extends Formulario
         $password = trim($datos['password'] ?? '');
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password || empty($password) ) {
-            $this->errores['password'] = 'El password no puede estar vacío.';
+            $this->errores['password'] = 'La contraseña no puede estar vacío.';
         }
         
         if (count($this->errores) === 0) {
             $usuario = Usuario::login($nombreUsuario, $password);
         
             if (!$usuario) {
-                $this->errores[] = "El usuario o el password no coinciden";
+                $this->errores[] = "El usuario o la contraseña no coinciden";
             } else {
                 $app = Aplicacion::getInstance();
                 $app->login($usuario);

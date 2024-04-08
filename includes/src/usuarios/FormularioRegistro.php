@@ -28,12 +28,12 @@ class FormularioRegistro extends Formulario
                 {$erroresCampos['nombreUsuario']}
             </div>
             <div>
-                <label for="password">Password:</label>
+                <label for="password">Contraseña:</label>
                 <input id="password" type="password" name="password" />
                 {$erroresCampos['password']}
             </div>
             <div>
-                <label for="password2">Reintroduce el password:</label>
+                <label for="password2">Repite la contraseña:</label>
                 <input id="password2" type="password" name="password2" />
                 {$erroresCampos['password2']}
             </div>
@@ -59,13 +59,13 @@ class FormularioRegistro extends Formulario
         $password = trim($datos['password'] ?? '');
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password || mb_strlen($password) < 5 ) {
-            $this->errores['password'] = 'El password tiene que tener una longitud de al menos 5 caracteres.';
+            $this->errores['password'] = 'La contraseña tiene que tener una longitud de al menos 5 caracteres.';
         }
 
         $password2 = trim($datos['password2'] ?? '');
         $password2 = filter_var($password2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password2 || $password != $password2 ) {
-            $this->errores['password2'] = 'Los passwords deben coincidir';
+            $this->errores['password2'] = 'Las contraseñas deben coincidir';
         }
 
         if (count($this->errores) === 0) {
