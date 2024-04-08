@@ -38,9 +38,9 @@ class FormularioRegistro extends Formulario
                 {$erroresCampos['password2']}
             </div>
             <div>
-            <label for="email">Introduce el email:</label>
-            <input id="email" type="email" name="email" />
-            {$erroresCampos['email']}
+                <label for="email">Introduce el email:</label>
+                <input id="email" type="email" name="email" />
+                {$erroresCampos['email']}
         </div>
             <div>
                 <button type="submit" name="registro">Registrar</button>
@@ -52,43 +52,44 @@ class FormularioRegistro extends Formulario
     
 
     protected function procesaFormulario(&$datos)
-    {
-        $this->errores = [];
+{
+    $this->errores = [];
 
-        $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
-        $nombreUsuario = filter_var($nombreUsuario, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if ( ! $nombreUsuario || mb_strlen($nombreUsuario) < 5) {
-            $this->errores['nombreUsuario'] = 'El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.';
-        }
+    $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
+    $nombreUsuario = filter_var($nombreUsuario, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    if ( ! $nombreUsuario || mb_strlen($nombreUsuario) < 5) {
+        $this->errores['nombreUsuario'] = 'El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.';
+    }
 
-        $password = trim($datos['password'] ?? '');
-        $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if ( ! $password || mb_strlen($password) < 5 ) {
-            $this->errores['password'] = 'La contraseña tiene que tener una longitud de al menos 5 caracteres.';
-        }
+    $password = trim($datos['password'] ?? '');
+    $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    if ( ! $password || mb_strlen($password) < 5 ) {
+        $this->errores['password'] = 'La contraseña tiene que tener una longitud de al menos 5 caracteres.';
+    }
 
-        $password2 = trim($datos['password2'] ?? '');
-        $password2 = filter_var($password2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if ( ! $password2 || $password != $password2 ) {
-            $this->errores['password2'] = 'Las contraseñas deben coincidir';
-        }
+    $password2 = trim($datos['password2'] ?? '');
+    $password2 = filter_var($password2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    if ( ! $password2 || $password != $password2 ) {
+        $this->errores['password2'] = 'Las contraseñas deben coincidir';
+    }
 
-        $email = trim($datos['email'] ?? '');
-        $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        if ( ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->errores['email'] = 'El email no es válido';
-        }
+    $email = trim($datos['email'] ?? '');
+    $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    if ( ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $this->errores['email'] = 'El email no es válido';
+    }
 
-        if (count($this->errores) === 0) {
-            $usuario = Usuario::buscaUsuario($nombreUsuario);
-	
-            if ($usuario) {
-                $this->errores[] = "El usuario ya existe";
-            } else {
-                $usuario = Usuario::crea($nombreUsuario, $password);
-                $app = Aplicacion::getInstance();
-                $app->login($usuario);
-            }
+    if (count($this->errores) === 0) {
+        $usuario = Usuario::buscaUsuario($nombreUsuario);
+    
+        if ($usuario) {
+            $this->errores[] = "El usuario ya existe";
+        } else {
+            // Se pasa el email al método crea() de Usuario
+            $usuario = Usuario::crea($nombreUsuario, $password, $email);
+            $app = Aplicacion::getInstance();
+            $app->login($usuario);
         }
     }
+}
 }

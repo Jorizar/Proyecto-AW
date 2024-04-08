@@ -19,7 +19,12 @@ INSERT INTO `RolesUsuario` (`usuario`, `rol`) VALUES
   user: userpass
   admin: adminpass
 */
-INSERT INTO `Usuarios` (`id`, `nombreUsuario`, `nombre`, `password`) VALUES
-(1, 'admin', 'Administrador', '$2y$10$O3c1kBFa2yDK5F47IUqusOJmIANjHP6EiPyke5dD18ldJEow.e0eS'),
-(2, 'user', 'Usuario', '$2y$10$uM6NtF.f6e.1Ffu2rMWYV.j.X8lhWq9l8PwJcs9/ioVKTGqink6DG');
+INSERT INTO `usuarios` (`username`, `password`, `user_id`, `rol`, `email`, `foto`) VALUES
+('user', 'user', 1, 'premium', 'user@gmail.com', './img/fotosPerfil/2.png'),
+('admin', 'admin', 2, 'admin', 'admin@gmail.com', './img/fotosPerfil/admin.png'),
+('critico', 'critico', 3, 'critico', 'critico@gmail.com', './img/fotosPerfil/1.png'),
+('free', 'user2', 4, 'premium', 'user2@gmail.com', './img/fotosPerfil/1.png'),
+('premium', 'premium', 5, 'premium', 'premium@gmail.com', './img/fotosPerfil/1.png'),
+('quentin_tarantino', 'malditosBastardos', 7, 'director', 'quentin@gmail.com', './img/fotosPerfil/quentin.png'),
+('bradpitt', 'bradpittcontra', 8, 'actor', 'bradpitt@gmail.com', './img/fotosPerfil/brad.png');
 
