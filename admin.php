@@ -18,3 +18,5 @@ if ($app->tieneRol('admin')) {
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
+
+ddsfdg
