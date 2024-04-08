@@ -95,7 +95,7 @@ class Usuario
             , $conn->real_escape_string($usuario->nombreUsuario)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->rol)
-            , $conn->real_escape_string($usuario->email),
+            , $conn->real_escape_string($usuario->email)
             , $conn->real_escape_string($usuario->foto)
             , $usuario->id
         );
