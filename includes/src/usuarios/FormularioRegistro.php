@@ -16,7 +16,7 @@ class FormularioRegistro extends Formulario
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['nombreUsuario', 'password', 'password2'], $this->errores, 'span', array('class' => 'error'));
+        $erroresCampos = self::generaErroresCampos(['nombreUsuario', 'password', 'password2', 'email'], $this->errores, 'span', array('class' => 'error'));
 
         $html = <<<EOF
         $htmlErroresGlobales
@@ -37,6 +37,11 @@ class FormularioRegistro extends Formulario
                 <input id="password2" type="password" name="password2" />
                 {$erroresCampos['password2']}
             </div>
+            <div>
+            <label for="email">Introduce el email:</label>
+            <input id="email" type="email" name="email" />
+            {$erroresCampos['email']}
+        </div>
             <div>
                 <button type="submit" name="registro">Registrar</button>
             </div>
@@ -66,6 +71,12 @@ class FormularioRegistro extends Formulario
         $password2 = filter_var($password2, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password2 || $password != $password2 ) {
             $this->errores['password2'] = 'Las contraseñas deben coincidir';
+        }
+
+        $email = trim($datos['email'] ?? '');
+        $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        if ( ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->errores['email'] = 'El email no es válido';
         }
 
         if (count($this->errores) === 0) {
