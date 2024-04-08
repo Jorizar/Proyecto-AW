@@ -54,7 +54,7 @@ class FormularioLogin extends Formulario
         $password = trim($datos['password'] ?? '');
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password || empty($password) ) {
-            $this->errores['password'] = 'La contraseña no puede estar vacío.';
+            $this->errores['password'] = 'La contraseña no puede estar vacía.';
         }
         
         if (count($this->errores) === 0) {
