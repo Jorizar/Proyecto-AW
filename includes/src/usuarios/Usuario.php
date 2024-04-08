@@ -12,15 +12,15 @@ class Usuario
     {
         $usuario = self::buscaUsuario($nombreUsuario);
         if ($usuario && $usuario->compruebaPassword($password)) {
-           return $usuario;
+            return $usuario;
         }
         return false;
     }
     
-    //Se utiliza cuando se registra un nuevo usuario
     public static function crea($nombreUsuario, $password)
     {
-        $user = new Usuario($nombreUsuario, self::hashPassword($password));
+        $hashedPassword = self::hashPassword($password);
+        $user = new Usuario($nombreUsuario, $hashedPassword);
         return $user->guarda();
     }
 
@@ -41,6 +41,7 @@ class Usuario
         }
         return $result;
     }
+
 
     public static function buscaPorId($idUsuario)
     {
