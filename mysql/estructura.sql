@@ -76,7 +76,7 @@ CREATE TABLE `peliculas` (
 
 CREATE TABLE `usuarios` (
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `user_id` int(2) UNSIGNED NOT NULL,
   `rol` varchar(20) NOT NULL,
   `email` varchar(35) DEFAULT NULL,
