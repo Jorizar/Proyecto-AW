@@ -22,11 +22,11 @@ if ($app->usuarioLogueado()) {
     <h2>Mi Perfil</h2>
     <div style="display: flex; align-items: center;">
         <div style="margin-right: 20px;">
-            <img src="${fotoPerfil}" alt='Foto de perfil' width='100' height='100'>;
+            <img src="${fotoPerfil}" alt='Foto de perfil' width='100' height='100'>
         </div>
         <div>
-            <p>@usuario: ${nombreUsuario}</p>;                        
-            <p>Plan: ${plan}</p>;
+            <p>@usuario: ${nombreUsuario}</p>                       
+            <p>Plan: ${plan}</p>
         </div>
     </div>
     <div style="margin-top: 20px;">
