@@ -7,17 +7,18 @@ TRUNCATE TABLE `usuarios`;
 
 
 /*
-  user: userpass
+  user: userpass aa
   admin: adminpass
 */
 INSERT INTO `usuarios` (`username`, `password`, `user_id`, `rol`, `email`, `foto`) VALUES
-('user', 'user', 1, 'premium', 'user@gmail.com', './img/fotosPerfil/2.png'),
-('admin', 'admin', 2, 'admin', 'admin@gmail.com', './img/fotosPerfil/admin.png'),
-('critico', 'critico', 3, 'critico', 'critico@gmail.com', './img/fotosPerfil/1.png'),
-('free', 'user2', 4, 'premium', 'user2@gmail.com', './img/fotosPerfil/1.png'),
-('premium', 'premium', 5, 'premium', 'premium@gmail.com', './img/fotosPerfil/1.png'),
-('quentin_tarantino', 'malditosBastardos', 7, 'director', 'quentin@gmail.com', './img/fotosPerfil/quentin.png'),
-('bradpitt', 'bradpittcontra', 8, 'actor', 'bradpitt@gmail.com', './img/fotosPerfil/brad.png');
+('user', '$2a$12$WF1/Gum.Y7voVfeQXFzJgOS.b.8T9MoFLUlv8/pPnVltM2PV8PtHS', 1, 'premium', 'user@gmail.com', './img/fotosPerfil/2.png'),
+('admin', '$2a$12$Gk7ChJIjOlbckeYWvQgWEeaR7dLOirztJPWszesu2Trxb3cgdwJrm', 2, 'admin', 'admin@gmail.com', './img/fotosPerfil/admin.png'),
+('critico', '$2a$12$xZ8cPwpRwobjsLwknsMAp.X8IFFGVUZs2BmcrtbXPP.5V.L.RNHxe', 3, 'critico', 'critico@gmail.com', './img/fotosPerfil/1.png'),
+('free', '$2a$12$jdFGSCXyzLyl/3dAHho5bu7L2tWPqEIQ08oPLkBO5XaxOme.QNMd.', 4, 'premium', 'user2@gmail.com', './img/fotosPerfil/1.png'),
+('premium', '$2a$12$UdlTk8bnmPvPItUbKrOHT.sAj0s0LMdIVauHVWcxLQg2yxr64GeR2
+', 5, 'premium', 'premium@gmail.com', './img/fotosPerfil/1.png'),
+('quentin_tarantino', '$2a$12$n1gsoBoizdiuHSlKjPtlW.yIKVq03QxHBuDYH.mxJhGo2noZOd4OO', 7, 'director', 'quentin@gmail.com', './img/fotosPerfil/quentin.png'),
+('bradpitt', '$2a$12$4TRoJW15GplwXxngzVWYI.Runn1oa3vHlqUi6kCQlMbBC9iz/weq.', 8, 'actor', 'bradpitt@gmail.com', './img/fotosPerfil/brad.png');
 
 --
 -- Volcado de datos para la tabla `peliculas`
