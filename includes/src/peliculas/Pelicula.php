@@ -60,7 +60,7 @@ class Pelicula
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Pelicula($fila['titulo'], $fila['director'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
+                $result = new Pelicula($fila['titulo'], $fila['director'], $fila['id'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
             }
             $rs->free();
         } else {
@@ -97,26 +97,36 @@ class Pelicula
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE peliculas SET titulo = '%s', director='%s', annio='%d', genero='%s', sinopsis='%s', portada='%s', reparto = '%s', Val_IMDb = '%d' WHERE id=%d"
+    
+        // Check if $conn is a valid connection
+        if ($conn->connect_error) {
+            error_log("Connection failed: " . $conn->connect_error);
+            return false;
+        }
+    
+        // Prepare query
+        $query = sprintf("UPDATE peliculas SET titulo = '%s', director='%s', annio='%d', genero='%s', sinopsis='%s', portada='%s', reparto = '%s', Val_IMDb = '%d' WHERE id=%d"
             , $conn->real_escape_string($pelicula->titulo)
             , $conn->real_escape_string($pelicula->director)
-            , $conn->real_escape_string($pelicula->annio)
-            , $pelicula->genero,
-            , $pelicula->sinopsis
-            , $conn->real_escape_string($portada)
-            , $pelicula->reparto
-            , $pelicula->
+            , $pelicula->annio
+            , $conn->real_escape_string($pelicula->genero)
+            , $conn->real_escape_string($pelicula->sinopsis)
+            , $conn->real_escape_string($pelicula->portada) // Assuming $portada was meant to be $pelicula->portada
+            , $conn->real_escape_string($pelicula->reparto)
+            , $pelicula->Val_IMDb
             , $pelicula->id
         );
-        if ( $conn->query($query) ) {
+    
+        // Execute query
+        if ($conn->query($query) === TRUE) {
             return $pelicula;
-        }
-        else {
+        } else {
+            // Log errors
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
     }
-     
+    
     private static function borra($pelicula)
     {
         return self::borraPorId($pelicula->id);
@@ -153,8 +163,6 @@ class Pelicula
     private $reparto;  //JSON con el reparto de la película
 
     private $val_imdb;   //Valoración IMDb
-
-    $titulo, $director, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb
 
     private function __construct($titulo, $director, $id = null, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb)
     {
