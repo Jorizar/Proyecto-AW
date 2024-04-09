@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
         $contenidoPrincipal = <<<EOS
         <div style="display: flex; align-items: center; justify-content: start; margin-bottom: 20px;">
             <h2 style="margin-right: 20px;">$titulo ($anno)</h2>
-            <form action="add_favoritos.php" method="post" style="margin-top: 0;">
+            <form action="procesar_favorito.php" method="post" style="margin-top: 0;">
                 <input type="hidden" name="movieId" value="$movieId">
                 <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
             </form>
