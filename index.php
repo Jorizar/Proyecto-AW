@@ -24,6 +24,18 @@ $peliculas = [
     // Agregar más películas según sea necesario
 ];
 
+//Formulario de búsqueda para el buscador
+$formBusqueda = new \es\ucm\fdi\aw\peliculas\FormularioBuscaPel();
+$formBusqueda = $formBusqueda->gestiona();
+
+//Agregar el buscador al contenido de la página
+$contenidoPrincipal .= <<<BUSCADOR
+        <div class="buscador">
+        <h1>Buscador</h1>
+        $formBusqueda
+        </div>
+BUSCADOR;
+
 // Agregar el encabezado "Peliculas destacadas de la semana"
 $contenidoPrincipal .= '<div class="destacadas">';
 $contenidoPrincipal .= '<h1>Peliculas destacadas de la semana</h1>';
