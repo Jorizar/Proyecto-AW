@@ -69,6 +69,26 @@ class Pelicula
         return $result;
     }
 
+    public static function buscaTituloPorId($idPelicula)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT titulo FROM peliculas WHERE id = %d", $idPelicula);
+        $rs = $conn->query($query);
+        $titulo = null; // Default to null if not found
+    
+        if ($rs) {
+            $fila = $rs->fetch_assoc();
+            if ($fila) {
+                $titulo = $fila['titulo']; // Retrieve the title
+            }
+            $rs->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $titulo; // Return the movie title or null if not found
+    }
+    
+
     //Inserta una pelicula nueva en la base de datos
     private static function inserta($pelicula)
     {
