@@ -73,6 +73,16 @@ CREATE TABLE `peliculas` (
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+--
+-- Estructura de tabla para la tabla `generos`
+--
+
+CREATE TABLE `generos` (
+  `id` int(2) UNSIGNED NOT NULL,
+  `genero` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 CREATE TABLE `usuarios` (
   `username` varchar(20) NOT NULL,
   `password` varchar(80) NOT NULL,
