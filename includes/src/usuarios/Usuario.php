@@ -17,12 +17,33 @@ class Usuario
         return false;
     }
     
-    public static function crea($nombreUsuario, $password)
+    public static function crea($nombreUsuario, $password, $id, $rol, $email, $foto)
     {
+        $foto = './img/fotosPerfil/1';
+        //$id = self::obtenerSiguienteId();
         $hashedPassword = self::hashPassword($password);
-        $user = new Usuario($nombreUsuario, $hashedPassword);
+        $user = new Usuario($nombreUsuario, $hashedPassword, $id, $rol, $email, $foto);
         return $user->guarda();
     }
+/*
+    private static function obtenerSiguienteId()
+    {
+    $conn = Aplicacion::getInstance()->getConexionBd();
+    $query = "SELECT MAX(user_id) AS max_id FROM Usuarios";
+    $rs = $conn->query($query);
+
+    if ($rs && $rs->num_rows > 0) {
+        $fila = $rs->fetch_assoc();
+        // Incrementa el último ID en 1 para obtener el siguiente ID disponible
+        $siguienteId = $fila['max_id'] + 1;
+    } else {
+        // Si no hay usuarios en la tabla, comienza desde el ID 1
+        $siguienteId = 1;
+    }
+
+    return $siguienteId;
+    }
+    */
 
     public static function buscaUsuario($nombreUsuario)
     {
@@ -145,7 +166,7 @@ class Usuario
 
     private $foto;   //Ruta para cargar la imagen de perfil
 
-    private function __construct($nombreUsuario, $password, $id = null, $rol = null, $email = null, $foto = './img/fotosPerfil/1')
+    private function __construct($nombreUsuario, $password, $id, $rol, $email, $foto)
     {
         $this->id = $id;
         $this->nombreUsuario = $nombreUsuario;
