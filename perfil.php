@@ -5,8 +5,6 @@ $tituloPagina = 'Mi Perfil';
 $contenidoPrincipal='';
 
 
-
-
 if ($app->usuarioLogueado()) {
     $nombreUsuario = $app->nombreUsuario();
     $plan = $app->rol();
