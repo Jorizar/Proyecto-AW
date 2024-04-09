@@ -4,7 +4,6 @@ require_once __DIR__.'/includes/config.php';
 $tituloPagina = 'Mi Perfil';
 $contenidoPrincipal='';
 
-
 if ($app->usuarioLogueado()) {
     $nombreUsuario = $app->nombreUsuario();
     $plan = $app->rol();
@@ -17,6 +16,7 @@ if ($app->usuarioLogueado()) {
     //$formCambioPlan = $formCambioPlan->gestiona();
     $urlComentarios = $app->resuelve('/misComentarios.php');
     $urlListas = $app->resuelve('/misListas.php');
+    $cerrarSesionUrl = $app->resuelve('/logout.php'); // URL para cerrar sesión
 
     $contenidoPrincipal = <<<EOS
     <h2>Mi Perfil</h2>
@@ -35,10 +35,8 @@ if ($app->usuarioLogueado()) {
             <a href="${cambioPlanUrl}">Cambiar Plan</a><br>
             <a href="${urlComentarios}">Mis Comentarios</a><br>
             <a href="${urlListas}">Mis Listas</a><br>
-            <!-- Botón para cerrar sesión -->
-            <form action="{$app->resuelve('logout.php')}" method="post">
-                <input type="submit" value="Cerrar Sesión">
-            </form>
+            <!-- Enlace para cerrar sesión -->
+            <a href="${cerrarSesionUrl}">Cerrar Sesión</a>
         </div>
     </div>
 EOS;
@@ -52,4 +50,5 @@ EOS;
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
+
 ?>
