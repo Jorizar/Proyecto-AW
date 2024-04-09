@@ -15,62 +15,67 @@ header {
 	height: 100px;
 	background-color: #000000;
 	color: white;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 header .menu {
-    display: flex;
-    justify-content: flex-end; /* Alinear a la derecha */
+	display: flex;
+	justify-content: flex-end;
+	/* Alinear a la derecha */
 }
 
 header .saludo-menu-container {
-    display: flex;
-    align-items: center; /* Alinea los elementos verticalmente */
+	display: flex;
+	align-items: center;
+	/* Alinea los elementos verticalmente */
 }
 
 header .saludo {
-    padding: 10px 24px;
+	padding: 10px 24px;
 }
 
-
 header .menu a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    margin-left: 20px; /* Espacio entre los elementos */
-	display: flex; /* Para permitir alinear elementos verticalmente */
-    align-items: center; /* Alinea verticalmente los elementos */
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+	margin-left: 20px;
+	/* Espacio entre los elementos */
+	display: flex;
+	/* Para permitir alinear elementos verticalmente */
+	align-items: center;
+	/* Alinea verticalmente los elementos */
 }
 
 header .menu a img {
-    vertical-align: middle; /* Alinea verticalmente con el texto */
-    margin-left: 5px; /* Ajusta el espacio entre el texto y la imagen */
+	vertical-align: middle;
+	/* Alinea verticalmente con el texto */
+	margin-left: 5px;
+	/* Ajusta el espacio entre el texto y la imagen */
 	width: 20px;
 	height: auto;
 }
 
-
-
-header a, header a:visited {
+header a,
+header a:visited {
 	color: white;
 	font-weight: bold;
 	text-decoration: none;
-} 
+}
 
 header a:hover {
 	color: red;
 	font-weight: bold;
 	text-decoration: underline;
-} 
-
-header .logo img {
-    width: 120px; /* Define el ancho del logo */
-    height: auto; /* Mantiene la proporción de aspecto */
 }
 
+header .logo img {
+	width: 120px;
+	/* Define el ancho del logo */
+	height: auto;
+	/* Mantiene la proporción de aspecto */
+}
 
 nav {
 	padding: 10px;
@@ -79,17 +84,17 @@ nav {
 	background-color: #000000;
 }
 
-nav a, nav a:visited {
+nav a,
+nav a:visited {
 	color: rgba(181, 184, 0, 0.615);
 	font-weight: bold;
 	text-decoration: none;
-} 
+}
 
 nav a:hover {
 	color: red;
 	text-decoration: underline;
-} 
-
+}
 
 aside {
 	padding: 10px;
@@ -107,7 +112,7 @@ main {
 	background-color: white;
 }
 
-footer	 {
+footer {
 	clear: both;
 	padding: 20px;
 	background-color: #303030;
@@ -115,32 +120,29 @@ footer	 {
 	text-align: center;
 }
 
-/*div.saludo {
-	width: 40%;
-	text-align: right;
-}
-*/
-fieldset {
-	border: 1px solid black;
-	width: 15em;
-	margin: 0 auto;
-}
-
-legend {
-	color: #fff;
-	background: #303030;
-	border: 1px solid black;
-	padding: 2px 6px;
-} 
-
-label {
-	width: 4em;
-	float: left;
-	text-align: right;
-	margin-right: 0.5em;
-	display: block;
+/* Estilos para los contenedores de películas */
+.peliculas-container {
+	max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
+    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
+	display: flex; /* Utilizamos flexbox para alinear los elementos */
+	flex-wrap: wrap; /* Hacemos que los elementos se envuelvan a la siguiente línea */
+	justify-content: space-between; /* Espacio entre las películas */
+	
 }
 
-button {
-	margin-left: 100px;
-} 
+/* Estilos para las imágenes de las películas */
+.peliculas-container img {
+    max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
+    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
+}
+
+/* Estilos para cada formulario de película */
+.peliculas-container form {
+	width: calc(25% - 10px); /* Establecemos el ancho de cada formulario (25% del contenedor menos el espacio entre ellas) */
+	margin-bottom: 20px; /* Espacio entre las filas */
+}
+
+/* Estilos para los botones */
+.peliculas-container button {
+	width: 100%; /* Botones ocupan todo el ancho del formulario */
+}
