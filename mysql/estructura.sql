@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS `listas` (
 --
 
 CREATE TABLE IF NOT EXISTS `noticias` (
-  `titulo` varchar(100) NOT NULL,
+  `titulo` varchar(1000) NOT NULL,
   `post_id` int(2) UNSIGNED NOT NULL,
-  `portada` varchar(50) DEFAULT NULL,
+  `portada` varchar(100) DEFAULT NULL,
   `texto` text NOT NULL,
   `autor` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
