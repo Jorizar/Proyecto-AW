@@ -62,13 +62,12 @@ CREATE TABLE `peliculas` (
   `director` varchar(35) NOT NULL,
   `id` int(2) UNSIGNED NOT NULL,
   `annio` year(4) NOT NULL,
-  `genero` varchar(20) NOT NULL,
+  `genero` int(2) UNSIGNED NOT NULL,
   `sinopsis` text NOT NULL,
   `portada` varchar(100) NOT NULL,
   `reparto` longtext NOT NULL,
   `Val_IMDb` decimal(2,1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 --
 -- Estructura de tabla para la tabla `usuarios`
@@ -76,7 +75,7 @@ CREATE TABLE `peliculas` (
 
 CREATE TABLE `usuarios` (
   `username` varchar(20) NOT NULL,
-  `password` varchar(2000) NOT NULL,
+  `password` varchar(80) NOT NULL,
   `user_id` int(2) UNSIGNED NOT NULL,
   `rol` varchar(20) NOT NULL,
   `email` varchar(35) DEFAULT NULL,
