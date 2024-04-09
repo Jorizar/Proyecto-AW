@@ -76,10 +76,23 @@ CREATE TABLE `peliculas` (
 
 CREATE TABLE `usuarios` (
   `username` varchar(20) NOT NULL,
-  `password` varchar(200) NOT NULL,
+  `password` varchar(2000) NOT NULL,
   `user_id` int(2) UNSIGNED NOT NULL,
   `rol` varchar(20) NOT NULL,
   `email` varchar(35) DEFAULT NULL,
   `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `user_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
