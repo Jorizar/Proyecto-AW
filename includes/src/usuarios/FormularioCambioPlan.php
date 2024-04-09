@@ -8,12 +8,11 @@ class FormularioCambioPlan extends Formulario
 {
     public function __construct() {
         parent::__construct('formCambioPlan', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/perfil.php')]);
-        $this->usuario = $usuario;
     }
     
     protected function generaCamposFormulario(&$datos)
     {
-        $nombreUsuario = $this->usuario->getNombreUsuario();
+ 
         // Se genera el HTML asociado a los campos del formulario.
         $html = <<<EOF
         <fieldset>
@@ -36,34 +35,26 @@ class FormularioCambioPlan extends Formulario
 
     protected function procesaFormulario(&$datos)
     {
-    // Verifica si se ha enviado el plan seleccionado
-    if (isset($datos['nuevo_plan'])) {
-        // Obtiene el nuevo plan seleccionado por el usuario
-        $nuevoPlan = $datos['nuevo_plan'];
-        
-        // Obtiene el plan actual del usuario
-        $planActual = $_SESSION["rol"];
+        // Verifica si se ha enviado el plan seleccionado
+        if (isset($datos['nuevo_plan'])) {
+            // Obtiene el nuevo plan seleccionado por el usuario
+            $nuevoPlan = $datos['nuevo_plan'];
+            
+            // Obtiene el plan actual del usuario
+            $planActual = $_SESSION["rol"];
 
-        // Verifica si el nuevo plan es igual al plan actual
-        if ($nuevoPlan === $planActual) {
-            // Muestra un mensaje de error
-            $this->errores[] = "Ese es tu plan actual.";
-        } else {
-            // Actualiza el plan del usuario en la sesión
-            $_SESSION["rol"] = $nuevoPlan;
-    
-            // Actualiza el plan del usuario en la base de datos
-            $usuario = Usuario::buscaUsuario($_SESSION['username']); 
-            $usuario->setRol($nuevoPlan);
-            $usuario->guarda(); 
+            // Verifica si el nuevo plan es igual al plan actual
+            if ($nuevoPlan === $planActual) {
+                // Muestra un mensaje de error
+                $this->errores[] = "Ese es tu plan actual.";
+            } else {
+                // Actualiza el plan del usuario en la sesión
+                $_SESSION["rol"] = $nuevoPlan;
+            }
         }
+
+        // Redirige al usuario de vuelta a la página de perfil
+        header("Location: " . $this->urlRedireccion);
+        exit;
     }
-
-    // Redirige al usuario de vuelta a la página de perfil
-    header("Location: " . $this->urlRedireccion);
-    exit;
-    }
-
-
-
 }
