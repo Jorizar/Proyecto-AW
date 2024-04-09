@@ -14,7 +14,9 @@ if ($app->tieneRol('admin')) {
   <h1>Acceso Denegado!</h1>
   <p>No tienes permisos suficientes para administrar la web.</p>
   EOS;
+  
 }
+
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
