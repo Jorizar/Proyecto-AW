@@ -9,8 +9,8 @@ if ($app->usuarioLogueado()) {
     $nombreUsuario = $app->nombreUsuario();
     $plan = $app->rol();
     $fotoPerfil = $app->fotoPerfil();
-    $urlDatos = $app->resuelve('/includes/src/usuarios/FormularioCambioDatos.php');
-    $urlPlan = $app->resuelve('/includes/src/usuarios/FormularioCambioPlan.php');
+    $urlDatos = $app->resuelve('./includes/src/usuarios/FormularioCambioDatos.php');
+    $urlPlan = $app->resuelve('./includes/src/usuarios/FormularioCambioPlan.php');
     $urlComentarios = $app->resuelve('/misComentarios.php');
     $urlListas = $app->resuelve('/misListas.php');
 
