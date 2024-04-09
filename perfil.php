@@ -18,26 +18,31 @@ if ($app->usuarioLogueado()) {
     $urlComentarios = $app->resuelve('/misComentarios.php');
     $urlListas = $app->resuelve('/misListas.php');
 
-    $contenidoPrincipal=<<<EOS
+    $contenidoPrincipal = <<<EOS
     <h2>Mi Perfil</h2>
     <div style="display: flex; align-items: center;">
         <div style="margin-right: 20px;">
-            <img src="${fotoPerfil}" alt='Foto de perfil' width='100' height='100'>;
+            <img src="{$fotoPerfil}" alt='Foto de perfil' width='100' height='100'>;
         </div>
         <div>
-            <p>@usuario: ${nombreUsuario}</p>;                        
-            <p>Plan: ${plan}</p>;
+            <p>@usuario: {$nombreUsuario}</p>;                        
+            <p>Plan: {$plan}</p>;
         </div>
     </div>
     <div style="margin-top: 20px;">
         <div style="text-align: right;">
-            <a href="${cambioDatosUrl}">Cambiar Datos</a><br>
-            <a href="${cambioPlanUrl}">Cambiar Plan</a><br>
-            <a href="${urlComentarios}">Mis Comentarios</a><br>
-            <a href="${urlListas}">Mis Listas</a><br>
+            <a href="{$cambioDatosUrl}">Cambiar Datos</a><br>
+            <a href="{$cambioPlanUrl}">Cambiar Plan</a><br>
+            <a href="{$urlComentarios}">Mis Comentarios</a><br>
+            <a href="{$urlListas}">Mis Listas</a><br>
+            <!-- Botón para cerrar sesión -->
+            <form action="{$app->resuelve('logout.php')}" method="post">
+                <input type="submit" value="Cerrar Sesión">
+            </form>
         </div>
     </div>
 EOS;
+
 } else {
   $contenidoPrincipal=<<<EOS
     <h1>Usuario no registrado!</h1>
