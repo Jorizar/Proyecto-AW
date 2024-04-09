@@ -16,7 +16,7 @@ $peliculas = [
     ['id' => 1, 'titulo' => 'La La Land', 'imagen' => './img/portadas/la_la_land.jpg'],
     ['id' => 2, 'titulo' => 'La playa de los ahogados', 'imagen' => './img/portadas/la_playa_de_los_ahogados.jpg'],
     ['id' => 3, 'titulo' => 'La ciudad no es para mí', 'imagen' => './img/portadas/la_ciudad_no_es_para_mi.jpg'],
-    ['id' => 4, 'titulo' => 'Unico testigo', 'imagen' => './img/portadas/la_la_land.jpg'],
+    ['id' => 4, 'titulo' => 'Unico testigo', 'imagen' => './img/portadas/witness.jpg'],
     ['id' => 5, 'titulo' => 'The Fast and the Furious', 'imagen' => './img/portadas/the_fast_and_the_furious.jpg'],
     ['id' => 6, 'titulo' => 'Ocho apellidos vascos', 'imagen' => './img/portadas/ocho_apellidos_vascos.jpg'],
     ['id' => 7, 'titulo' => 'Estoy hecho un chaval', 'imagen' => './img/portadas/estoy_hecho_un_chaval.jpg'],
