@@ -6,9 +6,10 @@ $formCambioPlan = new \es\ucm\fdi\aw\usuarios\FormularioCambioPlan();
 $formCambioPlan = $formCambioPlan->gestiona();
 
 
+
 $tituloPagina = 'Cambiar Plan';
 $contenidoPrincipal=<<<EOF
-  	<h1>Acceso al sistema</h1>
+  	<h1>Cambiar Plan</h1>
     $formCambioPlan
 EOF;
 

@@ -208,6 +208,12 @@ class Usuario
         return false;
     }
 
+    public function setRol($nuevoRol)
+    {
+        $this->rol = $nuevoRol;
+        return self::actualizaRol($this->id, $nuevoRol);
+    }
+
 
     public function cambiaFoto($nuevaFoto)
     {
@@ -221,6 +227,21 @@ class Usuario
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("UPDATE Usuarios SET foto='%s' WHERE user_id=%d",
             $conn->real_escape_string($nuevaFoto),
+            $idUsuario
+        );
+        if ($conn->query($query)) {
+            return true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    private static function actualizaRol($idUsuario, $nuevoRol)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE Usuarios SET rol='%s' WHERE user_id=%d",
+            $conn->real_escape_string($nuevoRol),
             $idUsuario
         );
         if ($conn->query($query)) {
