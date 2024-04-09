@@ -97,7 +97,6 @@ class Pelicula
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-<<<<<<< HEAD
         $query=sprintf("UPDATE peliculas SET titulo = '%s', director='%s', annio='%d', genero='%s', sinopsis='%s', portada='%s', reparto = '%s', Val_IMDb = '%d' WHERE id=%d"
             , $conn->real_escape_string($pelicula->titulo)
             , $conn->real_escape_string($pelicula->director)
@@ -108,15 +107,6 @@ class Pelicula
             , $pelicula->reparto
             , $pelicula->
             , $pelicula->id
-=======
-        $query=sprintf("UPDATE Usuarios U SET username = '%s', password='%s', rol='%s', email='%s', foto='%s' WHERE U.user_id=%d"
-            , $conn->real_escape_string($usuario->nombreUsuario)
-            , $conn->real_escape_string($usuario->password)
-            , $conn->real_escape_string($usuario->rol)
-            , $conn->real_escape_string($usuario->email)
-            , $conn->real_escape_string($usuario->foto)
-            , $usuario->id
->>>>>>> 4cc776b921d40c13854be75493b98fcd9235ab6f
         );
         if ( $conn->query($query) ) {
             return $pelicula;
