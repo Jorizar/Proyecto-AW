@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/includes/config.php';
 require_once __DIR__.'/includes/src/peliculas/Pelicula.php'; // Adjust the path as necessary
+require_once __DIR__.'/includes/src/comentarios/Comentario.php'; // Import the Comentario class
 
 $tituloPagina = 'Detalles de la Película';
 $contenidoPrincipal='';
@@ -53,6 +54,37 @@ if (isset($_GET['id'])) {
     } else {
         $contenidoPrincipal = '<h1>Película no encontrada</h1>';
     }
+
+    // Display comments for this movie
+    $comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorPeliculaId($movieId);
+    $comentariosHtml = '<h3>Comentarios</h3>';
+    foreach ($comentarios as $comentario) {
+        $textoComentario = htmlspecialchars($comentario->getTexto()); // Using the getter method
+        $valoracionComentario = htmlspecialchars($comentario->getValoracion()); // Assuming you also have a getValoracion() method
+        
+        $comentariosHtml .= "<div class='comentario'><p>$textoComentario</p><p>Valoración: $valoracionComentario</p></div>";
+    }
+    $contenidoPrincipal .= $comentariosHtml;
+
+    // Check if the user is logged in to display the add comment form
+    if ($app->usuarioLogueado()) { // This function needs to be implemented to check user login status
+        $contenidoPrincipal .= <<<EOF
+        <h3>Añadir un comentario</h3>
+        <form action="includes/src/comentarios/procesar_comentario.php" method="post"> <!-- Adjust action URL as needed -->
+            <input type="hidden" name="pelicula_id" value="$movieId">
+            <textarea name="texto" required></textarea>
+            <select name="valoracion" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button type="submit">Enviar comentario</button>
+        </form>
+        EOF;
+    }
+
 } else {
     $contenidoPrincipal = '<h1>ID de película no especificado</h1>';
 }
