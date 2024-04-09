@@ -29,8 +29,10 @@ function mostrarSaludo()
 
 <body>
 <header>
-    <div class ="logo">
-        <img src="./img/logo_proyecto.jpg" alt="Logo">
+    <div class="logo">
+        <a href="<?= $app->resuelve('/index.php')?>">
+            <img src="./img/logo_proyecto.jpg" alt="Logo">
+        </a>
     </div>
     <div class="saludo-menu-container"> <!-- Contenedor para el saludo y el menú -->
         <nav class="menu">
