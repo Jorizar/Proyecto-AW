@@ -111,5 +111,11 @@ class Comentario
     public function getValoracion() {
         return $this->valoracion;
     }
+    public function getPeliculaId() {
+        return $this->pelicula_id;
+    }
+    public function getComentarioId() {
+        return $this->comentario_id;
+    }
 
 }
