@@ -19,9 +19,34 @@ class Pelicula
 
     //Se utilizaría en el buscador. Hay que hacer que el título coincida con alguna película de la base de datos
     // TO DO
-    public static function buscaPelicula($titulo)
-    {
-        return self::buscaPorId($pelicula->id);
+    public static function buscaPelicula($titulo, $director, $genero, $annio)
+    {   
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT * FROM peliculas WHERE 1=1";    
+        if (!empty($titulo)) {
+            $sql .= " AND LOWER(titulo) LIKE LOWER('%$titulo%')";
+        }
+        if (!empty($director)) {
+            $sql .= " AND LOWER(director) LIKE LOWER('%$director%')";
+        }
+        if (!empty($genero)) {
+            $sql .= " AND genero = $genero";
+        }
+        if (!empty($anno)) {
+            $sql .= " AND annio = $annio";
+        }
+        $result = $conn->query($query);
+        $peliculas = false;
+        if ($result) {
+            $peliculas = array();
+            while($fila = $rs->fetch_assoc()) {
+                $peliculas[] = new Pelicula($fila['titulo'], $fila['director'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
+            }
+            $result->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $peliculas;
     }
 
     //Plantear si la necesitamos o no 
@@ -35,7 +60,7 @@ class Pelicula
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Pelicula($fila['username'], $fila['password'], $fila['user_id'], $fila['rol'], $fila['email'], $fila['foto']);
+                $result = new Pelicula($fila['titulo'], $fila['director'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
             }
             $rs->free();
         } else {
@@ -43,7 +68,7 @@ class Pelicula
         }
         return $result;
     }
-   
+
     //Inserta una pelicula nueva en la base de datos
     private static function inserta($pelicula)
     {
@@ -53,7 +78,7 @@ class Pelicula
             , $conn->real_escape_string($pelicula->titulo)
             , $conn->real_escape_string($pelicula->director)
             , $conn->real_escape_string($pelicula->annio)
-            , $conn->real_escape_string($pelicula->genero)
+            , $pelicula->genero
             , $pelicula->sinopsis
             , $pelicula->reparto
             , $pelicula->val_imdb
@@ -67,11 +92,23 @@ class Pelicula
         }
     }
     
-    //Actualiza la información del usuario en la base de datos
-    private static function actualiza($usuario)
+    //Actualiza la información de la película en la base de datos
+    private static function actualiza($pelicula)
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
+<<<<<<< HEAD
+        $query=sprintf("UPDATE peliculas SET titulo = '%s', director='%s', annio='%d', genero='%s', sinopsis='%s', portada='%s', reparto = '%s', Val_IMDb = '%d' WHERE id=%d"
+            , $conn->real_escape_string($pelicula->titulo)
+            , $conn->real_escape_string($pelicula->director)
+            , $conn->real_escape_string($pelicula->annio)
+            , $pelicula->genero,
+            , $pelicula->sinopsis
+            , $conn->real_escape_string($portada)
+            , $pelicula->reparto
+            , $pelicula->
+            , $pelicula->id
+=======
         $query=sprintf("UPDATE Usuarios U SET username = '%s', password='%s', rol='%s', email='%s', foto='%s' WHERE U.user_id=%d"
             , $conn->real_escape_string($usuario->nombreUsuario)
             , $conn->real_escape_string($usuario->password)
@@ -79,9 +116,10 @@ class Pelicula
             , $conn->real_escape_string($usuario->email)
             , $conn->real_escape_string($usuario->foto)
             , $usuario->id
+>>>>>>> 4cc776b921d40c13854be75493b98fcd9235ab6f
         );
         if ( $conn->query($query) ) {
-            return $usuario;
+            return $pelicula;
         }
         else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
@@ -100,9 +138,7 @@ class Pelicula
             return false;
         } 
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM peliculas P WHERE P.id = %d"
-            , $idPelicula
-        );
+        $query = sprintf("DELETE FROM peliculas P WHERE P.id = %d", $idPelicula);
         if ( ! $conn->query($query) ) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
@@ -181,7 +217,23 @@ class Pelicula
         return $this->val_imdb;
     }
 
-
+    //Convierte el valor entero del Género a su valor en la tabla de Géneros
+    private function convierteGenero($idGenero){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT genero FROM generos WHERE id = %d", $idGenero);
+        $rs = $conn->query($query);
+        $genero = false;
+        if ($rs) {
+            $fila = $rs->fetch_assoc();
+            if ($fila) {
+                $genero = $fila['genero'];
+            }
+            $rs->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $genero;
+    }
     
 
     //Si la instancia no posee id no se ha insertado todavía en la base de datos y se inserta. Si no, llama a actualiza para cambiar 
@@ -202,4 +254,23 @@ class Pelicula
         }
         return false;
     }
+
+    //Obtiene los géneros de las películas que se encuentran en la base de datos. Útil para el buscador
+    public function getGeneros(){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT * FROM generos");
+        $rs = $conn->query($query);
+        $generos = array();
+        if ($rs) {
+            while($fila = $rs->fetch_assoc()){
+                $generos[] = $fila['genero'];
+            }
+            $rs->free();
+        } else {
+            $generos = false;
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $generos;
+    }
+
 }
