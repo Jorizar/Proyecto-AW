@@ -216,7 +216,7 @@ class Pelicula
     }
 
     //Convierte el valor entero del Género a su valor en la tabla de Géneros
-    private function convierteGenero($idGenero){
+    public static function convierteGenero($idGenero){
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("SELECT genero FROM generos WHERE id = %d", $idGenero);
         $rs = $conn->query($query);

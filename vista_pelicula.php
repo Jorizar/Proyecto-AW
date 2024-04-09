@@ -15,12 +15,14 @@ if (isset($_GET['id'])) {
         $titulo = $movie->titulo;
         $anno = $movie->annio;
         $director = $movie->director;
-        $genero = $movie->genero;
+        $generoId = $movie->genero;
         $portada = $movie->portada;
         $repartoJson = $movie->reparto;
         $sinopsis = $movie->sinopsis;
         $valoracionIMDb = $movie->Val_IMDb;
-        
+
+        $genero = \es\ucm\fdi\aw\peliculas\Pelicula::convierteGenero($generoId); // Convertimos la id del genero a texto
+
         // Reparto es un json así que lo desciframos para escribirlo
         $repartoData = json_decode($repartoJson);
         $repartoHtml = "";
