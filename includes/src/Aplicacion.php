@@ -255,6 +255,10 @@ class Aplicacion
         $_SESSION['email'] = $user->getEmail();
     }
 
+    public function getUsuarioId() {
+        return isset($_SESSION['idUsuario']) ? $_SESSION['idUsuario'] : null;
+    }
+
     public function logout()
     {
         $this->compruebaInstanciaInicializada();
