@@ -146,3 +146,21 @@ footer {
 .peliculas-container button {
 	width: 100%; /* Botones ocupan todo el ancho del formulario */
 }
+
+.noticia {
+    overflow: hidden; /* Limpiar los floats */
+}
+
+.portada-noticia {
+    float: left; /* Coloca la imagen a la izquierda */
+    margin-right: 10px; /* Espacio entre la imagen y el título */
+    max-width: 200px; /* Ancho máximo de la imagen */
+    max-height: 150px; /* Altura máxima de la imagen */
+}
+
+.noticia h3 {
+    margin: 0; /* Elimina el margen del título */
+    font-size: 1.2em; /* Tamaño de fuente del título */
+}
+
+
