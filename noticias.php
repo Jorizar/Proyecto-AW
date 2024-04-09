@@ -2,10 +2,37 @@
 require_once __DIR__.'/includes/config.php';
 
 $tituloPagina = 'Noticias';
-$contenidoPrincipal= <<<EOS
-<h2>Noticias</h2>
-<p>Aquí estarán las noticias de la web publicadas.</p>
-EOS;
+$contenidoPrincipal = '';
+// Obtener la instancia de la aplicación
+$app = \es\ucm\fdi\aw\Aplicacion::getInstance();
 
+// Obtener la conexión a la base de datos desde la instancia de la aplicación
+$conexion = $app->getConexionBd();
+
+// Obtener las 5 últimas noticias de la base de datos
+$query = "SELECT titulo, post_id, portada, texto, autor FROM noticias";
+$result = $conexion->query($query);
+
+if ($result && $result->num_rows > 0) {
+    // Construir el contenido de las noticias
+    $contenidoPrincipal = '<h2>Noticias</h2><div class="noticias">';
+    while ($row = $result->fetch_assoc()) {
+        $idNoticia = $row['post_id']; // Cambiado de 'id' a 'post_id'
+        $tituloNoticia = $row['titulo'];
+        //$contenidoNoticia = $row['texto']; // Cambiado de 'contenido' a 'texto'
+
+        // Agregar el HTML de cada noticia
+        $contenidoPrincipal .= "<div class='noticia'>";
+        $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia</a></h3>";
+        //$contenidoPrincipal .= "<p>$contenidoNoticia</p>";
+        $contenidoPrincipal .= "</div>";
+    }
+    $contenidoPrincipal .= '</div>';
+} else {
+    $contenidoPrincipal = "<p>No se encontraron noticias.</p>";
+}
+
+// Renderizar la página utilizando la plantilla
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
+?>
