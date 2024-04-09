@@ -13,15 +13,18 @@ class FormularioCambioDatos extends Formulario
     protected function generaCamposFormulario(&$datos)
     {
         // Genera los campos para cambiar el email
-        $formularioCambioEmail = new FormularioCambioEmail();
+        $formularioCambioEmail = new \es\ucm\fdi\aw\usuarios\FormularioCambioEmail();
+        $formularioCambioEmail = $formularioCambioEmail->gestiona();
         $camposEmail = $formularioCambioEmail->generaCamposFormulario($datos);
 
         // Genera los campos para cambiar la foto de perfil
-        $formularioCambioFoto = new FormularioCambioFoto();
+        $formularioCambioFoto = new \es\ucm\fdi\aw\usuarios\FormularioCambioFoto();
+        $formularioCambioFoto = $formularioCambioFoto->gestiona();
         $camposFoto = $formularioCambioFoto->generaCamposFormulario($datos);
 
         // Genera los campos para cambiar el nombre de usuario
-        $formularioCambioNombre = new FormularioCambioNombre();
+        $formularioCambioNombre = new \es\ucm\fdi\aw\usuarios\FormularioCambioNombre();
+        $formularioCambioNombre = $formularioCambioNombre->gestiona();
         $camposNombre = $formularioCambioNombre->generaCamposFormulario($datos);
 
         // Combina los campos de los tres formularios en uno solo

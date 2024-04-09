@@ -5,12 +5,18 @@ $tituloPagina = 'Mi Perfil';
 $contenidoPrincipal='';
 
 
+
+
 if ($app->usuarioLogueado()) {
     $nombreUsuario = $app->nombreUsuario();
     $plan = $app->rol();
     $fotoPerfil = $app->fotoPerfil();
-    $urlDatos = $app->resuelve('/includes/src/usuarios/FormularioCambioDatos.php');
-    $urlPlan = $app->resuelve('/includes/src/usuarios/FormularioCambioPlan.php');
+    $cambioDatosUrl = $app->resuelve('/cambioDatos.php');
+    //$formCambioPlan = $app->resuelve('./includes/src/usuarios/FormularioCambioPlan.php');
+    //$formCambioPlan;
+    $cambioPlanUrl = $app->resuelve('/cambioPlan.php');
+    //$formCambioPlan = new \es\ucm\fdi\aw\usuarios\FormularioCambioPlan();
+    //$formCambioPlan = $formCambioPlan->gestiona();
     $urlComentarios = $app->resuelve('/misComentarios.php');
     $urlListas = $app->resuelve('/misListas.php');
 
@@ -27,8 +33,8 @@ if ($app->usuarioLogueado()) {
     </div>
     <div style="margin-top: 20px;">
         <div style="text-align: right;">
-            <a href="${urlDatos}">Cambiar Datos</a><br>
-            <a href="${urlPlan}">Cambiar Plan</a><br>
+            <a href="${cambioDatosUrl}">Cambiar Datos</a><br>
+            <a href="${cambioPlanUrl}">Cambiar Plan</a><br>
             <a href="${urlComentarios}">Mis Comentarios</a><br>
             <a href="${urlListas}">Mis Listas</a><br>
         </div>

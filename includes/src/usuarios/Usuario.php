@@ -17,12 +17,14 @@ class Usuario
         return false;
     }
     
-    public static function crea($nombreUsuario, $password)
+    public static function crea($nombreUsuario, $password, $id, $rol, $email, $foto)
     {
+        $foto = './img/fotosPerfil/1';
         $hashedPassword = self::hashPassword($password);
-        $user = new Usuario($nombreUsuario, $hashedPassword);
+        $user = new Usuario($nombreUsuario, $hashedPassword, $id, $rol, $email, $foto);
         return $user->guarda();
     }
+
 
     public static function buscaUsuario($nombreUsuario)
     {
@@ -145,7 +147,7 @@ class Usuario
 
     private $foto;   //Ruta para cargar la imagen de perfil
 
-    private function __construct($nombreUsuario, $password, $id = null, $rol = null, $email = null, $foto = './img/fotosPerfil/1')
+    private function __construct($nombreUsuario, $password, $id, $rol, $email, $foto)
     {
         $this->id = $id;
         $this->nombreUsuario = $nombreUsuario;
