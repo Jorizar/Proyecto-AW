@@ -101,6 +101,9 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username` (`username`);
 
+  ALTER TABLE `favoritos`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
