@@ -11,30 +11,41 @@ div#contenedor {
 }
 
 header {
-	padding: 30px;
-	height: 100px;
-	background-color: #000000;
-	color: white;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    padding: 30px;
+    height: 100px;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-header .menu {
-	display: flex;
-	justify-content: flex-end;
-	/* Alinear a la derecha */
+.logo {
+    flex: 1; /* Hace que el logo ocupe el espacio disponible */
 }
 
-header .saludo-menu-container {
-	display: flex;
-	align-items: center;
-	/* Alinea los elementos verticalmente */
+.centro {
+    flex: 2; /* Ajusta el ancho del área central */
+    text-align: center; /* Centra los elementos */
 }
 
-header .saludo {
-	padding: 10px 24px;
+.centro .menu {
+    display: flex; /* Hace que los enlaces estén en línea */
+    justify-content: space-between; /* Espacio uniforme entre los enlaces */
 }
+
+.centro .menu a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 10px; /* Espacio horizontal entre los enlaces */
+}
+
+.saludo-menu-container {
+    display: flex;
+    align-items: center;
+}
+
 
 header .menu a {
 	color: white;
@@ -122,40 +133,55 @@ footer {
 
 /* Estilos para los contenedores de películas */
 .peliculas-container {
-	max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
-    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
-	display: flex; /* Utilizamos flexbox para alinear los elementos */
-	flex-wrap: wrap; /* Hacemos que los elementos se envuelvan a la siguiente línea */
-	justify-content: space-between; /* Espacio entre las películas */
-	
+    display: flex; /* Utilizamos flexbox para alinear los elementos */
+    flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
+    justify-content: space-between; /* Espacio entre las películas */
+}
+
+/* Estilos para cada película */
+.peliculas-container .pelicula {
+    width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
+    margin-bottom: 20px; /* Espacio entre las filas */
+    text-align: center; /* Centramos el contenido */
+}
+
+/* Estilos para los títulos de las películas */
+.peliculas-container .pelicula span {
+    display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
+    margin-top: 5px; /* Espacio entre la imagen y el título */
+    font-weight: bold; /* Establecemos negrita */
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #000; /* Color del texto */
+}
+
+/* Estilos para los enlaces de las películas */
+.peliculas-container .pelicula a {
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #000; /* Color del texto */
 }
 
 /* Estilos para las imágenes de las películas */
-.peliculas-container img {
-    max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
-    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
+.peliculas-container .pelicula img {
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 300px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
 }
 
-/* Estilos para cada formulario de película */
-.peliculas-container form {
-	width: calc(25% - 10px); /* Establecemos el ancho de cada formulario (25% del contenedor menos el espacio entre ellas) */
-	margin-bottom: 20px; /* Espacio entre las filas */
-}
-
-/* Estilos para los botones */
-.peliculas-container button {
-	width: 100%; /* Botones ocupan todo el ancho del formulario */
-}
 
 .noticia {
     overflow: hidden; /* Limpiar los floats */
+    border-bottom: 1px solid #000000; /* Agregar borde inferior */
+    padding-bottom: 10px; /* Agregar espacio entre cada noticia */
 }
 
+
+/* Estilos para las imágenes de las noticias */
 .portada-noticia {
-    float: left; /* Coloca la imagen a la izquierda */
+	float: left; /* Coloca la imagen a la izquierda */
     margin-right: 10px; /* Espacio entre la imagen y el título */
-    max-width: 200px; /* Ancho máximo de la imagen */
-    max-height: 150px; /* Altura máxima de la imagen */
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 150px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
 }
 
 .noticia h3 {
@@ -163,8 +189,19 @@ footer {
     font-size: 1.2em; /* Tamaño de fuente del título */
 }
 
-.noticia p.autor {
+.noticia .autor-fecha {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos internos */
+}
+
+.noticia p.autor,
+.noticia p.fecha {
     font-size: 0.8em; /* Establecer el tamaño de la fuente más pequeño */
+    font-style: italic; /* Opcional: poner la fecha en cursiva */
+}
+
+.noticia p.fecha {
+    margin-left: 20px; /* Ajustar el espacio entre el nombre del autor y la fecha */
 }
 
 
