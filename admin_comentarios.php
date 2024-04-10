@@ -2,29 +2,31 @@
 require_once __DIR__.'/includes/config.php';
 require_once __DIR__.'/includes/src/comentarios/Comentario.php';
 
-$contenidoPrincipal = ''; 
-$tituloPagina = 'Mis Comentarios'; 
+if (!$app->tieneRol('admin')) {
+    die("Acceso restringido a administradores.");
+}
 
-$userId = $app->getUsuarioId();
+$tituloPagina = 'Administrar Comentarios';
+$contenidoPrincipal = '<h3>Todos los Comentarios</h3>';
 
-// Display user's comments
-$comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorUsuarioId($userId);
-$comentariosHtml = '<h3>Mis Comentarios</h3>';
+$comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarTodos();
+
 if (!empty($comentarios)) {
     foreach ($comentarios as $comentario) {
         $textoComentario = htmlspecialchars($comentario->getTexto());
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $peliculaId = htmlspecialchars($comentario->getPeliculaId());
         $peliculaTitulo = \es\ucm\fdi\aw\peliculas\Pelicula::buscaTituloPorId($peliculaId);
-
+        $UserId = htmlspecialchars($comentario->getUserId());
+        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
         
-        // Assuming you add a delete form or method
-        $deleteForm = "<form method='POST' action='includes/src/comentarios/eliminar_comentario.php' onsubmit='return confirm(\"¿Estás seguro?\");'>
+        $deleteForm = "<form method='POST' action='includes/src/comentarios/eliminar_comentario_admin.php' onsubmit='return confirm(\"¿Estás seguro?\");'>
                             <input type='hidden' name='comentario_id' value='{$comentario->getComentarioId()}'>
                             <input type='submit' value='Eliminar'>
                        </form>";
         
-        $comentariosHtml .= "<div class='comentario'>
+        $contenidoPrincipal .= "<div class='comentario'>
+                                <p>Usuario: $UserNombre</p>
                                 <p>Película: $peliculaTitulo</p>
                                 <p>Comentario: $textoComentario</p>
                                 <p>Valoración: $valoracionComentario</p>
@@ -32,12 +34,9 @@ if (!empty($comentarios)) {
                              </div>";
     }
 } else {
-    $comentariosHtml .= "<p>No has realizado ningún comentario.</p>";
+    $contenidoPrincipal .= "<p>No hay comentarios.</p>";
 }
-
-$contenidoPrincipal .= $comentariosHtml;
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
-
 ?>

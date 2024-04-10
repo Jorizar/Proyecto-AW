@@ -1,39 +1,72 @@
 body {
-	background-color: #CDCDCD;
+    background-color: #141414; /* Cambia el color de fondo principal a negro */
+    color: #ffffff; /* Cambia el color del texto a blanco */
 }
 
 div#contenedor {
-	width: 900px;
-	margin: auto;
-	border: 1px solid rgb(0, 0, 0);
-	background-color: #CDCDCD;
-	margin-top: 30px;
+    width: 90%;
+    margin: auto;
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: 30px;
+}
+
+#contenedor,
+header,
+nav,
+aside,
+main,
+footer {
+    color: #ffffff;
 }
 
 header {
-	padding: 30px;
-	height: 100px;
-	background-color: #000000;
-	color: white;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    padding: 30px;
+    height: 100px;
+    background-color: #141414;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ffffff; /* Borde inferior blanco */
 }
 
-header .menu {
-	display: flex;
-	justify-content: flex-end;
-	/* Alinear a la derecha */
+footer {
+    clear: both;
+    padding: 10px; /* Reducir el espacio interno */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    background-color: #141414;
+    color: white;
+    text-align: center;
+    border-top: 1px solid #ffffff;
 }
 
-header .saludo-menu-container {
-	display: flex;
-	align-items: center;
-	/* Alinea los elementos verticalmente */
+.contenedor-login-registro {
+    background-color: rgba(181, 184, 0, 0.615);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-header .saludo {
-	padding: 10px 24px;
+
+.logo {
+    flex: 1; /* Hace que el logo ocupe el espacio disponible */
+}
+
+.centro {
+    flex: 2; /* Ajusta el ancho del área central */
+    text-align: center; /* Centra los elementos */
+}
+
+.centro .menu {
+    display: flex; /* Hace que los enlaces estén en línea */
+    justify-content: space-between; /* Espacio uniforme entre los enlaces */
+}
+
+.centro .menu a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 10px; /* Espacio horizontal entre los enlaces */
 }
 
 header .menu a {
@@ -41,11 +74,8 @@ header .menu a {
 	font-weight: bold;
 	text-decoration: none;
 	margin-left: 20px;
-	/* Espacio entre los elementos */
 	display: flex;
-	/* Para permitir alinear elementos verticalmente */
 	align-items: center;
-	/* Alinea verticalmente los elementos */
 }
 
 header .menu a img {
@@ -64,11 +94,13 @@ header a:visited {
 	text-decoration: none;
 }
 
+/*
 header a:hover {
 	color: red;
 	font-weight: bold;
 	text-decoration: underline;
 }
+*/
 
 header .logo img {
 	width: 120px;
@@ -81,21 +113,50 @@ nav {
 	padding: 10px;
 	float: left;
 	width: 170px;
-	background-color: #000000;
+	background-color: #141414;
 }
 
+.menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: rgba(181, 184, 0, 0.615);
+}
+
+.saludo-menu-container {
+    display: flex;
+    align-items: center;
+}
+
+.saludo-menu-container a,
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.saludo-menu-container a:hover,
+.logo a:hover {
+    color: rgba(181, 184, 0, 0.615);
+}
+
+
+/*
 nav a,
 nav a:visited {
 	color: rgba(181, 184, 0, 0.615);
 	font-weight: bold;
 	text-decoration: none;
 }
+*/
 
 nav a:hover {
-	color: red;
+	color: rgba(181, 184, 0, 0.615);
 	text-decoration: underline;
 }
 
+/*
 aside {
 	padding: 10px;
 	float: right;
@@ -103,68 +164,195 @@ aside {
 	height: 400px;
 	background-color: #dddddd;
 }
+*/
 
 main {
-	padding: 10px;
-	float: left;
-	min-height: 600px;
-	width: 880px;
-	background-color: white;
+    padding: 10px;
+    float: left;
+    min-height: auto;
+    width: 90%;
 }
 
-footer {
-	clear: both;
-	padding: 20px;
-	background-color: #303030;
-	color: white;
-	text-align: center;
+.buscador{
+    width: 50%; /* Establece el ancho del contenedor del buscador */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    text-align: center; /* Centra el contenido del contenedor */
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.buscador h1{
+    font-size: 15px;
+}
+
+.destacadas {
+    border-bottom: 5px solid rgba(181, 184, 0, 0.615);
+    width: 50%; /* Ancho del borde inferior */
 }
 
 /* Estilos para los contenedores de películas */
 .peliculas-container {
-	max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
-    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
-	display: flex; /* Utilizamos flexbox para alinear los elementos */
-	flex-wrap: wrap; /* Hacemos que los elementos se envuelvan a la siguiente línea */
-	justify-content: space-between; /* Espacio entre las películas */
-	
+    display: flex; /* Utilizamos flexbox para alinear los elementos */
+    flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
+    justify-content: space-between; /* Espacio entre las películas */
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Estilos para cada película */
+.peliculas-container .pelicula {
+    width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
+    margin-bottom: 20px; /* Espacio entre las filas */
+    text-align: center; /* Centramos el contenido */
+}
+
+/* Estilos para los títulos de las películas */
+.peliculas-container .pelicula span {
+    display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
+    margin-top: 5px; /* Espacio entre la imagen y el título */
+    font-weight: bold; /* Establecemos negrita */
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #ffffff; /* Color del texto */
+}
+
+/* Estilos para los enlaces de las películas */
+.peliculas-container .pelicula a {
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #ffffff; /* Color del texto */
 }
 
 /* Estilos para las imágenes de las películas */
-.peliculas-container img {
-    max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
-    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
+.peliculas-container .pelicula img {
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 300px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
 }
 
-/* Estilos para cada formulario de película */
-.peliculas-container form {
-	width: calc(25% - 10px); /* Establecemos el ancho de cada formulario (25% del contenedor menos el espacio entre ellas) */
-	margin-bottom: 20px; /* Espacio entre las filas */
-}
-
-/* Estilos para los botones */
-.peliculas-container button {
-	width: 100%; /* Botones ocupan todo el ancho del formulario */
-}
 
 .noticia {
     overflow: hidden; /* Limpiar los floats */
+    border-bottom: 1px solid #ffffff; /* Agregar borde inferior */
+    border-top: 1px solid #ffffff;
+    padding-bottom: 15px; /* Agregar espacio entre cada noticia */
 }
 
+
+/* Estilos para las imágenes de las noticias */
 .portada-noticia {
-    float: left; /* Coloca la imagen a la izquierda */
+	float: left; /* Coloca la imagen a la izquierda */
     margin-right: 10px; /* Espacio entre la imagen y el título */
-    max-width: 200px; /* Ancho máximo de la imagen */
-    max-height: 150px; /* Altura máxima de la imagen */
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 150px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
 }
 
 .noticia h3 {
-    margin: 0; /* Elimina el margen del título */
+    margin: 10px; /* Elimina el margen del título */
     font-size: 1.2em; /* Tamaño de fuente del título */
 }
 
-.imagen-perfil {
-    width: 50px;
-    height: 50px;
+.noticia .autor-fecha {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos internos */
 }
 
+.noticia p.autor,
+.noticia p.fecha {
+    font-size: 0.8em; /* Establecer el tamaño de la fuente más pequeño */
+    font-style: italic; /* Opcional: poner la fecha en cursiva */
+}
+
+.noticia p.fecha {
+    margin-left: 20px; /* Ajustar el espacio entre el nombre del autor y la fecha */
+}
+
+.noticia a {
+    color: white; /* Color por defecto de los enlaces dentro de las noticias */
+    text-decoration: none; /* Quitamos el subrayado */
+}
+
+.noticia a:hover {
+    color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
+}
+
+.imagen-perfil-cabecera {
+    width: 50px; /* Ancho de la imagen de perfil */
+    height: 50px; /* Altura de la imagen de perfil */
+}
+
+.imagen-perfil {
+    width: 75px; /* Ancho de la imagen de perfil */
+    height: 75px; /* Altura de la imagen de perfil */
+}
+
+.perfil-info {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección principal a columnas */
+    align-items: center; /* Alinea los elementos horizontalmente al centro */
+}
+
+.perfil-info .nombre-perfil {
+    margin-top: 10px; /* Espacio entre la foto de perfil y el nombre de perfil */
+    text-decoration: none; /* Quita el subrayado del enlace */
+    color: rgb(255, 255, 255); /* Cambia el color del texto */
+    font-weight: bold; /* Hace que el nombre de perfil sea más prominente */
+    font-size: 20px; /* Tamaño del nombre de perfil */
+}
+
+.info-perfil {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección principal a columnas */
+    align-items: center; /* Alinea los elementos horizontalmente al centro */
+}
+
+.enlace-perfil,
+.enlace-perfil-admin{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinear los elementos a la izquierda */
+}
+
+.enlace-perfil {
+    color: white;
+    text-decoration: none; /* Opcional: para quitar el subrayado de los enlaces */
+    float: right;
+}
+
+.enlace-perfil:hover {
+    color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
+    /* Otros estilos que desees aplicar al pasar el cursor */
+}
+
+.enlace-perfil-admin {
+    color: white;
+    text-decoration: none;
+    float: left;
+    align-items: flex-end;
+}
+
+.enlace-perfil-admin:hover {
+    color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
+    /* Otros estilos que desees aplicar al pasar el cursor */
+}
+
+.info_pelicula {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.portada_detalles_pelicula {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.portada-pelicula {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.detalles-pelicula {
+    margin-left: 20px;
+}

@@ -71,6 +71,24 @@ class Comentario
         return $comentarios;
     }
 
+    public static function buscarTodos() {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT * FROM comentarios";
+        $result = $conn->query($sql);
+    
+        $comentarios = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id']);
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+    
+        return $comentarios;
+    }
+    
+
     public function actualiza($texto, $valoracion)
     {
         $this->texto = $texto;
@@ -87,23 +105,18 @@ class Comentario
         }
     }
 
-    public function borra()
-    {
-        if ($this->comentario_id !== null) {
-            $conn = Aplicacion::getInstance()->getConexionBd();
-            $sql = "DELETE FROM comentarios WHERE comentario_id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('i', $this->comentario_id);
-            if ($stmt->execute()) {
-                $this->comentario_id = null;
-                return true;
-            } else {
-                error_log("Error BD ({$conn->errno}): {$conn->error}");
-                return false;
-            }
+    public static function eliminarPorId($comentario_id) {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "DELETE FROM comentarios WHERE comentario_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $comentario_id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
         }
-        return false;
-    }
+    }    
 
     public function getTexto() {
         return $this->texto;
@@ -116,6 +129,9 @@ class Comentario
     }
     public function getComentarioId() {
         return $this->comentario_id;
+    }
+    public function getUserId() {
+        return $this->user_id;
     }
 
 }
