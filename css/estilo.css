@@ -168,3 +168,15 @@ footer {
     height: 50px;
 }
 
+.perfil-info {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección principal a columnas */
+    align-items: center; /* Alinea los elementos horizontalmente al centro */
+}
+
+.perfil-info .nombre-perfil {
+    margin-top: 5px; /* Espacio entre la foto de perfil y el nombre de perfil */
+    text-decoration: none; /* Quita el subrayado del enlace */
+    color: rgb(255, 255, 255); /* Cambia el color del texto */
+    font-weight: bold; /* Hace que el nombre de perfil sea más prominente */
+}
