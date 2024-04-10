@@ -53,9 +53,8 @@ class FormularioCambioPlan extends Formulario
                 // Actualiza el plan del usuario en la sesión
                 $_SESSION["rol"] = $nuevoPlan;
 
-                //Buscamos al usuario en la base de datos por su id y actualizamos su rol en la bd
-                $usuario = Usuario::buscaPorId($_SESSION['idUsuario']);
-                $usuario->setRol($nuevoPlan);
+                //Actualizamos su rol en la bd
+                $result = Usuario::actualizaRol($_SESSION['idUsuario'], $nuevoPlan);
             }
         }
 
