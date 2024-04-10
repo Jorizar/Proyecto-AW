@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__. '/../../config.php';
-require_once __DIR__.'/Comentario.php'; // Import the Comentario class
+require_once __DIR__.'/Comentario.php';
 
 // Check if the user is logged in
 if (!$app->usuarioLogueado()) {
