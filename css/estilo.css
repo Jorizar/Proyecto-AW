@@ -122,40 +122,53 @@ footer {
 
 /* Estilos para los contenedores de películas */
 .peliculas-container {
-	max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
-    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
-	display: flex; /* Utilizamos flexbox para alinear los elementos */
-	flex-wrap: wrap; /* Hacemos que los elementos se envuelvan a la siguiente línea */
-	justify-content: space-between; /* Espacio entre las películas */
-	
+    display: flex; /* Utilizamos flexbox para alinear los elementos */
+    flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
+    justify-content: space-between; /* Espacio entre las películas */
+}
+
+/* Estilos para cada película */
+.peliculas-container .pelicula {
+    width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
+    margin-bottom: 20px; /* Espacio entre las filas */
+    text-align: center; /* Centramos el contenido */
+}
+
+/* Estilos para los títulos de las películas */
+.peliculas-container .pelicula span {
+    display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
+    margin-top: 5px; /* Espacio entre la imagen y el título */
+    font-weight: bold; /* Establecemos negrita */
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #000; /* Color del texto */
+}
+
+/* Estilos para los enlaces de las películas */
+.peliculas-container .pelicula a {
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #000; /* Color del texto */
 }
 
 /* Estilos para las imágenes de las películas */
-.peliculas-container img {
-    max-width: 100%; /* Establecemos el ancho máximo al 100% del contenedor */
-    height: auto; /* Hacemos que la altura se ajuste automáticamente manteniendo la proporción */
+.peliculas-container .pelicula img {
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 300px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
 }
 
-/* Estilos para cada formulario de película */
-.peliculas-container form {
-	width: calc(25% - 10px); /* Establecemos el ancho de cada formulario (25% del contenedor menos el espacio entre ellas) */
-	margin-bottom: 20px; /* Espacio entre las filas */
-}
-
-/* Estilos para los botones */
-.peliculas-container button {
-	width: 100%; /* Botones ocupan todo el ancho del formulario */
-}
 
 .noticia {
     overflow: hidden; /* Limpiar los floats */
 }
 
+
+/* Estilos para las imágenes de las noticias */
 .portada-noticia {
-    float: left; /* Coloca la imagen a la izquierda */
+	float: left; /* Coloca la imagen a la izquierda */
     margin-right: 10px; /* Espacio entre la imagen y el título */
-    max-width: 200px; /* Ancho máximo de la imagen */
-    max-height: 150px; /* Altura máxima de la imagen */
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 150px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
 }
 
 .noticia h3 {
