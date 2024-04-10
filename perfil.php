@@ -13,7 +13,9 @@ if ($app->usuarioLogueado()) {
     $urlComentarios = $app->resuelve('/misComentarios.php');
     $urlListas = $app->resuelve('/misListas.php');
     $cerrarSesionUrl = $app->resuelve('/logout.php'); // URL para cerrar sesión
-    $urlAdmin = $app->resuelve('/admin');
+    $urlAdminComentarios = $app->resuelve('/admin_comentarios.php');
+    $urlAdminPeliculas = $app->resuelve('/admin_peliculas.php');
+    $urlAdminUsuarios = $app->resuelve('/admin_ususarios.php');
 
     // Contenido principal del perfil del usuario
     $contenidoPrincipal = <<<EOS
@@ -33,7 +35,9 @@ EOS;
 
     // Agregar el enlace para administradores
     if ($_SESSION['rol'] === 'admin') {
-        $contenidoPrincipal .= "<a href='${urlAdmin}'>ADMINISTRAR</a><br>";
+        $contenidoPrincipal .= "<a href='${urlAdminComentarios}'>ADMINISTRAR COMENTARIOS</a><br>";
+        $contenidoPrincipal .= "<a href='${urlAdminPeliculas}'>ADMINISTRAR PELICULAS</a><br>";
+        $contenidoPrincipal .= "<a href='${urlAdminUsuarios}'>ADMINISTRAR USUARIOS</a><br>";
     }
 
     $contenidoPrincipal .= <<<EOS
