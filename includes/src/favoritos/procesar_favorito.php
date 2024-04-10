@@ -10,11 +10,13 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
         $resultado = \es\ucm\fdi\aw\favoritos\Favorito::crea($userId, $pelicula_id);
 
         if ($resultado) {
-            // La película se añadió a favoritos
-            echo "Película añadida a favoritos.";
+            $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
+            header('Location: ' . $relativePath);
+            exit();
         } else {
-            // Ocurrio un error al añadir la película a favoritos
-            echo "Error al añadir la película a favoritos.";
+            // Handle the error appropriately
+            echo "Error: No se pudo añadir a favoritos.";
+            exit();
         }
     } else {
         // Si no se proporciona el ID de la película, mostrar un mensaje de error
