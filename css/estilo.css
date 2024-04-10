@@ -149,7 +149,10 @@ footer {
 
 .noticia {
     overflow: hidden; /* Limpiar los floats */
+    border-bottom: 1px solid #000000; /* Agregar borde inferior */
+    padding-bottom: 10px; /* Agregar espacio entre cada noticia */
 }
+
 
 .portada-noticia {
     float: left; /* Coloca la imagen a la izquierda */
@@ -163,8 +166,19 @@ footer {
     font-size: 1.2em; /* Tamaño de fuente del título */
 }
 
-.noticia p.autor {
+.noticia .autor-fecha {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos internos */
+}
+
+.noticia p.autor,
+.noticia p.fecha {
     font-size: 0.8em; /* Establecer el tamaño de la fuente más pequeño */
+    font-style: italic; /* Opcional: poner la fecha en cursiva */
+}
+
+.noticia p.fecha {
+    margin-left: 20px; /* Ajustar el espacio entre el nombre del autor y la fecha */
 }
 
 
