@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
                 <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
             </form>
             <div class="portada_detalles_pelicula">
-                <img src="$portada" alt="Portada de $titulo" class="movie-poster">
+                <img src="$portada" alt="Portada de $titulo" class="portada-pelicula">
                 <div class="detalles-pelicula">
                     <p><strong>Director:</strong> $director</p>
                     <p><strong>Género:</strong> $genero</p>
