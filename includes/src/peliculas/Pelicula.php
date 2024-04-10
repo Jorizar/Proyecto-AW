@@ -88,6 +88,25 @@ class Pelicula
         return $titulo; // Return the movie title or null if not found
     }
     
+    public static function buscarTodas() {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo FROM peliculas";
+        $result = $conn->query($sql);
+
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
 
     //Inserta una pelicula nueva en la base de datos
     private static function inserta($pelicula)
@@ -152,17 +171,27 @@ class Pelicula
         return self::borraPorId($pelicula->id);
     }
     
-    private static function borraPorId($idPelicula)
+    public static function borraPorId($idPelicula)
     {
         if (!$idPelicula) {
             return false;
-        } 
+        }
+    
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM peliculas P WHERE P.id = %d", $idPelicula);
-        if ( ! $conn->query($query) ) {
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        $query = "DELETE FROM peliculas WHERE id = ?";
+    
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            error_log("Prepare failed: ({$conn->errno}) {$conn->error}");
             return false;
         }
+    
+        $stmt->bind_param('i', $idPelicula);
+        if (!$stmt->execute()) {
+            error_log("Execution failed: ({$stmt->errno}) {$stmt->error}");
+            return false;
+        }
+    
         return true;
     }
     
