@@ -50,7 +50,8 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `post_id` int(2) UNSIGNED NOT NULL,
   `portada` varchar(100) DEFAULT NULL,
   `texto` text NOT NULL,
-  `autor` varchar(40) NOT NULL
+  `autor` varchar(40) NOT NULL,
+  'fecha' varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
