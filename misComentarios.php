@@ -2,6 +2,9 @@
 require_once __DIR__.'/includes/config.php';
 require_once __DIR__.'/includes/src/comentarios/Comentario.php';
 
+$contenidoPrincipal = ''; 
+$tituloPagina = 'Mis Comentarios'; 
+
 $userId = $app->getUsuarioId();
 
 // Display user's comments
