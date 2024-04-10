@@ -59,10 +59,17 @@ if (isset($_GET['id'])) {
     $comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorPeliculaId($movieId);
     $comentariosHtml = '<h3>Comentarios</h3>';
     foreach ($comentarios as $comentario) {
-        $textoComentario = htmlspecialchars($comentario->getTexto()); // Using the getter method
-        $valoracionComentario = htmlspecialchars($comentario->getValoracion()); // Assuming you also have a getValoracion() method
-        
-        $comentariosHtml .= "<div class='comentario'><p>$textoComentario</p><p>Valoración: $valoracionComentario</p></div>";
+        $textoComentario = htmlspecialchars($comentario->getTexto());
+        $valoracionComentario = htmlspecialchars($comentario->getValoracion());
+        $UserId = htmlspecialchars($comentario->getUserId());
+        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
+    
+        // Updated comments display format
+        $comentariosHtml .= "<div class='comentario'>
+            <p><strong>$UserNombre</strong> dijo:</p>
+            <p>$textoComentario</p>
+            <p>Valoración: $valoracionComentario</p>
+        </div>";
     }
     $contenidoPrincipal .= $comentariosHtml;
 
