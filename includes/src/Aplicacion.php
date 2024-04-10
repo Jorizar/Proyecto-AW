@@ -269,6 +269,7 @@ class Aplicacion
         unset($_SESSION['fotoPerfil']);
         unset($_SESSION['email']);
         unset($_SESSION['rol']);
+        unset($_SESSION['busquedaPeliculas']);
 
 
         session_destroy();

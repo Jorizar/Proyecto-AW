@@ -5,9 +5,7 @@ require_once __DIR__.'/includes/config.php';
 // Título de la página
 $tituloPagina = 'Portada';
 
-// URL para el inicio de sesión
-$login = resuelve('/login.php');
-
+//Contenido de la página
 $contenidoPrincipal = '';
 
 //Formulario de búsqueda para el buscador

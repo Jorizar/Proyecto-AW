@@ -17,8 +17,7 @@ class Pelicula
     }
     
 
-    //Se utilizaría en el buscador. Hay que hacer que el título coincida con alguna película de la base de datos
-    // TO DO
+    //Se utiliza en el buscador para obtener los ids de las películas que coinciden con los criterios de búsqueda
     public static function buscaPelicula($titulo, $director, $genero, $annio)
     {   
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -40,7 +39,7 @@ class Pelicula
         if ($result) {
             $peliculas = array();
             while($fila = $result->fetch_assoc()) {
-                $peliculas[] = new Pelicula($fila['titulo'], $fila['director'],$fila['id'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
+                $peliculas[] = $fila['id'];
             }
             $result->free();
         } else {

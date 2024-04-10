@@ -76,8 +76,8 @@ class FormularioBuscaPel extends Formulario
             if ($peliculas === false) {
                 $this->errores[] = "No existen películas con esos criterios de búsqueda";
             } else {
-                //Mostramos las películas encontradas
-                
+                //Almacenamos los ids de las películas encontradas en $_SESSION
+                $_SESSION['busquedaPeliculas'] = $peliculas;
             }
         }
     }
