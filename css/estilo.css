@@ -4,7 +4,7 @@ body {
 }
 
 div#contenedor {
-    width: 900px;
+    width: 90%;
     margin: auto;
     border: 1px solid rgb(0, 0, 0);
     margin-top: 30px;
@@ -61,19 +61,13 @@ footer {
     margin: 0 10px; /* Espacio horizontal entre los enlaces */
 }
 
-
-
-
 header .menu a {
 	color: white;
 	font-weight: bold;
 	text-decoration: none;
 	margin-left: 20px;
-	/* Espacio entre los elementos */
 	display: flex;
-	/* Para permitir alinear elementos verticalmente */
 	align-items: center;
-	/* Alinea verticalmente los elementos */
 }
 
 header .menu a img {
@@ -92,11 +86,13 @@ header a:visited {
 	text-decoration: none;
 }
 
+/*
 header a:hover {
 	color: red;
 	font-weight: bold;
 	text-decoration: underline;
 }
+*/
 
 header .logo img {
 	width: 120px;
@@ -152,6 +148,7 @@ nav a:hover {
 	text-decoration: underline;
 }
 
+/*
 aside {
 	padding: 10px;
 	float: right;
@@ -159,13 +156,13 @@ aside {
 	height: 400px;
 	background-color: #dddddd;
 }
+*/
 
 main {
     padding: 10px;
     float: left;
-    min-height: 600px;
-    width: 880px;
-    /* background-color: rgb(0, 0, 0); */ /* Elimina esta línea */
+    min-height: auto;
+    width: 90%;
 }
 
 .buscador{
@@ -190,6 +187,7 @@ main {
     flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
     justify-content: space-between; /* Espacio entre las películas */
     margin-top: 20px;
+    padding: 10px;
 }
 
 /* Estilos para cada película */
@@ -268,10 +266,14 @@ main {
     color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
 }
 
+.imagen-perfil-cabecera {
+    width: 50px; /* Ancho de la imagen de perfil */
+    height: 50px; /* Altura de la imagen de perfil */
+}
 
 .imagen-perfil {
-    width: 50px;
-    height: 50px;
+    width: 75px; /* Ancho de la imagen de perfil */
+    height: 75px; /* Altura de la imagen de perfil */
 }
 
 .perfil-info {
@@ -281,18 +283,45 @@ main {
 }
 
 .perfil-info .nombre-perfil {
-    margin-top: 5px; /* Espacio entre la foto de perfil y el nombre de perfil */
+    margin-top: 10px; /* Espacio entre la foto de perfil y el nombre de perfil */
     text-decoration: none; /* Quita el subrayado del enlace */
     color: rgb(255, 255, 255); /* Cambia el color del texto */
     font-weight: bold; /* Hace que el nombre de perfil sea más prominente */
+    font-size: 20px; /* Tamaño del nombre de perfil */
+}
+
+.info-perfil {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección principal a columnas */
+    align-items: center; /* Alinea los elementos horizontalmente al centro */
+}
+
+.enlace-perfil,
+.enlace-perfil-admin{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinear los elementos a la izquierda */
 }
 
 .enlace-perfil {
     color: white;
     text-decoration: none; /* Opcional: para quitar el subrayado de los enlaces */
+    float: right;
 }
 
 .enlace-perfil:hover {
+    color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
+    /* Otros estilos que desees aplicar al pasar el cursor */
+}
+
+.enlace-perfil-admin {
+    color: white;
+    text-decoration: none;
+    float: left;
+    align-items: flex-end;
+}
+
+.enlace-perfil-admin:hover {
     color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
     /* Otros estilos que desees aplicar al pasar el cursor */
 }

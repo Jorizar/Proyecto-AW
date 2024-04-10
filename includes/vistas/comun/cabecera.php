@@ -15,11 +15,10 @@ function mostrarPerfil()
         $nombrePerfil = $app->nombreUsuario();
 
         $html .= "<div class='perfil-info'>";
-        $html .= "<a href='$perfilUrl'><img src='$fotoPerfil' alt='Foto de perfil' class='imagen-perfil'></a>";
-        $html .= "<a href='$perfilUrl' class='nombre-perfil'>$nombrePerfil</a>"; 
+        $html .= "<a href='$perfilUrl'><img src='$fotoPerfil' alt='Foto de perfil' class='imagen-perfil-cabecera'></a>";
+        $html .= "<a href='$perfilUrl' class='nombre-perfil-cabecera'>$nombrePerfil</a>"; 
         $html .= "</div>";
 
-        //$html = "<a href='$perfilUrl'><img src='$fotoPerfil' alt='Foto de perfil' class='imagen-perfil'></a>";
     } else {
         // Si el usuario no está logueado, mostrar opciones de inicio de sesión y registro
         $loginUrl = $app->resuelve('/login.php');

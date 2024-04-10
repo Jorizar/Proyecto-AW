@@ -20,24 +20,24 @@ if ($app->usuarioLogueado()) {
     // Contenido principal del perfil del usuario
     $contenidoPrincipal = <<<EOS
     <h2>Mi Perfil</h2>
-    <div style="display: flex; align-items: center;">
-        <div style="margin-right: 20px;">
-            <img src="${fotoPerfil}" alt='Foto de perfil' width='100' height='100'>
+    <div class="info-perfil">
+        <div>
+            <img src="${fotoPerfil}" alt='Foto de perfil' class='imagen-perfil'>
         </div>
         <div>
-            <p>@usuario: ${nombreUsuario}</p>                        
+            <p class='nombre-perfil'>@usuario: ${nombreUsuario}</p>                        
             <p>Plan: ${plan}</p>
         </div>
     </div>
-    <div style="margin-top: 20px;">
-        <div style="text-align: right;">
+   
 EOS;
 
     // Agregar el enlace para administradores
     if ($_SESSION['rol'] === 'admin') {
-        $contenidoPrincipal .= "<a href='${urlAdminComentarios}'>ADMINISTRAR COMENTARIOS</a><br>";
-        $contenidoPrincipal .= "<a href='${urlAdminPeliculas}'>ADMINISTRAR PELICULAS</a><br>";
-        $contenidoPrincipal .= "<a href='${urlAdminUsuarios}'>ADMINISTRAR USUARIOS</a><br>";
+        $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminComentarios . '">ADMINISTRAR COMENTARIOS</a><br>';
+        $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminPeliculas . '">ADMINISTRAR PELÍCULAS</a><br>';
+        $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminUsuarios . '">ADMINISTRAR USUARIOS</a><br>';
+
     }
 
     $contenidoPrincipal .= <<<EOS
