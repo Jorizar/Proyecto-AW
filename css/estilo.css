@@ -325,3 +325,26 @@ main {
     color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
     /* Otros estilos que desees aplicar al pasar el cursor */
 }
+
+.info_pelicula {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.portada_detalles_pelicula {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.movie-poster {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.detalles-pelicula {
+    margin-left: 20px;
+}
