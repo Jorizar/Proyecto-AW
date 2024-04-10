@@ -87,23 +87,18 @@ class Comentario
         }
     }
 
-    public function borra()
-    {
-        if ($this->comentario_id !== null) {
-            $conn = Aplicacion::getInstance()->getConexionBd();
-            $sql = "DELETE FROM comentarios WHERE comentario_id = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param('i', $this->comentario_id);
-            if ($stmt->execute()) {
-                $this->comentario_id = null;
-                return true;
-            } else {
-                error_log("Error BD ({$conn->errno}): {$conn->error}");
-                return false;
-            }
+    public static function eliminarPorId($comentario_id) {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "DELETE FROM comentarios WHERE comentario_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $comentario_id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
         }
-        return false;
-    }
+    }    
 
     public function getTexto() {
         return $this->texto;
