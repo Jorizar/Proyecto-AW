@@ -112,5 +112,8 @@ class Comentario
     public function getComentarioId() {
         return $this->comentario_id;
     }
+    public function getUserId() {
+        return $this->user_id;
+    }
 
 }
