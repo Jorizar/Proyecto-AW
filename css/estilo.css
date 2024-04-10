@@ -168,8 +168,8 @@ aside {
 
 main {
     padding: 10px;
-    float: left;
     min-height: auto;
+    margin: 0 auto;
     width: 90%;
 }
 
