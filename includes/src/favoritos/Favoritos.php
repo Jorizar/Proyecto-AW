@@ -1,8 +1,9 @@
 <?php
-namespace es\ucm\fdi\aw\peliculas;
+namespace es\ucm\fdi\aw\favoritos;
 
 use es\ucm\fdi\aw\Aplicacion;
 use es\ucm\fdi\aw\MagicProperties;
+use es\ucm\fdi\aw\peliculas\Pelicula;
 
 class Favorito
 {
@@ -24,16 +25,14 @@ class Favorito
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("SELECT * FROM favoritos WHERE user_id=%d", $user_id);
-        $rs = $conn->query($query);
-        $result = false;
         $result = $conn->query($query);
-        $peliculas = false;
+        $favoritos = false;
         if ($result) {
-            $peliculas = array();
-            while($fila = $rs->fetch_assoc()) {
-                $peliculas[] = new Pelicula($fila['$user_id'], $fila['pelicula_id']);
-            }
-            $result->free();
+            /*$favoritos = array();
+            while($fila = $result->fetch_assoc()) {
+                $favoritos[] = new Favorito($fila['user_id'], $fila['pelicula_id']);
+            }*/
+            //$result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }

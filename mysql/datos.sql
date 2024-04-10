@@ -101,3 +101,5 @@ Dirigida por Dan Allen a partir de un guion de Felix Salten y Rhys Warrington, l
 "Bambi: The Reckoning" formará parte del "Twisted Childhood Universe", una serie de proyectos que provienen de Jagged Edge Productions e ITN Studios y que contará con otras películas previamente anunciadas como "Peter Pans Neverland Nightmare" y "Pinocchio Unstrung". 
 Este nuevo Universo culminará en 2025 con una película titulada "Poohniverse: Monsters Assembled", en la que veremos a todos los monstruos unirse. Volviendo a Bambi, la película llegará a nuestros cines el 5 de diciembre de 2024 a manos de Flins & Pinículas.', 'Lucas Pérez', '12/02/2024');
 
+INSERT INTO 'favoritos' ('user_id', 'pelicula_id', 'id') VALUES
+(9, 3, 1);

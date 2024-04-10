@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__.'/includes/config.php';
+require_once __DIR__.'/../../config.php';
 require_once __DIR__.'/Favoritos.php';
 
 if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
-    if (isset($_POST['pelicula_id'])) {
-        $userId = $app->idUsuario(); // Obtener el ID del usuario autenticado
-        $pelicula_idId = $_POST['pelicula_id']; // Obtener el ID de la película
+    if (isset($_POST['movieId'])) {
+        $userId = $app->getUsuarioId(); // Obtener el ID del usuario autenticado
+        $pelicula_id = $_POST['movieId']; // Obtener el ID de la película
 
-        $resultado = \es\ucm\fdi\aw\peliculas\Favorito::crea($userId, $pelicula_idId);
+        $resultado = \es\ucm\fdi\aw\favoritos\Favorito::crea($userId, $pelicula_id);
 
         if ($resultado) {
             // La película se añadió a favoritos

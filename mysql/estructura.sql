@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 --
 
 CREATE TABLE IF NOT EXISTS `favoritos` (
+  `id` int(2) UNSIGNED NOT NULL,
   `user_id` int(2) UNSIGNED NOT NULL,
   `pelicula_id` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -105,4 +106,8 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `user_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+ALTER TABLE `favoritos`
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
