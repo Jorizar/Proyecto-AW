@@ -71,6 +71,24 @@ class Comentario
         return $comentarios;
     }
 
+    public static function buscarTodos() {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT * FROM comentarios";
+        $result = $conn->query($sql);
+    
+        $comentarios = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id']);
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+    
+        return $comentarios;
+    }
+    
+
     public function actualiza($texto, $valoracion)
     {
         $this->texto = $texto;
