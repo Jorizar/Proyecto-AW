@@ -41,12 +41,12 @@ function mostrarPerfil()
         </a>
     </div>
     <div class="centro">
-        <nav class="menu">
-            <a href="<?= $app->resuelve('/index.php')?>">Inicio</a>
-            <a href="<?= $app->resuelve('/noticias.php')?>">Noticias</a>
-            <a href="<?= $app->resuelve('/peliculas_fav.php')?>">Películas <img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
-        </nav>
-    </div>
+    <nav class="menu">
+        <a href="<?= $app->resuelve('/index.php')?>" class="nav-enlace">Inicio</a>
+        <a href="<?= $app->resuelve('/noticias.php')?>" class="nav-enlace">Noticias</a>
+        <a href="<?= $app->resuelve('/peliculas_fav.php')?>" class="nav-enlace">Películas <img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
+    </nav>
+</div>
     <div class="saludo-menu-container">
         <div class="saludo">
             <?= mostrarPerfil(); ?>
