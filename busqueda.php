@@ -1,6 +1,7 @@
 <?php
 // Se incluye el archivo de configuración
-require_once __DIR__.'/includes/config.php'
+require_once __DIR__.'/includes/config.php';
+
 use es\ucm\fdi\aw\peliculas\Pelicula;
 
 

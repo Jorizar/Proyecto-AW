@@ -31,7 +31,7 @@ class Pelicula
         if (!empty($genero)) {
             $sql .= " AND genero = $genero";
         }
-        if (!empty($anno)) {
+        if (!empty($annio)) {
             $sql .= " AND annio = $annio";
         }
         $result = $conn->query($sql);
@@ -48,8 +48,7 @@ class Pelicula
         return $peliculas;
     }
 
-    //Plantear si la necesitamos o no 
-    //TO DO
+
     public static function buscaPorId($idPelicula)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -309,7 +308,7 @@ class Pelicula
         $generos = array();
         if ($rs) {
             while($fila = $rs->fetch_assoc()){
-                $generos[] = $fila['genero'];
+                $generos[$fila['id']] = $fila['genero'];
             }
             $rs->free();
         } else {
