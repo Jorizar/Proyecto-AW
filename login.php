@@ -7,10 +7,14 @@ $formLogin = $formLogin->gestiona();
 
 
 $tituloPagina = 'Login';
-$contenidoPrincipal=<<<EOF
-  	<h1>Acceso al sistema</h1>
-    $formLogin
-EOF;
+$contenidoPrincipal = <<<EOF
+        <div class="contenedor-login">
+            <h1>Iniciar Sesión</h1>
+        </div>
+        <div class="login-formulario">
+            $formLogin
+        </div>
+    EOF;
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal, 'cabecera' => 'Login'];
 $app->generaVista('/plantillas/plantilla.php', $params);
