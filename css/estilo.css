@@ -179,11 +179,17 @@ main {
     font-size: 15px;
 }
 
+.destacadas {
+    border-bottom: 5px solid rgba(181, 184, 0, 0.615);
+    width: 50%; /* Ancho del borde inferior */
+}
+
 /* Estilos para los contenedores de películas */
 .peliculas-container {
     display: flex; /* Utilizamos flexbox para alinear los elementos */
     flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
     justify-content: space-between; /* Espacio entre las películas */
+    margin-top: 20px;
 }
 
 /* Estilos para cada película */
