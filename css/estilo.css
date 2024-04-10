@@ -1,23 +1,43 @@
 body {
-	background-color: #CDCDCD;
+    background-color: #141414; /* Cambia el color de fondo principal a negro */
+    color: #ffffff; /* Cambia el color del texto a blanco */
 }
 
 div#contenedor {
-	width: 900px;
-	margin: auto;
-	border: 1px solid rgb(0, 0, 0);
-	background-color: #CDCDCD;
-	margin-top: 30px;
+    width: 900px;
+    margin: auto;
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: 30px;
+}
+
+#contenedor,
+header,
+nav,
+aside,
+main,
+footer {
+    color: #ffffff;
 }
 
 header {
     padding: 30px;
     height: 100px;
-    background-color: #000000;
+    background-color: #141414;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #ffffff; /* Borde inferior blanco */
+}
+
+footer {
+    clear: both;
+    padding: 10px; /* Reducir el espacio interno */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    background-color: #141414;
+    color: white;
+    text-align: center;
+    border-top: 1px solid #ffffff;
 }
 
 .logo {
@@ -41,10 +61,7 @@ header {
     margin: 0 10px; /* Espacio horizontal entre los enlaces */
 }
 
-.saludo-menu-container {
-    display: flex;
-    align-items: center;
-}
+
 
 
 header .menu a {
@@ -92,18 +109,46 @@ nav {
 	padding: 10px;
 	float: left;
 	width: 170px;
-	background-color: #000000;
+	background-color: #141414;
 }
 
+.menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: rgba(181, 184, 0, 0.615);
+}
+
+.saludo-menu-container {
+    display: flex;
+    align-items: center;
+}
+
+.saludo-menu-container a,
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.saludo-menu-container a:hover,
+.logo a:hover {
+    color: rgba(181, 184, 0, 0.615);
+}
+
+
+/*
 nav a,
 nav a:visited {
 	color: rgba(181, 184, 0, 0.615);
 	font-weight: bold;
 	text-decoration: none;
 }
+*/
 
 nav a:hover {
-	color: red;
+	color: rgba(181, 184, 0, 0.615);
 	text-decoration: underline;
 }
 
@@ -116,19 +161,22 @@ aside {
 }
 
 main {
-	padding: 10px;
-	float: left;
-	min-height: 600px;
-	width: 880px;
-	background-color: white;
+    padding: 10px;
+    float: left;
+    min-height: 600px;
+    width: 880px;
+    /* background-color: rgb(0, 0, 0); */ /* Elimina esta línea */
 }
 
-footer {
-	clear: both;
-	padding: 20px;
-	background-color: #303030;
-	color: white;
-	text-align: center;
+.buscador{
+    width: 50%; /* Establece el ancho del contenedor del buscador */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    text-align: center; /* Centra el contenido del contenedor */
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.buscador h1{
+    font-size: 15px;
 }
 
 /* Estilos para los contenedores de películas */
@@ -151,13 +199,13 @@ footer {
     margin-top: 5px; /* Espacio entre la imagen y el título */
     font-weight: bold; /* Establecemos negrita */
     text-decoration: none; /* Quitamos el subrayado */
-    color: #000; /* Color del texto */
+    color: #ffffff; /* Color del texto */
 }
 
 /* Estilos para los enlaces de las películas */
 .peliculas-container .pelicula a {
     text-decoration: none; /* Quitamos el subrayado */
-    color: #000; /* Color del texto */
+    color: #ffffff; /* Color del texto */
 }
 
 /* Estilos para las imágenes de las películas */
@@ -170,8 +218,9 @@ footer {
 
 .noticia {
     overflow: hidden; /* Limpiar los floats */
-    border-bottom: 1px solid #000000; /* Agregar borde inferior */
-    padding-bottom: 10px; /* Agregar espacio entre cada noticia */
+    border-bottom: 1px solid #ffffff; /* Agregar borde inferior */
+    border-top: 1px solid #ffffff;
+    padding-bottom: 15px; /* Agregar espacio entre cada noticia */
 }
 
 
@@ -185,7 +234,7 @@ footer {
 }
 
 .noticia h3 {
-    margin: 0; /* Elimina el margen del título */
+    margin: 10px; /* Elimina el margen del título */
     font-size: 1.2em; /* Tamaño de fuente del título */
 }
 
@@ -202,6 +251,15 @@ footer {
 
 .noticia p.fecha {
     margin-left: 20px; /* Ajustar el espacio entre el nombre del autor y la fecha */
+}
+
+.noticia a {
+    color: white; /* Color por defecto de los enlaces dentro de las noticias */
+    text-decoration: none; /* Quitamos el subrayado */
+}
+
+.noticia a:hover {
+    color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
 }
 
 
@@ -221,4 +279,14 @@ footer {
     text-decoration: none; /* Quita el subrayado del enlace */
     color: rgb(255, 255, 255); /* Cambia el color del texto */
     font-weight: bold; /* Hace que el nombre de perfil sea más prominente */
+}
+
+.enlace-perfil {
+    color: white;
+    text-decoration: none; /* Opcional: para quitar el subrayado de los enlaces */
+}
+
+.enlace-perfil:hover {
+    color: rgba(181, 184, 0, 0.615); /* Cambia el color al pasar el cursor */
+    /* Otros estilos que desees aplicar al pasar el cursor */
 }

@@ -41,12 +41,11 @@ EOS;
     }
 
     $contenidoPrincipal .= <<<EOS
-            <a href="${cambioDatosUrl}">Cambiar Datos</a><br>
-            <a href="${cambioPlanUrl}">Cambiar Plan</a><br>
-            <a href="${urlComentarios}">Mis Comentarios</a><br>
-            <a href="${urlListas}">Mis Listas</a><br>
-            <!-- Enlace para cerrar sesión -->
-            <a href="${cerrarSesionUrl}">Cerrar Sesión</a><br>
+            <a href="${cambioDatosUrl}" class='enlace-perfil'>Cambiar Datos</a><br>
+            <a href="${cambioPlanUrl}" class='enlace-perfil'>Cambiar Plan</a><br>
+            <a href="${urlComentarios}" class='enlace-perfil'>Mis Comentarios</a><br>
+            <a href="${urlListas}" class='enlace-perfil'>Mis Listas</a><br>
+            <a href="${cerrarSesionUrl}" class='enlace-perfil'>Cerrar Sesión</a><br>
         </div>
     </div>
 EOS;
@@ -57,8 +56,6 @@ EOS;
     <p>Debes iniciar sesión para ver el contenido.</p>
 EOS;
 }
-
-
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
