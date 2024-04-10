@@ -135,24 +135,22 @@ class Usuario
         return self::borraPorId($usuario->id);
     }
     
-    private static function borraPorId($idUsuario)
+    public static function borraPorId($idUsuario)
     {
         if (!$idUsuario) {
             return false;
-        } 
-        /* Los roles se borran en cascada por la FK
-         * $result = self::borraRoles($usuario) !== false;
-         */
+        }
+    
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM Usuarios U WHERE U.user_id = %d"
-            , $idUsuario
-        );
-        if ( ! $conn->query($query) ) {
+        $query = sprintf("DELETE FROM usuarios WHERE user_id = %d", $idUsuario);
+    
+        if (!$conn->query($query)) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
         return true;
     }
+    
 
     private $id; //Id que identifica al user en la base de datos
 
@@ -288,6 +286,26 @@ class Usuario
 
     }
 
+    public static function buscarTodos() {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT user_id, username, email FROM usuarios";
+        $result = $conn->query($sql);
+
+        $usuarios = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $usuarios[] = [
+                    'user_id' => $fila['user_id'],
+                    'username' => $fila['username'],
+                    'email' => $fila['email']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $usuarios;
+    }
 
     public static function cambiarEmail($idUsuario, $nuevoEmail)
     {
