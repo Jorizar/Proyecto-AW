@@ -24,7 +24,9 @@ function mostrarPerfil()
         $loginUrl = $app->resuelve('/login.php');
         $registroUrl = $app->resuelve('/registro.php');
 
-        $html = "<a href='$loginUrl'>Iniciar sesión</a> | <a href='$registroUrl'>Registrarse</a>";
+        $html = "<div class='contenedor-login-registro'>";
+        $html .= "<a href='$loginUrl'>Iniciar sesión</a> | <a href='$registroUrl'>Registrarse</a>";
+        $html .= "</div>";
     }
 
     return $html;

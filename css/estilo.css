@@ -40,6 +40,14 @@ footer {
     border-top: 1px solid #ffffff;
 }
 
+.contenedor-login-registro {
+    background-color: rgba(181, 184, 0, 0.615);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
 .logo {
     flex: 1; /* Hace que el logo ocupe el espacio disponible */
 }
