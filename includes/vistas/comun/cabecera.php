@@ -40,16 +40,18 @@ function mostrarPerfil()
             <img src="./img/logo_proyecto.png" alt="Logo">
         </a>
     </div>
-    <div class="saludo-menu-container"> <!-- Contenedor para el saludo y el menú -->
+    <div class="centro">
         <nav class="menu">
             <a href="<?= $app->resuelve('/index.php')?>">Inicio</a>
-            <a href="<?= $app->resuelve('/admin.php')?>">Administrar</a>
             <a href="<?= $app->resuelve('/noticias.php')?>">Noticias</a>
             <a href="<?= $app->resuelve('/peliculas_fav.php')?>">Películas <img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
         </nav>
+    </div>
+    <div class="saludo-menu-container">
         <div class="saludo">
             <?= mostrarPerfil(); ?>
         </div>
     </div>
 </header>
+
 </body>

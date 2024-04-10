@@ -11,30 +11,41 @@ div#contenedor {
 }
 
 header {
-	padding: 30px;
-	height: 100px;
-	background-color: #000000;
-	color: white;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    padding: 30px;
+    height: 100px;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-header .menu {
-	display: flex;
-	justify-content: flex-end;
-	/* Alinear a la derecha */
+.logo {
+    flex: 1; /* Hace que el logo ocupe el espacio disponible */
 }
 
-header .saludo-menu-container {
-	display: flex;
-	align-items: center;
-	/* Alinea los elementos verticalmente */
+.centro {
+    flex: 2; /* Ajusta el ancho del área central */
+    text-align: center; /* Centra los elementos */
 }
 
-header .saludo {
-	padding: 10px 24px;
+.centro .menu {
+    display: flex; /* Hace que los enlaces estén en línea */
+    justify-content: space-between; /* Espacio uniforme entre los enlaces */
 }
+
+.centro .menu a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 10px; /* Espacio horizontal entre los enlaces */
+}
+
+.saludo-menu-container {
+    display: flex;
+    align-items: center;
+}
+
 
 header .menu a {
 	color: white;
