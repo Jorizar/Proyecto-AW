@@ -20,15 +20,24 @@ class FormularioCambioDatos extends Formulario
             <legend>Cambiar Datos</legend>
             <div>
                 <label for="nuevo_nombre">Nuevo Nombre:</label>
-                <input type="text" id="nuevo_nombre" name="nuevo_nombre" required>
+                <input type="text" id="nuevo_nombre" name="nuevo_nombre">
             </div>
             <div>
                 <label for="nuevo_email">Nuevo Correo Electrónico:</label>
-                <input type="email" id="nuevo_email" name="nuevo_email" required>
+                <input type="email" id="nuevo_email" name="nuevo_email">
             </div>
             <div>
-                <label for="nueva_foto">Nueva Foto de Perfil:</label>
-                <input type="file" id="nueva_foto" name="nueva_foto" accept="image/*" multiple="false">
+                <label><img src='./img/fotosPerfil/1.png' width='48' height='48'></label>
+                <input type='radio' name='nueva_foto' value='/img/fotosPerfil/1.png'>
+
+                <label><img src='./img/fotosPerfil/2.png' width='48' height='48'></label>
+                <input type='radio' name='nueva_foto' value='/img/fotosPerfil/2.png'>
+
+                <label><img src='./img/fotosPerfil/brad.png' width='48' height='48'></label>
+                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/brad.png'>
+
+                <label><img src='./img/fotosPerfil/quentin.png' width='48' height='48'></label>
+                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/quentin.png'>
             </div>
             <div>
                 <button type="submit" name="cambiar_datos">Cambiar Datos</button>
@@ -42,43 +51,27 @@ class FormularioCambioDatos extends Formulario
     {
         // Verifica si se han enviado los datos del formulario
         if (isset($datos['nuevo_nombre'], $datos['nuevo_email'], $datos['nueva_foto'])) {
+
             // Obtiene los nuevos datos introducidos por el usuario
-            $nuevoNombre = $datos['nuevo_nombre'];
-            $nuevoEmail = $datos['nuevo_email'];
+            $nuevoNombre = trim($datos['nuevo_nombre'] ?? '');
+            $nuevoNombre = filter_var($nuevoNombre, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if ( ! $nuevoNombre || empty($nuevoNombre) ) {
+                $this->errores['nuevo_nombre'] = 'El nombre de usuario no puede estar vacío';
+            }
+
+            $nuevoEmail = trim($datos['nuevo_email'] ?? '');
+            $nuevoEmail = filter_var($nuevoEmail, FILTER_VALIDATE_EMAIL);
+            if ( ! $nuevoEmail || empty($nuevoEmail) ) {
+                $this->errores['nuevo_email'] = 'El email de usuario no puede estar vacío';
+            }
             
-            // Actualiza los datos del usuario en la sesión
-            $_SESSION['nombre'] = $nuevoNombre;
-            $_SESSION['email'] = $nuevoEmail;
-            
+            $nuevaFoto = $datos['nueva_foto'];
 
             //Actualiza los datos del usuario en la base de datos
             $result = Usuario::cambiarNombre($_SESSION['idUsuario'], $nuevoNombre);
             $result = Usuario::cambiarEmail($_SESSION['idUsuario'], $nuevoEmail);
-
-            // Aquí deberías procesar la foto de perfil y guardarla en una ubicación específica
-            if(isset($_FILES['nueva_foto'])){
-                $filetype = pathinfo($_FILES['nueva_foto']['name'], PATHINFO_EXTENSION);
-                $filename = uniqid() . "." . $filetype;
-                $targetFilePath = 'img/fotosPerfil/'.$filename;
-                $filesize = $_FILES['nueva_foto']['name'];
-                
-                if($filesize > 1000000){
-                    $this->errores['nueva_foto'] = 'La imagen no puede ocupar más de 1 MB';
-                }
-    
-                $allowTypes = array('jpg', 'png', 'jpeg');
-                if(in_array($filetype, $allowTypes)){ //Comprobamos que la extensión de la imagen se ajusta a las requeridas
-                    if(move_uploaded_file($_FILES['nueva_foto']["tmp_name"], $targetFilePath)) {
-                        $_SESSION['fotoPerfil'] = $filename;
-                    } else {
-                        $this->errores['nueva_foto'] = 'Hubo un error al subir el fichero';
-                    }
-                }
-                else{
-                    $this->errores['nueva_foto'] = 'La imagen que ha seleccionado debe tener extensión .jpg, .png o .jpeg'; 
-                }
-            }
-           
+            $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $nuevaFoto);
+                       
             // Redirige al usuario de vuelta a la página de perfil
             header("Location: " . $this->urlRedireccion);
             exit;
