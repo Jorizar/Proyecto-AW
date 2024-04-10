@@ -15,7 +15,7 @@ if ($app->usuarioLogueado()) {
     $cerrarSesionUrl = $app->resuelve('/logout.php'); // URL para cerrar sesión
     $urlAdminComentarios = $app->resuelve('/admin_comentarios.php');
     $urlAdminPeliculas = $app->resuelve('/admin_peliculas.php');
-    $urlAdminUsuarios = $app->resuelve('/admin_ususarios.php');
+    $urlAdminUsuarios = $app->resuelve('/admin_usuarios.php');
 
     // Contenido principal del perfil del usuario
     $contenidoPrincipal = <<<EOS
