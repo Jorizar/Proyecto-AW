@@ -35,12 +35,12 @@ class Pelicula
         if (!empty($anno)) {
             $sql .= " AND annio = $annio";
         }
-        $result = $conn->query($query);
+        $result = $conn->query($sql);
         $peliculas = false;
         if ($result) {
             $peliculas = array();
-            while($fila = $rs->fetch_assoc()) {
-                $peliculas[] = new Pelicula($fila['titulo'], $fila['director'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
+            while($fila = $result->fetch_assoc()) {
+                $peliculas[] = new Pelicula($fila['titulo'], $fila['director'],$fila['id'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
             }
             $result->free();
         } else {
@@ -274,7 +274,7 @@ class Pelicula
     }
 
     //Obtiene los géneros de las películas que se encuentran en la base de datos. Útil para el buscador
-    public function getGeneros(){
+    public static function getGeneros(){
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("SELECT * FROM generos");
         $rs = $conn->query($query);

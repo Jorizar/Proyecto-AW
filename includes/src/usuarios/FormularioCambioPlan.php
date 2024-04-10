@@ -3,6 +3,8 @@ namespace es\ucm\fdi\aw\usuarios;
 
 use es\ucm\fdi\aw\Aplicacion;
 use es\ucm\fdi\aw\Formulario;
+use es\ucm\fdi\aw\usuarios\Usuario;
+
 
 class FormularioCambioPlan extends Formulario
 {
@@ -12,6 +14,7 @@ class FormularioCambioPlan extends Formulario
     
     protected function generaCamposFormulario(&$datos)
     {
+ 
         // Se genera el HTML asociado a los campos del formulario.
         $html = <<<EOF
         <fieldset>
@@ -38,13 +41,26 @@ class FormularioCambioPlan extends Formulario
         if (isset($datos['nuevo_plan'])) {
             // Obtiene el nuevo plan seleccionado por el usuario
             $nuevoPlan = $datos['nuevo_plan'];
+            
+            // Obtiene el plan actual del usuario
+            $planActual = $_SESSION["rol"];
 
-            // Actualiza el plan del usuario en la sesión
-            $_SESSION["rol"] = $nuevoPlan;
+            // Verifica si el nuevo plan es igual al plan actual
+            if ($nuevoPlan === $planActual) {
+                // Muestra un mensaje de error
+                $this->errores[] = "Ese es tu plan actual.";
+            } else {
+                // Actualiza el plan del usuario en la sesión
+                $_SESSION["rol"] = $nuevoPlan;
 
-            // Redirige al usuario de vuelta a la página de perfil
-            header("Location: " . $this->urlRedireccion);
-            exit;
+                //Buscamos al usuario en la base de datos por su id y actualizamos su rol en la bd
+                $usuario = Usuario::buscaPorId($_SESSION['idUsuario']);
+                $usuario->setRol($nuevoPlan);
+            }
         }
+
+        // Redirige al usuario de vuelta a la página de perfil
+        header("Location: " . $this->urlRedireccion);
+        exit;
     }
 }

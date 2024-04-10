@@ -24,6 +24,23 @@ if (isset($_GET['id'])) {
 
         $genero = \es\ucm\fdi\aw\peliculas\Pelicula::convierteGenero($generoId); // Convertimos la id del genero a texto
 
+        // Recoge los comentarios
+        $comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorPeliculaId($movieId);
+
+        //Calcula la valoracion de los comentarios
+        $sumValoraciones = 0;
+        $numeroValoraciones = count($comentarios);
+    
+        if ($numeroValoraciones > 0) {
+            foreach ($comentarios as $comentario) {
+                $sumValoraciones += $comentario->getValoracion();
+            }
+            $avgValoracion = $sumValoraciones / $numeroValoraciones;
+            $valoracionUsuariosHtml = round($avgValoracion, 1);
+        } else {
+            $valoracionUsuariosHtml = "Aun no hay valoraciones";
+        }
+
         // Reparto es un json así que lo desciframos para escribirlo
         $repartoData = json_decode($repartoJson);
         $repartoHtml = "";
@@ -34,7 +51,7 @@ if (isset($_GET['id'])) {
         $contenidoPrincipal = <<<EOS
         <div style="display: flex; align-items: center; justify-content: start; margin-bottom: 20px;">
             <h2 style="margin-right: 20px;">$titulo ($anno)</h2>
-            <form action="add_favoritos.php" method="post" style="margin-top: 0;">
+            <form action="procesar_favorito.php" method="post" style="margin-top: 0;">
                 <input type="hidden" name="movieId" value="$movieId">
                 <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
             </form>
@@ -45,6 +62,7 @@ if (isset($_GET['id'])) {
                 <p><strong>Director:</strong> $director</p>
                 <p><strong>Género:</strong> $genero</p>
                 <p><strong>Valoración IMDb:</strong> $valoracionIMDb</p>
+                <p><strong>Valoración 7thArt:</strong> $valoracionUsuariosHtml</p>
                 <p><strong>Reparto:</strong><br>$repartoHtml</p>
                 <p><strong>Sinopsis:</strong> $sinopsis</p>
             </div>
@@ -55,19 +73,25 @@ if (isset($_GET['id'])) {
         $contenidoPrincipal = '<h1>Película no encontrada</h1>';
     }
 
-    // Display comments for this movie
-    $comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorPeliculaId($movieId);
-    $comentariosHtml = '<h3>Comentarios</h3>';
+    //Muestra los comentarios
+    $numComentarios = count($comentarios);
+    $comentariosHtml = '<h3>Comentarios (' . $numComentarios . ')</h3>';
     foreach ($comentarios as $comentario) {
-        $textoComentario = htmlspecialchars($comentario->getTexto()); // Using the getter method
-        $valoracionComentario = htmlspecialchars($comentario->getValoracion()); // Assuming you also have a getValoracion() method
-        
-        $comentariosHtml .= "<div class='comentario'><p>$textoComentario</p><p>Valoración: $valoracionComentario</p></div>";
+        $textoComentario = htmlspecialchars($comentario->getTexto());
+        $valoracionComentario = htmlspecialchars($comentario->getValoracion());
+        $UserId = htmlspecialchars($comentario->getUserId());
+        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
+    
+        $comentariosHtml .= "<div class='comentario'>
+            <p><strong>$UserNombre</strong> dijo:</p>
+            <p>$textoComentario</p>
+            <p>Valoración: $valoracionComentario</p>
+        </div>";
     }
     $contenidoPrincipal .= $comentariosHtml;
 
-    // Check if the user is logged in to display the add comment form
-    if ($app->usuarioLogueado()) { // This function needs to be implemented to check user login status
+    // Revisa si el usuario esta logueado para mostrarle la seccion añadir comentario
+    if ($app->usuarioLogueado()) {
         $contenidoPrincipal .= <<<EOF
         <h3>Añadir un comentario</h3>
         <form action="includes/src/comentarios/procesar_comentario.php" method="post"> <!-- Adjust action URL as needed -->
@@ -79,6 +103,11 @@ if (isset($_GET['id'])) {
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
             </select>
             <button type="submit">Enviar comentario</button>
         </form>

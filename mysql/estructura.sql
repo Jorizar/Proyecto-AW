@@ -46,11 +46,12 @@ CREATE TABLE IF NOT EXISTS `listas` (
 --
 
 CREATE TABLE IF NOT EXISTS `noticias` (
-  `titulo` varchar(100) NOT NULL,
+  `titulo` varchar(1000) NOT NULL,
   `post_id` int(2) UNSIGNED NOT NULL,
-  `portada` varchar(50) DEFAULT NULL,
+  `portada` varchar(100) DEFAULT NULL,
   `texto` text NOT NULL,
-  `autor` varchar(40) NOT NULL
+  `autor` varchar(40) NOT NULL,
+  `fecha` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -62,21 +63,30 @@ CREATE TABLE `peliculas` (
   `director` varchar(35) NOT NULL,
   `id` int(2) UNSIGNED NOT NULL,
   `annio` year(4) NOT NULL,
-  `genero` varchar(20) NOT NULL,
+  `genero` int(2) UNSIGNED NOT NULL,
   `sinopsis` text NOT NULL,
   `portada` varchar(100) NOT NULL,
   `reparto` longtext NOT NULL,
   `Val_IMDb` decimal(2,1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+--
+-- Estructura de tabla para la tabla `generos`
+--
+
+CREATE TABLE `generos` (
+  `id` int(2) UNSIGNED NOT NULL,
+  `genero` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 CREATE TABLE `usuarios` (
   `username` varchar(20) NOT NULL,
-  `password` varchar(2000) NOT NULL,
+  `password` varchar(80) NOT NULL,
   `user_id` int(2) UNSIGNED NOT NULL,
   `rol` varchar(20) NOT NULL,
   `email` varchar(35) DEFAULT NULL,

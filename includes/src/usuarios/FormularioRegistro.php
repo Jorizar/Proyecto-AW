@@ -14,9 +14,22 @@ class FormularioRegistro extends Formulario
     {
         $nombreUsuario = $datos['nombreUsuario'] ?? '';
 
-        // Se generan los mensajes de error si existen.
-        $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-        $erroresCampos = self::generaErroresCampos(['nombreUsuario', 'password', 'password2', 'email'], $this->errores, 'span', array('class' => 'error'));
+    // Se generan los mensajes de error si existen.
+    $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
+    $erroresCampos = self::generaErroresCampos(['nombreUsuario', 'password', 'password2', 'email', 'rol'], $this->errores, 'span', array('class' => 'error'));
+
+    // Opciones para el campo de selección de roles
+    $opcionesRol = [
+        'free' => 'Free',
+        'premium' => '$Premium$'
+    ];
+
+    // Genera las opciones HTML para el campo de selección de roles
+    $optionsRol = '';
+    foreach ($opcionesRol as $value => $label) {
+        $selected = ($datos['rol'] ?? '') === $value ? 'selected' : '';
+        $optionsRol .= "<option value='$value' $selected>$label</option>";
+    }
 
         $html = <<<EOF
         $htmlErroresGlobales
@@ -41,7 +54,13 @@ class FormularioRegistro extends Formulario
                 <label for="email">Introduce el email:</label>
                 <input id="email" type="email" name="email" />
                 {$erroresCampos['email']}
-        </div>
+            </div>
+            <div>
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol">
+                $optionsRol
+            </select>
+            </div>
             <div>
                 <button type="submit" name="registro">Registrar</button>
             </div>
@@ -79,14 +98,19 @@ class FormularioRegistro extends Formulario
         $this->errores['email'] = 'El email no es válido';
     }
 
+    $rol = $datos['rol'] ?? '';
+    if (!in_array($rol, ['free', 'premium'])) {
+        $this->errores['rol'] = 'Elige un rol válido';
+    }
+
     if (count($this->errores) === 0) {
+        
         $usuario = Usuario::buscaUsuario($nombreUsuario);
     
         if ($usuario) {
             $this->errores[] = "El usuario ya existe";
         } else {
-            // Se pasa el email al método crea() de Usuario
-            $usuario = Usuario::crea($nombreUsuario, $password, $email);
+            $usuario = Usuario::crea($nombreUsuario, $password, $id, $rol, $email, $foto);
             $app = Aplicacion::getInstance();
             $app->login($usuario);
         }

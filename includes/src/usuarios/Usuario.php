@@ -17,12 +17,14 @@ class Usuario
         return false;
     }
     
-    public static function crea($nombreUsuario, $password)
+    public static function crea($nombreUsuario, $password, $id, $rol, $email, $foto)
     {
+        $foto = './img/fotosPerfil/1.png';
         $hashedPassword = self::hashPassword($password);
-        $user = new Usuario($nombreUsuario, $hashedPassword);
+        $user = new Usuario($nombreUsuario, $hashedPassword, $id, $rol, $email, $foto);
         return $user->guarda();
     }
+
 
     public static function buscaUsuario($nombreUsuario)
     {
@@ -59,6 +61,25 @@ class Usuario
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
         return $result;
+    }
+
+    public static function buscaNombrePorId($UserId)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT username FROM usuarios WHERE user_id = %d", $UserId);
+        $rs = $conn->query($query);
+        $UserNombre = null;
+    
+        if ($rs) {
+            $fila = $rs->fetch_assoc();
+            if ($fila) {
+                $UserNombre = $fila['username']; // Retrieve the title
+            }
+            $rs->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $UserNombre; // Return the movie title or null if not found
     }
     
     private static function hashPassword($password)
@@ -145,7 +166,7 @@ class Usuario
 
     private $foto;   //Ruta para cargar la imagen de perfil
 
-    private function __construct($nombreUsuario, $password, $id = null, $rol = null, $email = null, $foto = './img/fotosPerfil/1')
+    private function __construct($nombreUsuario, $password, $id, $rol, $email, $foto)
     {
         $this->id = $id;
         $this->nombreUsuario = $nombreUsuario;
@@ -206,6 +227,12 @@ class Usuario
         return false;
     }
 
+    public function setRol($nuevoRol)
+    {
+        $this->rol = $nuevoRol;
+        return self::actualizaRol($this->id, $nuevoRol);
+    }
+
 
     public function cambiaFoto($nuevaFoto)
     {
@@ -219,6 +246,21 @@ class Usuario
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("UPDATE Usuarios SET foto='%s' WHERE user_id=%d",
             $conn->real_escape_string($nuevaFoto),
+            $idUsuario
+        );
+        if ($conn->query($query)) {
+            return true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    private static function actualizaRol($idUsuario, $nuevoRol)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE Usuarios SET rol='%s' WHERE user_id=%d",
+            $conn->real_escape_string($nuevoRol),
             $idUsuario
         );
         if ($conn->query($query)) {

@@ -11,66 +11,82 @@ div#contenedor {
 }
 
 header {
-	padding: 30px;
-	height: 100px;
-	background-color: #000000;
-	color: white;
-
+    padding: 30px;
+    height: 100px;
+    background-color: #000000;
+    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header .menu {
-    display: flex;
-    justify-content: flex-end; /* Alinear a la derecha */
+.logo {
+    flex: 1; /* Hace que el logo ocupe el espacio disponible */
 }
 
-header .saludo-menu-container {
-    display: flex;
-    align-items: center; /* Alinea los elementos verticalmente */
+.centro {
+    flex: 2; /* Ajusta el ancho del área central */
+    text-align: center; /* Centra los elementos */
 }
 
-header .saludo {
-    padding: 10px 24px;
+.centro .menu {
+    display: flex; /* Hace que los enlaces estén en línea */
+    justify-content: space-between; /* Espacio uniforme entre los enlaces */
+}
+
+.centro .menu a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 10px; /* Espacio horizontal entre los enlaces */
+}
+
+.saludo-menu-container {
+    display: flex;
+    align-items: center;
 }
 
 
 header .menu a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    margin-left: 20px; /* Espacio entre los elementos */
-	display: flex; /* Para permitir alinear elementos verticalmente */
-    align-items: center; /* Alinea verticalmente los elementos */
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+	margin-left: 20px;
+	/* Espacio entre los elementos */
+	display: flex;
+	/* Para permitir alinear elementos verticalmente */
+	align-items: center;
+	/* Alinea verticalmente los elementos */
 }
 
 header .menu a img {
-    vertical-align: middle; /* Alinea verticalmente con el texto */
-    margin-left: 5px; /* Ajusta el espacio entre el texto y la imagen */
+	vertical-align: middle;
+	/* Alinea verticalmente con el texto */
+	margin-left: 5px;
+	/* Ajusta el espacio entre el texto y la imagen */
 	width: 20px;
 	height: auto;
 }
 
-
-
-header a, header a:visited {
+header a,
+header a:visited {
 	color: white;
 	font-weight: bold;
 	text-decoration: none;
-} 
+}
 
 header a:hover {
 	color: red;
 	font-weight: bold;
 	text-decoration: underline;
-} 
-
-header .logo img {
-    width: 120px; /* Define el ancho del logo */
-    height: auto; /* Mantiene la proporción de aspecto */
 }
 
+header .logo img {
+	width: 120px;
+	/* Define el ancho del logo */
+	height: auto;
+	/* Mantiene la proporción de aspecto */
+}
 
 nav {
 	padding: 10px;
@@ -79,17 +95,17 @@ nav {
 	background-color: #000000;
 }
 
-nav a, nav a:visited {
+nav a,
+nav a:visited {
 	color: rgba(181, 184, 0, 0.615);
 	font-weight: bold;
 	text-decoration: none;
-} 
+}
 
 nav a:hover {
 	color: red;
 	text-decoration: underline;
-} 
-
+}
 
 aside {
 	padding: 10px;
@@ -107,7 +123,7 @@ main {
 	background-color: white;
 }
 
-footer	 {
+footer {
 	clear: both;
 	padding: 20px;
 	background-color: #303030;
@@ -115,32 +131,94 @@ footer	 {
 	text-align: center;
 }
 
-/*div.saludo {
-	width: 40%;
-	text-align: right;
-}
-*/
-fieldset {
-	border: 1px solid black;
-	width: 15em;
-	margin: 0 auto;
+/* Estilos para los contenedores de películas */
+.peliculas-container {
+    display: flex; /* Utilizamos flexbox para alinear los elementos */
+    flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
+    justify-content: space-between; /* Espacio entre las películas */
 }
 
-legend {
-	color: #fff;
-	background: #303030;
-	border: 1px solid black;
-	padding: 2px 6px;
-} 
-
-label {
-	width: 4em;
-	float: left;
-	text-align: right;
-	margin-right: 0.5em;
-	display: block;
+/* Estilos para cada película */
+.peliculas-container .pelicula {
+    width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
+    margin-bottom: 20px; /* Espacio entre las filas */
+    text-align: center; /* Centramos el contenido */
 }
 
-button {
-	margin-left: 100px;
-} 
+/* Estilos para los títulos de las películas */
+.peliculas-container .pelicula span {
+    display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
+    margin-top: 5px; /* Espacio entre la imagen y el título */
+    font-weight: bold; /* Establecemos negrita */
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #000; /* Color del texto */
+}
+
+/* Estilos para los enlaces de las películas */
+.peliculas-container .pelicula a {
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #000; /* Color del texto */
+}
+
+/* Estilos para las imágenes de las películas */
+.peliculas-container .pelicula img {
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 300px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
+}
+
+
+.noticia {
+    overflow: hidden; /* Limpiar los floats */
+    border-bottom: 1px solid #000000; /* Agregar borde inferior */
+    padding-bottom: 10px; /* Agregar espacio entre cada noticia */
+}
+
+
+/* Estilos para las imágenes de las noticias */
+.portada-noticia {
+	float: left; /* Coloca la imagen a la izquierda */
+    margin-right: 10px; /* Espacio entre la imagen y el título */
+    width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
+    height: 150px; /* Establecemos una altura fija para todas las imágenes */
+    object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
+}
+
+.noticia h3 {
+    margin: 0; /* Elimina el margen del título */
+    font-size: 1.2em; /* Tamaño de fuente del título */
+}
+
+.noticia .autor-fecha {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos internos */
+}
+
+.noticia p.autor,
+.noticia p.fecha {
+    font-size: 0.8em; /* Establecer el tamaño de la fuente más pequeño */
+    font-style: italic; /* Opcional: poner la fecha en cursiva */
+}
+
+.noticia p.fecha {
+    margin-left: 20px; /* Ajustar el espacio entre el nombre del autor y la fecha */
+}
+
+
+.imagen-perfil {
+    width: 50px;
+    height: 50px;
+}
+
+.perfil-info {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección principal a columnas */
+    align-items: center; /* Alinea los elementos horizontalmente al centro */
+}
+
+.perfil-info .nombre-perfil {
+    margin-top: 5px; /* Espacio entre la foto de perfil y el nombre de perfil */
+    text-decoration: none; /* Quita el subrayado del enlace */
+    color: rgb(255, 255, 255); /* Cambia el color del texto */
+    font-weight: bold; /* Hace que el nombre de perfil sea más prominente */
+}
