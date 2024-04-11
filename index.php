@@ -58,7 +58,7 @@ HTML;
     }
     $contenidoPrincipal .= '</div>';
 } else {
-    $contenidoPrincipal .= "<p>No se encontraron películas mejor valoradas.</p>";
+    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
 
 // Consulta SQL para obtener las películas del género 1
@@ -92,9 +92,198 @@ if ($resultGenero1 && $resultGenero1->num_rows > 0) {
             </div>
 HTML;
     }
+
+
     $contenidoPrincipal .= '</div>';
 } else {
-    $contenidoPrincipal .= "<p>No se encontraron películas del género 1.</p>";
+    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
+}
+
+// Consulta SQL para obtener las películas del género 1
+$queryGenero2 = "SELECT id, titulo, portada
+                FROM peliculas
+                WHERE genero = 2
+                ORDER BY Val_IMDb DESC
+                LIMIT 4";
+
+$resultGenero2 = $conexion->query($queryGenero2);
+
+if ($resultGenero2 && $resultGenero2->num_rows > 0) {
+    // Agregar el encabezado "Películas del género 1"
+    $contenidoPrincipal .= '<div class="generoComedia">';
+    $contenidoPrincipal .= '<h2>Comedias</h2>';
+    $contenidoPrincipal .= '</div>';
+
+    // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="peliculas-container">';
+    while ($row = $resultGenero2->fetch_assoc()) {
+        $id = $row['id'];
+        $titulo = $row['titulo'];
+        $imagen = $row['portada'];
+        // Enlace por cada película que redirige a la vista de la película
+        $contenidoPrincipal .= <<<HTML
+            <div class="pelicula">
+                <a href="vista_pelicula.php?id=$id">
+                    <img src="$imagen" alt="$titulo">
+                    <span>$titulo</span>
+                </a>
+            </div>
+HTML;
+    }
+    
+
+    $contenidoPrincipal .= '</div>';
+} else {
+    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
+}
+
+// Consulta SQL para obtener las películas del género 1
+$queryGenero3 = "SELECT id, titulo, portada
+                FROM peliculas
+                WHERE genero = 3
+                ORDER BY Val_IMDb DESC
+                LIMIT 4";
+
+$resultGenero3 = $conexion->query($queryGenero3);
+
+if ($resultGenero3 && $resultGenero3->num_rows > 0) {
+    // Agregar el encabezado "Películas de Acción"
+    $contenidoPrincipal .= '<div class="accion">';
+    $contenidoPrincipal .= '<h2>Películas de Acción</h2>';
+    $contenidoPrincipal .= '</div>';
+
+    // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="peliculas-container">';
+    while ($row = $resultGenero3->fetch_assoc()) {
+        $id = $row['id'];
+        $titulo = $row['titulo'];
+        $imagen = $row['portada'];
+        // Enlace por cada película que redirige a la vista de la película
+        $contenidoPrincipal .= <<<HTML
+            <div class="pelicula">
+                <a href="vista_pelicula.php?id=$id">
+                    <img src="$imagen" alt="$titulo">
+                    <span>$titulo</span>
+                </a>
+            </div>
+HTML;
+    }
+    
+
+    $contenidoPrincipal .= '</div>';
+} else {
+    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
+}
+// Consulta SQL para obtener las películas del género 1
+$queryGenero4 = "SELECT id, titulo, portada
+                FROM peliculas
+                WHERE genero = 4
+                ORDER BY Val_IMDb DESC
+                LIMIT 4";
+
+$resultGenero4 = $conexion->query($queryGenero4);
+
+if ($resultGenero4 && $resultGenero4->num_rows > 0) {
+    // Agregar el encabezado "Películas del género 1"
+    $contenidoPrincipal .= '<div class="musicales">';
+    $contenidoPrincipal .= '<h2>Películas Musicales</h2>';
+    $contenidoPrincipal .= '</div>';
+
+    // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="peliculas-container">';
+    while ($row = $resultGenero4->fetch_assoc()) {
+        $id = $row['id'];
+        $titulo = $row['titulo'];
+        $imagen = $row['portada'];
+        // Enlace por cada película que redirige a la vista de la película
+        $contenidoPrincipal .= <<<HTML
+            <div class="pelicula">
+                <a href="vista_pelicula.php?id=$id">
+                    <img src="$imagen" alt="$titulo">
+                    <span>$titulo</span>
+                </a>
+            </div>
+HTML;
+    }
+    
+
+    $contenidoPrincipal .= '</div>';
+} else {
+    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
+}
+// Consulta SQL para obtener las películas del género 1
+$queryGenero5 = "SELECT id, titulo, portada
+                FROM peliculas
+                WHERE genero = 5
+                ORDER BY Val_IMDb DESC
+                LIMIT 4";
+
+$resultGenero5 = $conexion->query($queryGenero5);
+
+if ($resultGenero5 && $resultGenero5->num_rows > 0) {
+    // Agregar el encabezado "Películas del género 1"
+    $contenidoPrincipal .= '<div class="misterio">';
+    $contenidoPrincipal .= '<h2>Películas Misteriosas</h2>';
+    $contenidoPrincipal .= '</div>';
+
+    // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="peliculas-container">';
+    while ($row = $resultGenero5->fetch_assoc()) {
+        $id = $row['id'];
+        $titulo = $row['titulo'];
+        $imagen = $row['portada'];
+        // Enlace por cada película que redirige a la vista de la película
+        $contenidoPrincipal .= <<<HTML
+            <div class="pelicula">
+                <a href="vista_pelicula.php?id=$id">
+                    <img src="$imagen" alt="$titulo">
+                    <span>$titulo</span>
+                </a>
+            </div>
+HTML;
+    }
+    
+
+    $contenidoPrincipal .= '</div>';
+} else {
+    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
+}
+// Consulta SQL para obtener las películas del género 1
+$queryGenero6 = "SELECT id, titulo, portada
+                FROM peliculas
+                WHERE genero = 6
+                ORDER BY Val_IMDb DESC
+                LIMIT 4";
+
+$resultGenero6 = $conexion->query($queryGenero6);
+
+if ($resultGenero6 && $resultGenero6->num_rows > 0) {
+    // Agregar el encabezado "Películas del género 1"
+    $contenidoPrincipal .= '<div class="scfi">';
+    $contenidoPrincipal .= '<h2>SCFI</h2>';
+    $contenidoPrincipal .= '</div>';
+
+    // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="peliculas-container">';
+    while ($row = $resultGenero6->fetch_assoc()) {
+        $id = $row['id'];
+        $titulo = $row['titulo'];
+        $imagen = $row['portada'];
+        // Enlace por cada película que redirige a la vista de la película
+        $contenidoPrincipal .= <<<HTML
+            <div class="pelicula">
+                <a href="vista_pelicula.php?id=$id">
+                    <img src="$imagen" alt="$titulo">
+                    <span>$titulo</span>
+                </a>
+            </div>
+HTML;
+    }
+    
+
+    $contenidoPrincipal .= '</div>';
+} else {
+    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
 
 // Parámetros para generar la vista final

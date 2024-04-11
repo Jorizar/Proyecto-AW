@@ -45,7 +45,7 @@ function mostrarPerfil()
     <nav class="menu">
         <a href="<?= $app->resuelve('/index.php')?>" class="nav-enlace">Inicio</a>
         <a href="<?= $app->resuelve('/noticias.php')?>" class="nav-enlace">Noticias</a>
-        <a href="<?= $app->resuelve('/peliculas_fav.php')?>" class="nav-enlace">Películas <img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
+        <a href="<?= $app->resuelve('/peliculas_fav.php')?>" class="nav-enlace">Películas<img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
     </nav>
 </div>
     <div class="saludo-menu-container">
