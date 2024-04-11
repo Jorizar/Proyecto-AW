@@ -89,13 +89,14 @@ footer {
 .centro .menu {
     display: flex; /* Hace que los enlaces estén en línea */
     justify-content: space-between; /* Espacio uniforme entre los enlaces */
+    margin: 0 20px; /* Margen horizontal para centrar los elementos */
 }
 
 .centro .menu a {
     color: white;
     font-weight: bold;
     text-decoration: none;
-    margin: 0 10px; /* Espacio horizontal entre los enlaces */
+    margin: 0 30px; /* Espacio horizontal entre los enlaces */
 }
 
 header .menu a {
@@ -216,7 +217,7 @@ main {
 }
 
 .buscador form {
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #141414;
@@ -226,6 +227,7 @@ main {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    max-width: 100%;
 }
 
 
@@ -235,7 +237,8 @@ main {
 .buscador-campo-genero {
     margin-top: 20px;
     margin-bottom: 10px;
-    margin-right: 10px;
+    margin-right: 30px;
+    width: calc(20% - 10px);
 }
 
 .buscador-campo-titulo label,
@@ -243,12 +246,12 @@ main {
 .buscador-campo-anio label,
 .buscador-campo-genero label {
     display: block;
+    
 }
 
 .buscador-campo-titulo input[type="text"],
 .buscador-campo-director input[type="text"],
-.buscador-campo-anio input[type="text"],
-.buscador-campo-genero select {
+.buscador-campo-anio input[type="text"]{
     
     padding: 8px;
     border: 1px solid #ccc;
@@ -256,6 +259,16 @@ main {
     color: #fff;
     background-color: transparent;
     margin-top: 10px;
+}
+
+.buscador-campo-genero select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #141414;
+    background-color: transparent;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .buscador-boton {
