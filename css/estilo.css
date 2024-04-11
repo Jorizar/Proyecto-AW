@@ -173,16 +173,58 @@ main {
     width: 90%;
 }
 
-.buscador{
-    width: 50%; /* Establece el ancho del contenedor del buscador */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    text-align: center; /* Centra el contenido del contenedor */
-    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+.buscador {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-.buscador h1{
-    font-size: 15px;
+.buscador h1 {
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 8px;
 }
+
+.buscador form {
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #141414;
+}
+
+.buscador-campo {
+    margin-bottom: 8px;
+}
+
+.buscador input[type="text"] {
+    width: calc(100% - 10px);
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #141414;
+    background-color: #fff;
+    margin-right: 8px;
+}
+
+.buscador button[type="submit"] {
+    width: 30%;
+    margin: 0 auto;
+    padding: 8px;
+    background-color: rgba(181, 184, 0, 0.615);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.buscador button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+
 
 .destacadas {
     border-bottom: 5px solid rgba(181, 184, 0, 0.615);

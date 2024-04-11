@@ -15,7 +15,6 @@ $formBusqueda = $formBusqueda->gestiona();
 // Agregar el buscador al contenido de la página
 $contenidoPrincipal .= <<<BUSCADOR
         <div class="buscador">
-        <h1>Buscador</h1>
         $formBusqueda
         </div>
 BUSCADOR;
