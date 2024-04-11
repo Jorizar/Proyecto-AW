@@ -253,7 +253,7 @@ main {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: #141414;
+    color: rgba(127,96,3,255);
     background-color: transparent;
     margin-top: 10px;
     width: 100%;
@@ -618,7 +618,7 @@ main {
 .comentario-formulario select {
     width: calc(12% - 10px); /* Ancho del select */
     margin-left: 30px;
-    color: #141414;
+    color: rgba(127,96,3,255);
     background-color: transparent;
 }
 
@@ -670,7 +670,7 @@ main {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: #141414;
+    color: rgba(127,96,3,255);
     background-color: transparent;
     width: calc(100% - 20px); /* Ancho del select */
 }
