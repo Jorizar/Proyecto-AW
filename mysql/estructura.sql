@@ -104,6 +104,9 @@ ALTER TABLE `usuarios`
   ALTER TABLE `favoritos`
   ADD PRIMARY KEY (`id`);
 
+  ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`comentario_id`);
+
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
@@ -113,4 +116,8 @@ COMMIT;
 
 ALTER TABLE `favoritos`
   MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+ALTER TABLE `comentarios`
+  MODIFY `comentario_id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 COMMIT;
