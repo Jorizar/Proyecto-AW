@@ -71,8 +71,8 @@ $resultGenero1 = $conexion->query($queryGenero1);
 
 if ($resultGenero1 && $resultGenero1->num_rows > 0) {
     // Agregar el encabezado "Películas del género 1"
-    $contenidoPrincipal .= '<div class="generoDrama">';
-    $contenidoPrincipal .= '<h2>Películas Dramáticas</h2>';
+    $contenidoPrincipal .= '<div class="destacadas">';
+    $contenidoPrincipal .= '<h1>Películas Dramáticas</h1>';
     $contenidoPrincipal .= '</div>';
 
     // Continuar con el contenido principal
@@ -109,8 +109,8 @@ $resultGenero2 = $conexion->query($queryGenero2);
 
 if ($resultGenero2 && $resultGenero2->num_rows > 0) {
     // Agregar el encabezado "Películas del género 1"
-    $contenidoPrincipal .= '<div class="generoComedia">';
-    $contenidoPrincipal .= '<h2>Comedias</h2>';
+    $contenidoPrincipal .= '<div class="destacadas">';
+    $contenidoPrincipal .= '<h1>Comedias</h1>';
     $contenidoPrincipal .= '</div>';
 
     // Continuar con el contenido principal
@@ -147,8 +147,8 @@ $resultGenero3 = $conexion->query($queryGenero3);
 
 if ($resultGenero3 && $resultGenero3->num_rows > 0) {
     // Agregar el encabezado "Películas de Acción"
-    $contenidoPrincipal .= '<div class="accion">';
-    $contenidoPrincipal .= '<h2>Películas de Acción</h2>';
+    $contenidoPrincipal .= '<div class="destacadas">';
+    $contenidoPrincipal .= '<h1>Películas de Acción</h1>';
     $contenidoPrincipal .= '</div>';
 
     // Continuar con el contenido principal
@@ -184,8 +184,8 @@ $resultGenero4 = $conexion->query($queryGenero4);
 
 if ($resultGenero4 && $resultGenero4->num_rows > 0) {
     // Agregar el encabezado "Películas del género 1"
-    $contenidoPrincipal .= '<div class="musicales">';
-    $contenidoPrincipal .= '<h2>Películas Musicales</h2>';
+    $contenidoPrincipal .= '<div class="destacadas">';
+    $contenidoPrincipal .= '<h1>Películas Musicales</h1>';
     $contenidoPrincipal .= '</div>';
 
     // Continuar con el contenido principal
@@ -221,8 +221,8 @@ $resultGenero5 = $conexion->query($queryGenero5);
 
 if ($resultGenero5 && $resultGenero5->num_rows > 0) {
     // Agregar el encabezado "Películas del género 1"
-    $contenidoPrincipal .= '<div class="misterio">';
-    $contenidoPrincipal .= '<h2>Películas Misteriosas</h2>';
+    $contenidoPrincipal .= '<div class="destacadas">';
+    $contenidoPrincipal .= '<h1>Películas Misteriosas</h1>';
     $contenidoPrincipal .= '</div>';
 
     // Continuar con el contenido principal
@@ -258,8 +258,8 @@ $resultGenero6 = $conexion->query($queryGenero6);
 
 if ($resultGenero6 && $resultGenero6->num_rows > 0) {
     // Agregar el encabezado "Películas del género 1"
-    $contenidoPrincipal .= '<div class="scfi">';
-    $contenidoPrincipal .= '<h2>SCFI</h2>';
+    $contenidoPrincipal .= '<div class="destacadas">';
+    $contenidoPrincipal .= '<h1>SCFI</h1>';
     $contenidoPrincipal .= '</div>';
 
     // Continuar con el contenido principal

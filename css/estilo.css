@@ -257,6 +257,11 @@ main {
     width: 50%; /* Ancho del borde inferior */
 }
 
+.destacadas h1 {
+    font-size: 1.5em; /* Tamaño de fuente del título */
+    text-align: left;
+}
+
 /* Estilos para los contenedores de películas */
 .peliculas-container {
     display: flex; /* Utilizamos flexbox para alinear los elementos */
