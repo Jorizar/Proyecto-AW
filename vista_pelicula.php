@@ -86,9 +86,55 @@ if (isset($_GET['id'])) {
         <?php
         $contenidoPrincipal = ob_get_clean(); // Guarda y limpia el contenido del buffer de salida
     }
+    // Muestra los comentarios
+    $numComentarios = count($comentarios);
+    $comentariosHtml = '<h3>Comentarios (' . $numComentarios . ')</h3>';
+    foreach ($comentarios as $comentario) {
+        $textoComentario = htmlspecialchars($comentario->getTexto());
+        $valoracionComentario = htmlspecialchars($comentario->getValoracion());
+        $UserId = htmlspecialchars($comentario->getUserId());
+        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
+    
+        $comentariosHtml .= "<div class='comentario'>
+            <p><strong>$UserNombre</strong> dijo:</p>
+            <p>$textoComentario</p>
+            <p>Valoración: $valoracionComentario</p>
+        </div>";
+    }
+    $contenidoPrincipal .= $comentariosHtml;
+
+    // Revisa si el usuario está logueado para mostrarle la sección añadir comentario
+    if ($app->usuarioLogueado()) {
+        $contenidoPrincipal .= <<<EOF
+        <h3>Añadir un comentario</h3>
+        <form action="includes/src/comentarios/procesar_comentario.php" method="post"> <!-- Ajusta la URL de acción según sea necesario -->
+            <input type="hidden" name="pelicula_id" value="$movieId">
+            <textarea name="texto" required></textarea>
+            <select name="valoracion" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <button type="submit">Enviar comentario</button>
+        </form>
+        EOF;
+    }
+
 } else {
     $contenidoPrincipal = '<h1>ID de película no especificado</h1>';
 }
+
+$params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
+$app->generaVista('/plantillas/plantilla.php', $params);
+?>
+
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
