@@ -31,10 +31,10 @@ class FormularioCambioDatos extends Formulario
             </div>
             <div>
                 <label><img src='./img/fotosPerfil/1.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='/img/fotosPerfil/1.png'>
+                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/1.png'>
 
                 <label><img src='./img/fotosPerfil/2.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='/img/fotosPerfil/2.png'>
+                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/2.png'>
 
                 <label><img src='./img/fotosPerfil/brad.png' width='48' height='48'></label>
                 <input type='radio' name='nueva_foto' value='./img/fotosPerfil/brad.png'>
@@ -52,44 +52,44 @@ class FormularioCambioDatos extends Formulario
 
     protected function procesaFormulario(&$datos)
     {
-        // Verifica si se han enviado los datos del formulario
-        if (isset($datos['nuevo_nombre'], $datos['nuevo_email'], $datos['nueva_foto'])) {
-
+            
             // Obtiene los nuevos datos introducidos por el usuario
-            $nuevoNombre = trim($datos['nuevo_nombre']);
+            $nuevoNombre = trim($datos['nuevo_nombre'] ?? '');
             $nuevoNombre = filter_var($nuevoNombre, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevoNombre)){
-                //Comprobamos que no exista un usuario con ese nombre
+                //Comprobamos que no exista un usuario con ese 
                 $user = Usuario::buscaUsuario($nuevoNombre);
                 if($user){
+                    error_log('nombre_duplicado');
                     $this->errores['nuevo_nombre'] = 'Alguien ya utiliza ese nombre de usuario';
+                }
+                else{
+                    $_SESSION['nombre'] = $nuevoNombre;
+                    $result = Usuario::cambiarNombre($_SESSION['idUsuario'], $nuevoNombre);
                 }
             }
 
-            $nuevoEmail = trim($datos['nuevo_email']);
-            $nuevoEmail = filter_var($nuevoEmail, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if ( ! filter_var($nuevoEmail, FILTER_VALIDATE_EMAIL)) {
-                $this->errores['nuevo_email'] = 'El email no es válido';
+
+            $nuevoEmail = trim($datos['nuevo_email'] ?? '');
+            if(!empty($nuevoEmail)){
+                $nuevoEmail = filter_var($nuevoEmail, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                if ( ! filter_var($nuevoEmail, FILTER_VALIDATE_EMAIL)) {
+                    $this->errores['nuevo_email'] = 'El email no es válido';
+                }
+                else{
+                    $result = Usuario::cambiarEmail($_SESSION['idUsuario'], $nuevoEmail);
+                    $_SESSION['email'] = $nuevoEmail;
+                }
             }
-           
-            $nuevaFoto = $datos['nueva_foto'];´
-
-            if (count($this->errores) === 0) {
-
-                //Actualizamos los datos de la sesión
-                $_SESSION['nombre'] = $nuevoNombre;
-                $_SESSION['email'] = $nuevoEmail;
+            
+            $nuevaFoto = $datos['nueva_foto'] ?? '';
+            if(!empty($nuevaFoto)){
                 $_SESSION['fotoPerfil'] = $nuevaFoto;
-
-                //Actualiza los datos del usuario en la base de datos
-                $result = Usuario::cambiarNombre($_SESSION['idUsuario'], $nuevoNombre);
-                $result = Usuario::cambiarEmail($_SESSION['idUsuario'], $nuevoEmail);
                 $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $nuevaFoto);
             }
-
+            
             // Redirige al usuario de vuelta a la página de perfil
-            header("Location: " . $this->urlRedireccion);
-            exit;
-        }
+            //header("Location: " . $this->urlRedireccion);
+            //exit;
     }
 }
