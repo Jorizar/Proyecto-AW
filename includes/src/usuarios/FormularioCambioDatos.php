@@ -3,6 +3,7 @@ namespace es\ucm\fdi\aw\usuarios;
 
 use es\ucm\fdi\aw\Aplicacion;
 use es\ucm\fdi\aw\Formulario;
+use es\ucm\fdi\aw\usuarios\Usuario;
 
 class FormularioCambioDatos extends Formulario
 {
@@ -12,7 +13,7 @@ class FormularioCambioDatos extends Formulario
     
     protected function generaCamposFormulario(&$datos)
     {
-        //$erroresCampos = self::generaErroresCampos(['nueva_foto'], $this->errores, 'span', array('class' => 'error'));
+        $erroresCampos = self::generaErroresCampos(['nuevo_nombre', 'nuevo_email'], $this->errores, 'span', array('class' => 'error'));
 
         // Se generan los campos del formulario para cambiar los datos del usuario.
         $html = <<<EOF
@@ -21,17 +22,19 @@ class FormularioCambioDatos extends Formulario
             <div>
                 <label for="nuevo_nombre">Nuevo Nombre:</label>
                 <input type="text" id="nuevo_nombre" name="nuevo_nombre">
+                {$erroresCampos['nuevo_nombre']}
             </div>
             <div>
                 <label for="nuevo_email">Nuevo Correo Electrónico:</label>
                 <input type="email" id="nuevo_email" name="nuevo_email">
+                {$erroresCampos['nuevo_email']}
             </div>
             <div>
                 <label><img src='./img/fotosPerfil/1.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='/img/fotosPerfil/1.png'>
+                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/1.png'>
 
                 <label><img src='./img/fotosPerfil/2.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='/img/fotosPerfil/2.png'>
+                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/2.png'>
 
                 <label><img src='./img/fotosPerfil/brad.png' width='48' height='48'></label>
                 <input type='radio' name='nueva_foto' value='./img/fotosPerfil/brad.png'>
@@ -49,35 +52,44 @@ class FormularioCambioDatos extends Formulario
 
     protected function procesaFormulario(&$datos)
     {
-        // Verifica si se han enviado los datos del formulario
-        if (isset($datos['nuevo_nombre'], $datos['nuevo_email'], $datos['nueva_foto'])) {
-
+            
             // Obtiene los nuevos datos introducidos por el usuario
             $nuevoNombre = trim($datos['nuevo_nombre'] ?? '');
             $nuevoNombre = filter_var($nuevoNombre, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if ( ! $nuevoNombre || empty($nuevoNombre) ) {
-                $this->errores['nuevo_nombre'] = 'El nombre de usuario no puede estar vacío';
+            if(!empty($nuevoNombre)){
+                //Comprobamos que no exista un usuario con ese 
+                $user = Usuario::buscaUsuario($nuevoNombre);
+                if($user){
+                    error_log('nombre_duplicado');
+                    $this->errores['nuevo_nombre'] = 'Alguien ya utiliza ese nombre de usuario';
+                }
+                else{
+                    $_SESSION['nombre'] = $nuevoNombre;
+                    $result = Usuario::cambiarNombre($_SESSION['idUsuario'], $nuevoNombre);
+                }
             }
+
 
             $nuevoEmail = trim($datos['nuevo_email'] ?? '');
-            $nuevoEmail = filter_var($nuevoEmail, FILTER_VALIDATE_EMAIL);
-            if ( ! $nuevoEmail || empty($nuevoEmail) ) {
-                $this->errores['nuevo_email'] = 'El email de usuario no puede estar vacío';
+            if(!empty($nuevoEmail)){
+                $nuevoEmail = filter_var($nuevoEmail, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                if ( ! filter_var($nuevoEmail, FILTER_VALIDATE_EMAIL)) {
+                    $this->errores['nuevo_email'] = 'El email no es válido';
+                }
+                else{
+                    $result = Usuario::cambiarEmail($_SESSION['idUsuario'], $nuevoEmail);
+                    $_SESSION['email'] = $nuevoEmail;
+                }
             }
             
-            $nuevaFoto = $datos['nueva_foto'];
-
-            //Actualiza los datos del usuario en la base de datos
-            $result = Usuario::cambiarNombre($_SESSION['idUsuario'], $nuevoNombre);
-            $result = Usuario::cambiarEmail($_SESSION['idUsuario'], $nuevoEmail);
-            $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $nuevaFoto);
-                       
+            $nuevaFoto = $datos['nueva_foto'] ?? '';
+            if(!empty($nuevaFoto)){
+                $_SESSION['fotoPerfil'] = $nuevaFoto;
+                $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $nuevaFoto);
+            }
+            
             // Redirige al usuario de vuelta a la página de perfil
-            header("Location: " . $this->urlRedireccion);
-            exit;
-        }
-        
-        // Si no se han enviado los datos del formulario, se muestra un mensaje de error
-        $this->errores[] = "Por favor, completa todos los campos.";
+            //header("Location: " . $this->urlRedireccion);
+            //exit;
     }
 }

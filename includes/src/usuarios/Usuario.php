@@ -239,7 +239,7 @@ class Usuario
     }
 
     // Actualiza la ruta de la foto en la base de datos
-    private static function actualizaFoto($idUsuario, $nuevaFoto)
+    public static function actualizaFoto($idUsuario, $nuevaFoto)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("UPDATE usuarios SET foto='%s' WHERE user_id=%d",
