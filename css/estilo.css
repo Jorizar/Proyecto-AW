@@ -1,12 +1,33 @@
-@font-face {
-    font-family: 'Gatha';
-    src: url('ZTGatha-SemiBold.ttf');
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Regular.ttf');
   }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-RegularItalic.ttf');
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Bold.ttf');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-BoldItalic.ttf');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
 
 body {
     background-color: #141414; /* Cambia el color de fondo principal a negro */
     color: #ffffff; /* Cambia el color del texto a blanco */
-    font-family: 'Gatha';
+    font-family: 'Roboto';
 }
 
 div#contenedor {
@@ -34,7 +55,7 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ffffff; /* Borde inferior blanco */
-    font-family: 'Gatha';
+    font-family: 'Roboto';
 }
 
 footer {
@@ -45,7 +66,7 @@ footer {
     color: white;
     text-align: center;
     border-top: 1px solid #ffffff;
-    font-family: 'Gatha';
+    font-family: 'Roboto';
 }
 
 .contenedor-login-registro {
@@ -122,7 +143,7 @@ nav {
 	float: left;
 	width: 170px;
 	background-color: #141414;
-    font-family: 'Gatha';
+    font-family: 'Roboto';
 }
 
 .menu a {
@@ -180,7 +201,7 @@ main {
     min-height: auto;
     margin: 0 auto;
     width: 90%;
-    font-family: 'Gatha';
+    font-family: 'Roboto';
 }
 
 .buscador {
