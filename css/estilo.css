@@ -172,6 +172,7 @@ main {
     margin: 0 auto;
     width: 90%;
 }
+
 .buscador {
     text-align: center;
     margin-bottom: 10px;
@@ -184,7 +185,7 @@ main {
 }
 
 .buscador form {
-    max-width: 600px;
+    max-width: 90%;
     margin: 0 auto;
     padding: 20px;
     background-color: #141414;
@@ -196,12 +197,14 @@ main {
     flex-wrap: wrap;
 }
 
+
 .buscador-campo-titulo,
 .buscador-campo-director,
 .buscador-campo-anio,
 .buscador-campo-genero {
-    flex: 1 1 calc(25% - 10px);
+    margin-top: 20px;
     margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 .buscador-campo-titulo label,
@@ -215,12 +218,13 @@ main {
 .buscador-campo-director input[type="text"],
 .buscador-campo-anio input[type="text"],
 .buscador-campo-genero select {
-    width: 100%;
+    
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     color: #fff;
     background-color: transparent;
+    margin-top: 10px;
 }
 
 .buscador-boton {
@@ -228,7 +232,7 @@ main {
 }
 
 .buscador button[type="submit"] {
-    width: 150px;
+    width: 75%;
     padding: 10px;
     background-color: rgba(181, 184, 0, 0.615);
     color: #fff;
@@ -236,6 +240,10 @@ main {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-top: 45px;
+    flex-grow: 1;
+    margin-right: 20px;
 }
 
 .buscador button[type="submit"]:hover {
