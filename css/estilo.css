@@ -172,52 +172,70 @@ main {
     margin: 0 auto;
     width: 90%;
 }
-
 .buscador {
     text-align: center;
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .buscador h1 {
     font-size: 16px;
-    color: #fff;
     margin-bottom: 8px;
 }
 
 .buscador form {
-    max-width: 200px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 20px;
     background-color: #141414;
 }
 
-.buscador-campo {
-    margin-bottom: 8px;
+.campos-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.buscador input[type="text"] {
-    width: calc(100% - 10px);
-    padding: 6px;
+.buscador-campo-titulo,
+.buscador-campo-director,
+.buscador-campo-anio,
+.buscador-campo-genero {
+    flex: 1 1 calc(25% - 10px);
+    margin-bottom: 10px;
+}
+
+.buscador-campo-titulo label,
+.buscador-campo-director label,
+.buscador-campo-anio label,
+.buscador-campo-genero label {
+    display: block;
+}
+
+.buscador-campo-titulo input[type="text"],
+.buscador-campo-director input[type="text"],
+.buscador-campo-anio input[type="text"],
+.buscador-campo-genero select {
+    width: 100%;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: #141414;
-    background-color: #fff;
-    margin-right: 8px;
+    color: #fff;
+    background-color: transparent;
+}
+
+.buscador-boton {
+    text-align: center;
 }
 
 .buscador button[type="submit"] {
-    width: 30%;
-    margin: 0 auto;
-    padding: 8px;
+    width: 150px;
+    padding: 10px;
     background-color: rgba(181, 184, 0, 0.615);
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: block;
-    text-align: center;
-    margin-top: 20px;
 }
 
 .buscador button[type="submit"]:hover {

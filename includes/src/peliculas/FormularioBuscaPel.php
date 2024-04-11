@@ -30,23 +30,26 @@ class FormularioBuscaPel extends Formulario
          <div class="buscador">
              <h1>Buscador de Películas</h1>
              <form id="formBuscaPel" action="{$this->action}" method="POST">
-                     <div class="buscador-campo">
+                <div class="campos-container">
+                     <div class="buscador-campo-titulo">
                          <label for="tituloPelicula">Título:</label>
                          <input id="tituloPelicula" type="text" name="tituloPelicula"/>
                      </div>
-                     <div class="buscador-campo">
+                     <div class="buscador-campo-director">
                         <label for="directorPelicula">Director:</label>
                         <input id="directorPelicula" type="text" name="directorPelicula"/>
                     </div>
-                    <div class="buscador-campo">
+                    <div class="buscador-campo-anio">
                         <label for="annioPelicula">Año de estreno:</label>
                         <input id="annioPelicula" type="text" name="annioPelicula"/>
                     </div>
-                    <div class="buscador-campo">
+                    <div class="buscador-campo-genero">
                          <label for="generoPelicula">Género:</label>
                          <select id="generoPelicula" name="generoPelicula">
                          <option value="-1">Seleccionar</option>
                     </div>
+                </div>
+
                     
         EOS;
                  if($generos != FALSE){
