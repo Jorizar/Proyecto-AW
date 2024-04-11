@@ -17,6 +17,20 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
             echo "Error: No se pudo añadir a favoritos.";
             exit();
         }
+    } elseif (isset($_POST['eliminarMovieId'])) {
+        $userId = $app->getUsuarioId(); // Obtener el ID del usuario autenticado
+        $pelicula_id = $_POST['eliminarMovieId']; // Obtener el ID de la película a eliminar de favoritos
+
+        $resultado = \es\ucm\fdi\aw\favoritos\Favorito::eliminaPorIdUsuarioYIdPelicula($userId, $pelicula_id);
+
+        if ($resultado) {
+            $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
+            header('Location: ' . $relativePath);
+            exit();
+        } else {
+            echo "Error: No se pudo eliminar de favoritos.";
+            exit();
+        }
     } else {
         // Si no se proporciona el ID de la película, mostrar un mensaje de error
         echo "ID de película no especificado.";

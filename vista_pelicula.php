@@ -2,6 +2,8 @@
 require_once __DIR__.'/includes/config.php';
 require_once __DIR__.'/includes/src/peliculas/Pelicula.php'; // Ajusta la ruta según sea necesario
 require_once __DIR__.'/includes/src/comentarios/Comentario.php'; // Importa la clase Comentario
+require_once __DIR__.'/includes/src/favoritos/Favoritos.php';
+
 
 $tituloPagina = 'Detalles de la Película';
 $contenidoPrincipal='';
@@ -48,72 +50,42 @@ if (isset($_GET['id'])) {
             $repartoHtml .= htmlspecialchars($obj->nombre) . " como " . htmlspecialchars($obj->personaje) . "<br>";
         }
         
-        $contenidoPrincipal = <<<EOS
+        // Verificar si la película está en la lista de favoritos del usuario
+        $estaEnFavoritos = \es\ucm\fdi\aw\favoritos\Favorito::existe($app->getUsuarioId(), $movieId);
+
+        ob_start(); // Inicia el almacenamiento en el buffer de salida
+        ?>
         <div class="info_pelicula">
-            <h2>$titulo ($anno)</h2>
-            <form action="includes/src/favoritos/procesar_favorito.php" method="post">
-                <input type="hidden" name="movieId" value="$movieId">
-                <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
-            </form>
+            <h2><?php echo $titulo . ' (' . $anno . ')'; ?></h2>
+            
+            <!-- Mostrar botón para añadir o eliminar de favoritos según corresponda -->
+            <?php if ($estaEnFavoritos): ?>
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post">
+                    <input type="hidden" name="eliminarMovieId" value="<?php echo $movieId; ?>">
+                    <button type="submit" class="btn btn-danger">Eliminar de favoritos</button>
+                </form>
+            <?php else: ?>
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post">
+                    <input type="hidden" name="movieId" value="<?php echo $movieId; ?>">
+                    <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
+                </form>
+            <?php endif; ?>
+
             <div class="portada_detalles_pelicula">
-                <img src="$portada" alt="Portada de $titulo" class="portada-pelicula">
+                <img src="<?php echo $portada; ?>" alt="Portada de <?php echo $titulo; ?>" class="portada-pelicula">
                 <div class="detalles-pelicula">
-                    <p><strong>Director:</strong> $director</p>
-                    <p><strong>Género:</strong> $genero</p>
-                    <p><strong>Valoración IMDb:</strong> $valoracionIMDb</p>
-                    <p><strong>Valoración 7thArt:</strong> $valoracionUsuariosHtml</p>
-                    <p><strong>Reparto:</strong><br>$repartoHtml</p>
-                    <p><strong>Sinopsis:</strong> $sinopsis</p>
+                    <p><strong>Director:</strong> <?php echo $director; ?></p>
+                    <p><strong>Género:</strong> <?php echo $genero; ?></p>
+                    <p><strong>Valoración IMDb:</strong> <?php echo $valoracionIMDb; ?></p>
+                    <p><strong>Valoración 7thArt:</strong> <?php echo $valoracionUsuariosHtml; ?></p>
+                    <p><strong>Reparto:</strong><br><?php echo $repartoHtml; ?></p>
+                    <p><strong>Sinopsis:</strong> <?php echo $sinopsis; ?></p>
                 </div>
             </div>
         </div>
-        EOS;
-        
-    } else {
-        $contenidoPrincipal = '<h1>Película no encontrada</h1>';
+        <?php
+        $contenidoPrincipal = ob_get_clean(); // Guarda y limpia el contenido del buffer de salida
     }
-
-    // Muestra los comentarios
-    $numComentarios = count($comentarios);
-    $comentariosHtml = '<h3>Comentarios (' . $numComentarios . ')</h3>';
-    foreach ($comentarios as $comentario) {
-        $textoComentario = htmlspecialchars($comentario->getTexto());
-        $valoracionComentario = htmlspecialchars($comentario->getValoracion());
-        $UserId = htmlspecialchars($comentario->getUserId());
-        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
-    
-        $comentariosHtml .= "<div class='comentario'>
-            <p><strong>$UserNombre</strong> dijo:</p>
-            <p>$textoComentario</p>
-            <p>Valoración: $valoracionComentario</p>
-        </div>";
-    }
-    $contenidoPrincipal .= $comentariosHtml;
-
-    // Revisa si el usuario está logueado para mostrarle la sección añadir comentario
-    if ($app->usuarioLogueado()) {
-        $contenidoPrincipal .= <<<EOF
-        <h3>Añadir un comentario</h3>
-        <form action="includes/src/comentarios/procesar_comentario.php" method="post"> <!-- Ajusta la URL de acción según sea necesario -->
-            <input type="hidden" name="pelicula_id" value="$movieId">
-            <textarea name="texto" required></textarea>
-            <select name="valoracion" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-            </select>
-            <button type="submit">Enviar comentario</button>
-        </form>
-        EOF;
-    }
-
 } else {
     $contenidoPrincipal = '<h1>ID de película no especificado</h1>';
 }

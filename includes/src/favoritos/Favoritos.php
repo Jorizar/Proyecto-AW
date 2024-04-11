@@ -63,6 +63,30 @@ class Favorito
         return $favoritos;
     }
 
+    // Static method to delete favorito by user ID and movie ID
+    public static function eliminaPorIdUsuarioYIdPelicula($userId, $peliculaId)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $stmt = $conn->prepare("DELETE FROM favoritos WHERE user_id = ? AND pelicula_id = ?");
+        $stmt->bind_param("ii", $userId, $peliculaId);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        return $resultado;
+    }
+
+    // Static method to check if a movie is in user's favorites
+    public static function existe($userId, $peliculaId)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $stmt = $conn->prepare("SELECT * FROM favoritos WHERE user_id = ? AND pelicula_id = ?");
+        $stmt->bind_param("ii", $userId, $peliculaId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $existe = $result->num_rows > 0;
+        $stmt->close();
+        return $existe;
+    }
+
     // Getters
     public function getId()
     {
@@ -79,3 +103,4 @@ class Favorito
         return $this->pelicula_id;
     }
 }
+?>
