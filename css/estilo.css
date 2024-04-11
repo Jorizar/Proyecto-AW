@@ -585,3 +585,71 @@ main {
     background-color:#141414; /* Cambia el color de fondo al pasar el ratón */
 }
 
+
+/* Estilos para el formulario de comentarios */
+.comentario-formulario {
+    width: 500px;
+    text-align: left; /* Alinea todo el contenido a la izquierda */
+    margin-bottom: 10px; /* Espaciado inferior */
+    color: #fff; /* Color del texto */
+}
+
+.comentario-formulario h3 {
+    font-size: 16px; /* Tamaño de fuente del título */
+    margin-bottom: 8px; /* Espaciado inferior */
+}
+
+.comentario-formulario form {
+    padding: 20px; /* Añade espacio interno */
+    background-color: #141414; /* Color de fondo del formulario */
+}
+
+
+.comentario-formulario label {
+    display: block; /* Convertimos la etiqueta en un bloque para que ocupe todo el ancho */
+}
+
+.comentario-formulario textarea,
+.comentario-formulario select {
+    padding: 8px; /* Añade espacio interno */
+    border: 1px solid #ccc; /* Borde del campo */
+    border-radius: 4px; /* Bordes redondeados */
+    color: #fff; /* Color del texto */
+    background-color: transparent; /* Fondo transparente */
+    margin-top: 10px; /* Espaciado superior */
+    display: inline-block; /* Cambia el tipo de visualización a inline-block */
+    vertical-align: top; /* Alinea verticalmente al inicio */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
+}
+
+.comentario-formulario textarea {
+    width: calc(80% - 10px); /* Ancho del textarea */
+    height: 100px; /* Altura del textarea */
+}
+
+.comentario-formulario select {
+    width: calc(12% - 10px); /* Ancho del select */
+    margin-left: 30px;
+    color: #141414;
+    background-color: transparent;
+}
+
+
+/* Estilos para el botón de enviar comentario */
+.comentario-formulario button[type="submit"] {
+    width: calc(82% - 20px); /* Ancho del botón */
+    padding: 8px; /* Añade espacio interno */
+    background-color: rgba(127,96,3,255); /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Quita el borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    margin-top: 20px; /* Espaciado superior */
+    margin-bottom: 45px; /* Espaciado inferior */
+    float: left; /* Alinea el botón a la izquierda */
+}
+
+.comentario-formulario button[type="submit"]:hover {
+    background-color: #141414; /* Cambia el color de fondo al pasar el ratón */
+}

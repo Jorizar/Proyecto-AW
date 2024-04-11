@@ -106,9 +106,10 @@ if (isset($_GET['id'])) {
     // Revisa si el usuario está logueado para mostrarle la sección añadir comentario
     if ($app->usuarioLogueado()) {
         $contenidoPrincipal .= <<<EOF
-        <h3>Añadir un comentario</h3>
-        <form action="includes/src/comentarios/procesar_comentario.php" method="post"> <!-- Ajusta la URL de acción según sea necesario -->
-            <input type="hidden" name="pelicula_id" value="$movieId">
+        <div class="comentario-formulario">
+            <h3>Añadir un comentario</h3>
+            <form action="includes/src/comentarios/procesar_comentario.php" method="post">
+            <input type="hidden" name="pelicula_id" value="<?= $movieId ?>">
             <textarea name="texto" required></textarea>
             <select name="valoracion" required>
                 <option value="1">1</option>
@@ -122,8 +123,10 @@ if (isset($_GET['id'])) {
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
-            <button type="submit">Enviar comentario</button>
-        </form>
+            
+                <button type="submit">Enviar comentario</button>
+                </form>
+        </div>
         EOF;
     }
 
