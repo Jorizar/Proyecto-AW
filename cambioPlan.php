@@ -9,8 +9,15 @@ $formCambioPlan = $formCambioPlan->gestiona();
 
 $tituloPagina = 'Cambiar Plan';
 $contenidoPrincipal=<<<EOF
-  	<h1>Cambiar Plan</h1>
+<div class="titulo_cambiarPlan">
+    <h1>Cambiar Plan</h1>
+</div>
+<div class="contenedor_cambiarPlan">
     $formCambioPlan
+</div>
+
+
+  	
 EOF;
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];

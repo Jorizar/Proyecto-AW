@@ -17,20 +17,22 @@ class FormularioCambioPlan extends Formulario
  
         // Se genera el HTML asociado a los campos del formulario.
         $html = <<<EOF
-        <fieldset>
-            <legend>Cambiar Plan</legend>
-            <div>
-                <p>Plan Actual: {$_SESSION["rol"]}</p>
+        <div class="cambiar-plan-formulario">
+                <div class="plan-actual">
+                    <p>Plan Actual: {$_SESSION["rol"]}</p>
+                </div>
+                <div class="nuevo-plan">
                 <label for="nuevo_plan">Nuevo Plan:</label>
                 <select id="nuevo_plan" name="nuevo_plan">
-                    <option value="free">Free</option>
-                    <option value="premium">€ Premium €</option>
+                <option value="free">Free</option>
+                <option value="premium">€ Premium €</option>
                 </select>
-            </div>
-            <div>
+                </div>
+                <div class="enviar_plan">
                 <button type="submit" name="cambiar_plan">Cambiar Plan</button>
-            </div>
-        </fieldset>
+                </div>
+        </div>
+
         EOF;
         return $html;
     }
