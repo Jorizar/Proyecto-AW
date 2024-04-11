@@ -14,7 +14,6 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
             header('Location: ' . $relativePath);
             exit();
         } else {
-            // Handle the error appropriately
             echo "Error: No se pudo añadir a favoritos.";
             exit();
         }
@@ -24,7 +23,8 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
     }
 } else {
     // Si el usuario no está autenticado, redirigirlo a la página de inicio de sesión
-    header('Location: /login.php');
+    $relativePath = '/AW/Proyecto-AW/login.php';
+    header('Location: ' . $relativePath);
     exit();
 }
 ?>

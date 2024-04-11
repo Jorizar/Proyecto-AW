@@ -21,7 +21,7 @@ class FormularioRegistro extends Formulario
     // Opciones para el campo de selección de roles
     $opcionesRol = [
         'free' => 'Free',
-        'premium' => '$Premium$'
+        'premium' => '€ Premium €'
     ];
 
     // Genera las opciones HTML para el campo de selección de roles
