@@ -2,7 +2,9 @@
 
 require_once __DIR__.'/includes/config.php';
 
-$formCambioDatos = new \es\ucm\fdi\aw\usuarios\FormularioCambioDatos();
+use es\ucm\fdi\aw\usuarios\FormularioCambioDatos;
+
+$formCambioDatos = new FormularioCambioDatos();
 $formCambioDatos = $formCambioDatos->gestiona();
 
 

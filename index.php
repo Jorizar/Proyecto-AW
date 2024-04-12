@@ -2,6 +2,8 @@
 // Se incluye el archivo de configuración
 require_once __DIR__.'/includes/config.php';
 
+use es\ucm\fdi\aw\peliculas\FormularioBuscaPel;
+
 // Título de la página
 $tituloPagina = 'Portada';
 
@@ -9,7 +11,7 @@ $tituloPagina = 'Portada';
 $contenidoPrincipal = '';
 
 // Formulario de búsqueda para el buscador
-$formBusqueda = new \es\ucm\fdi\aw\peliculas\FormularioBuscaPel();
+$formBusqueda = new FormularioBuscaPel();
 $formBusqueda = $formBusqueda->gestiona();
 
 // Agregar el buscador al contenido de la página

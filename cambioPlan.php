@@ -2,7 +2,9 @@
 
 require_once __DIR__.'/includes/config.php';
 
-$formCambioPlan = new \es\ucm\fdi\aw\usuarios\FormularioCambioPlan();
+use es\ucm\fdi\aw\usuarios\FormularioCambioPlan;
+
+$formCambioPlan = new FormularioCambioPlan();
 $formCambioPlan = $formCambioPlan->gestiona();
 
 

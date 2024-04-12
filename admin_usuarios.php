@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/usuarios/Usuario.php';
+
+use es\ucm\fdi\aw\usuarios\Usuario;
 
 if (!$app->tieneRol('admin')) {
     die("Acceso restringido a administradores.");
@@ -9,7 +10,7 @@ if (!$app->tieneRol('admin')) {
 $tituloPagina = 'Administrar Usuarios';
 $contenidoPrincipal = '<div class="admin-usuarios-container"><h3>Lista de Usuarios</h3>';
 
-$usuarios = es\ucm\fdi\aw\usuarios\Usuario::buscarTodos();
+$usuarios = Usuario::buscarTodos();
 
 if (!empty($usuarios)) {
     $contenidoPrincipal .= '<table class="admin-usuarios-table"><thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Acción</th></tr></thead><tbody>';

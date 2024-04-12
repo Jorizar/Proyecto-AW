@@ -1,21 +1,23 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/comentarios/Comentario.php';
+
+use es\ucm\fdi\aw\comentarios\Comentario;
+use es\ucm\fdi\aw\peliculas\Pelicula;
 
 $contenidoPrincipal = ''; 
 $tituloPagina = 'Mis Comentarios'; 
 
 $userId = $app->getUsuarioId();
 
-// Display user's comments
-$comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorUsuarioId($userId);
+// Mostramos los comentarios del usuario
+$comentarios = Comentario::buscarPorUsuarioId($userId);
 $comentariosHtml = '<h3>Mis Comentarios</h3>';
 if (!empty($comentarios)) {
     foreach ($comentarios as $comentario) {
         $textoComentario = htmlspecialchars($comentario->getTexto());
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $peliculaId = htmlspecialchars($comentario->getPeliculaId());
-        $peliculaTitulo = \es\ucm\fdi\aw\peliculas\Pelicula::buscaTituloPorId($peliculaId);
+        $peliculaTitulo = Pelicula::buscaTituloPorId($peliculaId);
 
         
         // Assuming you add a delete form or method

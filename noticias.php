@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__.'/includes/config.php';
 
+use es\ucm\fdi\aw\Aplicacion;
+
 $tituloPagina = 'Noticias';
 $contenidoPrincipal = '';
 // Obtener la instancia de la aplicación
-$app = \es\ucm\fdi\aw\Aplicacion::getInstance();
+$app = Aplicacion::getInstance();
 
 // Obtener la conexión a la base de datos desde la instancia de la aplicación
 $conexion = $app->getConexionBd();
