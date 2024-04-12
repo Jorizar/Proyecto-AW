@@ -297,9 +297,9 @@ main {
 
 /* Estilos para los contenedores de películas */
 .peliculas-container {
-    display: flex; /* Utilizamos flexbox para alinear los elementos */
-    flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
-    justify-content: space-between; /* Espacio entre las películas */
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
     margin-top: 20px;
     padding: 10px;
 }
@@ -811,3 +811,48 @@ main {
     height:20px;
 }
 
+
+#favoritos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start; 
+    margin-left: 30px;
+    gap: 10px; 
+}
+
+.favorito {
+    margin-bottom: 20px; /* Espacio entre las filas */
+    text-align: center;
+    width: 150px; /* Ancho fijo para todas las portadas */
+}
+
+.favoritos-container .favorito span {
+    display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
+    margin-top: 5px; /* Espacio entre la imagen y el título */
+    font-weight: bold; /* Establecemos negrita */
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #ffffff; /* Color del texto */
+}
+
+.favorito img {
+    width: 100%;
+    height: 200px; /* Altura fija para todas las portadas */
+    object-fit: cover; /* Ajusta el tamaño de la imagen para que todas tengan el mismo tamaño */
+    border-radius: 8px;
+}
+
+.favorito p {
+    margin: 0;
+    font-size: 14px; /* Tamaño de fuente más pequeño para el título */
+    color: #fff; /* Color del texto del título */
+}
+
+.favorito p a {
+    text-decoration: none;
+    color: inherit; /* Utiliza el color heredado del padre */
+    transition: color 0.3s ease;
+}
+
+.favorito p a:hover {
+    color: rgba(127, 96, 3, 255);
+}

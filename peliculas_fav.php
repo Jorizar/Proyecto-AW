@@ -12,20 +12,23 @@ $userId = $app->getUsuarioId();
 $favoritos = \es\ucm\fdi\aw\favoritos\Favorito::buscaPorUser($userId);
 $favoritosHtml = '<h3>Mis Favoritos</h3>';
 if (!empty($favoritos)) {
+    $favoritosHtml .= '<div id="favoritos-container">';
     foreach ($favoritos as $favorito) {
         $peliculaId = htmlspecialchars($favorito->getPelicula());
         $pelicula = \es\ucm\fdi\aw\peliculas\Pelicula::buscaPorId($peliculaId);
         $peliculaTitulo = htmlspecialchars($pelicula->titulo); // Suponiendo que el objeto tiene una propiedad 'titulo'
         $peliculaPortada = htmlspecialchars($pelicula->portada); // Suponiendo que el objeto tiene una propiedad 'portada'
 
-        // Modifica las acciones aquí para incluir la imagen de la portada como un enlace
+        
         $favoritosHtml .= "<div class='favorito'>
                                 <a href='vista_pelicula.php?id=$peliculaId'> <!-- Enlace a la página de la película -->
-                                    <img src='$peliculaPortada' alt='Portada de $peliculaTitulo' style='width: 100px; height: auto;'> 
+                                <img src='$peliculaPortada' alt='Portada de $peliculaTitulo'> 
                                 </a>
-                                <p>Película: $peliculaTitulo</p>
-                             </div>";
+                                <p><a href='vista_pelicula.php?id=$peliculaId'>$peliculaTitulo</a></p>
+                            </div>";
+
     }
+    $favoritosHtml .= '</div>'; 
 } else {
     $favoritosHtml .= "<p>No tienes películas en favoritos.</p>";
 }
