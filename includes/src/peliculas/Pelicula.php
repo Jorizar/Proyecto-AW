@@ -106,6 +106,69 @@ class Pelicula
         return $peliculas;
     }
 
+    public static function peliculasMejorVal($n){   //Devuelve las n películas mejor valoradas
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas ORDER BY Val_IMDb DESC LIMIT $n";
+        $result = $conn->query($sql);
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo'],
+                    'portada' => $fila['portada'],
+                    'val_imdb' => $fila['Val_IMDb']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
+
+    public static function peliculasPorGenero($idGenero, $n){ //Devuelve las mejores n peliculas de un género
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo, portada FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC LIMIT $n";
+        $result = $conn->query($sql);
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo'],
+                    'portada' => $fila['portada'],
+                    'val_imdb' => $fila['Val_IMDb']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
+
+    public static function peliculasPorAnnio($annio_inf, $annio_sup, $n) { //Devuelve las mejores n peliculas de un periodo de años
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo, portada FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC LIMIT $n";
+        $result = $conn->query($sql);
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo'],
+                    'portada' => $fila['portada'],
+                    'val_imdb' => $fila['Val_IMDb']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
+
     //Inserta una pelicula nueva en la base de datos
     private static function inserta($pelicula)
     {
