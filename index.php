@@ -276,14 +276,45 @@ if ($resultGenero6 && $resultGenero6->num_rows > 0) {
                     <span>$titulo</span>
                 </a>
             </div>
+
 HTML;
     }
-    
-
-    $contenidoPrincipal .= '</div>';
-} else {
-    $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
+
+    $queryDecada80s = "SELECT id, titulo, portada
+                FROM peliculas
+                WHERE annio >= 1980 AND annio < 1990
+                ORDER BY annio ASC
+                LIMIT 4";
+
+$resultDecada80s = $conexion->query($queryDecada80s);
+
+if ($resultDecada80s && $resultDecada80s->num_rows > 0) {
+    // Agregar el encabezado "Películas de la década de los 80"
+    $contenidoPrincipal .= '<div class="destacadas">';
+    $contenidoPrincipal .= '<h1>Películas de la década de los 80</h1>';
+    $contenidoPrincipal .= '</div>';
+
+    // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="peliculas-container">';
+    while ($row = $resultDecada80s->fetch_assoc()) {
+        $id = $row['id'];
+        $titulo = $row['titulo'];
+        $imagen = $row['portada'];
+        // Enlace por cada película que redirige a la vista de la película
+        $contenidoPrincipal .= <<<HTML
+            <div class="pelicula">
+                <a href="vista_pelicula.php?id=$id">
+                    <img src="$imagen" alt="$titulo">
+                    <span>$titulo</span>
+                </a>
+            </div>
+HTML;
+}
+$contenidoPrincipal .= '</div>';
+    } else {
+        $contenidoPrincipal .= "<p>No hay peliculas.</p>";
+    }
 
 // Parámetros para generar la vista final
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
