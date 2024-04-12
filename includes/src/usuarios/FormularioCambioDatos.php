@@ -17,35 +17,44 @@ class FormularioCambioDatos extends Formulario
 
         // Se generan los campos del formulario para cambiar los datos del usuario.
         $html = <<<EOF
-        <fieldset>
-            <legend>Cambiar Datos</legend>
-            <div>
-                <label for="nuevo_nombre">Nuevo Nombre:</label>
-                <input type="text" id="nuevo_nombre" name="nuevo_nombre">
-                {$erroresCampos['nuevo_nombre']}
+        <div class="titulo_cambiarDatos">
+        </div>
+        <div class="contenedor_cambiarDatos">
+            <div class="cambiar-datos-formulario">
+                <div class="nombre_cambioPlan">
+                    <label for="nuevo_nombre">Nuevo Nombre:</label>
+                    <input type="text" id="nuevo_nombre" name="nuevo_nombre">
+                    {$erroresCampos['nuevo_nombre']}
+                </div>
+                <div class="email_cambioPlan">
+                    <label for="nuevo_email">Nuevo Correo Electrónico:</label>
+                    <input type="email" id="nuevo_email" name="nuevo_email">
+                    {$erroresCampos['nuevo_email']}
+                </div>
+                <div class="fotos_cambioDatos-container">
+                    <div class="foto-cambioDatos">
+                        <label><img src='./img/fotosPerfil/1.png' width='48' height='48'></label>
+                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/1.png'>
+                    </div>
+                    <div class="foto-cambioDatos">
+                        <label><img src='./img/fotosPerfil/2.png' width='48' height='48'></label>
+                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/2.png'>
+                    </div>
+                    <div class="foto-cambioDatos">
+                        <label><img src='./img/fotosPerfil/brad.png' width='48' height='48'></label>
+                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/brad.png'>
+                    </div>
+                    <div class="foto-cambioDatos">
+                        <label><img src='./img/fotosPerfil/quentin.png' width='48' height='48'></label>
+                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/quentin.png'>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" name="cambiar_datos">Cambiar Datos</button>
+                </div>
             </div>
-            <div>
-                <label for="nuevo_email">Nuevo Correo Electrónico:</label>
-                <input type="email" id="nuevo_email" name="nuevo_email">
-                {$erroresCampos['nuevo_email']}
-            </div>
-            <div>
-                <label><img src='./img/fotosPerfil/1.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/1.png'>
+        </div>
 
-                <label><img src='./img/fotosPerfil/2.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/2.png'>
-
-                <label><img src='./img/fotosPerfil/brad.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/brad.png'>
-
-                <label><img src='./img/fotosPerfil/quentin.png' width='48' height='48'></label>
-                <input type='radio' name='nueva_foto' value='./img/fotosPerfil/quentin.png'>
-            </div>
-            <div>
-                <button type="submit" name="cambiar_datos">Cambiar Datos</button>
-            </div>
-        </fieldset>
         EOF;
         return $html;
     }

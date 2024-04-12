@@ -8,12 +8,12 @@ if (!$app->tieneRol('admin')) {
 }
 
 $tituloPagina = 'Administrar Usuarios';
-$contenidoPrincipal = '<h3>Lista de Usuarios</h3>';
+$contenidoPrincipal = '<div class="admin-usuarios-container"><h3>Lista de Usuarios</h3>';
 
 $usuarios = Usuario::buscarTodos();
 
 if (!empty($usuarios)) {
-    $contenidoPrincipal .= '<table><thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Acción</th></tr></thead><tbody>';
+    $contenidoPrincipal .= '<table class="admin-usuarios-table"><thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Acción</th></tr></thead><tbody>';
     foreach ($usuarios as $usuario) {
         $contenidoPrincipal .= "<tr>
                                     <td>" . htmlspecialchars($usuario['user_id']) . "</td>
@@ -31,6 +31,8 @@ if (!empty($usuarios)) {
 } else {
     $contenidoPrincipal .= '<p>No hay usuarios registrados.</p>';
 }
+
+$contenidoPrincipal .= '</div>'; // Cierre del div admin-usuarios-container
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);

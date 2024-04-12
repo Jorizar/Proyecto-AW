@@ -6,8 +6,6 @@ use es\ucm\fdi\aw\peliculas\Pelicula;
 use es\ucm\fdi\aw\comentarios\Comentario;
 use es\ucm\fdi\aw\favoritos\Favorito;
 
-
-
 $tituloPagina = 'Detalles de la Película';
 $contenidoPrincipal='';
 
@@ -63,14 +61,14 @@ if (isset($_GET['id'])) {
             
             <!-- Mostrar botón para añadir o eliminar de favoritos según corresponda -->
             <?php if ($estaEnFavoritos): ?>
-                <form action="includes/src/favoritos/procesar_favorito.php" method="post">
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post" class="eliminar-favoritos-form"> 
                     <input type="hidden" name="eliminarMovieId" value="<?php echo $movieId; ?>">
-                    <button type="submit" class="btn btn-danger">Eliminar de favoritos</button>
+                    <button type="submit" class="boton-fav">Eliminar de <img src="./img/fav.png" alt="Películas"></button>
                 </form>
             <?php else: ?>
-                <form action="includes/src/favoritos/procesar_favorito.php" method="post">
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post"class="añadir-favoritos-form">
                     <input type="hidden" name="movieId" value="<?php echo $movieId; ?>">
-                    <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
+                    <button type="submit" class="boton-fav">Añadir a <img src="./img/fav.png" alt="Películas"></button>
                 </form>
             <?php endif; ?>
 
