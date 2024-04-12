@@ -138,7 +138,6 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
-                    'val_imdb' => $fila['Val_IMDb']
                 ];
             }
         } else {
@@ -159,7 +158,6 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
-                    'val_imdb' => $fila['Val_IMDb']
                 ];
             }
         } else {

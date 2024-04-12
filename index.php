@@ -3,6 +3,8 @@
 require_once __DIR__.'/includes/config.php';
 
 use es\ucm\fdi\aw\peliculas\FormularioBuscaPel;
+use es\ucm\fdi\aw\peliculas\Pelicula;
+use es\ucm\fdi\aw\Aplicacion;
 
 // Título de la página
 $tituloPagina = 'Portada';
@@ -37,7 +39,7 @@ if($peliculasMV){
         $id = $pelicula['id'];
         $titulo = $pelicula['titulo'];
         $imagen = $pelicula['portada'];
-        $valoracion = $pelicula['Val_IMDb'];
+        $valoracion = $pelicula['val_imdb'];
         // Enlace por cada película que redirige a la vista de la película
         $contenidoPrincipal .= <<<HTML
             <div class="pelicula">
@@ -79,13 +81,12 @@ for($i = 1; $i <= 9; $i++){
             $id = $pelicula['id'];
             $titulo = $pelicula['titulo'];
             $imagen = $pelicula['portada'];
-            $valoracion = $pelicula['Val_IMDb'];
             // Enlace por cada película que redirige a la vista de la película
             $contenidoPrincipal .= <<<HTML
                 <div class="pelicula">
                     <a href="vista_pelicula.php?id=$id">
                         <img src="$imagen" alt="$titulo">
-                        <span>$titulo ($valoracion)</span>
+                        <span>$titulo</span>
                     </a>
                 </div>
 HTML;
@@ -97,13 +98,14 @@ HTML;
     }
 }
 
+$conn = Aplicacion::getInstance()->getConexionBd();
 $queryActual = "SELECT id, titulo, portada
                 FROM peliculas
                 WHERE annio = 2024 
                 ORDER BY annio ASC
                 LIMIT 4";
 
-$resultActual = $conexion->query($queryActual);
+$resultActual = $conn->query($queryActual);
 
 if ($resultActual && $resultActual->num_rows > 0) {
     // Agregar el encabezado "Películas de la década de los 80"
@@ -126,7 +128,10 @@ if ($resultActual && $resultActual->num_rows > 0) {
                 </a>
             </div>
 HTML;
+    }
 }
+else{
+    $contenidoPrincipal .= "<p>No hay peliculas de esta década.</p>";
 }
 
 $htmlDecadas = array();
@@ -136,7 +141,11 @@ $htmlDecadas[2] = '<div class="destacadas"><h1>Películas de la década de los 2
 
 for($i = 0; $i < 3; $i++){
     //Obtenemos las películas del primer género
+    $annio_inf = 1980;
+    $annio_sup = 1990;
     $peliculas = Pelicula::peliculasPorAnnio($annio_inf, $annio_sup, 4);
+    $annio_inf += 10;
+    $annio_sup += 10;
     $contenidoPrincipal .= $htmlDecadas[$i];
     if($peliculas){
         $contenidoPrincipal .= '<div class="peliculas-container">';
@@ -144,20 +153,17 @@ for($i = 0; $i < 3; $i++){
             $id = $pelicula['id'];
             $titulo = $pelicula['titulo'];
             $imagen = $pelicula['portada'];
-            $valoracion = $pelicula['Val_IMDb'];
             // Enlace por cada película que redirige a la vista de la película
             $contenidoPrincipal .= <<<HTML
                 <div class="pelicula">
                     <a href="vista_pelicula.php?id=$id">
                         <img src="$imagen" alt="$titulo">
-                        <span>$titulo ($valoracion)</span>
+                        <span>$titulo</span>
                     </a>
                 </div>
 HTML;
         }
         $contenidoPrincipal .= '</div>';
-        $annio_inf += 10;
-        $annio_sup += 10;
     }
     else{
         $contenidoPrincipal .= "<p>No hay peliculas de esta década.</p>";
