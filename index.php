@@ -221,12 +221,10 @@ $queryGenero5 = "SELECT id, titulo, portada
 $resultGenero5 = $conexion->query($queryGenero5);
 
 if ($resultGenero5 && $resultGenero5->num_rows > 0) {
-    // Agregar el encabezado "Películas del género 1"
     $contenidoPrincipal .= '<div class="destacadas">';
-    $contenidoPrincipal .= '<h1>Películas Misteriosas</h1>';
+    $contenidoPrincipal .= '<h1>Películas de Misterio</h1>';
     $contenidoPrincipal .= '</div>';
 
-    // Continuar con el contenido principal
     $contenidoPrincipal .= '<div class="peliculas-container">';
     while ($row = $resultGenero5->fetch_assoc()) {
         $id = $row['id'];
