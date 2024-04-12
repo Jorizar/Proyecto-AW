@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/peliculas/Pelicula.php'; // Ajusta la ruta según sea necesario
-require_once __DIR__.'/includes/src/comentarios/Comentario.php'; // Importa la clase Comentario
+require_once __DIR__.'/includes/src/peliculas/Pelicula.php'; 
+require_once __DIR__.'/includes/src/comentarios/Comentario.php'; 
 require_once __DIR__.'/includes/src/favoritos/Favoritos.php';
 
 
@@ -60,14 +60,14 @@ if (isset($_GET['id'])) {
             
             <!-- Mostrar botón para añadir o eliminar de favoritos según corresponda -->
             <?php if ($estaEnFavoritos): ?>
-                <form action="includes/src/favoritos/procesar_favorito.php" method="post">
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post" class="eliminar-favoritos-form"> 
                     <input type="hidden" name="eliminarMovieId" value="<?php echo $movieId; ?>">
-                    <button type="submit" class="btn btn-danger">Eliminar de favoritos</button>
+                    <button type="submit" class="boton-fav">Eliminar de <img src="./img/fav.png" alt="Películas"></button>
                 </form>
             <?php else: ?>
-                <form action="includes/src/favoritos/procesar_favorito.php" method="post">
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post"class="añadir-favoritos-form">
                     <input type="hidden" name="movieId" value="<?php echo $movieId; ?>">
-                    <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
+                    <button type="submit" class="boton-fav">Añadir a <img src="./img/fav.png" alt="Películas"></button>
                 </form>
             <?php endif; ?>
 

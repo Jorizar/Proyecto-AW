@@ -8,8 +8,12 @@ $formCambioDatos = $formCambioDatos->gestiona();
 
 $tituloPagina = 'Cambiar Datos';
 $contenidoPrincipal=<<<EOF
-  	<h1>Acceso al sistema</h1>
-    $formCambioDatos
+  <div class="titulo_cambiarDatos">
+      <h1>Cambiar Datos</h1>
+  </div>
+  <div class="contenedor_cambiarDatos">
+      $formCambioDatos
+  </div>
 EOF;
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];

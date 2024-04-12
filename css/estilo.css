@@ -697,3 +697,116 @@ main {
 .cambiar-plan-formulario button[type="submit"]:hover {
     background-color: #141414;
 }
+
+
+/* Estilos para el título */
+.titulo_cambiarDatos {
+    text-align: center; /* Alinea el contenido al centro */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+/* Estilos para el contenedor de centrado */
+.contenedor_cambiarDatos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el formulario de cambio de datos */
+.cambiar-datos-formulario {
+    width: 200px;
+    text-align: center;;
+    color: #fff;
+}
+
+.cambiar-datos-formulario label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.cambiar-datos-formulario select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: rgba(127, 96, 3, 255);
+    background-color: transparent;
+    width: calc(100% - 20px); 
+}
+
+.cambiar-datos-formulario .plan-actual {
+    margin-bottom: 10px;
+}
+
+.cambiar-datos-formulario .enviar_plan {
+    margin-top: 20px;
+}
+
+.cambiar-datos-formulario button[type="submit"] {
+    width: calc(70% - 20px);
+    padding: 8px;
+    background-color: rgba(127, 96, 3, 255);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.cambiar-datos-formulario button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+.fotos_cambioDatos-container {
+    display: flex;
+    margin-top: 25px;
+}
+
+.foto-cambioDatos {
+    margin-right: 10px; /* Espaciado entre cada foto de perfil */
+}
+
+.nombre_cambioPlan,
+.email_cambioPlan {
+    margin-bottom: 20px; /* Aumenta el margen inferior */
+}
+
+
+.eliminar-favoritos-form,
+.añadir-favoritos-form {
+    margin-bottom: 10px; 
+}
+
+
+.añadir-favoritos-form button,
+.eliminar-favoritos-form button {
+    width: auto; /* Ancho automático según el contenido */
+    padding: 8px;
+    background-color: rgba(127, 96, 3, 255);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    margin-left: auto; 
+    margin-right: auto;
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+}
+
+.añadir-favoritos-form button[type="submit"]:hover,
+.eliminar-favoritos-form button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+.boton-fav img {
+    margin-left: 5px;
+    margin-top: -3px;
+    width:20px;
+    height:20px;
+}
+
