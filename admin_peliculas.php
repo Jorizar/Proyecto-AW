@@ -18,7 +18,7 @@ if (!empty($peliculas)) {
                             <input type='submit' value='Eliminar'>
                        </form>";
         
-        $contenidoPrincipal .= "<div class='pelicula'>
+        $contenidoPrincipal .= "<div class='pelicula_admin'>
                                 <p>ID: {$pelicula['id']} - Título: {$pelicula['titulo']}</p>
                                 $deleteForm
                              </div>";

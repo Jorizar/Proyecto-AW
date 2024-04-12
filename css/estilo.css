@@ -617,7 +617,7 @@ main {
 }
 
 .comentario-formulario select {
-    width: calc(12% - 10px); /* Ancho del select */
+    width: calc(15% - 10px); /* Ancho del select */
     margin-left: 30px;
     color: rgba(127,96,3,255);
     background-color: transparent;
@@ -855,4 +855,143 @@ main {
 
 .favorito p a:hover {
     color: rgba(127, 96, 3, 255);
+}
+
+
+/* Estilos para la página de administración de comentarios */
+
+/* Estilos para el contenedor principal */
+.admin-comentarios-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los comentarios */
+.comentario {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.comentario p {
+    margin: 5px 0;
+}
+
+.comentario form {
+    display: inline; /* Para que el formulario de eliminación esté en la misma línea */
+}
+
+.comentario form input[type="submit"] {
+    background-color: rgba(127, 96, 3, 255); /* Color de fondo del botón de eliminar */
+    color: #fff; /* Color del texto del botón de eliminar */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comentario form input[type="submit"]:hover {
+    background-color: #141414; /* Cambio de color al pasar el ratón sobre el botón de eliminar */
+}
+
+
+/* Estilos para el contenedor principal */
+.admin-peliculas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para cada película */
+.pelicula_admin {
+    display: inline-block; /* Para que las películas aparezcan una al lado de la otra */
+    width: calc(31% - 20px); /* Establece el ancho de cada película */
+    margin-right: 20px; /* Espacio entre cada película */
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #fff; /* Color del texto */
+}
+
+.pelicula_admin p {
+    margin: 5px 0;
+}
+
+.pelicula_admin form {
+    display: inline; /* Para que el formulario de eliminación esté en la misma línea */
+}
+
+.pelicula_admin form input[type="submit"] {
+    background-color: rgba(127, 96, 3, 255); /* Color de fondo del botón de eliminar */
+    color: #fff; /* Color del texto del botón de eliminar */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pelicula_admin form input[type="submit"]:hover {
+    background-color: #141414; /* Cambio de color al pasar el ratón sobre el botón de eliminar */
+}
+
+
+/* Estilos para el contenedor de usuarios */
+.admin-usuarios-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la tabla de usuarios */
+.admin-usuarios-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-usuarios-table th, .admin-usuarios-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; 
+}
+
+.admin-usuarios-table th {
+    background-color: rgba(127, 96, 3, 255); 
+}
+
+.admin-usuarios-table tr:hover {
+    background-color: rgba(127, 96, 3, 255);
+}
+
+.admin-usuarios-table td:last-child {
+    text-align: center; 
+}
+
+.admin-usuarios-table input[type="submit"] {
+    background-color: rgba(127, 96, 3, 255); 
+    color: #fff; 
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-usuarios-table input[type="submit"]:hover {
+    background-color: #141414; 
 }
