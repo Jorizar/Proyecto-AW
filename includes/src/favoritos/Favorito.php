@@ -9,7 +9,7 @@ class Favorito
     private $user_id;
     private $pelicula_id;
 
-    // Constructor with optional $id for existing entries
+    // Constructor 
     public function __construct($user_id, $pelicula_id, $id = null)
     {
         $this->user_id = $user_id;
@@ -17,14 +17,14 @@ class Favorito
         $this->id = $id;
     }
 
-    // Static method for creation and saving instance
+    //Crea un favorito y lo guarda en la bbdd
     public static function crea($user_id, $pelicula_id)
     {
         $favorito = new Favorito($user_id, $pelicula_id);
         return $favorito->guarda() ? $favorito : null;
     }
 
-    // Method to save instance into database
+    //Guarda un favorito en la base de datos
     private function guarda()
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -41,11 +41,11 @@ class Favorito
                 return false;
             }
         }
-        // No update logic as favoritos are typically added or removed
+
         return false;
     }
 
-    // Static method to fetch Favorito instances by user ID
+    //Busca los favoritos por el id de usuario
     public static function buscaPorUser($user_id)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -63,7 +63,7 @@ class Favorito
         return $favoritos;
     }
 
-    // Static method to delete favorito by user ID and movie ID
+    // Elimina un favorito por el id de usuario y el id de película
     public static function eliminaPorIdUsuarioYIdPelicula($userId, $peliculaId)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -74,7 +74,7 @@ class Favorito
         return $resultado;
     }
 
-    // Static method to check if a movie is in user's favorites
+    // Comprueba si un favorito está asocidado a un usuario en la base de datos
     public static function existe($userId, $peliculaId)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();

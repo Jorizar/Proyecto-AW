@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/peliculas/Pelicula.php';
+
+use es\ucm\fdi\aw\peliculas\Pelicula;
+
 
 if (!$app->tieneRol('admin')) {
     die("Acceso restringido a administradores.");
@@ -9,7 +11,7 @@ if (!$app->tieneRol('admin')) {
 $tituloPagina = 'Administrar Películas';
 $contenidoPrincipal = '<h3>Todas las Películas</h3>';
 
-$peliculas = es\ucm\fdi\aw\peliculas\Pelicula::buscarTodas();
+$peliculas = Pelicula::buscarTodas();
 
 if (!empty($peliculas)) {
     foreach ($peliculas as $pelicula) {

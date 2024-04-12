@@ -1,8 +1,11 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/peliculas/Pelicula.php'; // Ajusta la ruta según sea necesario
-require_once __DIR__.'/includes/src/comentarios/Comentario.php'; // Importa la clase Comentario
-require_once __DIR__.'/includes/src/favoritos/Favoritos.php';
+
+use es\ucm\fdi\aw\usuarios\Usuario;
+use es\ucm\fdi\aw\peliculas\Pelicula;
+use es\ucm\fdi\aw\comentarios\Comentario;
+use es\ucm\fdi\aw\favoritos\Favorito;
+
 
 
 $tituloPagina = 'Detalles de la Película';
@@ -11,7 +14,7 @@ $contenidoPrincipal='';
 if (isset($_GET['id'])) {
     $movieId = $_GET['id'];
     // Suponiendo que buscaPorId devuelve un objeto de tipo Pelicula con los detalles de la película
-    $movie = \es\ucm\fdi\aw\peliculas\Pelicula::buscaPorId($movieId);
+    $movie = Pelicula::buscaPorId($movieId);
 
     if ($movie) {
         // Ajusta estos nombres de propiedad según las propiedades reales de la clase Pelicula
@@ -24,10 +27,10 @@ if (isset($_GET['id'])) {
         $sinopsis = $movie->sinopsis;
         $valoracionIMDb = $movie->Val_IMDb;
 
-        $genero = \es\ucm\fdi\aw\peliculas\Pelicula::convierteGenero($generoId); // Convertimos la ID del género a texto
+        $genero = Pelicula::convierteGenero($generoId); // Convertimos la ID del género a texto
 
         // Recoge los comentarios
-        $comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorPeliculaId($movieId);
+        $comentarios = Comentario::buscarPorPeliculaId($movieId);
 
         // Calcula la valoración de los comentarios
         $sumValoraciones = 0;
@@ -51,7 +54,7 @@ if (isset($_GET['id'])) {
         }
         
         // Verificar si la película está en la lista de favoritos del usuario
-        $estaEnFavoritos = \es\ucm\fdi\aw\favoritos\Favorito::existe($app->getUsuarioId(), $movieId);
+        $estaEnFavoritos = Favorito::existe($app->getUsuarioId(), $movieId);
 
         ob_start(); // Inicia el almacenamiento en el buffer de salida
         ?>
@@ -93,7 +96,7 @@ if (isset($_GET['id'])) {
         $textoComentario = htmlspecialchars($comentario->getTexto());
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $UserId = htmlspecialchars($comentario->getUserId());
-        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
+        $UserNombre = Usuario::buscaNombrePorId($UserId);
     
         $comentariosHtml .= "<div class='comentario'>
             <p><strong>$UserNombre</strong> dijo:</p>

@@ -87,9 +87,5 @@ class FormularioCambioDatos extends Formulario
                 $_SESSION['fotoPerfil'] = $nuevaFoto;
                 $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $nuevaFoto);
             }
-            
-            // Redirige al usuario de vuelta a la página de perfil
-            //header("Location: " . $this->urlRedireccion);
-            //exit;
     }
 }

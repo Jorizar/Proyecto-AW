@@ -1,13 +1,15 @@
 <?php
 require_once __DIR__.'/../../config.php';
-require_once __DIR__.'/Favoritos.php';
+
+use es\ucm\fdi\aw\favoritos\Favorito;
+
 
 if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
     if (isset($_POST['movieId'])) {
         $userId = $app->getUsuarioId(); // Obtener el ID del usuario autenticado
         $pelicula_id = $_POST['movieId']; // Obtener el ID de la película
 
-        $resultado = \es\ucm\fdi\aw\favoritos\Favorito::crea($userId, $pelicula_id);
+        $resultado = Favorito::crea($userId, $pelicula_id);
 
         if ($resultado) {
             $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
@@ -21,7 +23,7 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
         $userId = $app->getUsuarioId(); // Obtener el ID del usuario autenticado
         $pelicula_id = $_POST['eliminarMovieId']; // Obtener el ID de la película a eliminar de favoritos
 
-        $resultado = \es\ucm\fdi\aw\favoritos\Favorito::eliminaPorIdUsuarioYIdPelicula($userId, $pelicula_id);
+        $resultado = Favorito::eliminaPorIdUsuarioYIdPelicula($userId, $pelicula_id);
 
         if ($resultado) {
             $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
