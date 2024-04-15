@@ -92,7 +92,11 @@ class FormularioCambioDatos extends Formulario
                 $allowTypes = array('jpg', 'png', 'jpeg');
                 if(in_array($filetype, $allowTypes)){ //Comprobamos que la extensión de la imagen se ajusta a las requeridas
                     if(move_uploaded_file($_FILES['nueva_foto']["tmp_name"], $targetFilePath)) {
-                        $_SESSION['fotoPerfil'] = $filename;
+                        //Actualizar la foto en la base de datos
+                        $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $targetFilePath);
+
+                        //Actualizar la foto en la sesión
+                        $_SESSION['fotoPerfil'] = $targetFilePath;
                     } else {
                         $this->errores['nueva_foto'] = 'Hubo un error al subir el fichero';
                     }
@@ -100,6 +104,7 @@ class FormularioCambioDatos extends Formulario
                 else{
                     $this->errores['nueva_foto'] = 'La imagen que ha seleccionado debe tener extensión .jpg, .png o .jpeg'; 
                 }
+
             }
     }
 }
