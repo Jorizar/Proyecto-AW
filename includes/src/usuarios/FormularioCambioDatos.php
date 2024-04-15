@@ -32,22 +32,8 @@ class FormularioCambioDatos extends Formulario
                     {$erroresCampos['nuevo_email']}
                 </div>
                 <div class="fotos_cambioDatos-container">
-                    <div class="foto-cambioDatos">
-                        <label><img src='./img/fotosPerfil/1.png' width='48' height='48'></label>
-                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/1.png'>
-                    </div>
-                    <div class="foto-cambioDatos">
-                        <label><img src='./img/fotosPerfil/2.png' width='48' height='48'></label>
-                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/2.png'>
-                    </div>
-                    <div class="foto-cambioDatos">
-                        <label><img src='./img/fotosPerfil/brad.png' width='48' height='48'></label>
-                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/brad.png'>
-                    </div>
-                    <div class="foto-cambioDatos">
-                        <label><img src='./img/fotosPerfil/quentin.png' width='48' height='48'></label>
-                        <input type='radio' name='nueva_foto' value='./img/fotosPerfil/quentin.png'>
-                    </div>
+                    <label for="nueva_foto">Nueva Foto de Perfil:</label>
+                    <input type="file" id="nueva_foto" name="nueva_foto" accept="image/*" multiple="false">
                 </div>
                 <div>
                     <button type="submit" name="cambiar_datos">Cambiar Datos</button>
@@ -95,6 +81,30 @@ class FormularioCambioDatos extends Formulario
             if(!empty($nuevaFoto)){
                 $_SESSION['fotoPerfil'] = $nuevaFoto;
                 $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $nuevaFoto);
+            }
+
+            //Procesamo la foto que ha escogido cargar el usuario
+            if(isset($_FILES['nueva_foto'])){
+                $filetype = pathinfo($_FILES['nueva_foto']['name'], PATHINFO_EXTENSION);
+                $filename = uniqid() . "." . $filetype;
+                $targetFilePath = 'img/fotosPerfil/'.$filename;
+                $filesize = $_FILES['nueva_foto']['name'];
+                
+                if($filesize > 1000000){
+                    $this->errores['nueva_foto'] = 'La imagen no puede ocupar más de 1 MB';
+                }
+    
+                $allowTypes = array('jpg', 'png', 'jpeg');
+                if(in_array($filetype, $allowTypes)){ //Comprobamos que la extensión de la imagen se ajusta a las requeridas
+                    if(move_uploaded_file($_FILES['nueva_foto']["tmp_name"], $targetFilePath)) {
+                        $_SESSION['fotoPerfil'] = $filename;
+                    } else {
+                        $this->errores['nueva_foto'] = 'Hubo un error al subir el fichero';
+                    }
+                }
+                else{
+                    $this->errores['nueva_foto'] = 'La imagen que ha seleccionado debe tener extensión .jpg, .png o .jpeg'; 
+                }
             }
     }
 }
