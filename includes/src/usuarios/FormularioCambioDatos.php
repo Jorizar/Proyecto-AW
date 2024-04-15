@@ -77,11 +77,6 @@ class FormularioCambioDatos extends Formulario
                 }
             }
             
-            $nuevaFoto = $datos['nueva_foto'] ?? '';
-            if(!empty($nuevaFoto)){
-                $_SESSION['fotoPerfil'] = $nuevaFoto;
-                $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $nuevaFoto);
-            }
 
             //Procesamo la foto que ha escogido cargar el usuario
             if(isset($_FILES['nueva_foto'])){
