@@ -77,21 +77,20 @@ footer {
 }
 
 
-
-
 .logo {
     flex: 1; /* Hace que el logo ocupe el espacio disponible */
 }
 
 .centro {
     flex: 2; /* Ajusta el ancho del área central */
-    text-align: center; /* Centra los elementos */
+    display: inline-block; /* Asegura que el contenedor sea flexible */
+    justify-content: flex-start; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
 }
 
 .centro .menu {
     display: flex; /* Hace que los enlaces estén en línea */
-    justify-content: space-between; /* Espacio uniforme entre los enlaces */
-    margin: 0 20px; /* Margen horizontal para centrar los elementos */
+    align-items: center; /* Alinea verticalmente los elementos */
 }
 
 .centro .menu a {
@@ -100,6 +99,12 @@ footer {
     text-decoration: none;
     margin: 0 30px; /* Espacio horizontal entre los enlaces */
 }
+
+/* Ajustes específicos para el último enlace */
+.centro .menu a:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último enlace */
+}
+
 
 header .menu a {
 	color: white;
@@ -147,6 +152,9 @@ nav {
 	width: 170px;
 	background-color: #141414;
     font-family: 'Roboto';
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .menu a {
