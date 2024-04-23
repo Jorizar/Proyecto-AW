@@ -1003,3 +1003,11 @@ main {
 .admin-usuarios-table input[type="submit"]:hover {
     background-color: #141414; 
 }
+
+
+/* Estilos para dispositivos con un ancho máximo de 600px */
+@media (max-width: 800px) {
+    /* Estilos específicos para dispositivos móviles */
+    /* Por ejemplo, ajustar anchos, tamaños de fuente, etc. */
+  }
+  
