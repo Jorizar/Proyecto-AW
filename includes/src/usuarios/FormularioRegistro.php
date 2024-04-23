@@ -110,7 +110,9 @@ class FormularioRegistro extends Formulario
         } else {
             $usuario = Usuario::crea($nombreUsuario, $password, $id, $rol, $email, $foto);
             $app = Aplicacion::getInstance();
+            if (!$app->tieneRol('admin')) {
             $app->login($usuario);
+            } 
         }
     }
 }

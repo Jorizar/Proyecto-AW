@@ -10,6 +10,7 @@ if (!$app->tieneRol('admin')) {
 $tituloPagina = 'Administrar Usuarios';
 $contenidoPrincipal = '<div class="admin-usuarios-container"><h3>Lista de Usuarios</h3>';
 
+
 $usuarios = Usuario::buscarTodos();
 
 if (!empty($usuarios)) {
@@ -31,6 +32,16 @@ if (!empty($usuarios)) {
 } else {
     $contenidoPrincipal .= '<p>No hay usuarios registrados.</p>';
 }
+
+// Formulario para añadir un nuevo usuario
+    $formRegistro = new \es\ucm\fdi\aw\usuarios\FormularioRegistro();
+    $formRegistro = $formRegistro->gestiona();
+    
+    $contenidoPrincipal .= "  <div class= 'registro-formulario'>
+                                $formRegistro
+                            </div>";
+
+
 
 $contenidoPrincipal .= '</div>'; // Cierre del div admin-usuarios-container
 
