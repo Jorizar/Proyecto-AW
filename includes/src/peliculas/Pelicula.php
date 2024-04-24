@@ -337,4 +337,109 @@ class Pelicula
         return $generos;
     }
 
+
+    public static function cambiarTítulo($pelicula_id,$nuevoTitulo){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET titulo='%s' WHERE id=%d",
+            $conn->real_escape_string($nuevoTitulo),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarDirector($pelicula_id,$nuevoDirector){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET director='%s' WHERE id=%d",
+            $conn->real_escape_string($nuevoDirector),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarAnnio($pelicula_id,$nuevoAnnio){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET annio='%s' WHERE id=%d",
+            $conn->real_escape_string($nuevoAnnio),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarSinopsis($pelicula_id,$nuevaSinopsis){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET sinopsis='%s' WHERE id=%d",
+            $conn->real_escape_string($nuevaSinopsis),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarImdb($pelicula_id,$nuevoImdb){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET Val_IMDb='%s' WHERE id=%d",
+            $conn->real_escape_string($nuevoImdb),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function actualizaPortada($pelicula_id, $nuevaPortada){
+
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET portada='%s' WHERE id=%d",
+            $conn->real_escape_string($nuevaPortada),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarGenero($pelicula_id,$generoPelicula){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET genero='%s' WHERE id=%d",
+            $conn->real_escape_string($generoPelicula),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
 }
