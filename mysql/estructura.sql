@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `noticias` (
 CREATE TABLE `peliculas` (
   `titulo` varchar(60) NOT NULL,
   `director` varchar(35) NOT NULL,
-  `id` int(2) UNSIGNED NOT NULL,
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
   `annio` year(4) NOT NULL,
   `genero` int(2) UNSIGNED NOT NULL,
   `sinopsis` text NOT NULL,

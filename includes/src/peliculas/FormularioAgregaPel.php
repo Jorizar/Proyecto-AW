@@ -27,7 +27,6 @@ class FormularioAgregaPel extends Formulario
          $html = <<<EOS
          $htmlErroresGlobales
          <div class="agrega-pelicula">
-             <h1>Añadir Película</h1>
              <form id="formAddPel" action="{$this->action}" method="POST">
 
                 <div class="campos-container">
@@ -44,7 +43,7 @@ class FormularioAgregaPel extends Formulario
                         <input id="annioPelicula" type="text" name="annioPelicula"/>
                     </div>
                     <div class="portada-container">
-                        <label for="portada">portada de la Pelicula:</label>
+                        <label for="portada">Portada de la Pelicula:</label>
                         <input type="file" id="portada" name="portada" accept="image/*" multiple="false">
                     </div>
                     <div class="add-campo-sinopsis">
@@ -145,12 +144,13 @@ class FormularioAgregaPel extends Formulario
 
         
             if ($peliculas === false) {
-                $this->errores[] = "No se ha podido crear la pelicula";
+                echo "Error: No se ha podido crear la pelicula";
+                exit();
             } else {
-                header("Location: {$_SERVER['PHP_SELF']}");
-                exit;
+                $relativePath = '/AW/Proyecto-AW/admin_peliculas.php';
+                header('Location: ' . $relativePath);
+                exit();
             }
-
         }
 
     }
@@ -159,9 +159,9 @@ class FormularioAgregaPel extends Formulario
         $limite = 10;
 
         // Comprobamos que la entrada cumpla con el formato requerido
-        if (!preg_match('/^(?:\w+\s\w+\/\w+\s\w+(?:,\s\w+\s\w+\/\w+\s\w+)*)$/', $entrada)) {
-            $this->errores[] = "Formato de entrada de actores incorrecto. (Ej:Pau Gasol/Bugs Bunny, etc.)";
-        }
+       // if (!preg_match('/^(?:\w+\s\w+\/\w+\s\w+(?:,\s\w+\s\w+\/\w+\s\w+)*)$/', $entrada)) {
+        //    $this->errores[] = "Formato de entrada de actores incorrecto. (Ej:Pau Gasol/Bugs Bunny, etc.)";
+        //}
     
         // Convertimos la entrada en un array de nombres
         $actores = explode(',', $entrada);

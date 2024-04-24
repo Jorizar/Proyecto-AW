@@ -12,7 +12,7 @@ class Pelicula
     //Se utiliza cuando se registra una nueva pelicula
     public static function crea($titulo, $director, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb)
     {
-        $pelicula = new Pelicula($titulo, $director, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb);
+        $pelicula = new Pelicula($titulo, $director, $annio, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb);
         return $pelicula->guarda();
     }
     
@@ -51,7 +51,8 @@ class Pelicula
     public static function buscaPorTitulo($tituloPelicula)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("SELECT * FROM peliculas WHERE LOWER(titulo) LIKE LOWER('%$tituloPelicula%')");
+        //$query = sprintf("SELECT * FROM peliculas WHERE LOWER(titulo) LIKE LOWER('%$tituloPelicula%')");
+        $query = "SELECT * FROM peliculas WHERE LOWER(titulo) LIKE LOWER('%$tituloPelicula%')";
         $rs = $conn->query($query);
         $result = false;
         if ($rs) {

@@ -17,11 +17,9 @@ $ADDForm = new FormularioAgregaPel();
 $ADDForm = $ADDForm->gestiona();
 
 // Agregar el formulario de agregar películas encima de la lista de películas disponibles
-$ADDForm = "<form method='POST' action='includes/src/peliculas/FormularioAgregaPel.php' onsubmit='return confirm(\"¿Estás seguro de que quieres añadir esta película?\");'>
-                <!-- Aquí puedes agregar los campos del formulario -->
-                <button type='submit' name='add'>Añadir película</button>
-            </form>";
 
+// Contenido de la página
+$contenidoPrincipal = '';
 $contenidoPrincipal .= "<h3>Añadir Nueva Película</h3>";
 $contenidoPrincipal .= "<div class= 'añadirPel'>
                             $ADDForm
