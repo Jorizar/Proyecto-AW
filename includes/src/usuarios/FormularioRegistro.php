@@ -73,57 +73,59 @@ class FormularioRegistro extends Formulario
     $this->errores = [];
 
     $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
-    // Lista blanca
-    if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nombreUsuario)) {
-        $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, numeros y guiones';
-    }
-
     $password = trim($datos['password'] ?? '');
-    if (empty($password) || mb_strlen($password) < 8) {
-        $this->errores['password'] = 'La contraseña debe tener al menos 8 caracteres.';
-    }
 
-    // Cargar patrones desde el archivo
-    $rutaArchivoPatrones = 'src/usuarios/patrones.txt';
+    // Validar nombre de usuario
+    if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nombreUsuario)) {
+        $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, números y guiones.';
+    }
+    /*
+    // Cargar palabras prohibidas desde el archivo
+    $rutaArchivoPalabrasProhibidas = 'src/usuarios/palabrasProhibidas.txt';
+    $contenidoPalabrasProhibidas = file_get_contents($rutaArchivoPalabrasProhibidas);
+    $palabrasProhibidas = explode("\n", $contenidoPalabrasProhibidas);
+
+    // Verificar cada palabra prohibida contra la contraseña
+    foreach ($palabrasProhibidas as $palabraProhibida) {
+    if (strpos($password, trim($palabraProhibida)) !== false) {
+        $this->errores['password'] = 'La contraseña no puede contener secuencias o patrones comunes.';
+        break;
+    }
+    }*/
+    /*// Cargar patrones desde el archivo
+    $rutaArchivoPatrones = 'src/usuarios/palabrasProhibidas.txt';
     $contenidoPatrones = file_get_contents($rutaArchivoPatrones);
     $patrones = explode("\n", $contenidoPatrones);
     // Verificar secuencias y patrones comunes
     foreach ($patrones as $patron) {
-        if (stripos($password, $patron) !== false) {
-            $this->errores['password'] = 'La contraseña no puede contener secuencias o patrones comunes.';
+        if (strpos($password, $patron) !== false) {
+            $this->errores['password'] = 'La contraseña no puede contener caracteres comunes.';
             break;
         }
-    }
+    }*/
 
-    // La contraseña no puede contener tu nombre de usuario
-    if (stripos($password, $nombreUsuario) !== false) {
+
+    // Validar contraseña
+    if (empty($password) || mb_strlen($password) < 8) {
+        $this->errores['password'] = 'La contraseña debe tener al menos 8 caracteres.';
+    } elseif (stripos($password, $nombreUsuario) !== false) {
         $this->errores['password'] = 'La contraseña no puede contener tu nombre de usuario.';
-    }
-    
-    // Fortaleza de la contraseña
-    $puntos = 0;
-    $puntos += mb_strlen($password); // Longitud de la contraseña
-    if (preg_match('/[A-Z]/', $password)) {
-        $puntos += 2; // Sumar puntos si hay letras mayúsculas
-    }
-    if (preg_match('/[a-z]/', $password)) {
-        $puntos += 2; // Sumar puntos si hay letras minúsculas
-    }
-    if (preg_match('/[0-9]/', $password)) {
-        $puntos += 2; // Sumar puntos si hay números
-    }
-    if (preg_match('/[^a-zA-Z0-9]/', $password)) {
-        $puntos += 3; // Sumar puntos si hay caracteres especiales
-    }
-
-    
-    // Puntuación de la contraseña
-    if ($puntos < 8) {
-        $this->errores['password'] = 'La contraseña es débil. Debe incluir al menos 8 caracteres, letras mayúsculas y minúsculas, números y caracteres especiales.';
-    } elseif ($puntos < 12) {
-        $this->errores['password'] = 'La contraseña es moderadamente segura. Debe incluir al menos 8 caracteres, letras mayúsculas y minúsculas, números y caracteres especiales.';
     } else {
-        // La contraseña fuerte
+        // Fortaleza de la contraseña
+        $puntos = 0;
+        //$puntos += mb_strlen($password) >= 8 ? 4 : 0; // Longitud de la contraseña
+        $puntos += preg_match('/[A-Z]/', $password) ? 2 : 0; // Sumar puntos si hay letras mayúsculas
+        $puntos += preg_match('/[a-z]/', $password) ? 1 : 0; // Sumar puntos si hay letras minúsculas
+        $puntos += preg_match('/[0-9]/', $password) ? 2 : 0; // Sumar puntos si hay números
+        $puntos += preg_match('/[^a-zA-Z0-9]/', $password) ? 3 : 0; // Sumar puntos si hay caracteres especiales
+
+        // Puntuación de la contraseña
+        if ($puntos < 5) {
+            $this->errores['password'] = 'La contraseña es débil. Debe incluir al menos 8 caracteres, letras mayúsculas y minúsculas, números y caracteres especiales.';
+        } else {
+            // La contraseña es fuerte
+        }
+
     }
 
     $password2 = trim($datos['password2'] ?? '');
