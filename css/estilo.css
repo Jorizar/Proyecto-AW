@@ -296,6 +296,7 @@ main {
 .destacadas {
     border-bottom: 5px solid rgba(127,96,3,255);
     width: 50%; /* Ancho del borde inferior */
+  
 }
 
 .destacadas h1 {
@@ -326,9 +327,9 @@ main {
     font-weight: bold; /* Establecemos negrita */
     text-decoration: none; /* Quitamos el subrayado */
     color: #ffffff; /* Color del texto */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Estilos para los enlaces de las películas */
 .peliculas-container .pelicula a {
     text-decoration: none; /* Quitamos el subrayado */
     color: #ffffff; /* Color del texto */
@@ -339,6 +340,52 @@ main {
     width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
     height: 300px; /* Establecemos una altura fija para todas las imágenes */
     object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.peliculas-container .pelicula span:hover {
+    color: rgba(127,96,3,255); 
+}
+
+.peliculas-container .pelicula img:hover ~ span {
+    transform: translateY(20px); 
+    color: rgba(127,96,3,255); 
+}
+
+/* Efecto de zoom y resplandor al pasar el ratón sobre la imagen */
+.peliculas-container .pelicula img:hover {
+    box-shadow: 0 0 20px rgba(127,96,3,255); 
+    transform: scale(1.1); /* Zoom del 10% */
+}
+
+.contenedor-carousel {
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    white-space: nowrap; /* Evita saltos de línea */
+
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+}
+
+.carousel {
+    display: inline-flex; /* Muestra las películas en una fila */
+}
+
+.carousel .pelicula {
+    margin-right: 70px; /* Espacio entre películas */
+}
+
+.indicadores {
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos al final del contenedor */
+    align-items: center; /* Alinea los elementos verticalmente en el centro del contenedor */
+    transition: color 0.3s ease;
+}
+
+
+/* Estilos para cambiar el color al pasar el ratón por encima */
+.indicadores button:hover {
+    color: rgba(127, 96, 3, 255); /* Color rojo */
 }
 
 
@@ -840,6 +887,7 @@ main {
     font-weight: bold; /* Establecemos negrita */
     text-decoration: none; /* Quitamos el subrayado */
     color: #ffffff; /* Color del texto */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .favorito img {
@@ -847,22 +895,31 @@ main {
     height: 200px; /* Altura fija para todas las portadas */
     object-fit: cover; /* Ajusta el tamaño de la imagen para que todas tengan el mismo tamaño */
     border-radius: 8px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .favorito p {
     margin: 0;
     font-size: 14px; /* Tamaño de fuente más pequeño para el título */
     color: #fff; /* Color del texto del título */
+    transition: transform 0.3s ease;
 }
 
 .favorito p a {
     text-decoration: none;
     color: inherit; /* Utiliza el color heredado del padre */
-    transition: color 0.3s ease;
 }
 
-.favorito p a:hover {
-    color: rgba(127, 96, 3, 255);
+.favorito:hover img,
+.favorito:hover p {
+    transform: translateY(20px); /* Desplazamiento hacia abajo */
+    color: rgba(127,96,3,255); /* Cambio de color del título a rojo */
+}
+
+/* Efecto de zoom y resplandor al pasar el ratón sobre la portada */
+.favorito img:hover {
+    box-shadow: 0 0 20px rgba(127,96,3,255); /* Resplandor rojo */
+    transform: scale(1.1); /* Zoom del 10% */
 }
 
 
