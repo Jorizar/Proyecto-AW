@@ -856,6 +856,7 @@ main {
     font-weight: bold; /* Establecemos negrita */
     text-decoration: none; /* Quitamos el subrayado */
     color: #ffffff; /* Color del texto */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .favorito img {
@@ -863,22 +864,31 @@ main {
     height: 200px; /* Altura fija para todas las portadas */
     object-fit: cover; /* Ajusta el tamaño de la imagen para que todas tengan el mismo tamaño */
     border-radius: 8px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .favorito p {
     margin: 0;
     font-size: 14px; /* Tamaño de fuente más pequeño para el título */
     color: #fff; /* Color del texto del título */
+    transition: transform 0.3s ease;
 }
 
 .favorito p a {
     text-decoration: none;
     color: inherit; /* Utiliza el color heredado del padre */
-    transition: color 0.3s ease;
 }
 
-.favorito p a:hover {
-    color: rgba(127, 96, 3, 255);
+.favorito:hover img,
+.favorito:hover p {
+    transform: translateY(20px); /* Desplazamiento hacia abajo */
+    color: rgba(127,96,3,255); /* Cambio de color del título a rojo */
+}
+
+/* Efecto de zoom y resplandor al pasar el ratón sobre la portada */
+.favorito img:hover {
+    box-shadow: 0 0 20px rgba(127,96,3,255); /* Resplandor rojo */
+    transform: scale(1.1); /* Zoom del 10% */
 }
 
 

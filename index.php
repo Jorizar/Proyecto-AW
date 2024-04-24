@@ -63,6 +63,8 @@ HTML;
     $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
 
+
+
 // Consulta SQL para obtener las películas del género 1
 $queryGenero1 = "SELECT id, titulo, portada
                 FROM peliculas
