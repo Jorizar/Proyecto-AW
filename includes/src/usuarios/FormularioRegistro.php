@@ -81,10 +81,10 @@ class FormularioRegistro extends Formulario
         $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, números y guiones.';
     }
    
-    /*
+    
     //Esto esta bien, solo hay que cambiar la ruta y el nombre del txt
     // Cargar palabras prohibidas desde el archivo
-    $rutaArchivoPalabrasProhibidas = 'C:\software\programacion\WWW\xampp\htdocs\AW\Proyecto-AW\includes\src\usuarios\hola.txt';
+    $rutaArchivoPalabrasProhibidas = './seguridad/palabrasProhibidas.txt';
     $contenidoArchivo = file_get_contents($rutaArchivoPalabrasProhibidas);
 
     if (!file_exists($rutaArchivoPalabrasProhibidas)) {
@@ -103,7 +103,7 @@ class FormularioRegistro extends Formulario
     if (in_array(trim($password), $palabrasProhibidas)) {
     $this->errores['password'] = 'La contraseña no puede ser una palabra común.';
     }
-    */
+    
 
     // Validar contraseña
     if (empty($password) || mb_strlen($password) < 8) {
