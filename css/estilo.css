@@ -296,6 +296,7 @@ main {
 .destacadas {
     border-bottom: 5px solid rgba(127,96,3,255);
     width: 50%; /* Ancho del borde inferior */
+  
 }
 
 .destacadas h1 {
@@ -355,6 +356,36 @@ main {
 .peliculas-container .pelicula img:hover {
     box-shadow: 0 0 20px rgba(127,96,3,255); 
     transform: scale(1.1); /* Zoom del 10% */
+}
+
+.contenedor-carousel {
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    white-space: nowrap; /* Evita saltos de línea */
+
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+}
+
+.carousel {
+    display: inline-flex; /* Muestra las películas en una fila */
+}
+
+.carousel .pelicula {
+    margin-right: 70px; /* Espacio entre películas */
+}
+
+.indicadores {
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos al final del contenedor */
+    align-items: center; /* Alinea los elementos verticalmente en el centro del contenedor */
+    transition: color 0.3s ease;
+}
+
+
+/* Estilos para cambiar el color al pasar el ratón por encima */
+.indicadores button:hover {
+    color: rgba(127, 96, 3, 255); /* Color rojo */
 }
 
 
