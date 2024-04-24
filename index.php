@@ -139,10 +139,11 @@ $htmlDecadas[0] = '<div class="destacadas"><h1>Películas de la década de los 8
 $htmlDecadas[1] = '<div class="destacadas"><h1>Películas de la década de los 90</h1></div>'; 
 $htmlDecadas[2] = '<div class="destacadas"><h1>Películas de la década de los 2000</h1></div>';
 
+$annio_inf = 1980;
+$annio_sup = 1990;
+
 for($i = 0; $i < 3; $i++){
     //Obtenemos las películas del primer género
-    $annio_inf = 1980;
-    $annio_sup = 1990;
     $peliculas = Pelicula::peliculasPorAnnio($annio_inf, $annio_sup, 4);
     $annio_inf += 10;
     $annio_sup += 10;
