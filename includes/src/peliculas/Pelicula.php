@@ -48,6 +48,24 @@ class Pelicula
         return $peliculas;
     }
 
+    public static function buscaPorTitulo($tituloPelicula)
+    {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("SELECT * FROM peliculas WHERE LOWER(titulo) LIKE LOWER('%$tituloPelicula%')");
+        $rs = $conn->query($query);
+        $result = false;
+        if ($rs) {
+            $fila = $rs->fetch_assoc();
+            if ($fila) {
+                $result = new Pelicula($fila['titulo'], $fila['director'], $fila['id'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
+            }
+            $rs->free();
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+        return $result;
+    }
+
 
     public static function buscaPorId($idPelicula)
     {
