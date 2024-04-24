@@ -75,35 +75,35 @@ class FormularioRegistro extends Formulario
     $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
     $password = trim($datos['password'] ?? '');
 
+    
     // Validar nombre de usuario
     if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nombreUsuario)) {
         $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, números y guiones.';
     }
+   
     /*
+    //Esto esta bien, solo hay que cambiar la ruta y el nombre del txt
     // Cargar palabras prohibidas desde el archivo
-    $rutaArchivoPalabrasProhibidas = 'src/usuarios/palabrasProhibidas.txt';
-    $contenidoPalabrasProhibidas = file_get_contents($rutaArchivoPalabrasProhibidas);
-    $palabrasProhibidas = explode("\n", $contenidoPalabrasProhibidas);
+    $rutaArchivoPalabrasProhibidas = 'C:\software\programacion\WWW\xampp\htdocs\AW\Proyecto-AW\includes\src\usuarios\hola.txt';
+    $contenidoArchivo = file_get_contents($rutaArchivoPalabrasProhibidas);
 
-    // Verificar cada palabra prohibida contra la contraseña
-    foreach ($palabrasProhibidas as $palabraProhibida) {
-    if (strpos($password, trim($palabraProhibida)) !== false) {
-        $this->errores['password'] = 'La contraseña no puede contener secuencias o patrones comunes.';
-        break;
+    if (!file_exists($rutaArchivoPalabrasProhibidas)) {
+        echo "Error: El archivo de palabras prohibidas no existe.";
+        exit;
     }
-    }*/
-    /*// Cargar patrones desde el archivo
-    $rutaArchivoPatrones = 'src/usuarios/palabrasProhibidas.txt';
-    $contenidoPatrones = file_get_contents($rutaArchivoPatrones);
-    $patrones = explode("\n", $contenidoPatrones);
-    // Verificar secuencias y patrones comunes
-    foreach ($patrones as $patron) {
-        if (strpos($password, $patron) !== false) {
-            $this->errores['password'] = 'La contraseña no puede contener caracteres comunes.';
-            break;
-        }
-    }*/
+    // Convertir el contenido del archivo en un array de palabras prohibidas
+    $palabrasProhibidas = explode(',', $contenidoArchivo);
 
+    // Eliminar espacios en blanco al inicio y final de cada palabra prohibida
+    foreach ($palabrasProhibidas as &$palabraProhibida) {
+    $palabraProhibida = trim($palabraProhibida);
+    }
+
+    // Verificar que la contraseña no sea igual a ninguna de las palabras prohibidas
+    if (in_array(trim($password), $palabrasProhibidas)) {
+    $this->errores['password'] = 'La contraseña no puede ser una palabra común.';
+    }
+    */
 
     // Validar contraseña
     if (empty($password) || mb_strlen($password) < 8) {
