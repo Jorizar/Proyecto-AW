@@ -326,9 +326,9 @@ main {
     font-weight: bold; /* Establecemos negrita */
     text-decoration: none; /* Quitamos el subrayado */
     color: #ffffff; /* Color del texto */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Estilos para los enlaces de las películas */
 .peliculas-container .pelicula a {
     text-decoration: none; /* Quitamos el subrayado */
     color: #ffffff; /* Color del texto */
@@ -339,6 +339,22 @@ main {
     width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
     height: 300px; /* Establecemos una altura fija para todas las imágenes */
     object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.peliculas-container .pelicula span:hover {
+    color: rgba(127,96,3,255); 
+}
+
+.peliculas-container .pelicula img:hover ~ span {
+    transform: translateY(20px); 
+    color: rgba(127,96,3,255); 
+}
+
+/* Efecto de zoom y resplandor al pasar el ratón sobre la imagen */
+.peliculas-container .pelicula img:hover {
+    box-shadow: 0 0 20px rgba(127,96,3,255); 
+    transform: scale(1.1); /* Zoom del 10% */
 }
 
 
