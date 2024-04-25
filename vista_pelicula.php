@@ -43,7 +43,24 @@ if (isset($_GET['id'])) {
             $avgValoracion = $sumValoraciones / $numeroValoraciones;
             $valoracionUsuariosHtml = round($avgValoracion, 1);
         } else {
-            $valoracionUsuariosHtml = "Aun no hay valoraciones";
+            $valoracionUsuariosHtml = "Aun no hay valoraciones de usuarios";
+        }
+
+        // Recoge las reseñas
+        $resenas = Resena::buscarPorPeliculaId($movieId);
+
+        // Calcula la valoración de las reseñas
+        $sumValoracionesResenas = 0;
+        $numeroValoracionesResenas = count($resenas);
+
+        if ($numeroValoracionesResenas > 0) {
+            foreach ($resenas as $resena) {
+                $sumValoracionesResenas += $resena->getValoracion(); // Ensure getValoracion() method exists in Resena class
+            }
+            $avgValoracionResenas = $sumValoracionesResenas / $numeroValoracionesResenas;
+            $valoracionCriticosHtml = round($avgValoracionResenas, 1);
+        } else {
+            $valoracionCriticosHtml = "Aún no hay valoraciones de críticos";
         }
 
         // Reparto es un JSON así que lo desciframos para escribirlo
@@ -94,6 +111,7 @@ if (isset($_GET['id'])) {
                     <p><strong>Género:</strong> <?php echo $genero; ?></p>
                     <p><strong>Valoración IMDb:</strong> <?php echo $valoracionIMDb; ?></p>
                     <p><strong>Valoración 7thArt:</strong> <?php echo $valoracionUsuariosHtml; ?></p>
+                    <p><strong>Valoración Criticos:</strong> <?php echo $valoracionCriticosHtml; ?></p>
                     <p><strong>Reparto:</strong><br><?php echo $repartoHtml; ?></p>
                     <p><strong>Sinopsis:</strong> <?php echo $sinopsis; ?></p>
                 </div>
