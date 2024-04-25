@@ -1061,6 +1061,127 @@ main {
     background-color: #141414; 
 }
 
+/* Style for the entire review block */
+.review {
+    margin-bottom: 20px; /* Adds space between review blocks */
+    border-bottom: 1px solid #ccc; /* Adds a line below each review for clear separation */
+    padding-bottom: 20px; /* Adds some padding at the bottom of each review */
+}
+
+/* Style for critic's information */
+.info-critico {
+    display: flex; /* Uses flexbox for layout */
+    align-items: center; /* Aligns items vertically center */
+    margin-bottom: 10px; /* Adds some space below the critic info before the review text */
+}
+
+/* Style for the critic's photo */
+.foto-critico {
+    width: 60px; /* Sets a fixed width for the photo */
+    height: 60px; /* Sets a fixed height for the photo */
+    border-radius: 50%; /* Makes the photo circular */
+    margin-right: 15px; /* Adds space between the photo and the critic's name */
+    object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+}
+
+/* Style for the review text */
+.review p {
+    margin: 5px 0; /* Adds top and bottom margin to each paragraph in the review */
+    line-height: 1.6; /* Increases line spacing for better readability */
+}
+
+/* Style for the valuation text */
+.review p:last-child {
+    font-weight: bold; /* Makes the last paragraph (valuation) bold */
+    color: #ebbe44; /* Optional: changes the color to blue for emphasis */
+}
+
+/* Base style for review buttons */
+.resenas-criticos button {
+    width: auto; /* Width adjusts to content */
+    padding: 10px 20px; /* Comfortable padding */
+    background-color: #7f6003; /* Deep gold color */
+    color: white; /* Text color */
+    border: none; /* No borders */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    margin-top: 10px; /* Margin on the top */
+    margin-bottom: 10px; /* Margin on the bottom */
+    display: block; /* Makes it a block element to fill the space */
+    text-align: center; /* Centers the text inside */
+}
+
+/* Hover effect for review buttons */
+.resenas-criticos button:hover {
+    background-color: #4a4a4a; /* Dark gray on hover for contrast */
+}
+
+/* Additional styles to visually distinguish the button for adding reviews */
+.resenas-criticos button:nth-child(2) { /* Assuming the second button is 'Reseñar esta película' */
+    background-color: #5a924f; /* A green shade for add review button */
+}
+
+/* Hover effect specifically for the 'Reseñar esta película' button */
+.resenas-criticos button:nth-child(2):hover {
+    background-color: #427337; /* Darker green on hover */
+}
+
+/* General styling for the specific form container */
+.resena-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #141414;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.resena-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.resena-form-container textarea {
+    width: 100%;
+    height: 120px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.resena-form-container select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.resena-form-container button[type="submit"] {
+    display: block;
+    width: auto;
+    padding: 10px 20px;
+    background-color: #7f6003;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.2s;
+}
+
+.resena-form-container button[type="submit"]:hover {
+    background-color: #4b3800;
+}
 
 /* Estilos para dispositivos con un ancho máximo de 600px */
 @media (max-width: 800px) {
