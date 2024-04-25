@@ -95,6 +95,17 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Estructura de tabla para la tabla `reseñas`
+--
+CREATE TABLE IF NOT EXISTS `reseñas` (
+  `reseña_id` int(3) UNSIGNED NOT NULL,
+  `user_id` int(2) UNSIGNED NOT NULL,
+  `pelicula_id` int(2) UNSIGNED NOT NULL,
+  `texto` text NOT NULL,
+  `valoracion` int(2) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -106,6 +117,9 @@ ALTER TABLE `usuarios`
 
   ALTER TABLE `comentarios`
   ADD PRIMARY KEY (`comentario_id`);
+
+    ALTER TABLE `reseñas`
+  ADD PRIMARY KEY (`reseña_id`);
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -120,4 +134,8 @@ COMMIT;
 
 ALTER TABLE `comentarios`
   MODIFY `comentario_id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+COMMIT;
+
+ALTER TABLE `reseñas`
+  MODIFY `reseña_id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 COMMIT;
