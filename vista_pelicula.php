@@ -5,6 +5,8 @@ use es\ucm\fdi\aw\usuarios\Usuario;
 use es\ucm\fdi\aw\peliculas\Pelicula;
 use es\ucm\fdi\aw\comentarios\Comentario;
 use es\ucm\fdi\aw\favoritos\Favorito;
+use es\ucm\fdi\aw\resenas\Resena;
+
 
 $tituloPagina = 'Detalles de la Película';
 $contenidoPrincipal='';
@@ -41,7 +43,24 @@ if (isset($_GET['id'])) {
             $avgValoracion = $sumValoraciones / $numeroValoraciones;
             $valoracionUsuariosHtml = round($avgValoracion, 1);
         } else {
-            $valoracionUsuariosHtml = "Aun no hay valoraciones";
+            $valoracionUsuariosHtml = "Aun no hay valoraciones de usuarios";
+        }
+
+        // Recoge las reseñas
+        $resenas = Resena::buscarPorPeliculaId($movieId);
+
+        // Calcula la valoración de las reseñas
+        $sumValoracionesResenas = 0;
+        $numeroValoracionesResenas = count($resenas);
+
+        if ($numeroValoracionesResenas > 0) {
+            foreach ($resenas as $resena) {
+                $sumValoracionesResenas += $resena->getValoracion(); // Ensure getValoracion() method exists in Resena class
+            }
+            $avgValoracionResenas = $sumValoracionesResenas / $numeroValoracionesResenas;
+            $valoracionCriticosHtml = round($avgValoracionResenas, 1);
+        } else {
+            $valoracionCriticosHtml = "Aún no hay valoraciones de críticos";
         }
 
         // Reparto es un JSON así que lo desciframos para escribirlo
@@ -53,6 +72,19 @@ if (isset($_GET['id'])) {
         
         // Verificar si la película está en la lista de favoritos del usuario
         $estaEnFavoritos = Favorito::existe($app->getUsuarioId(), $movieId);
+
+        $resenas = Resena::buscarPorPeliculaId($movieId);
+        $numResenas = count($resenas);
+
+        // HTML para mostrar el botón de reseñas
+        $resenasHtml = "<div class='resenas-criticos'>";
+        $resenasHtml .= "<button onclick=\"location.href='ver_resenas.php?id=$movieId'\">Reseñas de críticos ($numResenas)</button>";
+
+        // Verifica si el usuario es un crítico y muestra el botón para añadir reseñas
+        if ($app->esCritico()) {
+            $resenasHtml .= "<button onclick=\"location.href='escribir_resenas.php?id=$movieId'\">Reseñar esta película</button>";
+        }
+        $resenasHtml .= "</div>";
 
         ob_start(); // Inicia el almacenamiento en el buffer de salida
         ?>
@@ -79,6 +111,7 @@ if (isset($_GET['id'])) {
                     <p><strong>Género:</strong> <?php echo $genero; ?></p>
                     <p><strong>Valoración IMDb:</strong> <?php echo $valoracionIMDb; ?></p>
                     <p><strong>Valoración 7thArt:</strong> <?php echo $valoracionUsuariosHtml; ?></p>
+                    <p><strong>Valoración Criticos:</strong> <?php echo $valoracionCriticosHtml; ?></p>
                     <p><strong>Reparto:</strong><br><?php echo $repartoHtml; ?></p>
                     <p><strong>Sinopsis:</strong> <?php echo $sinopsis; ?></p>
                 </div>
@@ -87,6 +120,9 @@ if (isset($_GET['id'])) {
         <?php
         $contenidoPrincipal = ob_get_clean(); // Guarda y limpia el contenido del buffer de salida
     }
+
+    $contenidoPrincipal .= $resenasHtml;
+
     // Muestra los comentarios
     $numComentarios = count($comentarios);
     $comentariosHtml = '<h3>Comentarios (' . $numComentarios . ')</h3>';
