@@ -27,7 +27,6 @@ class FormularioBuscaPel extends Formulario
          // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
          $html = <<<EOS
          $htmlErroresGlobales
-<<<<<<< Updated upstream
          <fieldset>
              <legend>Introduce los datos de la película en los campos que te interesen</legend>
              <div>
@@ -42,44 +41,14 @@ class FormularioBuscaPel extends Formulario
                  <label for="generoPelicula">Género:</label>
                  <select id="generoPelicula" name="generoPelicula">
                  <option value="-1">Seleccionar</option>
-=======
-         <div class="buscador">
-             <h1>Buscador de Películas</h1>
-             <form id="formBuscaPel" action="{$this->action}" method="POST">
-                <div class="campos-container">
-                     <div class="buscador-campo-titulo">
-                         <label for="tituloPelicula">Título:</label>
-                         <input id="tituloPelicula" type="text" name="tituloPelicula" onkeyup="buscarPeliculas()"/>
-                     </div>
-                     
-                     <div class="buscador-campo-director">
-                        <label for="directorPelicula">Director:</label>
-                        <input id="directorPelicula" type="text" name="directorPelicula" onkeyup="buscarPeliculas()"/>
-                    </div>
-                    <div class="buscador-campo-anio">
-                        <label for="annioPelicula">Año de estreno:</label>
-                        <input id="annioPelicula" type="text" name="annioPelicula" onkeyup="buscarPeliculas()"/>
-                    </div>
-                    <div class="buscador-campo-genero">
-                         <label for="generoPelicula">Género:</label>
-                         <select id="generoPelicula" name="generoPelicula" onchange="buscarPeliculas()">
-                         <option value="-1">Seleccionar</option>
-                    </div>
-                </div>
-
-
->>>>>>> Stashed changes
         EOS;
-
-                if ($generos != FALSE) {
-                    foreach ($generos as $id => $genero) {
+                 if($generos != FALSE){
+                    foreach ($generos as $id => $genero){
                         $html .= "<option value='$id'>$genero</option>";
                     }
-                }
-                $html .= "</select></div>";
-                 
+                    $html .= "</select></div>";
+                 }
             $html .= <<<EOF
-<<<<<<< Updated upstream
              <div>
                  <label for="annioPelicula">Año de estreno:</label>
                  <input type="number" id="annioPelicula" name="annioPelicula"/>
@@ -88,18 +57,6 @@ class FormularioBuscaPel extends Formulario
                  <button type="submit" name="buscar">Buscar</button>
              </div>
          </fieldset>
-=======
-                     
-                     <div class="buscador-boton">
-                         <button type="submit" name="buscar">Buscar</button>
-                     </div>
-             </form>
-         </div>
-         <div id="resultadoBusqueda"></div>
-         
-            <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
-            <script type="text/javascript" src="js/main.js"></script>
->>>>>>> Stashed changes
         EOF;
          return $html;
     }
@@ -124,10 +81,4 @@ class FormularioBuscaPel extends Formulario
             }
         }
     }
-<<<<<<< Updated upstream
 }
-=======
-}
-
-
->>>>>>> Stashed changes
