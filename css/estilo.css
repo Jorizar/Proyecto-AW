@@ -1183,6 +1183,22 @@ main {
     background-color: #4b3800;
 }
 
+.heart {
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    border: none;
+    background: none;
+}
+
+.heart.liked {
+    color: red;
+}
+
+.heart:hover {
+    color: red;
+}
+
 /* Estilos para dispositivos con un ancho máximo de 600px */
 @media (max-width: 800px) {
     /* Estilos específicos para dispositivos móviles */
