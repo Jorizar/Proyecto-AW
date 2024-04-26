@@ -6,6 +6,7 @@ use es\ucm\fdi\aw\peliculas\Pelicula;
 use es\ucm\fdi\aw\comentarios\Comentario;
 use es\ucm\fdi\aw\favoritos\Favorito;
 use es\ucm\fdi\aw\resenas\Resena;
+use es\ucm\fdi\aw\likes\Like;
 
 
 $tituloPagina = 'Detalles de la Película';
@@ -131,13 +132,32 @@ if (isset($_GET['id'])) {
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $UserId = htmlspecialchars($comentario->getUserId());
         $UserNombre = Usuario::buscaNombrePorId($UserId);
+        $comentarioId = $comentario->getComentarioId();
+        $likesCount = $comentario->getLikesCount(); // Get likes count from the comentarios object
+    
+        // Check if the current user has liked this comment
+        $liked = Like::existe($app->getUsuarioId(), $comentarioId);
+        $likeButton = $liked ?
+        "<form action='includes/src/likes/procesar_like.php' method='post' style='display: inline;'>
+            <input type='hidden' name='action' value='undo'>
+            <input type='hidden' name='comentario_id' value='$comentarioId'>
+            <input type='hidden' name='pelicula_id' value='$movieId'>
+            <button type='submit' class='heart liked'>♥</button>
+        </form> <span>{$likesCount}</span>" :
+        "<form action='includes/src/likes/procesar_like.php' method='post' style='display: inline;'>
+            <input type='hidden' name='action' value='like'>
+            <input type='hidden' name='comentario_id' value='$comentarioId'>
+            <input type='hidden' name='pelicula_id' value='$movieId'>
+            <button type='submit' class='heart'>♡</button>
+        </form> <span>{$likesCount}</span>";
     
         $comentariosHtml .= "<div class='comentario'>
             <p><strong>$UserNombre</strong> dijo:</p>
             <p>$textoComentario</p>
             <p>Valoración: $valoracionComentario</p>
+            $likeButton  <!-- Display the like or undo like button -->
         </div>";
-    }
+    }     
     $contenidoPrincipal .= $comentariosHtml;
 
     // Revisa si el usuario está logueado para mostrarle la sección añadir comentario

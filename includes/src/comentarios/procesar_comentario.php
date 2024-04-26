@@ -23,7 +23,7 @@ if (empty($pelicula_id) || empty($texto) || empty($valoracion)) {
 $user_id = $app->getUsuarioId();
 
 //Creamos el nuevo comentario
-$comentario = Comentario::crea($user_id, $pelicula_id, $texto, $valoracion);
+$comentario = Comentario::crea($user_id, $pelicula_id, $texto, $valoracion, 0);
 
 if ($comentario) {
     $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
