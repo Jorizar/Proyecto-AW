@@ -1,36 +1,36 @@
 <?php
 require_once __DIR__. '/../../config.php';
 
-use es\ucm\fdi\aw\comentarios\Comentario;
+use es\ucm\fdi\aw\resenas\Resena;
 
-// Comprobamos si el usuario se ha logueado
+// Check if the user is logged in
 if (!$app->usuarioLogueado()) {
-    //Redirigimos al usuario al login
+    // Redirect to the login page
     header('Location: login.php'); 
     exit();
 }
 
-// Validamos la entrada 
+// Validate the input
 $pelicula_id = filter_input(INPUT_POST, 'pelicula_id', FILTER_SANITIZE_NUMBER_INT);
 $texto = filter_input(INPUT_POST, 'texto', FILTER_SANITIZE_SPECIAL_CHARS);
 $valoracion = filter_input(INPUT_POST, 'valoracion', FILTER_SANITIZE_NUMBER_INT);
 
-if (empty($pelicula_id) || empty($texto) || empty($valoracion)) {
+if ($pelicula_id === null || $texto === '' || $valoracion === null) {
     echo "Error: Todos los campos son obligatorios.";
     exit();
 }
 
 $user_id = $app->getUsuarioId();
 
-//Creamos el nuevo comentario
-$comentario = Comentario::crea($user_id, $pelicula_id, $texto, $valoracion, 0);
+// Create the new review
+$resena = Resena::crea($user_id, $pelicula_id, $texto, $valoracion);
 
-if ($comentario) {
-    $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
+if ($resena) {
+    $relativePath = '/AW/Proyecto-AW/ver_resenas.php?id=' . urlencode($pelicula_id);
     header('Location: ' . $relativePath);
     exit();
 } else {
-    echo "Error: No se pudo guardar el comentario.";
+    echo "Error: No se pudo guardar la reseña.";
     exit();
 }
 
