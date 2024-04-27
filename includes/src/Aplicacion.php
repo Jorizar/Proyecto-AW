@@ -317,6 +317,12 @@ class Aplicacion
         return $this->usuarioLogueado() && ($_SESSION['rol'] === 'admin');
     }
 
+    public function esCritico()
+    {
+        $this->compruebaInstanciaInicializada();
+        return $this->usuarioLogueado() && ($_SESSION['rol'] === 'critico');
+    }
+
     public function tieneRol($rol)
     {
         $this->compruebaInstanciaInicializada();
