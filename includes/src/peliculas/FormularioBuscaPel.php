@@ -71,7 +71,7 @@ class FormularioBuscaPel extends Formulario
          <div id="resultadoBusqueda"></div>
          
             <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
-            <script type="text/javascript" src="js/main.js"></script>
+            <script type="text/javascript" src="js/busqueda.js"></script>
         EOF;
          return $html;
     }
