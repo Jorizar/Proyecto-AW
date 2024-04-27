@@ -304,7 +304,8 @@ main {
     text-align: left;
 }
 
-/* Estilos para los contenedores de películas */
+/* ANTIGUO */
+/*
 .peliculas-container {
     display: flex; 
     flex-wrap: wrap; 
@@ -312,12 +313,26 @@ main {
     margin-top: 20px;
     padding: 10px;
 }
+*/
+
+
+.peliculas-container {
+    display: flex; 
+    flex-wrap: nowrap; 
+    justify-content: flex-start; 
+    margin-top: 20px;
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+
 
 /* Estilos para cada película */
 .peliculas-container .pelicula {
     width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
     margin-bottom: 20px; /* Espacio entre las filas */
     text-align: center; /* Centramos el contenido */
+
+    margin-right: 85px;
 }
 
 /* Estilos para los títulos de las películas */
@@ -355,32 +370,63 @@ main {
 /* Efecto de zoom y resplandor al pasar el ratón sobre la imagen */
 .peliculas-container .pelicula img:hover {
     box-shadow: 0 0 20px rgba(127,96,3,255); 
-    transform: scale(1.1); /* Zoom del 10% */
+    transform: scale(1.1); 
 }
 
-.contenedor-carousel {
-    overflow-x: auto; /* Permite desplazamiento horizontal */
-    white-space: nowrap; /* Evita saltos de línea */
+.carrusel {
+    overflow: hidden;
+    position: relative;
+    width: 100%; 
+}
 
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+
+
+/*
+.contenedor-carousel {
+    overflow-x: auto; 
+    white-space: nowrap; 
     display: flex; 
     flex-wrap: wrap; 
     justify-content: flex-start; 
+    width: 100%;
 }
 
 .carousel {
-    display: inline-flex; /* Muestra las películas en una fila */
+    display: inline-flex; 
 }
 
 .carousel .pelicula {
-    margin-right: 70px; /* Espacio entre películas */
+    margin-right: 70px; 
 }
+
 
 .indicadores {
     display: flex;
-    justify-content: flex-end; /* Alinea los elementos al final del contenedor */
-    align-items: center; /* Alinea los elementos verticalmente en el centro del contenedor */
+    justify-content: flex-end; 
+    align-items: center; 
     transition: color 0.3s ease;
 }
+*/
 
 
 /* Estilos para cambiar el color al pasar el ratón por encima */
@@ -1114,7 +1160,7 @@ main {
 
 /* Hover effect for review buttons */
 .resenas-criticos button:hover {
-    background-color: #4a4a4a; /* Dark gray on hover for contrast */
+    background-color: #141414; /* Dark gray on hover for contrast */
 }
 
 /* Additional styles to visually distinguish the button for adding reviews */

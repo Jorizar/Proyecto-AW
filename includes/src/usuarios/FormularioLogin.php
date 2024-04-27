@@ -43,11 +43,14 @@ class FormularioLogin extends Formulario
     {
         $this->errores = [];
         $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
-        $nombreUsuario = filter_var($nombreUsuario, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        //Lista Blanca
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nombreUsuario)) {
+            $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, numeros y guiones';
+        }
         if ( ! $nombreUsuario || empty($nombreUsuario) ) {
             $this->errores['nombreUsuario'] = 'El nombre de usuario no puede estar vacío';
         }
-        
+      
         $password = trim($datos['password'] ?? '');
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password || empty($password) ) {
