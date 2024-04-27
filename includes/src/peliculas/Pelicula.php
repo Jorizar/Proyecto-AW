@@ -379,38 +379,4 @@ class Pelicula
         return $generos;
     }
 
-
-    public static function getListasUser($user_id){  //Obtenemos las listas de películas que tiene creada un usuario
-        $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("SELECT lista_id, nombre_lista FROM listas WHERE user_id = %d ORDER BY lista_id ASC", $user_id);
-        $rs = $conn->query($query);
-        $listas_user = array();
-        if ($rs) {
-            while($fila = $rs->fetch_assoc()){
-                $listas_user[] = $fila['lista_id'] => $fila['nombre_lista'];
-            }
-            $rs->free();
-        } else {
-            $listas_user = false;
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
-        }
-        return $listas_user;
-    }
-
-    public static function getPeliculasLista($lista_id){    //Obtenemos las peliculas de la lista de un usuario
-        $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("SELECT pelicula_id FROM peliculas_lista WHERE lista_id = %d", $lista_id);
-        $rs = $conn->query($query);
-        $peliculas = array();
-        if ($rs) {
-            while($fila = $rs->fetch_assoc()){
-                $peliculas[] = $fila['pelicula_id'];
-            }
-            $rs->free();
-        } else {
-            $peliculas = false;
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
-        }
-        return $peliculas;
-    }
 }

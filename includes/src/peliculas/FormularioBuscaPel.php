@@ -22,15 +22,11 @@ class FormularioBuscaPel extends Formulario
         
          // Se generan los mensajes de error si existen.
          $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-         $erroresCampos = self::generaErroresCampos(['tituloPelicula', 'generoPelicula', 'annioPelicula', 'directorPelicula'], $this->errores, 'span', array('class' => 'error'));
  
          // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
          $html = <<<EOS
          $htmlErroresGlobales
-         <div class="buscador">
-             <h1>Buscador de Películas</h1>
-             <form id="formBuscaPel" action="{$this->action}" method="POST">
-                <div class="campos-container">
+            <div class="campos-container">
                      <div class="buscador-campo-titulo">
                          <label for="tituloPelicula">Título:</label>
                          <input id="tituloPelicula" type="text" name="tituloPelicula"/>
@@ -47,10 +43,6 @@ class FormularioBuscaPel extends Formulario
                          <label for="generoPelicula">Género:</label>
                          <select id="generoPelicula" name="generoPelicula">
                          <option value="-1">Seleccionar</option>
-                    </div>
-                </div>
-
-                    
         EOS;
                  if($generos != FALSE){
                     foreach ($generos as $id => $genero){
@@ -59,11 +51,9 @@ class FormularioBuscaPel extends Formulario
                     $html .= "</select></div>";
                  }
             $html .= <<<EOF
-                     
                      <div class="buscador-boton">
                          <button type="submit" name="buscar">Buscar</button>
                      </div>
-             </form>
          </div>
         EOF;
          return $html;
