@@ -672,6 +672,6 @@ $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPr
 // Se genera la vista utilizando la plantilla
 $app->generaVista('/plantillas/plantilla.php', $params);
 
-echo '<script src="js/carrusel.js"></script>'
+echo '<script src="js/carrusel.js"></script>';
 ?>
 
