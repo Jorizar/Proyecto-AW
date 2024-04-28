@@ -296,25 +296,33 @@ main {
 .destacadas {
     border-bottom: 5px solid rgba(127,96,3,255);
     width: 50%; /* Ancho del borde inferior */
-  
 }
+
+
 
 .destacadas h1 {
     font-size: 1.5em; /* Tamaño de fuente del título */
     text-align: left;
 }
 
-/* ANTIGUO */
-/*
-.peliculas-container {
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: flex-start; 
-    margin-top: 20px;
-    padding: 10px;
+.indicadores{
+    display: flex;
+    justify-content: flex-end;
 }
-*/
  
+.indicadores button {
+	background: #fff;
+	height: 3px;
+	width: 10px;
+	cursor: pointer;
+	border: none;
+	margin-right: 4px;
+}
+
+.indicadores button:hover,
+.indicadores button.activo {
+	background: rgba(127,96,3,255);
+}
 
 .busqueda-peliculas-container{
     display: flex; 
