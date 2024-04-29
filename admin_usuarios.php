@@ -10,7 +10,7 @@ if (!$app->tieneRol('admin')) {
 $tituloPagina = 'Administrar Usuarios';
 $contenidoPrincipal = '<div class="admin-usuarios-container"><h3>Lista de Usuarios</h3>';
 
-
+  
 $usuarios = Usuario::buscarTodos();
 
 if (!empty($usuarios)) {
@@ -20,6 +20,12 @@ if (!empty($usuarios)) {
                                     <td>" . htmlspecialchars($usuario['user_id']) . "</td>
                                     <td>" . htmlspecialchars($usuario['username']) . "</td>
                                     <td>" . htmlspecialchars($usuario['email']) . "</td>
+                                    <td>
+                                        <form method='post' action='cambioDatos.php'>
+                                            <input type='hidden' name='usuario_id' value='" . $usuario['user_id'] . "'>
+                                            <input type='submit' value='Editar Datos');'>
+                                        </form>
+                                    </td>
                                     <td>
                                         <form method='post' action='includes/src/usuarios/eliminar_usuario.php'>
                                             <input type='hidden' name='usuario_id' value='" . $usuario['user_id'] . "'>

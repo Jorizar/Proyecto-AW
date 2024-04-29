@@ -263,7 +263,7 @@ main {
     border: 1px solid #ccc;
     border-radius: 4px;
     color: rgba(127,96,3,255);
-    background-color: transparent;
+    background-color: #141414;
     margin-top: 10px;
     width: 100%;
 }
@@ -312,17 +312,19 @@ main {
  
 .indicadores button {
 	background: #fff;
-	height: 3px;
+	height: 4px;
 	width: 10px;
 	cursor: pointer;
 	border: none;
 	margin-right: 4px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .indicadores button:hover,
 .indicadores button.activo {
 	background: rgba(127,96,3,255);
 }
+
 
 .busqueda-peliculas-container{
     display: flex; 
@@ -353,8 +355,8 @@ main {
     width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
     margin-bottom: 20px; /* Espacio entre las filas */
     text-align: center; /* Centramos el contenido */
-
     margin-right: 85px;
+    /*margin-right: 8%;*/
 }
 
 /* Estilos para los títulos de las películas */
@@ -462,38 +464,6 @@ main {
 
 
 
-/*
-.contenedor-carousel {
-    overflow-x: auto; 
-    white-space: nowrap; 
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: flex-start; 
-    width: 100%;
-}
-
-.carousel {
-    display: inline-flex; 
-}
-
-.carousel .pelicula {
-    margin-right: 70px; 
-}
-
-
-.indicadores {
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center; 
-    transition: color 0.3s ease;
-}
-*/
-
-
-/* Estilos para cambiar el color al pasar el ratón por encima */
-.indicadores button:hover {
-    color: rgba(127, 96, 3, 255); /* Color rojo */
-}
 
 
 .noticia {

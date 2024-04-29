@@ -59,9 +59,6 @@ CREATE TABLE IF NOT EXISTS `peliculas_lista` (
   `lista_id` int(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-ALTER TABLE `peliculas_lista`
-ADD FOREIGN KEY (`lista_id`) REFERENCES `listas`(`lista_id`)
-ADD FOREIGN KEY (`pelicula_id`) REFERENCES `peliculas`(`id`);
 
 --
 -- Estructura de tabla para la tabla `noticias`
@@ -83,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `noticias` (
 CREATE TABLE `peliculas` (
   `titulo` varchar(60) NOT NULL,
   `director` varchar(35) NOT NULL,
-  `id` int(2) UNSIGNED NOT NULL,
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
   `annio` year(4) NOT NULL,
   `genero` int(2) UNSIGNED NOT NULL,
   `sinopsis` text NOT NULL,

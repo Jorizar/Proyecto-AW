@@ -157,6 +157,10 @@ class FormularioRegistro extends Formulario
             if (!$app->tieneRol('admin')) {
             $app->login($usuario);
             } 
+            else{
+                header("Location: admin_usuarios.php");
+                exit;
+            }
         }
     }
 }
