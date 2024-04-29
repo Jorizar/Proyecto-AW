@@ -263,7 +263,7 @@ main {
     border: 1px solid #ccc;
     border-radius: 4px;
     color: rgba(127,96,3,255);
-    background-color: transparent;
+    background-color: #141414;
     margin-top: 10px;
     width: 100%;
 }
@@ -353,8 +353,8 @@ main {
     width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
     margin-bottom: 20px; /* Espacio entre las filas */
     text-align: center; /* Centramos el contenido */
-
     margin-right: 85px;
+    /*margin-right: 8%;*/
 }
 
 /* Estilos para los títulos de las películas */

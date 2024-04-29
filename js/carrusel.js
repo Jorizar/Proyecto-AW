@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         let scrollAmount = 0;
         let peliculaWidth = 1140; // Ancho de cada película incluyendo margen
+        //let peliculaWidth = (window.innerWidth * 0.25) - 10;
        
 
         // Función para calcular el ancho total de las películas
