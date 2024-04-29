@@ -29,9 +29,6 @@ if (isset($_GET['id'])) {
         $sinopsis = $movie->sinopsis;
         $valoracionIMDb = $movie->Val_IMDb;
 
-        $formAgregaPelLista = new FormAgregaPelLista();
-        $formAgregaPelLista = $formAgregaPelLista->gestiona();
-
         $genero = Pelicula::convierteGenero($generoId); // Convertimos la ID del género a texto
 
         // Recoge los comentarios
