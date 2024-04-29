@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 --
 
 CREATE TABLE IF NOT EXISTS `favoritos` (
+  `id` int(2) UNSIGNED NOT NULL,
   `user_id` int(2) UNSIGNED NOT NULL,
   `pelicula_id` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -35,11 +36,32 @@ CREATE TABLE IF NOT EXISTS `favoritos` (
 -- Estructura de tabla para la tabla `listas`
 --
 
-CREATE TABLE IF NOT EXISTS `listas` (
+CREATE TABLE `listas` (
   `user_id` int(2) UNSIGNED NOT NULL,
-  `pelicula_id` int(2) UNSIGNED NOT NULL,
+  `nombre_lista` varchar(35) NOT NULL,
   `lista_id` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `listas`
+ADD PRIMARY KEY (`lista_id`);
+
+ALTER TABLE `listas`
+MODIFY `lista_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+--
+-- Estructura de tabla para la tabla `peliculas_listas`
+--
+
+CREATE TABLE IF NOT EXISTS `peliculas_lista` (
+  `pelicula_id` int(2) UNSIGNED NOT NULL,
+  `lista_id` int(3) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `peliculas_lista`
+ADD FOREIGN KEY (`lista_id`) REFERENCES `listas`(`lista_id`)
+ADD FOREIGN KEY (`pelicula_id`) REFERENCES `peliculas`(`id`);
 
 --
 -- Estructura de tabla para la tabla `noticias`
@@ -94,11 +116,31 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Estructura de tabla para la tabla `reseñas`
+--
+CREATE TABLE IF NOT EXISTS `reseñas` (
+  `reseña_id` int(3) UNSIGNED NOT NULL,
+  `user_id` int(2) UNSIGNED NOT NULL,
+  `pelicula_id` int(2) UNSIGNED NOT NULL,
+  `texto` text NOT NULL,
+  `valoracion` int(2) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username` (`username`);
+
+  ALTER TABLE `favoritos`
+  ADD PRIMARY KEY (`id`);
+
+  ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`comentario_id`);
+
+    ALTER TABLE `reseñas`
+  ADD PRIMARY KEY (`reseña_id`);
 
 --
 -- AUTO_INCREMENT for table `usuarios`
@@ -106,3 +148,46 @@ ALTER TABLE `usuarios`
 ALTER TABLE `usuarios`
   MODIFY `user_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
+
+ALTER TABLE `favoritos`
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+ALTER TABLE `comentarios`
+  MODIFY `comentario_id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100,
+  ADD `likes_count` int(11) NOT NULL DEFAULT '0';
+COMMIT;
+
+ALTER TABLE `reseñas`
+  MODIFY `reseña_id` int(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+COMMIT;
+
+CREATE TABLE IF NOT EXISTS `likes` (
+  `like_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(2) UNSIGNED NOT NULL,
+  `comentario_id` int(3) UNSIGNED NOT NULL,
+  PRIMARY KEY (`like_id`),
+  UNIQUE KEY `user_comment_unique` (`user_id`, `comentario_id`)  -- Ensures a user can only like a comment once
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+DELIMITER //
+CREATE TRIGGER increment_like_count
+AFTER INSERT ON `likes`
+FOR EACH ROW
+BEGIN
+  UPDATE `comentarios`
+  SET likes_count = likes_count + 1
+  WHERE comentario_id = NEW.comentario_id;
+END; //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER decrement_like_count
+AFTER DELETE ON `likes`
+FOR EACH ROW
+BEGIN
+  UPDATE `comentarios`
+  SET likes_count = likes_count - 1
+  WHERE comentario_id = OLD.comentario_id;
+END; //
+DELIMITER ;

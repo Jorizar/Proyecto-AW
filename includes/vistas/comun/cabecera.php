@@ -15,17 +15,18 @@ function mostrarPerfil()
         $nombrePerfil = $app->nombreUsuario();
 
         $html .= "<div class='perfil-info'>";
-        $html .= "<a href='$perfilUrl'><img src='$fotoPerfil' alt='Foto de perfil' class='imagen-perfil'></a>";
-        $html .= "<a href='$perfilUrl' class='nombre-perfil'>$nombrePerfil</a>"; 
+        $html .= "<a href='$perfilUrl'><img src='$fotoPerfil' alt='Foto de perfil' class='imagen-perfil-cabecera'></a>";
+        $html .= "<a href='$perfilUrl' class='nombre-perfil-cabecera'>$nombrePerfil</a>"; 
         $html .= "</div>";
 
-        //$html = "<a href='$perfilUrl'><img src='$fotoPerfil' alt='Foto de perfil' class='imagen-perfil'></a>";
     } else {
         // Si el usuario no está logueado, mostrar opciones de inicio de sesión y registro
         $loginUrl = $app->resuelve('/login.php');
         $registroUrl = $app->resuelve('/registro.php');
 
-        $html = "<a href='$loginUrl'>Iniciar sesión</a> | <a href='$registroUrl'>Registrarse</a>";
+        $html = "<div class='contenedor-login-registro'>";
+        $html .= "<a href='$loginUrl'>Iniciar sesión</a> | <a href='$registroUrl'>Registrarse</a>";
+        $html .= "</div>";
     }
 
     return $html;
@@ -41,12 +42,14 @@ function mostrarPerfil()
         </a>
     </div>
     <div class="centro">
-        <nav class="menu">
-            <a href="<?= $app->resuelve('/index.php')?>">Inicio</a>
-            <a href="<?= $app->resuelve('/noticias.php')?>">Noticias</a>
-            <a href="<?= $app->resuelve('/peliculas_fav.php')?>">Películas <img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
-        </nav>
-    </div>
+    <nav class="menu">
+        <a href="<?= $app->resuelve('/index.php')?>" class="nav-enlace">Inicio</a>
+        <a href="<?= $app->resuelve('/noticias.php')?>" class="nav-enlace">Noticias</a>
+        <a href="<?= $app->resuelve('/peliculas_fav.php')?>" class="nav-enlace">Películas<img src="./img/fav.png" alt="Películas" width="50" height="50"></a>
+        <a href="<?= $app->resuelve('/misListas.php')?>" class="nav-enlace">Listas</a>
+    </nav>
+    </nav>
+</div>
     <div class="saludo-menu-container">
         <div class="saludo">
             <?= mostrarPerfil(); ?>

@@ -27,22 +27,6 @@ class FormularioBuscaPel extends Formulario
          // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
          $html = <<<EOS
          $htmlErroresGlobales
-<<<<<<< Updated upstream
-         <fieldset>
-             <legend>Introduce los datos de la película en los campos que te interesen</legend>
-             <div>
-                 <label for="tituloPelicula">Título:</label>
-                 <input id="tituloPelicula" type="text" name="tituloPelicula"/>
-             </div>
-             <div>
-                <label for="directorPelicula">Director:</label>
-                <input id="directorPelicula" type="text" name="directorPelicula"/>
-            </div>
-            <div>
-                 <label for="generoPelicula">Género:</label>
-                 <select id="generoPelicula" name="generoPelicula">
-                 <option value="-1">Seleccionar</option>
-=======
          <div class="buscador">
              <h1>Buscador de Películas</h1>
              <form id="formBuscaPel" action="{$this->action}" method="POST">
@@ -64,7 +48,6 @@ class FormularioBuscaPel extends Formulario
                          <label for="generoPelicula">Género:</label>
                          <select id="generoPelicula" name="generoPelicula" onchange="buscarPeliculas()">
                          <option value="-1">Seleccionar</option>
->>>>>>> Stashed changes
         EOS;
                  if($generos != FALSE){
                     foreach ($generos as $id => $genero){
@@ -73,16 +56,6 @@ class FormularioBuscaPel extends Formulario
                     $html .= "</select></div>";
                  }
             $html .= <<<EOF
-<<<<<<< Updated upstream
-             <div>
-                 <label for="annioPelicula">Año de estreno:</label>
-                 <input type="number" id="annioPelicula" name="annioPelicula"/>
-             </div>
-             <div>
-                 <button type="submit" name="buscar">Buscar</button>
-             </div>
-         </fieldset>
-=======
                      
                     <div class="buscador-boton">
                          <button type="submit" name="buscar">Buscar</button>
@@ -95,7 +68,6 @@ class FormularioBuscaPel extends Formulario
          
             <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
             <script type="text/javascript" src="js/main.js"></script>
->>>>>>> Stashed changes
         EOF;
          return $html;
     }

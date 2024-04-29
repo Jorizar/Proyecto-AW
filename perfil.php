@@ -13,36 +13,39 @@ if ($app->usuarioLogueado()) {
     $urlComentarios = $app->resuelve('/misComentarios.php');
     $urlListas = $app->resuelve('/misListas.php');
     $cerrarSesionUrl = $app->resuelve('/logout.php'); // URL para cerrar sesión
-    $urlAdmin = $app->resuelve('/admin');
+    $urlAdminComentarios = $app->resuelve('/admin_comentarios.php');
+    $urlAdminPeliculas = $app->resuelve('/admin_peliculas.php');
+    $urlAdminUsuarios = $app->resuelve('/admin_usuarios.php');
 
     // Contenido principal del perfil del usuario
     $contenidoPrincipal = <<<EOS
     <h2>Mi Perfil</h2>
-    <div style="display: flex; align-items: center;">
-        <div style="margin-right: 20px;">
-            <img src="${fotoPerfil}" alt='Foto de perfil' width='100' height='100'>
+    <div class="info-perfil">
+        <div>
+            <img src="${fotoPerfil}" alt='Foto de perfil' class='imagen-perfil'>
         </div>
         <div>
-            <p>@usuario: ${nombreUsuario}</p>                        
+            <p class='nombre-perfil'>@usuario: ${nombreUsuario}</p>                        
             <p>Plan: ${plan}</p>
         </div>
     </div>
-    <div style="margin-top: 20px;">
-        <div style="text-align: right;">
+   
 EOS;
 
     // Agregar el enlace para administradores
     if ($_SESSION['rol'] === 'admin') {
-        $contenidoPrincipal .= "<a href='${urlAdmin}'>ADMINISTRAR</a><br>";
+        $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminComentarios . '">ADMINISTRAR COMENTARIOS</a><br>';
+        $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminPeliculas . '">ADMINISTRAR PELÍCULAS</a><br>';
+        $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminUsuarios . '">ADMINISTRAR USUARIOS</a><br>';
+
     }
 
     $contenidoPrincipal .= <<<EOS
-            <a href="${cambioDatosUrl}">Cambiar Datos</a><br>
-            <a href="${cambioPlanUrl}">Cambiar Plan</a><br>
-            <a href="${urlComentarios}">Mis Comentarios</a><br>
-            <a href="${urlListas}">Mis Listas</a><br>
-            <!-- Enlace para cerrar sesión -->
-            <a href="${cerrarSesionUrl}">Cerrar Sesión</a><br>
+            <a href="${cambioDatosUrl}" class='enlace-perfil'>Cambiar Datos</a><br>
+            <a href="${cambioPlanUrl}" class='enlace-perfil'>Cambiar Plan</a><br>
+            <a href="${urlComentarios}" class='enlace-perfil'>Mis Comentarios</a><br>
+            <a href="${urlListas}" class='enlace-perfil'>Mis Listas</a><br>
+            <a href="${cerrarSesionUrl}" class='enlace-perfil'>Cerrar Sesión</a><br>
         </div>
     </div>
 EOS;
@@ -53,8 +56,6 @@ EOS;
     <p>Debes iniciar sesión para ver el contenido.</p>
 EOS;
 }
-
-
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);

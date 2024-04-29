@@ -29,7 +29,7 @@ class Usuario
     public static function buscaUsuario($nombreUsuario)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("SELECT * FROM Usuarios U WHERE U.username='%s'", $conn->real_escape_string($nombreUsuario));
+        $query = sprintf("SELECT * FROM usuarios U WHERE U.username='%s'", $conn->real_escape_string($nombreUsuario));
         $rs = $conn->query($query);
         $result = false;
         if ($rs) {
@@ -48,7 +48,7 @@ class Usuario
     public static function buscaPorId($idUsuario)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("SELECT * FROM Usuarios WHERE user_id=%d", $idUsuario);
+        $query = sprintf("SELECT * FROM usuarios WHERE user_id=%d", $idUsuario);
         $rs = $conn->query($query);
         $result = false;
         if ($rs) {
@@ -92,7 +92,7 @@ class Usuario
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO Usuarios(username, password, rol, email, foto) VALUES ('%s', '%s', '%s', '%s', '%s')"
+        $query=sprintf("INSERT INTO usuarios(username, password, rol, email, foto) VALUES ('%s', '%s', '%s', '%s', '%s')"
             , $conn->real_escape_string($usuario->nombreUsuario)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->rol)
@@ -113,7 +113,7 @@ class Usuario
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("UPDATE Usuarios U SET username = '%s', password='%s', rol='%s', email='%s', foto='%s' WHERE U.user_id=%d"
+        $query=sprintf("UPDATE usuarios U SET username = '%s', password='%s', rol='%s', email='%s', foto='%s' WHERE U.user_id=%d"
             , $conn->real_escape_string($usuario->nombreUsuario)
             , $conn->real_escape_string($usuario->password)
             , $conn->real_escape_string($usuario->rol)
@@ -135,24 +135,22 @@ class Usuario
         return self::borraPorId($usuario->id);
     }
     
-    private static function borraPorId($idUsuario)
+    public static function borraPorId($idUsuario)
     {
         if (!$idUsuario) {
             return false;
-        } 
-        /* Los roles se borran en cascada por la FK
-         * $result = self::borraRoles($usuario) !== false;
-         */
+        }
+    
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM Usuarios U WHERE U.user_id = %d"
-            , $idUsuario
-        );
-        if ( ! $conn->query($query) ) {
+        $query = sprintf("DELETE FROM usuarios WHERE user_id = %d", $idUsuario);
+    
+        if (!$conn->query($query)) {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }
         return true;
     }
+    
 
     private $id; //Id que identifica al user en la base de datos
 
@@ -241,10 +239,10 @@ class Usuario
     }
 
     // Actualiza la ruta de la foto en la base de datos
-    private static function actualizaFoto($idUsuario, $nuevaFoto)
+    public static function actualizaFoto($idUsuario, $nuevaFoto)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("UPDATE Usuarios SET foto='%s' WHERE user_id=%d",
+        $query = sprintf("UPDATE usuarios SET foto='%s' WHERE user_id=%d",
             $conn->real_escape_string($nuevaFoto),
             $idUsuario
         );
@@ -256,10 +254,10 @@ class Usuario
         }
     }
 
-    private static function actualizaRol($idUsuario, $nuevoRol)
+    public static function actualizaRol($idUsuario, $nuevoRol)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("UPDATE Usuarios SET rol='%s' WHERE user_id=%d",
+        $query = sprintf("UPDATE usuarios SET rol='%s' WHERE user_id=%d",
             $conn->real_escape_string($nuevoRol),
             $idUsuario
         );
@@ -274,7 +272,7 @@ class Usuario
     public static function cambiarNombre($idUsuario, $nuevoNombre)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("UPDATE Usuarios SET username='%s' WHERE user_id=%d",
+        $query = sprintf("UPDATE usuarios SET username='%s' WHERE user_id=%d",
             $conn->real_escape_string($nuevoNombre),
             $idUsuario
         );
@@ -288,11 +286,31 @@ class Usuario
 
     }
 
+    public static function buscarTodos() {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT user_id, username, email FROM usuarios";
+        $result = $conn->query($sql);
+
+        $usuarios = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $usuarios[] = [
+                    'user_id' => $fila['user_id'],
+                    'username' => $fila['username'],
+                    'email' => $fila['email']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $usuarios;
+    }
 
     public static function cambiarEmail($idUsuario, $nuevoEmail)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("UPDATE Usuarios SET email='%s' WHERE user_id=%d",
+        $query = sprintf("UPDATE usuarios SET email='%s' WHERE user_id=%d",
             $conn->real_escape_string($nuevoEmail),
             $idUsuario
         );

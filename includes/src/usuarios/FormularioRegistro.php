@@ -21,9 +21,9 @@ class FormularioRegistro extends Formulario
     // Opciones para el campo de selección de roles
     $opcionesRol = [
         'free' => 'Free',
-        'premium' => '$Premium$'
+        'premium' => '€ Premium €'
     ];
-
+    
     // Genera las opciones HTML para el campo de selección de roles
     $optionsRol = '';
     foreach ($opcionesRol as $value => $label) {
@@ -33,29 +33,27 @@ class FormularioRegistro extends Formulario
 
         $html = <<<EOF
         $htmlErroresGlobales
-        <fieldset>
-            <legend>Datos para el registro</legend>
-            <div>
+            <div class="registro-usuario">
                 <label for="nombreUsuario">Nombre de usuario:</label>
                 <input id="nombreUsuario" type="text" name="nombreUsuario" value="$nombreUsuario" />
                 {$erroresCampos['nombreUsuario']}
             </div>
-            <div>
+            <div class="registro-password">
                 <label for="password">Contraseña:</label>
                 <input id="password" type="password" name="password" />
                 {$erroresCampos['password']}
             </div>
-            <div>
+            <div class="registro-password2">
                 <label for="password2">Repite la contraseña:</label>
                 <input id="password2" type="password" name="password2" />
                 {$erroresCampos['password2']}
             </div>
-            <div>
+            <div class="registro-email">
                 <label for="email">Introduce el email:</label>
                 <input id="email" type="email" name="email" />
                 {$erroresCampos['email']}
             </div>
-            <div>
+            <div class="registro-rol">
             <label for="rol">Rol:</label>
             <select id="rol" name="rol">
                 $optionsRol
@@ -75,15 +73,59 @@ class FormularioRegistro extends Formulario
     $this->errores = [];
 
     $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
-    $nombreUsuario = filter_var($nombreUsuario, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    if ( ! $nombreUsuario || mb_strlen($nombreUsuario) < 5) {
-        $this->errores['nombreUsuario'] = 'El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.';
+    $password = trim($datos['password'] ?? '');
+
+    
+    // Validar nombre de usuario
+    if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nombreUsuario)) {
+        $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, números y guiones.';
+    }
+   
+    
+    //Esto esta bien, solo hay que cambiar la ruta y el nombre del txt
+    // Cargar palabras prohibidas desde el archivo
+    $rutaArchivoPalabrasProhibidas = './seguridad/palabrasProhibidas.txt';
+    $contenidoArchivo = file_get_contents($rutaArchivoPalabrasProhibidas);
+
+    if (!file_exists($rutaArchivoPalabrasProhibidas)) {
+        echo "Error: El archivo de palabras prohibidas no existe.";
+        exit;
+    }
+    // Convertir el contenido del archivo en un array de palabras prohibidas
+    $palabrasProhibidas = explode(',', $contenidoArchivo);
+
+    // Eliminar espacios en blanco al inicio y final de cada palabra prohibida
+    foreach ($palabrasProhibidas as &$palabraProhibida) {
+    $palabraProhibida = trim($palabraProhibida);
     }
 
-    $password = trim($datos['password'] ?? '');
-    $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    if ( ! $password || mb_strlen($password) < 5 ) {
-        $this->errores['password'] = 'La contraseña tiene que tener una longitud de al menos 5 caracteres.';
+    // Verificar que la contraseña no sea igual a ninguna de las palabras prohibidas
+    if (in_array(trim($password), $palabrasProhibidas)) {
+    $this->errores['password'] = 'La contraseña no puede ser una palabra común.';
+    }
+    
+
+    // Validar contraseña
+    if (empty($password) || mb_strlen($password) < 8) {
+        $this->errores['password'] = 'La contraseña debe tener al menos 8 caracteres.';
+    } elseif (stripos($password, $nombreUsuario) !== false) {
+        $this->errores['password'] = 'La contraseña no puede contener tu nombre de usuario.';
+    } else {
+        // Fortaleza de la contraseña
+        $puntos = 0;
+        //$puntos += mb_strlen($password) >= 8 ? 4 : 0; // Longitud de la contraseña
+        $puntos += preg_match('/[A-Z]/', $password) ? 2 : 0; // Sumar puntos si hay letras mayúsculas
+        $puntos += preg_match('/[a-z]/', $password) ? 1 : 0; // Sumar puntos si hay letras minúsculas
+        $puntos += preg_match('/[0-9]/', $password) ? 2 : 0; // Sumar puntos si hay números
+        $puntos += preg_match('/[^a-zA-Z0-9]/', $password) ? 3 : 0; // Sumar puntos si hay caracteres especiales
+
+        // Puntuación de la contraseña
+        if ($puntos < 5) {
+            $this->errores['password'] = 'La contraseña es débil. Debe incluir al menos 8 caracteres, letras mayúsculas y minúsculas, números y caracteres especiales.';
+        } else {
+            // La contraseña es fuerte
+        }
+
     }
 
     $password2 = trim($datos['password2'] ?? '');
@@ -112,7 +154,9 @@ class FormularioRegistro extends Formulario
         } else {
             $usuario = Usuario::crea($nombreUsuario, $password, $id, $rol, $email, $foto);
             $app = Aplicacion::getInstance();
+            if (!$app->tieneRol('admin')) {
             $app->login($usuario);
+            } 
         }
     }
 }

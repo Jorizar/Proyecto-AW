@@ -20,7 +20,7 @@ if (!(empty($titulo) && empty($director) && empty($annio))) {
         }
         //Mostramos las películas de la búsqueda
         $contenidoPrincipal .= '<h1>Coincidencias</h1>';
-        $contenidoPrincipal .= '<div class="peliculas-container">';
+        $contenidoPrincipal .= '<div class="busqueda-peliculas-container">';
         foreach ($peliculas as $pelicula) {
             $id = $pelicula->getId();
             $titulo = $pelicula->getTitulo();
@@ -35,7 +35,7 @@ if (!(empty($titulo) && empty($director) && empty($annio))) {
 </div>
 HTML;
         }
-        $contenidoPrincipal .= "</div>";
+        $contenidoPrincipal .= '</div>'; 
     } else {
         $contenidoPrincipal .=
             "<p>No se encontraron películas con los criterios establecidos.</p>";

@@ -17,8 +17,7 @@ class Pelicula
     }
     
 
-    //Se utilizaría en el buscador. Hay que hacer que el título coincida con alguna película de la base de datos
-    // TO DO
+    //Se utiliza en el buscador para obtener los ids de las películas que coinciden con los criterios de búsqueda
     public static function buscaPelicula($titulo, $director, $genero, $annio)
     {   
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -32,7 +31,7 @@ class Pelicula
         if (!empty($genero)) {
             $sql .= " AND genero = $genero";
         }
-        if (!empty($anno)) {
+        if (!empty($annio)) {
             $sql .= " AND annio = $annio";
         }
         $result = $conn->query($sql);
@@ -40,7 +39,7 @@ class Pelicula
         if ($result) {
             $peliculas = array();
             while($fila = $result->fetch_assoc()) {
-                $peliculas[] = new Pelicula($fila['titulo'], $fila['director'],$fila['id'], $fila['annio'], $fila['genero'], $fila['sinopsis'], $fila['portada'], $fila['reparto'], $fila['Val_IMDb']);
+                $peliculas[] = $fila['id'];
             }
             $result->free();
         } else {
@@ -49,8 +48,7 @@ class Pelicula
         return $peliculas;
     }
 
-    //Plantear si la necesitamos o no 
-    //TO DO
+
     public static function buscaPorId($idPelicula)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -88,6 +86,86 @@ class Pelicula
         return $titulo; // Return the movie title or null if not found
     }
     
+    public static function buscarTodas() {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo FROM peliculas";
+        $result = $conn->query($sql);
+
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
+
+    public static function peliculasMejorVal($n){   //Devuelve las n películas mejor valoradas
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas ORDER BY Val_IMDb DESC LIMIT $n";
+        $result = $conn->query($sql);
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo'],
+                    'portada' => $fila['portada'],
+                    'val_imdb' => $fila['Val_IMDb']
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
+
+    public static function peliculasPorGenero($idGenero, $n){ //Devuelve las mejores n peliculas de un género
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo, portada FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC LIMIT $n";
+        $result = $conn->query($sql);
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo'],
+                    'portada' => $fila['portada'],
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
+
+    public static function peliculasPorAnnio($annio_inf, $annio_sup, $n) { //Devuelve las mejores n peliculas de un periodo de años
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT id, titulo, portada FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC LIMIT $n";
+        $result = $conn->query($sql);
+        $peliculas = [];
+        if ($result) {
+            while ($fila = $result->fetch_assoc()) {
+                $peliculas[] = [
+                    'id' => $fila['id'],
+                    'titulo' => $fila['titulo'],
+                    'portada' => $fila['portada'],
+                ];
+            }
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        }
+
+        return $peliculas;
+    }
 
     //Inserta una pelicula nueva en la base de datos
     private static function inserta($pelicula)
@@ -152,17 +230,27 @@ class Pelicula
         return self::borraPorId($pelicula->id);
     }
     
-    private static function borraPorId($idPelicula)
+    public static function borraPorId($idPelicula)
     {
         if (!$idPelicula) {
             return false;
-        } 
+        }
+    
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("DELETE FROM peliculas P WHERE P.id = %d", $idPelicula);
-        if ( ! $conn->query($query) ) {
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
+        $query = "DELETE FROM peliculas WHERE id = ?";
+    
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            error_log("Prepare failed: ({$conn->errno}) {$conn->error}");
             return false;
         }
+    
+        $stmt->bind_param('i', $idPelicula);
+        if (!$stmt->execute()) {
+            error_log("Execution failed: ({$stmt->errno}) {$stmt->error}");
+            return false;
+        }
+    
         return true;
     }
     
@@ -281,7 +369,7 @@ class Pelicula
         $generos = array();
         if ($rs) {
             while($fila = $rs->fetch_assoc()){
-                $generos[] = $fila['genero'];
+                $generos[$fila['id']] = $fila['genero'];
             }
             $rs->free();
         } else {

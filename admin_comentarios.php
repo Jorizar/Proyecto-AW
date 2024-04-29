@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/comentarios/Comentario.php';
+
+use es\ucm\fdi\aw\comentarios\Comentario;
+use es\ucm\fdi\aw\usuarios\Usuario;
+use es\ucm\fdi\aw\peliculas\Pelicula;
+
 
 if (!$app->tieneRol('admin')) {
     die("Acceso restringido a administradores.");
@@ -9,16 +13,16 @@ if (!$app->tieneRol('admin')) {
 $tituloPagina = 'Administrar Comentarios';
 $contenidoPrincipal = '<h3>Todos los Comentarios</h3>';
 
-$comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarTodos();
+$comentarios = Comentario::buscarTodos();
 
 if (!empty($comentarios)) {
     foreach ($comentarios as $comentario) {
         $textoComentario = htmlspecialchars($comentario->getTexto());
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $peliculaId = htmlspecialchars($comentario->getPeliculaId());
-        $peliculaTitulo = \es\ucm\fdi\aw\peliculas\Pelicula::buscaTituloPorId($peliculaId);
+        $peliculaTitulo = Pelicula::buscaTituloPorId($peliculaId);
         $UserId = htmlspecialchars($comentario->getUserId());
-        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
+        $UserNombre = Usuario::buscaNombrePorId($UserId);
         
         $deleteForm = "<form method='POST' action='includes/src/comentarios/eliminar_comentario_admin.php' onsubmit='return confirm(\"¿Estás seguro?\");'>
                             <input type='hidden' name='comentario_id' value='{$comentario->getComentarioId()}'>

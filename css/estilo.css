@@ -1,24 +1,81 @@
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Italic.ttf');
+    font-style: italic;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Bold.ttf');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-BoldItalic.ttf');
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+
 body {
-	background-color: #CDCDCD;
+    background-color: #141414; /* Cambia el color de fondo principal a negro */
+    color: #ffffff; /* Cambia el color del texto a blanco */
+    font-family: 'Roboto';
 }
 
 div#contenedor {
-	width: 900px;
-	margin: auto;
-	border: 1px solid rgb(0, 0, 0);
-	background-color: #CDCDCD;
-	margin-top: 30px;
+    width: 90%;
+    margin: auto;
+    border: 1px solid rgb(0, 0, 0);
+    margin-top: 30px;
+}
+
+#contenedor,
+header,
+nav,
+aside,
+main,
+footer {
+    color: #ffffff;
 }
 
 header {
     padding: 30px;
     height: 100px;
-    background-color: #000000;
+    background-color: #141414;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #ffffff; /* Borde inferior blanco */
+    font-family: 'Roboto';
 }
+
+footer {
+    clear: both;
+    padding: 10px; /* Reducir el espacio interno */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    background-color: #141414;
+    color: white;
+    text-align: center;
+    border-top: 1px solid #ffffff;
+    font-family: 'Roboto';
+}
+
+.contenedor-login-registro {
+    background-color: rgba(127,96,3,255);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 
 .logo {
     flex: 1; /* Hace que el logo ocupe el espacio disponible */
@@ -26,24 +83,26 @@ header {
 
 .centro {
     flex: 2; /* Ajusta el ancho del área central */
-    text-align: center; /* Centra los elementos */
+    display: inline-block; /* Asegura que el contenedor sea flexible */
+    justify-content: flex-start; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
 }
 
 .centro .menu {
     display: flex; /* Hace que los enlaces estén en línea */
-    justify-content: space-between; /* Espacio uniforme entre los enlaces */
+    align-items: center; /* Alinea verticalmente los elementos */
 }
 
 .centro .menu a {
     color: white;
     font-weight: bold;
     text-decoration: none;
-    margin: 0 10px; /* Espacio horizontal entre los enlaces */
+    margin: 0 30px; /* Espacio horizontal entre los enlaces */
 }
 
-.saludo-menu-container {
-    display: flex;
-    align-items: center;
+/* Ajustes específicos para el último enlace */
+.centro .menu a:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último enlace */
 }
 
 
@@ -52,11 +111,8 @@ header .menu a {
 	font-weight: bold;
 	text-decoration: none;
 	margin-left: 20px;
-	/* Espacio entre los elementos */
 	display: flex;
-	/* Para permitir alinear elementos verticalmente */
 	align-items: center;
-	/* Alinea verticalmente los elementos */
 }
 
 header .menu a img {
@@ -75,11 +131,13 @@ header a:visited {
 	text-decoration: none;
 }
 
+/*
 header a:hover {
 	color: red;
 	font-weight: bold;
 	text-decoration: underline;
 }
+*/
 
 header .logo img {
 	width: 120px;
@@ -92,86 +150,357 @@ nav {
 	padding: 10px;
 	float: left;
 	width: 170px;
-	background-color: #000000;
+	background-color: #141414;
+    font-family: 'Roboto';
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-nav a,
-nav a:visited {
-	color: rgba(181, 184, 0, 0.615);
-	font-weight: bold;
-	text-decoration: none;
+.menu a {
+    color: white;
+    text-decoration: none;
 }
+
+.menu a:hover {
+    color: rgba(127,96,3,255);
+}
+
+.saludo-menu-container {
+    display: flex;
+    align-items: center;
+}
+
+.saludo-menu-container a,
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.saludo-menu-container a:hover,
+.logo a:hover {
+    color: rgba(127,96,3,255);
+}
+
+.contenedor-login-registro a:hover{
+    color: #141414;
+} 
+
 
 nav a:hover {
-	color: red;
+	color: rgba(127,96,3,255);
 	text-decoration: underline;
 }
 
-aside {
-	padding: 10px;
-	float: right;
-	width: 170px;
-	height: 400px;
-	background-color: #dddddd;
-}
 
 main {
-	padding: 10px;
-	float: left;
-	min-height: 600px;
-	width: 880px;
-	background-color: white;
+    padding: 10px;
+    min-height: auto;
+    margin: 0 auto;
+    width: 90%;
+    font-family: 'Roboto';
 }
 
-footer {
-	clear: both;
-	padding: 20px;
-	background-color: #303030;
-	color: white;
-	text-align: center;
+.buscador {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #fff;
+    border-bottom: 1px solid #fff;
 }
 
-/* Estilos para los contenedores de películas */
+.buscador h1 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.buscador form {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+}
+
+.campos-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+
+.buscador-campo-titulo,
+.buscador-campo-director,
+.buscador-campo-anio,
+.buscador-campo-genero {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+    width: calc(20% - 10px);
+}
+
+.buscador-campo-titulo label,
+.buscador-campo-director label,
+.buscador-campo-anio label,
+.buscador-campo-genero label {
+    display: block;
+    
+}
+
+.buscador-campo-titulo input[type="text"],
+.buscador-campo-director input[type="text"],
+.buscador-campo-anio input[type="text"]{
+    
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #fff;
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.buscador-campo-genero select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: rgba(127,96,3,255);
+    background-color: transparent;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.buscador-boton {
+    text-align: center;
+}
+
+.buscador button[type="submit"] {
+    width: 75%;
+    padding: 10px;
+    background-color: rgba(127,96,3,255);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    margin-top: 45px;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.buscador button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+
+
+.destacadas {
+    border-bottom: 5px solid rgba(127,96,3,255);
+    width: 50%; /* Ancho del borde inferior */
+}
+
+
+
+.destacadas h1 {
+    font-size: 1.5em; /* Tamaño de fuente del título */
+    text-align: left;
+}
+
+.indicadores{
+    display: flex;
+    justify-content: flex-end;
+}
+ 
+.indicadores button {
+	background: #fff;
+	height: 3px;
+	width: 10px;
+	cursor: pointer;
+	border: none;
+	margin-right: 4px;
+}
+
+.indicadores button:hover,
+.indicadores button.activo {
+	background: rgba(127,96,3,255);
+}
+
+.busqueda-peliculas-container{
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    margin-top: 20px;
+    padding: 10px;
+}
+
 .peliculas-container {
-    display: flex; /* Utilizamos flexbox para alinear los elementos */
-    flex-wrap: wrap; /* Permitimos que las películas se envuelvan a la siguiente línea */
-    justify-content: space-between; /* Espacio entre las películas */
+    display: flex; 
+    flex-wrap: nowrap; 
+    justify-content: flex-start; 
+    margin-top: 20px;
+    padding: 10px;
+    transition: transform 0.3s ease;
 }
+
+.busqueda-peliculas-container .pelicula{
+    width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
+    margin-bottom: 30px; /* Espacio entre las filas */
+    text-align: center;
+}
+
 
 /* Estilos para cada película */
 .peliculas-container .pelicula {
     width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
     margin-bottom: 20px; /* Espacio entre las filas */
     text-align: center; /* Centramos el contenido */
+
+    margin-right: 85px;
 }
 
 /* Estilos para los títulos de las películas */
-.peliculas-container .pelicula span {
+.peliculas-container .pelicula span, .busqueda-peliculas-container .pelicula span {
     display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
     margin-top: 5px; /* Espacio entre la imagen y el título */
     font-weight: bold; /* Establecemos negrita */
     text-decoration: none; /* Quitamos el subrayado */
-    color: #000; /* Color del texto */
+    color: #ffffff; /* Color del texto */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Estilos para los enlaces de las películas */
-.peliculas-container .pelicula a {
+.peliculas-container .pelicula a, .busqueda-peliculas-container .pelicula a{
     text-decoration: none; /* Quitamos el subrayado */
-    color: #000; /* Color del texto */
+    color: #ffffff; /* Color del texto */
 }
 
 /* Estilos para las imágenes de las películas */
-.peliculas-container .pelicula img {
+.peliculas-container .pelicula img, .busqueda-peliculas-container .pelicula img {
     width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
     height: 300px; /* Establecemos una altura fija para todas las imágenes */
     object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.peliculas-container .pelicula span:hover, .busqueda-peliculas-container .pelicula span:hover {
+    color: rgba(127,96,3,255); 
+}
+
+.peliculas-container .pelicula img:hover ~ span, .busqueda-peliculas-container .pelicula img:hover ~ span{
+    transform: translateY(20px); 
+    color: rgba(127,96,3,255); 
+}
+
+/* Efecto de zoom y resplandor al pasar el ratón sobre la imagen */
+.peliculas-container .pelicula img:hover, .busqueda-peliculas-container .pelicula img:hover{
+    box-shadow: 0 0 20px rgba(127,96,3,255); 
+    transform: scale(1.1); 
+}
+
+.peliculas-container .pelicula input[type="submit"] {
+    background-color: rgba(127, 96, 3, 255); 
+    color: #fff; 
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.peliculas-container .pelicula input[type="submit"]:hover {
+    background-color: #141414; 
+}
+
+
+.carrusel {
+    overflow: hidden;
+    position: relative;
+    width: 100%; 
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.formAgregaPelLista button[type="submit"] {
+    padding: 10px;
+    background-color: rgba(127,96,3,255);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.formAgregaPelLista select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: rgba(127,96,3,255);
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.formAgregaPelLista button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+
+
+/*
+.contenedor-carousel {
+    overflow-x: auto; 
+    white-space: nowrap; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    width: 100%;
+}
+
+.carousel {
+    display: inline-flex; 
+}
+
+.carousel .pelicula {
+    margin-right: 70px; 
+}
+
+
+.indicadores {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+    transition: color 0.3s ease;
+}
+*/
+
+
+/* Estilos para cambiar el color al pasar el ratón por encima */
+.indicadores button:hover {
+    color: rgba(127, 96, 3, 255); /* Color rojo */
 }
 
 
 .noticia {
     overflow: hidden; /* Limpiar los floats */
-    border-bottom: 1px solid #000000; /* Agregar borde inferior */
-    padding-bottom: 10px; /* Agregar espacio entre cada noticia */
+    border-bottom: 1px solid #ffffff; /* Agregar borde inferior */
+    border-top: 1px solid #ffffff;
+    padding-bottom: 15px; /* Agregar espacio entre cada noticia */
 }
 
 
@@ -185,7 +514,7 @@ footer {
 }
 
 .noticia h3 {
-    margin: 0; /* Elimina el margen del título */
+    margin: 10px; /* Elimina el margen del título */
     font-size: 1.2em; /* Tamaño de fuente del título */
 }
 
@@ -204,10 +533,23 @@ footer {
     margin-left: 20px; /* Ajustar el espacio entre el nombre del autor y la fecha */
 }
 
+.noticia a {
+    color: white; /* Color por defecto de los enlaces dentro de las noticias */
+    text-decoration: none; /* Quitamos el subrayado */
+}
+
+.noticia a:hover {
+    color: rgba(127,96,3,255); /* Cambia el color al pasar el cursor */
+}
+
+.imagen-perfil-cabecera {
+    width: 50px; /* Ancho de la imagen de perfil */
+    height: 50px; /* Altura de la imagen de perfil */
+}
 
 .imagen-perfil {
-    width: 50px;
-    height: 50px;
+    width: 75px; /* Ancho de la imagen de perfil */
+    height: 75px; /* Altura de la imagen de perfil */
 }
 
 .perfil-info {
@@ -217,8 +559,756 @@ footer {
 }
 
 .perfil-info .nombre-perfil {
-    margin-top: 5px; /* Espacio entre la foto de perfil y el nombre de perfil */
+    margin-top: 10px; /* Espacio entre la foto de perfil y el nombre de perfil */
     text-decoration: none; /* Quita el subrayado del enlace */
     color: rgb(255, 255, 255); /* Cambia el color del texto */
     font-weight: bold; /* Hace que el nombre de perfil sea más prominente */
+    font-size: 20px; /* Tamaño del nombre de perfil */
 }
+
+.info-perfil {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección principal a columnas */
+    align-items: center; /* Alinea los elementos horizontalmente al centro */
+}
+
+.enlace-perfil,
+.enlace-perfil-admin{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinear los elementos a la izquierda */
+}
+
+.enlace-perfil {
+    color: white;
+    text-decoration: none; /* Opcional: para quitar el subrayado de los enlaces */
+    float: right;
+}
+
+.enlace-perfil:hover {
+    color: rgba(127,96,3,255); /* Cambia el color al pasar el cursor */
+    /* Otros estilos que desees aplicar al pasar el cursor */
+}
+
+.enlace-perfil-admin {
+    color: white;
+    text-decoration: none;
+    float: left;
+    align-items: flex-end;
+}
+
+.enlace-perfil-admin:hover {
+    color: rgba(127,96,3,255); /* Cambia el color al pasar el cursor */
+    /* Otros estilos que desees aplicar al pasar el cursor */
+}
+
+.info_pelicula {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.portada_detalles_pelicula {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.portada-pelicula {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.detalles-pelicula {
+    margin-left: 20px;
+}
+
+
+/* Estilos para el contenedor principal del login */
+.contenedor-login {
+    text-align: center; /* Alinea el contenido al centro */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* Estilos para el formulario de login */
+.login-formulario {
+    max-width: 300px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 20px; /* Añade espacio interno */
+    background-color: #141414; /* Color de fondo */
+}
+
+/* Estilos para el campo de usuario */
+.login-usuario, .login-password {
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+/* Estilos para las etiquetas de los campos */
+.login-formulario label {
+    display: block; /* Hace que las etiquetas ocupen todo el ancho */
+    margin-bottom: 5px; /* Espaciado inferior */
+    font-weight: bold; /* Fuente en negrita */
+}
+
+/* Estilos para los campos de entrada */
+.login-formulario input[type="text"],
+.login-formulario input[type="password"] {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 8px; /* Añade espacio interno */
+    border: 1px solid #ccc; /* Borde del campo */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.login-formulario button[type="submit"] {
+    width: 30%; 
+    margin: 0 auto; /* Centra horizontalmente el botón */
+    padding: 10px; /* Añade espacio interno */
+    background-color: rgba(127,96,3,255); /* Color de fondo */
+    color: #fff; 
+    border: none; /* Quita el borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    display: block; /* Hace que el botón sea un elemento de bloque */
+    text-align: center; /* Centra el texto horizontalmente */
+}
+
+/* Estilos para el botón de enviar al pasar el ratón sobre él */
+.login-formulario button[type="submit"]:hover {
+    background-color:#141414; /* Cambia el color de fondo al pasar el ratón */
+}
+
+
+
+/* Estilos para el contenedor principal del login */
+.contenedor-registro {
+    text-align: center; /* Alinea el contenido al centro */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* Estilos para el formulario de login */
+.registro-formulario {
+    max-width: 300px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 20px; /* Añade espacio interno */
+    background-color: #141414; /* Color de fondo */
+}
+
+/* Estilos para el campo de usuario */
+.registro-usuario, .registro-password, .registro-password2, .registro-email, .registro-rol{
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+/* Estilos para las etiquetas de los campos */
+.registro-formulario label {
+    display: block; /* Hace que las etiquetas ocupen todo el ancho */
+    margin-bottom: 5px; /* Espaciado inferior */
+    font-weight: bold; /* Fuente en negrita */
+}
+
+/* Estilos para los campos de entrada */
+.registro-formulario input[type="text"],
+.registro-formulario input[type="password"] {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 8px; /* Añade espacio interno */
+    border: 1px solid #ccc; /* Borde del campo */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.registro-formulario button[type="submit"] {
+    width: 30%; /* Ocupa el 50% del ancho disponible */
+    margin: 0 auto; /* Centra horizontalmente el botón */
+    padding: 10px; /* Añade espacio interno */
+    background-color: rgba(127,96,3,255); /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Quita el borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    display: block; /* Hace que el botón sea un elemento de bloque */
+    text-align: center; /* Centra el texto horizontalmente */
+}
+
+/* Estilos para el botón de enviar al pasar el ratón sobre él */
+.registro-formulario button[type="submit"]:hover {
+    background-color:#141414; /* Cambia el color de fondo al pasar el ratón */
+}
+
+
+/* Estilos para el formulario de comentarios */
+.comentario-formulario {
+    width: 500px;
+    text-align: left; /* Alinea todo el contenido a la izquierda */
+    margin-bottom: 10px; /* Espaciado inferior */
+    color: #fff; /* Color del texto */
+}
+
+.comentario-formulario h3 {
+    font-size: 16px; /* Tamaño de fuente del título */
+    margin-bottom: 8px; /* Espaciado inferior */
+}
+
+.comentario-formulario form {
+    padding: 20px; /* Añade espacio interno */
+    background-color: #141414; /* Color de fondo del formulario */
+}
+
+
+.comentario-formulario label {
+    display: block; /* Convertimos la etiqueta en un bloque para que ocupe todo el ancho */
+}
+
+.comentario-formulario textarea,
+.comentario-formulario select {
+    padding: 8px; /* Añade espacio interno */
+    border: 1px solid #ccc; /* Borde del campo */
+    border-radius: 4px; /* Bordes redondeados */
+    color: #fff; /* Color del texto */
+    background-color: transparent; /* Fondo transparente */
+    margin-top: 10px; /* Espaciado superior */
+    display: inline-block; /* Cambia el tipo de visualización a inline-block */
+    vertical-align: top; /* Alinea verticalmente al inicio */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
+}
+
+.comentario-formulario textarea {
+    width: calc(80% - 10px); /* Ancho del textarea */
+    height: 100px; /* Altura del textarea */
+}
+
+.comentario-formulario select {
+    width: calc(15% - 10px); /* Ancho del select */
+    margin-left: 30px;
+    color: rgba(127,96,3,255);
+    background-color: transparent;
+}
+
+
+/* Estilos para el botón de enviar comentario */
+.comentario-formulario button[type="submit"] {
+    width: calc(82% - 20px); /* Ancho del botón */
+    padding: 8px; /* Añade espacio interno */
+    background-color: rgba(127,96,3,255); /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Quita el borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    margin-top: 20px; /* Espaciado superior */
+    margin-bottom: 45px; /* Espaciado inferior */
+    float: left; /* Alinea el botón a la izquierda */
+}
+
+.comentario-formulario button[type="submit"]:hover {
+    background-color: #141414; /* Cambia el color de fondo al pasar el ratón */
+}
+
+
+.titulo_cambiarPlan{
+    text-align: center; /* Alinea el contenido al centro */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+.contenedor_cambiarPlan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el formulario de cambio de plan */
+.cambiar-plan-formulario {
+    width: 200px;
+    text-align: left;
+    color: #fff;
+}
+
+.cambiar-plan-formulario label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.cambiar-plan-formulario select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: rgba(127,96,3,255);
+    background-color: transparent;
+    width: calc(100% - 20px); /* Ancho del select */
+}
+
+.cambiar-plan-formulario .plan-actual {
+    margin-bottom: 10px;
+}
+
+.cambiar-plan-formulario .enviar_plan {
+    margin-top: 20px;
+}
+
+.cambiar-plan-formulario button[type="submit"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    background-color: rgba(127,96,3,255);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cambiar-plan-formulario button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+
+/* Estilos para el título */
+.titulo_cambiarDatos {
+    text-align: center; /* Alinea el contenido al centro */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+/* Estilos para el contenedor de centrado */
+.contenedor_cambiarDatos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el formulario de cambio de datos */
+.cambiar-datos-formulario {
+    width: 200px;
+    text-align: center;;
+    color: #fff;
+}
+
+.cambiar-datos-formulario label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.cambiar-datos-formulario select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: rgba(127, 96, 3, 255);
+    background-color: transparent;
+    width: calc(100% - 20px); 
+}
+
+.cambiar-datos-formulario .plan-actual {
+    margin-bottom: 10px;
+}
+
+.cambiar-datos-formulario .enviar_plan {
+    margin-top: 20px;
+}
+
+.cambiar-datos-formulario button[type="submit"] {
+    width: calc(70% - 20px);
+    padding: 8px;
+    background-color: rgba(127, 96, 3, 255);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.cambiar-datos-formulario button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+.fotos_cambioDatos-container {
+    display: flex;
+    margin-top: 25px;
+}
+
+.foto-cambioDatos {
+    margin-right: 10px; /* Espaciado entre cada foto de perfil */
+}
+
+.nombre_cambioPlan,
+.email_cambioPlan {
+    margin-bottom: 20px; /* Aumenta el margen inferior */
+}
+
+
+.eliminar-favoritos-form,
+.añadir-favoritos-form {
+    margin-bottom: 10px; 
+}
+
+
+.añadir-favoritos-form button,
+.eliminar-favoritos-form button {
+    width: auto; /* Ancho automático según el contenido */
+    padding: 8px;
+    background-color: rgba(127, 96, 3, 255);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    margin-left: auto; 
+    margin-right: auto;
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+}
+
+.añadir-favoritos-form button[type="submit"]:hover,
+.eliminar-favoritos-form button[type="submit"]:hover {
+    background-color: #141414;
+}
+
+.boton-fav img {
+    margin-left: 5px;
+    margin-top: -3px;
+    width:20px;
+    height:20px;
+}
+
+
+#favoritos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start; 
+    margin-left: 30px;
+    gap: 10px; 
+}
+
+.favorito {
+    margin-bottom: 20px; /* Espacio entre las filas */
+    text-align: center;
+    width: 150px; /* Ancho fijo para todas las portadas */
+}
+
+.favoritos-container .favorito span {
+    display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
+    margin-top: 5px; /* Espacio entre la imagen y el título */
+    font-weight: bold; /* Establecemos negrita */
+    text-decoration: none; /* Quitamos el subrayado */
+    color: #ffffff; /* Color del texto */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.favorito img {
+    width: 100%;
+    height: 200px; /* Altura fija para todas las portadas */
+    object-fit: cover; /* Ajusta el tamaño de la imagen para que todas tengan el mismo tamaño */
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.favorito p {
+    margin: 0;
+    font-size: 14px; /* Tamaño de fuente más pequeño para el título */
+    color: #fff; /* Color del texto del título */
+    transition: transform 0.3s ease;
+}
+
+.favorito p a {
+    text-decoration: none;
+    color: inherit; /* Utiliza el color heredado del padre */
+}
+
+.favorito:hover img,
+.favorito:hover p {
+    transform: translateY(20px); /* Desplazamiento hacia abajo */
+    color: rgba(127,96,3,255); /* Cambio de color del título a rojo */
+}
+
+/* Efecto de zoom y resplandor al pasar el ratón sobre la portada */
+.favorito img:hover {
+    box-shadow: 0 0 20px rgba(127,96,3,255); /* Resplandor rojo */
+    transform: scale(1.1); /* Zoom del 10% */
+}
+
+
+/* Estilos para la página de administración de comentarios */
+
+/* Estilos para el contenedor principal */
+.admin-comentarios-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los comentarios */
+.comentario {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.comentario p {
+    margin: 5px 0;
+}
+
+.comentario form {
+    display: inline; /* Para que el formulario de eliminación esté en la misma línea */
+}
+
+.comentario form input[type="submit"] {
+    background-color: rgba(127, 96, 3, 255); /* Color de fondo del botón de eliminar */
+    color: #fff; /* Color del texto del botón de eliminar */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comentario form input[type="submit"]:hover {
+    background-color: #141414; /* Cambio de color al pasar el ratón sobre el botón de eliminar */
+}
+
+
+/* Estilos para el contenedor principal */
+.admin-peliculas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para cada película */
+.pelicula_admin {
+    display: inline-block; /* Para que las películas aparezcan una al lado de la otra */
+    width: calc(31% - 20px); /* Establece el ancho de cada película */
+    margin-right: 20px; /* Espacio entre cada película */
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #fff; /* Color del texto */
+}
+
+.pelicula_admin p {
+    margin: 5px 0;
+}
+
+.pelicula_admin form {
+    display: inline; /* Para que el formulario de eliminación esté en la misma línea */
+}
+
+.pelicula_admin form input[type="submit"] {
+    background-color: rgba(127, 96, 3, 255); /* Color de fondo del botón de eliminar */
+    color: #fff; /* Color del texto del botón de eliminar */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pelicula_admin form input[type="submit"]:hover {
+    background-color: #141414; /* Cambio de color al pasar el ratón sobre el botón de eliminar */
+}
+
+
+/* Estilos para el contenedor de usuarios */
+.admin-usuarios-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la tabla de usuarios */
+.admin-usuarios-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-usuarios-table th, .admin-usuarios-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; 
+}
+
+.admin-usuarios-table th {
+    background-color: rgba(127, 96, 3, 255); 
+}
+
+.admin-usuarios-table tr:hover {
+    background-color: rgba(127, 96, 3, 255);
+}
+
+.admin-usuarios-table td:last-child {
+    text-align: center; 
+}
+
+.admin-usuarios-table input[type="submit"] {
+    background-color: rgba(127, 96, 3, 255); 
+    color: #fff; 
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-usuarios-table input[type="submit"]:hover {
+    background-color: #141414; 
+}
+
+/* Style for the entire review block */
+.review {
+    margin-bottom: 20px; /* Adds space between review blocks */
+    border-bottom: 1px solid #ccc; /* Adds a line below each review for clear separation */
+    padding-bottom: 20px; /* Adds some padding at the bottom of each review */
+}
+
+/* Style for critic's information */
+.info-critico {
+    display: flex; /* Uses flexbox for layout */
+    align-items: center; /* Aligns items vertically center */
+    margin-bottom: 10px; /* Adds some space below the critic info before the review text */
+}
+
+/* Style for the critic's photo */
+.foto-critico {
+    width: 60px; /* Sets a fixed width for the photo */
+    height: 60px; /* Sets a fixed height for the photo */
+    border-radius: 50%; /* Makes the photo circular */
+    margin-right: 15px; /* Adds space between the photo and the critic's name */
+    object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+}
+
+/* Style for the review text */
+.review p {
+    margin: 5px 0; /* Adds top and bottom margin to each paragraph in the review */
+    line-height: 1.6; /* Increases line spacing for better readability */
+}
+
+/* Style for the valuation text */
+.review p:last-child {
+    font-weight: bold; /* Makes the last paragraph (valuation) bold */
+    color: #ebbe44; /* Optional: changes the color to blue for emphasis */
+}
+
+/* Base style for review buttons */
+.resenas-criticos button {
+    width: auto; /* Width adjusts to content */
+    padding: 10px 20px; /* Comfortable padding */
+    background-color: #7f6003; /* Deep gold color */
+    color: white; /* Text color */
+    border: none; /* No borders */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    margin-top: 10px; /* Margin on the top */
+    margin-bottom: 10px; /* Margin on the bottom */
+    display: block; /* Makes it a block element to fill the space */
+    text-align: center; /* Centers the text inside */
+}
+
+/* Hover effect for review buttons */
+.resenas-criticos button:hover {
+    background-color: #141414; /* Dark gray on hover for contrast */
+}
+
+/* Additional styles to visually distinguish the button for adding reviews */
+.resenas-criticos button:nth-child(2) { /* Assuming the second button is 'Reseñar esta película' */
+    background-color: #5a924f; /* A green shade for add review button */
+}
+
+/* Hover effect specifically for the 'Reseñar esta película' button */
+.resenas-criticos button:nth-child(2):hover {
+    background-color: #427337; /* Darker green on hover */
+}
+
+/* General styling for the specific form container */
+.resena-form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #141414;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.resena-form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.resena-form-container textarea {
+    width: 100%;
+    height: 120px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.resena-form-container select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.resena-form-container button[type="submit"] {
+    display: block;
+    width: auto;
+    padding: 10px 20px;
+    background-color: #7f6003;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.2s;
+}
+
+.resena-form-container button[type="submit"]:hover {
+    background-color: #4b3800;
+}
+
+.heart {
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    border: none;
+    background: none;
+}
+
+.heart.liked {
+    color: red;
+}
+
+.heart:hover {
+    color: red;
+}
+
+/* Estilos para dispositivos con un ancho máximo de 600px */
+@media (max-width: 800px) {
+    /* Estilos específicos para dispositivos móviles */
+    /* Por ejemplo, ajustar anchos, tamaños de fuente, etc. */
+  }
+  

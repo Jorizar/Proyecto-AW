@@ -59,25 +59,10 @@ fila.addEventListener('mouseleave', () => {
 	peliculas.forEach(pelicula => pelicula.classList.remove('hover'));
 });
 
-// ? ----- ----- Busqueda Dinamica de Peliculas ----- -----
-function buscarPeliculas() {
-	console.log('Buscando películas...');
-	$.ajax({
-		url: 'busquedaDinamica.php',  // Asegúrate de que esta URL es accesible
-		type: 'POST',
-		data: {
-			tituloPelicula: $('#tituloPelicula').val(),
-			directorPelicula: $('#directorPelicula').val(),
-			generoPelicula: $('#generoPelicula').val(),
-			annioPelicula: $('#annioPelicula').val()
-		},
-		success: function(response) {
-			$('#resultadoBusqueda').html(response);
-		},
-		error: function() {
-			// En caso de error en la solicitud, mostrar un mensaje adecuado
-			$('#resultadoBusqueda').html('<p>Ocurrió un error al realizar la búsqueda.</p>');
-		}
-	});
+
+//Botón para ver la lista
+function verModificarLista(id_lista) {
+    // Redirigir a otra página pasando el nombre de la lista como parámetro
+    window.location.href = "ver_lista.php?id=" + id_lista;
 }
 

@@ -1,20 +1,37 @@
 <?php
-require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/Favoritos.php';
+require_once __DIR__.'/../../config.php';
+
+use es\ucm\fdi\aw\favoritos\Favorito;
+
 
 if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
-    if (isset($_POST['pelicula_id'])) {
-        $userId = $app->idUsuario(); // Obtener el ID del usuario autenticado
-        $pelicula_idId = $_POST['pelicula_id']; // Obtener el ID de la película
+    if (isset($_POST['movieId'])) {
+        $userId = $app->getUsuarioId(); // Obtener el ID del usuario autenticado
+        $pelicula_id = $_POST['movieId']; // Obtener el ID de la película
 
-        $resultado = \es\ucm\fdi\aw\peliculas\Favorito::crea($userId, $pelicula_idId);
+        $resultado = Favorito::crea($userId, $pelicula_id);
 
         if ($resultado) {
-            // La película se añadió a favoritos
-            echo "Película añadida a favoritos.";
+            $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
+            header('Location: ' . $relativePath);
+            exit();
         } else {
-            // Ocurrio un error al añadir la película a favoritos
-            echo "Error al añadir la película a favoritos.";
+            echo "Error: No se pudo añadir a favoritos.";
+            exit();
+        }
+    } elseif (isset($_POST['eliminarMovieId'])) {
+        $userId = $app->getUsuarioId(); // Obtener el ID del usuario autenticado
+        $pelicula_id = $_POST['eliminarMovieId']; // Obtener el ID de la película a eliminar de favoritos
+
+        $resultado = Favorito::eliminaPorIdUsuarioYIdPelicula($userId, $pelicula_id);
+
+        if ($resultado) {
+            $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
+            header('Location: ' . $relativePath);
+            exit();
+        } else {
+            echo "Error: No se pudo eliminar de favoritos.";
+            exit();
         }
     } else {
         // Si no se proporciona el ID de la película, mostrar un mensaje de error
@@ -22,7 +39,8 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
     }
 } else {
     // Si el usuario no está autenticado, redirigirlo a la página de inicio de sesión
-    header('Location: /login.php');
+    $relativePath = '/AW/Proyecto-AW/login.php';
+    header('Location: ' . $relativePath);
     exit();
 }
 ?>

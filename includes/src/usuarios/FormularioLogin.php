@@ -22,14 +22,12 @@ class FormularioLogin extends Formulario
         // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
         $html = <<<EOF
         $htmlErroresGlobales
-        <fieldset>
-            <legend>Usuario y contraseña</legend>
-            <div>
+            <div class="login-usuario">
                 <label for="nombreUsuario">Nombre de usuario:</label>
                 <input id="nombreUsuario" type="text" name="nombreUsuario" value="$nombreUsuario" />
                 {$erroresCampos['nombreUsuario']}
             </div>
-            <div>
+            <div class="login-password">
                 <label for="password">Contraseña:</label>
                 <input id="password" type="password" name="password" />
                 {$erroresCampos['password']}
@@ -37,7 +35,6 @@ class FormularioLogin extends Formulario
             <div>
                 <button type="submit" name="login">Entrar</button>
             </div>
-        </fieldset>
         EOF;
         return $html;
     }
@@ -46,11 +43,14 @@ class FormularioLogin extends Formulario
     {
         $this->errores = [];
         $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
-        $nombreUsuario = filter_var($nombreUsuario, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        //Lista Blanca
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nombreUsuario)) {
+            $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, numeros y guiones';
+        }
         if ( ! $nombreUsuario || empty($nombreUsuario) ) {
             $this->errores['nombreUsuario'] = 'El nombre de usuario no puede estar vacío';
         }
-        
+      
         $password = trim($datos['password'] ?? '');
         $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if ( ! $password || empty($password) ) {

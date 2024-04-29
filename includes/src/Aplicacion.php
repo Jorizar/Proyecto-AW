@@ -269,6 +269,7 @@ class Aplicacion
         unset($_SESSION['fotoPerfil']);
         unset($_SESSION['email']);
         unset($_SESSION['rol']);
+        unset($_SESSION['busquedaPeliculas']);
 
 
         session_destroy();
@@ -314,6 +315,12 @@ class Aplicacion
     {
         $this->compruebaInstanciaInicializada();
         return $this->usuarioLogueado() && ($_SESSION['rol'] === 'admin');
+    }
+
+    public function esCritico()
+    {
+        $this->compruebaInstanciaInicializada();
+        return $this->usuarioLogueado() && ($_SESSION['rol'] === 'critico');
     }
 
     public function tieneRol($rol)
