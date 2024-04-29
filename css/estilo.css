@@ -296,25 +296,41 @@ main {
 .destacadas {
     border-bottom: 5px solid rgba(127,96,3,255);
     width: 50%; /* Ancho del borde inferior */
-  
 }
+
+
 
 .destacadas h1 {
     font-size: 1.5em; /* Tamaño de fuente del título */
     text-align: left;
 }
 
-/* ANTIGUO */
-/*
-.peliculas-container {
+.indicadores{
+    display: flex;
+    justify-content: flex-end;
+}
+ 
+.indicadores button {
+	background: #fff;
+	height: 3px;
+	width: 10px;
+	cursor: pointer;
+	border: none;
+	margin-right: 4px;
+}
+
+.indicadores button:hover,
+.indicadores button.activo {
+	background: rgba(127,96,3,255);
+}
+
+.busqueda-peliculas-container{
     display: flex; 
     flex-wrap: wrap; 
     justify-content: flex-start; 
     margin-top: 20px;
     padding: 10px;
 }
-*/
-
 
 .peliculas-container {
     display: flex; 
@@ -323,6 +339,12 @@ main {
     margin-top: 20px;
     padding: 10px;
     transition: transform 0.3s ease;
+}
+
+.busqueda-peliculas-container .pelicula{
+    width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
+    margin-bottom: 30px; /* Espacio entre las filas */
+    text-align: center;
 }
 
 
@@ -336,7 +358,7 @@ main {
 }
 
 /* Estilos para los títulos de las películas */
-.peliculas-container .pelicula span {
+.peliculas-container .pelicula span, .busqueda-peliculas-container .pelicula span {
     display: block; /* Convertimos el título en un bloque para que ocupe todo el ancho */
     margin-top: 5px; /* Espacio entre la imagen y el título */
     font-weight: bold; /* Establecemos negrita */
@@ -345,30 +367,30 @@ main {
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.peliculas-container .pelicula a {
+.peliculas-container .pelicula a, .busqueda-peliculas-container .pelicula a{
     text-decoration: none; /* Quitamos el subrayado */
     color: #ffffff; /* Color del texto */
 }
 
 /* Estilos para las imágenes de las películas */
-.peliculas-container .pelicula img {
+.peliculas-container .pelicula img, .busqueda-peliculas-container .pelicula img {
     width: 200px; /* Establecemos un ancho fijo para todas las imágenes */
     height: 300px; /* Establecemos una altura fija para todas las imágenes */
     object-fit: cover; /* Escalamos la imagen para que cubra completamente el contenedor */
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.peliculas-container .pelicula span:hover {
+.peliculas-container .pelicula span:hover, .busqueda-peliculas-container .pelicula span:hover {
     color: rgba(127,96,3,255); 
 }
 
-.peliculas-container .pelicula img:hover ~ span {
+.peliculas-container .pelicula img:hover ~ span, .busqueda-peliculas-container .pelicula img:hover ~ span{
     transform: translateY(20px); 
     color: rgba(127,96,3,255); 
 }
 
 /* Efecto de zoom y resplandor al pasar el ratón sobre la imagen */
-.peliculas-container .pelicula img:hover {
+.peliculas-container .pelicula img:hover, .busqueda-peliculas-container .pelicula img:hover{
     box-shadow: 0 0 20px rgba(127,96,3,255); 
     transform: scale(1.1); 
 }
@@ -437,6 +459,7 @@ main {
 .formAgregaPelLista button[type="submit"]:hover {
     background-color: #141414;
 }
+
 
 
 /*
