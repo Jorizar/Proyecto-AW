@@ -93,11 +93,21 @@ if (isset($_GET['id'])) {
     // Revisa si el usuario esta logueado para mostrarle la seccion añadir comentario
     if ($app->usuarioLogueado()) {
         $contenidoPrincipal .= <<<EOF
+<<<<<<< Updated upstream
         <h3>Añadir un comentario</h3>
         <form action="includes/src/comentarios/procesar_comentario.php" method="post"> <!-- Adjust action URL as needed -->
             <input type="hidden" name="pelicula_id" value="$movieId">
             <textarea name="texto" required></textarea>
             <select name="valoracion" required>
+=======
+
+        <div class="comentario-formulario">
+        <h3>Añadir un comentario</h3>
+        <form id="comentarioForm" action="includes/src/comentarios/procesar_comentario.php" method="post">
+            <input type="hidden" name="pelicula_id" value="<?= $movieId ?>">
+            <textarea name="texto" id="comentario-texto" required></textarea>
+            <select name="valoracion" id="comentario-valoracion" required>
+>>>>>>> Stashed changes
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -111,6 +121,12 @@ if (isset($_GET['id'])) {
             </select>
             <button type="submit">Enviar comentario</button>
         </form>
+<<<<<<< Updated upstream
+=======
+        </div>
+        <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="js/ValidarFormulario.js"></script>
+>>>>>>> Stashed changes
         EOF;
     }
 
