@@ -38,6 +38,7 @@ if (!empty($usuarios)) {
     $formRegistro = $formRegistro->gestiona();
     
     $contenidoPrincipal .= "  <div class= 'registro-formulario'>
+                                <h3>Añadir Usuario</h3>
                                 $formRegistro
                             </div>";
 

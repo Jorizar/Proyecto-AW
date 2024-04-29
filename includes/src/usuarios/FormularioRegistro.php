@@ -23,7 +23,7 @@ class FormularioRegistro extends Formulario
         'free' => 'Free',
         'premium' => '€ Premium €'
     ];
-
+    
     // Genera las opciones HTML para el campo de selección de roles
     $optionsRol = '';
     foreach ($opcionesRol as $value => $label) {
@@ -73,15 +73,59 @@ class FormularioRegistro extends Formulario
     $this->errores = [];
 
     $nombreUsuario = trim($datos['nombreUsuario'] ?? '');
-    $nombreUsuario = filter_var($nombreUsuario, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    if ( ! $nombreUsuario || mb_strlen($nombreUsuario) < 5) {
-        $this->errores['nombreUsuario'] = 'El nombre de usuario tiene que tener una longitud de al menos 5 caracteres.';
+    $password = trim($datos['password'] ?? '');
+
+    
+    // Validar nombre de usuario
+    if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nombreUsuario)) {
+        $this->errores['nombreUsuario'] = 'El nombre solo puede contener letras, números y guiones.';
+    }
+   
+    
+    //Esto esta bien, solo hay que cambiar la ruta y el nombre del txt
+    // Cargar palabras prohibidas desde el archivo
+    $rutaArchivoPalabrasProhibidas = './seguridad/palabrasProhibidas.txt';
+    $contenidoArchivo = file_get_contents($rutaArchivoPalabrasProhibidas);
+
+    if (!file_exists($rutaArchivoPalabrasProhibidas)) {
+        echo "Error: El archivo de palabras prohibidas no existe.";
+        exit;
+    }
+    // Convertir el contenido del archivo en un array de palabras prohibidas
+    $palabrasProhibidas = explode(',', $contenidoArchivo);
+
+    // Eliminar espacios en blanco al inicio y final de cada palabra prohibida
+    foreach ($palabrasProhibidas as &$palabraProhibida) {
+    $palabraProhibida = trim($palabraProhibida);
     }
 
-    $password = trim($datos['password'] ?? '');
-    $password = filter_var($password, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    if ( ! $password || mb_strlen($password) < 5 ) {
-        $this->errores['password'] = 'La contraseña tiene que tener una longitud de al menos 5 caracteres.';
+    // Verificar que la contraseña no sea igual a ninguna de las palabras prohibidas
+    if (in_array(trim($password), $palabrasProhibidas)) {
+    $this->errores['password'] = 'La contraseña no puede ser una palabra común.';
+    }
+    
+
+    // Validar contraseña
+    if (empty($password) || mb_strlen($password) < 8) {
+        $this->errores['password'] = 'La contraseña debe tener al menos 8 caracteres.';
+    } elseif (stripos($password, $nombreUsuario) !== false) {
+        $this->errores['password'] = 'La contraseña no puede contener tu nombre de usuario.';
+    } else {
+        // Fortaleza de la contraseña
+        $puntos = 0;
+        //$puntos += mb_strlen($password) >= 8 ? 4 : 0; // Longitud de la contraseña
+        $puntos += preg_match('/[A-Z]/', $password) ? 2 : 0; // Sumar puntos si hay letras mayúsculas
+        $puntos += preg_match('/[a-z]/', $password) ? 1 : 0; // Sumar puntos si hay letras minúsculas
+        $puntos += preg_match('/[0-9]/', $password) ? 2 : 0; // Sumar puntos si hay números
+        $puntos += preg_match('/[^a-zA-Z0-9]/', $password) ? 3 : 0; // Sumar puntos si hay caracteres especiales
+
+        // Puntuación de la contraseña
+        if ($puntos < 5) {
+            $this->errores['password'] = 'La contraseña es débil. Debe incluir al menos 8 caracteres, letras mayúsculas y minúsculas, números y caracteres especiales.';
+        } else {
+            // La contraseña es fuerte
+        }
+
     }
 
     $password2 = trim($datos['password2'] ?? '');

@@ -41,7 +41,13 @@ if ($resultMejorValoradas && $resultMejorValoradas->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas mejor valoradas</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
+   
+
     // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
     while ($row = $resultMejorValoradas->fetch_assoc()) {
         $id = $row['id'];
@@ -58,7 +64,16 @@ if ($resultMejorValoradas && $resultMejorValoradas->num_rows > 0) {
             </div>
 HTML;
     }
-    $contenidoPrincipal .= '</div>';
+
+
+
+    $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 } else {
     $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
@@ -73,19 +88,17 @@ $queryGenero1 = "SELECT id, titulo, portada
 $resultGenero1 = $conexion->query($queryGenero1);
 
 if ($resultGenero1 && $resultGenero1->num_rows > 0) {
-    // Agregar el encabezado "Películas del género 1"
     $contenidoPrincipal .= '<div class="destacadas">';
     $contenidoPrincipal .= '<h1>Películas Dramáticas</h1>';
     $contenidoPrincipal .= '</div>';
 
-    // Continuar con el contenido principal
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
 
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    // Agregar el encabezado "Películas del género 1"
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
-
+  
     while ($row = $resultGenero1->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -100,11 +113,13 @@ if ($resultGenero1 && $resultGenero1->num_rows > 0) {
             </div>
 HTML;
     }
-
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 } else {
     $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
@@ -127,12 +142,16 @@ if ($resultGenero2 && $resultGenero2->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Comedias</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero2->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -149,10 +168,16 @@ HTML;
     }
     
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
+    //$contenidoPrincipal .= '</div>'; // Cierre de div.carousel
+    //$contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
+    //$contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 } else {
     $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
@@ -171,12 +196,16 @@ if ($resultGenero3 && $resultGenero3->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas de Acción</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero3->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -193,10 +222,13 @@ HTML;
     }
     
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 } else {
     $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
@@ -214,12 +246,16 @@ if ($resultGenero4 && $resultGenero4->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas Musicales</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero4->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -235,11 +271,13 @@ if ($resultGenero4 && $resultGenero4->num_rows > 0) {
 HTML;
     }
     
-
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 } else {
     $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
@@ -256,11 +294,14 @@ if ($resultGenero5 && $resultGenero5->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas de Misterio</h1>';
     $contenidoPrincipal .= '</div>';
 
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero5->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -277,10 +318,13 @@ HTML;
     }
     
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 } else {
     $contenidoPrincipal .= "<p>No hay peliculas.</p>";
 }
@@ -298,12 +342,16 @@ if ($resultGenero6 && $resultGenero6->num_rows > 0) {
     $contenidoPrincipal .= '<h1>SCFI</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero6->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -320,10 +368,13 @@ if ($resultGenero6 && $resultGenero6->num_rows > 0) {
 HTML;
     }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 }
 
 $queryGenero7 = "SELECT id, titulo, portada
@@ -339,12 +390,16 @@ if ($resultGenero7 && $resultGenero7->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas de Terror</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero7->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -361,10 +416,13 @@ if ($resultGenero7 && $resultGenero7->num_rows > 0) {
 HTML;
     }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 }
 
 $queryGenero8 = "SELECT id, titulo, portada
@@ -380,12 +438,16 @@ if ($resultGenero8 && $resultGenero8->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas Basadas en Hechos Reales</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero8->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -402,10 +464,13 @@ if ($resultGenero8 && $resultGenero8->num_rows > 0) {
 HTML;
     }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 }
 
 $queryGenero9 = "SELECT id, titulo, portada
@@ -421,12 +486,16 @@ if ($resultGenero9 && $resultGenero9->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas sobre Crímenes</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
-    $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+   //$contenidoPrincipal .= '<div class="indicadores"></div>';
+   $contenidoPrincipal .= '<div class="carrusel">';
+   $contenidoPrincipal .= '<div class="peliculas-container">';
+   //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+   //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+   //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultGenero9->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -443,10 +512,13 @@ if ($resultGenero9 && $resultGenero9->num_rows > 0) {
 HTML;
     }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 }
 
 $queryActual = "SELECT id, titulo, portada
@@ -462,12 +534,16 @@ if ($resultActual && $resultActual->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas de este año</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultActual->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -483,10 +559,13 @@ if ($resultActual && $resultActual->num_rows > 0) {
 HTML;
 }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 }
 
     $queryDecada80s = "SELECT id, titulo, portada
@@ -502,12 +581,16 @@ if ($resultDecada80s && $resultDecada80s->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas de la década de los 80</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
-    $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+   //$contenidoPrincipal .= '<div class="indicadores"></div>';
+   $contenidoPrincipal .= '<div class="carrusel">';
+   $contenidoPrincipal .= '<div class="peliculas-container">';
+   //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+   //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+   //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultDecada80s->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -523,10 +606,13 @@ if ($resultDecada80s && $resultDecada80s->num_rows > 0) {
 HTML;
 }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 }
 
 $queryDecada90s = "SELECT id, titulo, portada
@@ -542,12 +628,16 @@ if ($resultDecada90s && $resultDecada90s->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas de la década de los 90</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultDecada90s->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -563,10 +653,13 @@ if ($resultDecada90s && $resultDecada90s->num_rows > 0) {
 HTML;
 }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
     $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
 
 $queryDecada2000s = "SELECT id, titulo, portada
                 FROM peliculas
@@ -581,12 +674,16 @@ if ($resultDecada82000s && $resultDecada82000s->num_rows > 0) {
     $contenidoPrincipal .= '<h1>Películas de la década de los 2000</h1>';
     $contenidoPrincipal .= '</div>';
 
+    $contenidoPrincipal .= '<div class="indicadores">';
+    $contenidoPrincipal .= '</div>'; 
+
     // Continuar con el contenido principal
-    $contenidoPrincipal .= '<div class="indicadores"></div>';
+    //$contenidoPrincipal .= '<div class="indicadores"></div>';
+    $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
-    $contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
-    $contenidoPrincipal .= '<div class="contenedor-carousel">';
-    $contenidoPrincipal .= '<div class="carousel">';
+    //$contenidoPrincipal .= '<button role="button" id="flecha-izquierda" class="flecha-izquierda"><i class="fas fa-angle-left"></i></button>';
+    //$contenidoPrincipal .= '<div class="contenedor-carousel">';
+    //$contenidoPrincipal .= '<div class="carousel">';
     while ($row = $resultDecada82000s->fetch_assoc()) {
         $id = $row['id'];
         $titulo = $row['titulo'];
@@ -603,10 +700,13 @@ HTML;
 }
 }
 
-    $contenidoPrincipal .= '</div>'; // Cierre de div.carousel
-    $contenidoPrincipal .= '</div>'; // Cierre de div.contenedor-carousel
-    $contenidoPrincipal .= '<button role="button" id="flecha-derecha" class="flecha-derecha"><i class="fas fa-angle-right"></i></button>';
-    $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+   $contenidoPrincipal .= '</div>'; // Cierre de div.peliculas-container
+
+    // Agregar botones de navegación
+    $contenidoPrincipal .= '<button class="prev">&#10094;</button>';
+    $contenidoPrincipal .= '<button class="next">&#10095;</button>';
+    
+    $contenidoPrincipal .= '</div>'; // Cierre de div.carrusel
     } else {
         $contenidoPrincipal .= "<p>No hay peliculas.</p>";
     }
@@ -617,5 +717,8 @@ $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPr
 // Se genera la vista utilizando la plantilla
 $app->generaVista('/plantillas/plantilla.php', $params);
 
-echo '<script src="js/main.js"></script>'
+echo '<script src="js/carrusel.js"></script>';
+echo '<script src="js/indicadores.js"></script>';
+
 ?>
+
