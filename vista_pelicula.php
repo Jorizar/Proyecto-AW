@@ -7,10 +7,11 @@ use es\ucm\fdi\aw\comentarios\Comentario;
 use es\ucm\fdi\aw\favoritos\Favorito;
 use es\ucm\fdi\aw\resenas\Resena;
 use es\ucm\fdi\aw\likes\Like;
-
+use es\ucm\fdi\aw\listas\FormAgregaPelLista;
 
 $tituloPagina = 'Detalles de la Película';
 $contenidoPrincipal='';
+
 
 if (isset($_GET['id'])) {
     $movieId = $_GET['id'];
@@ -121,7 +122,13 @@ if (isset($_GET['id'])) {
         <?php
         $contenidoPrincipal = ob_get_clean(); // Guarda y limpia el contenido del buffer de salida
     }
-
+    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
+        $formAgregaPelLista = new FormAgregaPelLista();
+        $formAgregaPelLista = $formAgregaPelLista->gestiona();
+        $contenidoPrincipal .= "<div class='formAgregaPelLista'>";
+        $contenidoPrincipal .= $formAgregaPelLista;
+        $contenidoPrincipal .= "</div>";
+    }
     $contenidoPrincipal .= $resenasHtml;
 
     // Muestra los comentarios

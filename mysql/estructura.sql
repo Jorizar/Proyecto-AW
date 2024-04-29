@@ -36,11 +36,32 @@ CREATE TABLE IF NOT EXISTS `favoritos` (
 -- Estructura de tabla para la tabla `listas`
 --
 
-CREATE TABLE IF NOT EXISTS `listas` (
+CREATE TABLE `listas` (
   `user_id` int(2) UNSIGNED NOT NULL,
-  `pelicula_id` int(2) UNSIGNED NOT NULL,
+  `nombre_lista` varchar(35) NOT NULL,
   `lista_id` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `listas`
+ADD PRIMARY KEY (`lista_id`);
+
+ALTER TABLE `listas`
+MODIFY `lista_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+
+--
+-- Estructura de tabla para la tabla `peliculas_listas`
+--
+
+CREATE TABLE IF NOT EXISTS `peliculas_lista` (
+  `pelicula_id` int(2) UNSIGNED NOT NULL,
+  `lista_id` int(3) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `peliculas_lista`
+ADD FOREIGN KEY (`lista_id`) REFERENCES `listas`(`lista_id`)
+ADD FOREIGN KEY (`pelicula_id`) REFERENCES `peliculas`(`id`);
 
 --
 -- Estructura de tabla para la tabla `noticias`
