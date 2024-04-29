@@ -24,17 +24,17 @@ class FormAgregaPelLista extends Formulario
 
          $html = <<<EOS
          $htmlErroresGlobales
-         <div>
-         <label for=lista_seleccionada">Lista seleccionada:</label>
+         <div class>
+         <label for=lista_seleccionada">Añade la película a la lista:</label>
                 <select id="lista_seleccionada" name="lista_seleccionada">
         EOS;
         foreach($listas_user as $lista){
             $lista_id = $lista['lista_id'];
             $nombre_lista = $lista['nombre_lista'];
-            $html .= "<option value='$lista_id'>'$nombre_lista'</option>";
+            $html .= "<option value=$lista_id>$nombre_lista</option>";
         }
         $html .=<<<EOS
-            </select></div>"
+            </select></div>
         <div>
             <button type="submit" name="Añadir">Añadir</button>
         </div>

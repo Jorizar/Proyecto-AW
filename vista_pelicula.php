@@ -7,10 +7,11 @@ use es\ucm\fdi\aw\comentarios\Comentario;
 use es\ucm\fdi\aw\favoritos\Favorito;
 use es\ucm\fdi\aw\resenas\Resena;
 use es\ucm\fdi\aw\likes\Like;
-
+use es\ucm\fdi\aw\listas\FormAgregaPelLista;
 
 $tituloPagina = 'Detalles de la Película';
 $contenidoPrincipal='';
+
 
 if (isset($_GET['id'])) {
     $movieId = $_GET['id'];
@@ -27,6 +28,9 @@ if (isset($_GET['id'])) {
         $repartoJson = $movie->reparto;
         $sinopsis = $movie->sinopsis;
         $valoracionIMDb = $movie->Val_IMDb;
+
+        $formAgregaPelLista = new FormAgregaPelLista();
+        $formAgregaPelLista = $formAgregaPelLista->gestiona();
 
         $genero = Pelicula::convierteGenero($generoId); // Convertimos la ID del género a texto
 
@@ -122,6 +126,9 @@ if (isset($_GET['id'])) {
         $contenidoPrincipal = ob_get_clean(); // Guarda y limpia el contenido del buffer de salida
     }
 
+    $contenidoPrincipal .= "<div class='formAgregaPelLista'>";
+    $contenidoPrincipal .= $formAgregaPelLista;
+    $contenidoPrincipal .= "</div>";
     $contenidoPrincipal .= $resenasHtml;
 
     // Muestra los comentarios

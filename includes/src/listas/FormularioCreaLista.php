@@ -36,15 +36,20 @@ class FormularioCreaLista extends Formulario
     {
         $nombre_lista = $datos['nombre_lista'] ?? '';
         $nombre_lista = filter_var($nombre_lista, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mismoNombre = false;
         if(!empty($nombre_lista)){
             //Comprobamos que no exista una lista con ese nombre para ese usuario 
             $listas = Lista::getListasUser($_SESSION['idUsuario']);
-            foreach($listas as $lista){
-                $nombre = $lista['nombre_lista'];
-                if($nombre_lista == $nombre){
-                    $this->errores['nombre_lista'] = 'Ya tienes una lista con el mismo nombre';
+            if(count($listas) > 0){
+                foreach($listas as $lista){
+                    $nombre = $lista['nombre_lista'];
+                    if($nombre_lista == $nombre){
+                        $this->errores['nombre_lista'] = 'Ya tienes una lista con el mismo nombre';
+                        $mismoNombre = true;
+                        break;
+                    }
                 }
-                else{
+                if($mismoNombre == false){
                     //Creamos la nueva lista vacía en la base de datos
                     $result = Lista::creaListaPeliculas($_SESSION['idUsuario'], $nombre_lista);
                     if(!$result){
@@ -52,6 +57,13 @@ class FormularioCreaLista extends Formulario
                     }
                 }
             }
+            else{
+                 //Creamos la nueva lista vacía en la base de datos
+                 $result = Lista::creaListaPeliculas($_SESSION['idUsuario'], $nombre_lista);
+                 if(!$result){
+                     $this->errores[] = 'Error al crear la nueva lista.';
+                 }
+            } 
         }
         else{
             $this->errores['nombre_lista'] = 'Introduce un nombre válido para la lista';

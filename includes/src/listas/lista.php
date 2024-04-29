@@ -73,10 +73,10 @@ class Lista{
 
     public static function getNumPeliculasLista($lista_id){
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query = sprintf("SELECT COUNT(pelicula_id) FROM peliculas_lista WHERE lista_id = %d", $lista_id);
+        $query = sprintf("SELECT COUNT(pelicula_id) AS numPel FROM peliculas_lista WHERE lista_id = %d", $lista_id);
         $rs = $conn->query($query);
         if ($rs) {
-            $numPeliculas = $rs->fetchColumn();
+            $numPeliculas = $rs->fetch_assoc()['numPel'];
             $rs->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
@@ -115,7 +115,7 @@ class Lista{
         }
     }
     
-    public static function elminaPeliculaLista($idPelicula, $idLista){
+    public static function eliminaPeliculaLista($idPelicula, $idLista){
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query=sprintf("DELETE FROM peliculas_lista WHERE pelicula_id = %d AND lista_id = %d"
             , $conn->real_escape_string($idPelicula)

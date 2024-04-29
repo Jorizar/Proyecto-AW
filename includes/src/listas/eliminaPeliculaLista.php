@@ -1,4 +1,5 @@
 <?php
+    require_once __DIR__. '/../../config.php';
 
     use es\ucm\fdi\aw\listas\Lista;
 
@@ -8,5 +9,5 @@
 
     //Eliminamos la película de la lista que deseamos y redigirimos al usuario a la vista de misListas
     Lista::eliminaPeliculaLista($idPelicula, $idLista);
-    $relativePath = "/AW/Proyecto-AW/ver_lista.php?id='$idLista'";
+    $relativePath = "/AW/Proyecto-AW/ver_lista.php?id=$idLista";
     header('Location: ' . $relativePath);
