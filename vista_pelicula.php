@@ -125,10 +125,13 @@ if (isset($_GET['id'])) {
         <?php
         $contenidoPrincipal = ob_get_clean(); // Guarda y limpia el contenido del buffer de salida
     }
-
-    $contenidoPrincipal .= "<div class='formAgregaPelLista'>";
-    $contenidoPrincipal .= $formAgregaPelLista;
-    $contenidoPrincipal .= "</div>";
+    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
+        $formAgregaPelLista = new FormAgregaPelLista();
+        $formAgregaPelLista = $formAgregaPelLista->gestiona();
+        $contenidoPrincipal .= "<div class='formAgregaPelLista'>";
+        $contenidoPrincipal .= $formAgregaPelLista;
+        $contenidoPrincipal .= "</div>";
+    }
     $contenidoPrincipal .= $resenasHtml;
 
     // Muestra los comentarios
