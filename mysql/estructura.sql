@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS `listas`;
 DROP TABLE IF EXISTS `noticias`;
 DROP TABLE IF EXISTS `usuarios`;
 DROP TABLE IF EXISTS `peliculas`;
+DROP TABLE IF EXISTS `peliculas_lista`;
+DROP TABLE IF EXISTS `generos`;
+DROP TABLE IF EXISTS `reseñas`;
 
 -- --------------------------------------------------------
 

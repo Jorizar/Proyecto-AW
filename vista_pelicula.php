@@ -1,18 +1,25 @@
 <?php
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/src/peliculas/Pelicula.php'; // Adjust the path as necessary
-require_once __DIR__.'/includes/src/comentarios/Comentario.php'; // Import the Comentario class
+
+use es\ucm\fdi\aw\usuarios\Usuario;
+use es\ucm\fdi\aw\peliculas\Pelicula;
+use es\ucm\fdi\aw\comentarios\Comentario;
+use es\ucm\fdi\aw\favoritos\Favorito;
+use es\ucm\fdi\aw\resenas\Resena;
+use es\ucm\fdi\aw\likes\Like;
+use es\ucm\fdi\aw\listas\FormAgregaPelLista;
 
 $tituloPagina = 'Detalles de la Película';
 $contenidoPrincipal='';
 
+
 if (isset($_GET['id'])) {
     $movieId = $_GET['id'];
-    // Assuming buscaPorId returns an object of type Pelicula with movie details
-    $movie = \es\ucm\fdi\aw\peliculas\Pelicula::buscaPorId($movieId);
+    // Suponiendo que buscaPorId devuelve un objeto de tipo Pelicula con los detalles de la película
+    $movie = Pelicula::buscaPorId($movieId);
 
     if ($movie) {
-        // Adjust these property names based on the actual properties of the Pelicula class
+        // Ajusta estos nombres de propiedad según las propiedades reales de la clase Pelicula
         $titulo = $movie->titulo;
         $anno = $movie->annio;
         $director = $movie->director;
@@ -22,12 +29,12 @@ if (isset($_GET['id'])) {
         $sinopsis = $movie->sinopsis;
         $valoracionIMDb = $movie->Val_IMDb;
 
-        $genero = \es\ucm\fdi\aw\peliculas\Pelicula::convierteGenero($generoId); // Convertimos la id del genero a texto
+        $genero = Pelicula::convierteGenero($generoId); // Convertimos la ID del género a texto
 
         // Recoge los comentarios
-        $comentarios = \es\ucm\fdi\aw\comentarios\Comentario::buscarPorPeliculaId($movieId);
+        $comentarios = Comentario::buscarPorPeliculaId($movieId);
 
-        //Calcula la valoracion de los comentarios
+        // Calcula la valoración de los comentarios
         $sumValoraciones = 0;
         $numeroValoraciones = count($comentarios);
     
@@ -38,65 +45,129 @@ if (isset($_GET['id'])) {
             $avgValoracion = $sumValoraciones / $numeroValoraciones;
             $valoracionUsuariosHtml = round($avgValoracion, 1);
         } else {
-            $valoracionUsuariosHtml = "Aun no hay valoraciones";
+            $valoracionUsuariosHtml = "Aun no hay valoraciones de usuarios";
         }
 
-        // Reparto es un json así que lo desciframos para escribirlo
+        // Recoge las reseñas
+        $resenas = Resena::buscarPorPeliculaId($movieId);
+
+        // Calcula la valoración de las reseñas
+        $sumValoracionesResenas = 0;
+        $numeroValoracionesResenas = count($resenas);
+
+        if ($numeroValoracionesResenas > 0) {
+            foreach ($resenas as $resena) {
+                $sumValoracionesResenas += $resena->getValoracion(); // Ensure getValoracion() method exists in Resena class
+            }
+            $avgValoracionResenas = $sumValoracionesResenas / $numeroValoracionesResenas;
+            $valoracionCriticosHtml = round($avgValoracionResenas, 1);
+        } else {
+            $valoracionCriticosHtml = "Aún no hay valoraciones de críticos";
+        }
+
+        // Reparto es un JSON así que lo desciframos para escribirlo
         $repartoData = json_decode($repartoJson);
         $repartoHtml = "";
         foreach ($repartoData as $obj) {
             $repartoHtml .= htmlspecialchars($obj->nombre) . " como " . htmlspecialchars($obj->personaje) . "<br>";
         }
         
-        $contenidoPrincipal = <<<EOS
-        <div style="display: flex; align-items: center; justify-content: start; margin-bottom: 20px;">
-            <h2 style="margin-right: 20px;">$titulo ($anno)</h2>
-            <form action="procesar_favorito.php" method="post" style="margin-top: 0;">
-                <input type="hidden" name="movieId" value="$movieId">
-                <button type="submit" class="btn btn-primary">Añadir a favoritos</button>
-            </form>
-        </div>
-        <div style="display: flex; justify-content: start; align-items: center; margin-bottom: 20px;">
-            <img src="$portada" alt="Portada de $titulo" width="200">
-            <div style="margin-left: 20px;">
-                <p><strong>Director:</strong> $director</p>
-                <p><strong>Género:</strong> $genero</p>
-                <p><strong>Valoración IMDb:</strong> $valoracionIMDb</p>
-                <p><strong>Valoración 7thArt:</strong> $valoracionUsuariosHtml</p>
-                <p><strong>Reparto:</strong><br>$repartoHtml</p>
-                <p><strong>Sinopsis:</strong> $sinopsis</p>
+        // Verificar si la película está en la lista de favoritos del usuario
+        $estaEnFavoritos = Favorito::existe($app->getUsuarioId(), $movieId);
+
+        $resenas = Resena::buscarPorPeliculaId($movieId);
+        $numResenas = count($resenas);
+
+        // HTML para mostrar el botón de reseñas
+        $resenasHtml = "<div class='resenas-criticos'>";
+        $resenasHtml .= "<button onclick=\"location.href='ver_resenas.php?id=$movieId'\">Reseñas de críticos ($numResenas)</button>";
+
+        // Verifica si el usuario es un crítico y muestra el botón para añadir reseñas
+        if ($app->esCritico()) {
+            $resenasHtml .= "<button onclick=\"location.href='escribir_resenas.php?id=$movieId'\">Reseñar esta película</button>";
+        }
+        $resenasHtml .= "</div>";
+
+        ob_start(); // Inicia el almacenamiento en el buffer de salida
+        ?>
+        <div class="info_pelicula">
+            <h2><?php echo $titulo . ' (' . $anno . ')'; ?></h2>
+            
+            <!-- Mostrar botón para añadir o eliminar de favoritos según corresponda -->
+            <?php if ($estaEnFavoritos): ?>
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post" class="eliminar-favoritos-form"> 
+                    <input type="hidden" name="eliminarMovieId" value="<?php echo $movieId; ?>">
+                    <button type="submit" class="boton-fav">Eliminar de <img src="./img/fav.png" alt="Películas"></button>
+                </form>
+            <?php else: ?>
+                <form action="includes/src/favoritos/procesar_favorito.php" method="post"class="añadir-favoritos-form">
+                    <input type="hidden" name="movieId" value="<?php echo $movieId; ?>">
+                    <button type="submit" class="boton-fav">Añadir a <img src="./img/fav.png" alt="Películas"></button>
+                </form>
+            <?php endif; ?>
+
+            <div class="portada_detalles_pelicula">
+                <img src="<?php echo $portada; ?>" alt="Portada de <?php echo $titulo; ?>" class="portada-pelicula">
+                <div class="detalles-pelicula">
+                    <p><strong>Director:</strong> <?php echo $director; ?></p>
+                    <p><strong>Género:</strong> <?php echo $genero; ?></p>
+                    <p><strong>Valoración IMDb:</strong> <?php echo $valoracionIMDb; ?></p>
+                    <p><strong>Valoración 7thArt:</strong> <?php echo $valoracionUsuariosHtml; ?></p>
+                    <p><strong>Valoración Criticos:</strong> <?php echo $valoracionCriticosHtml; ?></p>
+                    <p><strong>Reparto:</strong><br><?php echo $repartoHtml; ?></p>
+                    <p><strong>Sinopsis:</strong> <?php echo $sinopsis; ?></p>
+                </div>
             </div>
         </div>
-        EOS;
-        
-    } else {
-        $contenidoPrincipal = '<h1>Película no encontrada</h1>';
+        <?php
+        $contenidoPrincipal = ob_get_clean(); // Guarda y limpia el contenido del buffer de salida
     }
+    if(isset($_SESSION['login']) && $_SESSION['login'] == true){
+        $formAgregaPelLista = new FormAgregaPelLista();
+        $formAgregaPelLista = $formAgregaPelLista->gestiona();
+        $contenidoPrincipal .= "<div class='formAgregaPelLista'>";
+        $contenidoPrincipal .= $formAgregaPelLista;
+        $contenidoPrincipal .= "</div>";
+    }
+    $contenidoPrincipal .= $resenasHtml;
 
-    //Muestra los comentarios
+    // Muestra los comentarios
     $numComentarios = count($comentarios);
     $comentariosHtml = '<h3>Comentarios (' . $numComentarios . ')</h3>';
     foreach ($comentarios as $comentario) {
         $textoComentario = htmlspecialchars($comentario->getTexto());
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $UserId = htmlspecialchars($comentario->getUserId());
-        $UserNombre = \es\ucm\fdi\aw\usuarios\Usuario::buscaNombrePorId($UserId);
+        $UserNombre = Usuario::buscaNombrePorId($UserId);
+        $comentarioId = $comentario->getComentarioId();
+        $likesCount = $comentario->getLikesCount(); // Get likes count from the comentarios object
     
-        $comentariosHtml .= "<div class='comentario'>
+        // Check if the current user has liked this comment
+        $liked = Like::existe($app->getUsuarioId(), $comentarioId);
+        $likeButton = 
+        "<form class='comentarioLike' action='includes/src/likes/procesar_like.php' method='post' style='display: inline;'>
+        <input type='hidden' name='action' value='" . ($liked ? "undo" : "like") . "'>
+        <input type='hidden' name='comentario_id' value='$comentarioId'>
+        <input type='hidden' name='pelicula_id' value='$movieId'>
+        <button type='submit' class='heart " . ($liked ? "liked" : "") . "'>" . ($liked ? "♥" : "♡") . "</button>
+        </form> <span class='likes-count'>{$likesCount}</span>";
+    
+    
+        $comentariosHtml .= "<div class='comentario' data-comentario-id='{$comentarioId}'>
             <p><strong>$UserNombre</strong> dijo:</p>
             <p>$textoComentario</p>
             <p>Valoración: $valoracionComentario</p>
+            $likeButton  <!-- Display the like or undo like button -->
         </div>";
-    }
+    }     
     $contenidoPrincipal .= $comentariosHtml;
 
-    // Revisa si el usuario esta logueado para mostrarle la seccion añadir comentario
+    // Revisa si el usuario está logueado para mostrarle la sección añadir comentario
     if ($app->usuarioLogueado()) {
         $contenidoPrincipal .= <<<EOF
-
         <div class="comentario-formulario">
-        <h3>Añadir un comentario</h3>
-        <form id="comentarioForm" action="includes/src/comentarios/procesar_comentario.php" method="post">
+            <h3>Añadir un comentario</h3>
+            <form id="comentarioForm" action="includes/src/comentarios/procesar_comentario.php" method="post">
             <input type="hidden" name="pelicula_id" value="<?= $movieId ?>">
             <textarea name="texto" id="comentario-texto" required></textarea>
             <select name="valoracion" id="comentario-valoracion" required>
@@ -111,8 +182,9 @@ if (isset($_GET['id'])) {
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
-            <button type="submit">Enviar comentario</button>
-        </form>
+            
+                <button type="submit">Enviar comentario</button>
+                </form>
         </div>
         <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
         <script type="text/javascript" src="js/ValidarFormulario.js"></script>
