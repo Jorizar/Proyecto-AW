@@ -7,6 +7,8 @@ use es\ucm\fdi\aw\peliculas\Pelicula;
 
 class FormularioEditaPeli extends Formulario
 {
+    protected $pelicula_id;
+
     public function __construct($pelicula_id) {
         parent::__construct('formCambioDatos', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/perfil.php'), 'enctype' => 'multipart/form-data']);
         $this->pelicula_id = $pelicula_id;
@@ -14,10 +16,33 @@ class FormularioEditaPeli extends Formulario
     
     protected function generaCamposFormulario(&$datos)
     {
+            // Obtener la película con el ID proporcionado
+        $pelicula = Pelicula::buscaPorId($this->pelicula_id);
+
+        // Si no se encuentra la película, mostrar mensaje de error
+        if (!$pelicula) {
+            return "No se encontró la película con el ID {$this->pelicula_id}.";
+        }
+
+        // Obtener los valores de la película para prellenar los campos del formulario
+            $tituloP = $pelicula->getTitulo();
+            $directorP = $pelicula->getDirector();
+            $annioP = $pelicula->getAnnio();
+            $sinopsisP = $pelicula->getSinopsis();
+            $imdbP = $pelicula->getVal_IMDb();
+            $repartoP = $pelicula->getReparto();
+
+
             //Obtenemos los géneros de las películas
         $generos = Pelicula::getGeneros();
 
-        $erroresCampos = self::generaErroresCampos(['tituloPelicula', 'directorPelicula', 'annioPelicula', 'generoPelicula',  'sinopsis', 'portada', 'reparto', 'imdb'], $this->errores, 'span', array('class' => 'error'));
+        $erroresCampos = self::generaErroresCampos(['tituloPelicula', 'directorPelicula', 'annioPelicula', 'generoPelicula',  'sinopsisPelicula', 'portada', 'reparto', 'imdb'], $this->errores, 'span', array('class' => 'error'));
+
+        $htmlpeliId= '';
+
+        if (!empty($this->pelicula_id)) {
+            $htmlpeliId = "<input type='hidden' name='id_peli' value='{$this->pelicula_id}'>";
+        }
 
         // Se generan los campos del formulario para cambiar los datos del usuario.
         $html = <<<EOF
@@ -25,57 +50,64 @@ class FormularioEditaPeli extends Formulario
         </div>
         <div class="contenedor_cambiarDatosPel">
             <div class="cambiar-datos-peli-formulario">
+                {$htmlpeliId}
                 <div class="add-campo-titulo">
-                         <label for="tituloPelicula">Título:</label>
-                         <input id="tituloPelicula" type="text" name="tituloPelicula"/>
-                     </div>
-                     <div class="add-campo-director">
-                        <label for="directorPelicula">Director:</label>
-                        <input id="directorPelicula" type="text" name="directorPelicula"/>
-                    </div>
-                    <div class="add-campo-anio">
-                        <label for="annioPelicula">Año de estreno:</label>
-                        <input id="annioPelicula" type="text" name="annioPelicula"/>
-                    </div>
-                    <div class="portada-container">
-                        <label for="portada">Portada de la Pelicula:</label>
-                        <input type="file" id="portada" name="portada" accept="image/*" multiple="false">
-                    </div>
-                    <div class="add-campo-sinopsis">
-                        <label for="sinopsisPelicula">Sinopsis:</label>
-                        <textarea id="sinopsisPelicula" name="sinopsisPelicula" rows="5"></textarea>
-                    </div>
-                    <div class="add-campo-reparto">
-                        <label for="reparto">Actores/Personajes (separados por comas entre  diferentes actores):</label>
-                        <input id="reparto" type="text" name="reparto"/>
-                    </div>
-                    <div class="add-campo-genero">
-                         <label for="generoPelicula">Género:</label>
-                         <select id="generoPelicula" name="generoPelicula">
-                         <option value="-1">Seleccionar</option>
-                    </div>
+                    <label for="tituloPelicula">Título:</label>
+                    <input id="tituloPelicula" type="text" name="tituloPelicula"  placeholder="$tituloP"/>
+                    {$erroresCampos['tituloPelicula']}
                 </div>
-                    
-        EOF;
-
-                 if($generos != FALSE){
-                    foreach ($generos as $id => $genero){
-                        $html .= "<option value='$id'>$genero</option>";
-                    }
-                    $html .= "</select></div>";
-                 }
-            $html .= <<<EOF
+                <div class="add-campo-director">
+                    <label for="directorPelicula">Director:</label>
+                    <input id="directorPelicula" type="text" name="directorPelicula"    value="$directorP"/>
+                    {$erroresCampos['directorPelicula']}
+                </div>
+                <div class="add-campo-anio">
+                    <label for="annioPelicula">Año de estreno:</label>
+                    <input id="annioPelicula" type="text" name="annioPelicula"  value="$annioP"/>
+                    {$erroresCampos['annioPelicula']}
+                </div>
+                <div class="portada-container">
+                    <label for="portada">Portada de la Película:</label>
+                    <input type="file" id="portada" name="portada" accept="image/*" multiple="false">
+                    {$erroresCampos['portada']}
+                </div>
+                <div class="add-campo-sinopsis">
+                    <label for="sinopsisPelicula">Sinopsis:</label>
+                    <textarea id="sinopsisPelicula" name="sinopsisPelicula" rows="5">$sinopsisP</textarea>
+                    {$erroresCampos['sinopsisPelicula']}
+                </div>
+                <div class="add-campo-reparto">
+                    <label for="reparto">Actores/Personajes (separados por comas entre diferentes actores):</label>
+                    <input id="reparto" type="text" name="reparto" value="$repartoP"/>
+                    {$erroresCampos['reparto']}
+                </div>
+                <div class="add-campo-genero">
+                    <label for="generoPelicula">Género:</label>
+                    <select id="generoPelicula" name="generoPelicula">
+                        <option value="-1">Seleccionar</option>
+                        {$erroresCampos['generoPelicula']}
+    EOF;
+    
+        if ($generos != false) {
+            foreach ($generos as $id => $genero) {
+                $html .= "<option value='$id'>$genero</option>";
+            }
+            $html .= "</select>{$erroresCampos['generoPelicula']}</div>";
+        }
+    
+        $html .= <<<EOF
                 <div class="add-campo-imdb">
-                    <label for="imdb">Puntuacion en IMdB:</label>
-                    <input id="imdb" type="text" name="imdb"/>
+                    <label for="imdb">Puntuación en IMDb:</label>
+                    <input id="imdb" type="text" name="imdb"    value="$imdbP" />
+                    {$erroresCampos['imdb']}
                 </div>
                 <div>
                     <button type="submit" name="cambiar_datos">Cambiar Datos</button>
                 </div>
             </div>
         </div>
-
-        EOF;
+    EOF;
+    
         return $html;
     }
 
@@ -83,7 +115,7 @@ class FormularioEditaPeli extends Formulario
     {
     // Podriamos obtener la pelicula con el id y hacer cambios con esa variable en vd
             
-            // Obtiene los nuevos datos introducidos por el usuario
+            // NUEVO TITULO?
             $nuevoTitulo = trim($datos['tituloPelicula'] ?? '');
             $nuevoTitulo = filter_var($nuevoTitulo, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevoTitulo)){
@@ -95,14 +127,15 @@ class FormularioEditaPeli extends Formulario
                     $this->errores['tituloPelicula'] = 'Ya existe una pelicula con ese titulo';
                 }
                 else{
-                    $result = Pelicula::cambiarTítulo($pelicula_id,$nuevoTitulo);
+                    $result = Pelicula::cambiarTítulo($this->pelicula_id,$nuevoTitulo);
                 }
             }
+
             //NUEVO DIRECTOR ?
             $nuevoDirector = trim($datos['directorPelicula'] ?? '');
             $nuevoDirector = filter_var($nuevoDirector, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if(!empty($nuevoTitulo)){
-                $result = Pelicula::cambiarDirector($pelicula_id,$nuevoDirector);   
+            if(!empty($nuevoDirector)){
+                $result = Pelicula::cambiarDirector($this->pelicula_id,$nuevoDirector);   
             }
 
             //NUEVO AÑO ?
@@ -111,7 +144,7 @@ class FormularioEditaPeli extends Formulario
             if(!empty($nuevoAnnio)){
                 $year = date('Y');
                 if($nuevoAnnio <= $year){
-                $result = Pelicula::cambiarAnnio($pelicula_id,$nuevoAnnio); 
+                $result = Pelicula::cambiarAnnio($this->pelicula_id,$nuevoAnnio); 
                 }
                 else{
                     $this->errores['annioPelicula'] = 'El año introducido no es valido';
@@ -122,7 +155,7 @@ class FormularioEditaPeli extends Formulario
             $nuevaSinopsis = trim($datos['sinopsisPelicula'] ?? '');
             $nuevaSinopsis = filter_var($nuevaSinopsis, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevaSinopsis)){
-                $result = Pelicula::cambiarSinopsis($pelicula_id,$nuevaSinopsis); 
+                $result = Pelicula::cambiarSinopsis($this->pelicula_id,$nuevaSinopsis); 
             }
 
             //NUEVA NOTA IMdB ?
@@ -130,7 +163,7 @@ class FormularioEditaPeli extends Formulario
             $nuevoIMdB = filter_var($nuevoIMdB, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevoIMdB)){
                 if($nuevoIMdB <= 10.0){
-                $result = Pelicula::cambiarImdb($pelicula_id,$nuevoIMdB); 
+                $result = Pelicula::cambiarImdb($this->pelicula_id,$nuevoIMdB); 
                 }
                 else{
                     $this->errores['imdb'] = 'El valor introducido no es valido';
@@ -139,7 +172,7 @@ class FormularioEditaPeli extends Formulario
 
             $generoPelicula = ($datos['generoPelicula'] != -1) ? $datos['generoPelicula'] : '';
             if (!empty($generoPelicula)){
-                $result = Pelicula::cambiarGenero($pelicula_id,$generoPelicula); 
+                $result = Pelicula::cambiarGenero($this->pelicula_id,$generoPelicula); 
             }
             
     
@@ -158,7 +191,7 @@ class FormularioEditaPeli extends Formulario
                 if(in_array($filetype, $allowTypes)){ //Comprobamos que la extensión de la imagen se ajusta a las requeridas
                     if(move_uploaded_file($_FILES['portada']["tmp_name"], $targetFilePath)) {
                         //Actualizar la foto en la base de datos
-                        $result = Pelicula::actualizaPortada($pelicula_id, $targetFilePath);
+                        $result = Pelicula::actualizaPortada($this->pelicula_id, $targetFilePath);
 
                         //Actualizar la foto en la sesión
                         $_SESSION['fotoPerfil'] = $targetFilePath;
@@ -172,6 +205,9 @@ class FormularioEditaPeli extends Formulario
 
             }
 
+            $relativePath = '/AW/Proyecto-AW/admin_peliculas.php';
+            header('Location: ' . $relativePath);
+            exit();
             
     }
 }

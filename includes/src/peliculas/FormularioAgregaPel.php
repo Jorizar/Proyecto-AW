@@ -20,7 +20,7 @@ class FormularioAgregaPel extends Formulario
 
      // Se generan los mensajes de error si existen.
     $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
-    $erroresCampos = self::generaErroresCampos(['tituloPelicula', 'directorPelicula', 'annioPelicula', 'generoPelicula',  'sinopsis', 'portada', 'reparto', 'imdb'], $this->errores, 'span', array('class' => 'error'));
+    $erroresCampos = self::generaErroresCampos(['tituloPelicula', 'directorPelicula', 'annioPelicula', 'generoPelicula',  'sinopsisPelicula', 'portada', 'reparto', 'imdb'], $this->errores, 'span', array('class' => 'error'));
 
    
          // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
@@ -131,7 +131,7 @@ class FormularioAgregaPel extends Formulario
         $repartoPelicula = isset($datos['actor']) ? $datos['actor'] : [];
         $personajesPelicula = isset($datos['personaje']) ? $datos['personaje'] : [];
         $imdbPelicula = isset($datos['imdb']) ? $datos['imdb'] : '';
-        $portadaPelicula = isset($datos['portada']) ? $datos['portada']: '';
+        $portadaPelicula = isset($_FILES['portada']) ? $_FILES['portada']: '';
 
          // Comprobamos si exxiste una pelicula con ese mismo titulo
          $peliculas = Pelicula::buscaPorTitulo($tituloPelicula);
@@ -172,7 +172,6 @@ class FormularioAgregaPel extends Formulario
             } else {
                 $this->errores['portada'] = 'La imagen que ha seleccionado debe tener extensión .jpg, .png o .jpeg'; 
             }
-            echo ''.$portadaPelicula.'';
         }
         else{
             $this->errores[] = "ERROR: La portada es obligatoria.";
@@ -195,31 +194,42 @@ class FormularioAgregaPel extends Formulario
     }
 
    // Método para procesar el formato del reparto
-    protected function procesarActores($actores, $personajes)
-    {
-        $limite = 10;
-        $resultado = [];
+   protected function procesarActores($actores, $personajes)
+{
+    $limite = 10;
+    $resultado = [];
 
-        if (count($actores) !== count($personajes)) {
-            return false; // Número de actores y personajes no coincide
-        }
-
-        if (count($actores) > $limite) {
-            return false; // Demasiados nombres
-        }
-
-        foreach ($actores as $indice => $nombre) {
-            $resultado[] = ['nombre' => trim($nombre), 'personaje' => trim($personajes[$indice])];
-        }
-
-        // Convertir el resultado a JSON con el formato especificado
-        $jsonReparto = json_encode($resultado, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-
-        // Reemplazar los saltos de línea por \r\n
-        $jsonReparto = str_replace(["\r\n", "\n", "\r"], '\r\n', $jsonReparto);
-
-        return $jsonReparto;
+    if (count($actores) !== count($personajes)) {
+        return false; // Número de actores y personajes no coincide
     }
+
+    if (count($actores) > $limite) {
+        return false; // Demasiados nombres
+    }
+
+    foreach ($actores as $indice => $nombre) {
+        $resultado[] = ['nombre' => trim($nombre), 'personaje' => trim($personajes[$indice])];
+    }
+
+    // Convertir el resultado a JSON con el formato especificado
+    $jsonReparto = json_encode($resultado, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
+    // Reemplazar los saltos de línea dentro de los corchetes con una cadena temporal
+    $jsonReparto = preg_replace_callback('/\{(?:[^{}]|(?R))*\}/s', function($match) {
+        return str_replace(["\r\n", "\n", "\r"], '\r\n', $match[0]);
+    }, $jsonReparto);
+
+    // Reemplazar las comillas dobles por comillas escapadas
+    $jsonReparto = str_replace('"', '\"', $jsonReparto);
+
+    return $jsonReparto;
+}
+
+   
+
+   
+
+
 
 
 }

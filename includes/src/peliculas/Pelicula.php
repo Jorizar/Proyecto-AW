@@ -191,7 +191,7 @@ class Pelicula
     {
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO peliculas(titulo, director, annio, genero, sinopsis, portada, reparto, Val_IMDb) VALUES ('%s', '%s', '%d', '%s', '%s', '%s', '%0.1f')"
+        $query=sprintf("INSERT INTO peliculas(titulo, director, annio, genero, sinopsis, portada, reparto, Val_IMDb) VALUES ('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%0.1f')"
             , $conn->real_escape_string($pelicula->titulo)
             , $conn->real_escape_string($pelicula->director)
             , $conn->real_escape_string($pelicula->annio)

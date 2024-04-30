@@ -4,7 +4,13 @@ require_once __DIR__.'/includes/config.php';
 
 use es\ucm\fdi\aw\peliculas\FormularioEditaPeli;
 
-$pelicula_id = filter_input(INPUT_POST, 'pelicula_id', FILTER_SANITIZE_NUMBER_INT);
+if (!$app->tieneRol('admin')) {
+    echo "Acceso restringido solo a administradores.";
+    exit();
+}
+
+
+$pelicula_id = filter_input(INPUT_POST, 'id_peli', FILTER_SANITIZE_NUMBER_INT);
 
 if (empty($pelicula_id)) {
     echo "Error: La película no puede ser identificada.";

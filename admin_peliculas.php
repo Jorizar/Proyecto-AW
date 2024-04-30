@@ -34,7 +34,7 @@ if (!empty($peliculas)) {
 
     foreach ($peliculas as $pelicula) {
         $editForm = "<form method='POST' action='./admin_editaPeli.php''>
-                            <input type='hidden' name='pelicula_id' value='{$pelicula['id']}'>
+                            <input type='hidden' name='id_peli' value='{$pelicula['id']}'>
                             <input type='submit' value='Editar'>
                         </form>";
 
