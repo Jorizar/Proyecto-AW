@@ -8,7 +8,7 @@ class FormularioAgregaPel extends Formulario
 {
     //TO DO
     public function __construct() {
-        parent::__construct('formAgregaPel', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/index.php')]);
+        parent::__construct('formAgregaPel', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/index.php'), 'enctype' => 'multipart/form-data']);
     }
     
     //TO DO
@@ -26,43 +26,46 @@ class FormularioAgregaPel extends Formulario
          // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
          $html = <<<EOS
          $htmlErroresGlobales
-         <div class="agrega-pelicula">
-             <form id="formAddPel" action="{$this->action}" method="POST">
-
+            <div class="agrega-pelicula">
+            </div>
                 <div class="campos-container">
                      <div class="add-campo-titulo">
                          <label for="tituloPelicula">Título:</label>
-                         <input id="tituloPelicula" type="text" name="tituloPelicula"/>
-                     </div>
+                         <input id="tituloPelicula" type="text" name="tituloPelicula"  required/>
+                         {$erroresCampos['tituloPelicula']}
+                         </div>
                      <div class="add-campo-director">
                         <label for="directorPelicula">Director:</label>
-                        <input id="directorPelicula" type="text" name="directorPelicula"/>
+                        <input id="directorPelicula" type="text" name="directorPelicula"    required/>
+                        {$erroresCampos['directorPelicula']}
                     </div>
                     <div class="add-campo-anio">
                         <label for="annioPelicula">Año de estreno:</label>
-                        <input id="annioPelicula" type="text" name="annioPelicula"/>
+                        <input id="annioPelicula" type="text" name="annioPelicula"   placeholder="XXXX"     required/>
+                        {$erroresCampos['annioPelicula']}
                     </div>
-                    <div class="portada-container">
+                    <div class="add-campo-portada">
                         <label for="portada">Portada de la Pelicula:</label>
-                        <input type="file" id="portada" name="portada" accept="image/*" multiple="false">
+                        <input id="portada" type="file"  name="portada" accept="image/*" multiple="false"    required >
                     </div>
                     <div class="add-campo-sinopsis">
                         <label for="sinopsisPelicula">Sinopsis:</label>
-                        <textarea id="sinopsisPelicula" name="sinopsisPelicula" rows="5"></textarea>
+                        <textarea id="sinopsisPelicula" name="sinopsisPelicula"   placeholder="Añada aqui la sinopsis"   rows="5"   required></textarea>
+                        {$erroresCampos['sinopsisPelicula']}
                     </div>
-                    <div class="add-campo-reparto">
-                        <label for="reparto">Actores/Personajes (separados por comas entre  diferentes actores):</label>
-                        <input id="reparto" type="text" name="reparto"/>
+                    <div class="add-campo-imdb">
+                        <label for="imdb">Puntuacion en IMdB:</label>
+                        <input id="imdb" type="text" name="imdb"  placeholder="XX.X"  required/>
+                        {$erroresCampos['imdb']}
                     </div>
-                    <div class="add-campo-genero">
-                         <label for="generoPelicula">Género:</label>
-                         <select id="generoPelicula" name="generoPelicula">
-                         <option value="-1">Seleccionar</option>
-                    </div>
-                </div>
-                    
-        EOS;
 
+                    <div class="add-campo-genero">
+                        <label for="generoPelicula">Género:</label>
+                        <select id="generoPelicula" name="generoPelicula">
+                        <option value="-1">Seleccionar</option>
+                    </div>
+                
+        EOS;
                  if($generos != FALSE){
                     foreach ($generos as $id => $genero){
                         $html .= "<option value='$id'>$genero</option>";
@@ -70,9 +73,41 @@ class FormularioAgregaPel extends Formulario
                     $html .= "</select></div>";
                  }
             $html .= <<<EOF
-                <div class="add-campo-imdb">
-                    <label for="imdb">Puntuacion en IMdB:</label>
-                    <input id="imdb" type="text" name="imdb"/>
+                 
+                    <div class="add-campo-reparto">
+                    <label>Actores/Personajes:</label>
+                    <div id="reparto-container">
+                        <div class="reparto-item">
+                            <input type="text" name="actor[]" placeholder="Nombre del actor" required>
+                            <input type="text" name="personaje[]" placeholder="Personaje" required>
+                            <button type="button" class="eliminar-campo">Eliminar</button>
+                        </div>
+                    </div>
+                    <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const agregarCampoBtn = document.getElementById('agregar-campo');
+                                const repartoContainer = document.getElementById('reparto-container');
+
+                                agregarCampoBtn.addEventListener('click', function() {
+                                    const nuevoCampo = document.createElement('div');
+                                    nuevoCampo.classList.add('reparto-item');
+                                    nuevoCampo.innerHTML = `
+                                        <input type="text" name="actor[]" placeholder="Nombre del actor" required>
+                                        <input type="text" name="personaje[]" placeholder="Personaje" required>
+                                        <button type="button" class="eliminar-campo">Eliminar</button>
+                                    `;
+                                    repartoContainer.appendChild(nuevoCampo);
+                                });
+
+                                repartoContainer.addEventListener('click', function(event) {
+                                    if (event.target.classList.contains('eliminar-campo')) {
+                                        event.target.parentElement.remove();
+                                    }
+                                });
+                            });
+                    </script>
+
+                    <button type="button" id="agregar-campo">Agregar Actor/Personaje</button>
                 </div>
                      
                      <div class="anyadir-boton">
@@ -93,8 +128,10 @@ class FormularioAgregaPel extends Formulario
         $generoPelicula = ($datos['generoPelicula'] != -1) ? $datos['generoPelicula'] : '';
         $annioPelicula = isset($datos['annioPelicula']) ? $datos['annioPelicula'] : '';
         $sinopsisPelicula = isset($datos['sinopsisPelicula']) ? $datos['sinopsisPelicula'] : '';
-        $repartoPelicula = isset($datos['reparto']) ? $datos['reparto'] : '';
+        $repartoPelicula = isset($datos['actor']) ? $datos['actor'] : [];
+        $personajesPelicula = isset($datos['personaje']) ? $datos['personaje'] : [];
         $imdbPelicula = isset($datos['imdb']) ? $datos['imdb'] : '';
+        $portadaPelicula = isset($datos['portada']) ? $datos['portada']: '';
 
          // Comprobamos si exxiste una pelicula con ese mismo titulo
          $peliculas = Pelicula::buscaPorTitulo($tituloPelicula);
@@ -106,16 +143,15 @@ class FormularioAgregaPel extends Formulario
             $this->errores[] = "No puede haber campos vacios, rellene todos los campos";    
          }
 
-         //Procesamos el formato del reparto
-
-         $repartoOK =self:: procesarActores($repartoPelicula);
-         if ($repartoOK == false) {
-            $this->errores[] = "ERROR:";   
+        // Procesamos el formato del reparto
+        $repartoOK = $this->procesarActores($repartoPelicula, $personajesPelicula);
+        if (!$repartoOK) {
+            $this->errores[] = "Error al procesar el reparto";
         }
     
         
          // Procesamos la portada de la película
-        if(isset($_FILES['portada'])){
+        if($portadaPelicula != ''){
             $filetype = pathinfo($_FILES['portada']['name'], PATHINFO_EXTENSION);
             $filename = uniqid() . "." . $filetype;
             $targetFilePath = 'img/portadas/' . $filename;
@@ -136,12 +172,15 @@ class FormularioAgregaPel extends Formulario
             } else {
                 $this->errores['portada'] = 'La imagen que ha seleccionado debe tener extensión .jpg, .png o .jpeg'; 
             }
+            echo ''.$portadaPelicula.'';
+        }
+        else{
+            $this->errores[] = "ERROR: La portada es obligatoria.";
         }
 
         if (count($this->errores) === 0) {
             //$peliculas contiene un array de películas si la búsqueda ha encontrado alguna coincidencia, false en caso contrario
             $peliculas = Pelicula::crea($tituloPelicula, $directorPelicula, $annioPelicula, $generoPelicula, $sinopsisPelicula, $portadaPelicula, $repartoOK, $imdbPelicula);
-
         
             if ($peliculas === false) {
                 echo "Error: No se ha podido crear la pelicula";
@@ -155,30 +194,32 @@ class FormularioAgregaPel extends Formulario
 
     }
 
-    function procesarActores($entrada) {
+   // Método para procesar el formato del reparto
+    protected function procesarActores($actores, $personajes)
+    {
         $limite = 10;
+        $resultado = [];
 
-        // Comprobamos que la entrada cumpla con el formato requerido
-       // if (!preg_match('/^(?:\w+\s\w+\/\w+\s\w+(?:,\s\w+\s\w+\/\w+\s\w+)*)$/', $entrada)) {
-        //    $this->errores[] = "Formato de entrada de actores incorrecto. (Ej:Pau Gasol/Bugs Bunny, etc.)";
-        //}
-    
-        // Convertimos la entrada en un array de nombres
-        $actores = explode(',', $entrada);
-    
+        if (count($actores) !== count($personajes)) {
+            return false; // Número de actores y personajes no coincide
+        }
 
         if (count($actores) > $limite) {
-            $this->errores[] = "Demasiados nombres, como máximo 10 actores.";
+            return false; // Demasiados nombres
         }
-    
-    
-        $resultado = [];
-        foreach ($actores as $nombre) {
-            list($nombreCompleto, $personaje) = explode('/', trim($nombre));
-            $resultado[] = ['nombre' => trim($nombreCompleto), 'personaje' => trim($personaje)];
+
+        foreach ($actores as $indice => $nombre) {
+            $resultado[] = ['nombre' => trim($nombre), 'personaje' => trim($personajes[$indice])];
         }
-    
-        return json_encode($resultado, JSON_PRETTY_PRINT);
+
+        // Convertir el resultado a JSON con el formato especificado
+        $jsonReparto = json_encode($resultado, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+
+        // Reemplazar los saltos de línea por \r\n
+        $jsonReparto = str_replace(["\r\n", "\n", "\r"], '\r\n', $jsonReparto);
+
+        return $jsonReparto;
     }
+
 
 }

@@ -12,7 +12,7 @@ class Pelicula
     //Se utiliza cuando se registra una nueva pelicula
     public static function crea($titulo, $director, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb)
     {
-        $pelicula = new Pelicula($titulo, $director, $annio, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb);
+        $pelicula = new Pelicula($titulo, $director, null, $annio, $genero, $sinopsis, $portada, $reparto, $val_imdb);
         return $pelicula->guarda();
     }
     
@@ -197,7 +197,8 @@ class Pelicula
             , $conn->real_escape_string($pelicula->annio)
             , $pelicula->genero
             , $pelicula->sinopsis
-            , $pelicula->reparto
+            , $conn->real_escape_string($pelicula->portada)
+            , $conn->real_escape_string($pelicula->reparto)
             , $pelicula->val_imdb
         );
         if ( $conn->query($query) ) {

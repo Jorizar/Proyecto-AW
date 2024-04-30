@@ -45,7 +45,8 @@ if (!empty($peliculas)) {
         
         $contenidoPrincipal .= "<div class='pelicula_admin'>
                                 <p>ID: {$pelicula['id']} - Título: {$pelicula['titulo']}</p>
-                                $deleteForm     $editForm
+                                $editForm
+                                $deleteForm                                
                              </div>";
     }
 } else {
