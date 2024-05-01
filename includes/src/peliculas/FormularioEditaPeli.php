@@ -113,7 +113,6 @@ class FormularioEditaPeli extends Formulario
 
     protected function procesaFormulario(&$datos)
     {
-    // Podriamos obtener la pelicula con el id y hacer cambios con esa variable en vd
             
             // NUEVO TITULO?
             $nuevoTitulo = trim($datos['tituloPelicula'] ?? '');
