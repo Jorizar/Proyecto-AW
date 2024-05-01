@@ -48,24 +48,20 @@ class FormularioBuscaPel extends Formulario
                          <label for="generoPelicula">Género:</label>
                          <select id="generoPelicula" name="generoPelicula" onchange="buscarPeliculas()">
                          <option value="-1">Seleccionar</option>
-                    </div>
-                </div>
-
-
         EOS;
-
-                if ($generos != FALSE) {
-                    foreach ($generos as $id => $genero) {
+                 if($generos != FALSE){
+                    foreach ($generos as $id => $genero){
                         $html .= "<option value='$id'>$genero</option>";
                     }
-                }
-                $html .= "</select></div>";
-                 
+                    $html .= "</select></div>";
+                 }
             $html .= <<<EOF
                      
-                     <div class="buscador-boton">
+                    <div class="buscador-boton">
                          <button type="submit" name="buscar">Buscar</button>
                      </div>
+                </div>
+                     
              </form>
          </div>
          <div id="resultadoBusqueda"></div>
@@ -91,11 +87,9 @@ class FormularioBuscaPel extends Formulario
             if ($peliculas === false) {
                 $this->errores[] = "No existen películas con esos criterios de búsqueda";
             } else {
-                //Almacenamos los ids de las películas encontradas en $_SESSION
+                //Mostramos las películas encontradas
                 $_SESSION['busquedaPeliculas'] = $peliculas;
             }
         }
     }
 }
-
-

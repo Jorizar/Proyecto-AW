@@ -41,6 +41,5 @@ HTML;
             "<p>No se encontraron películas con los criterios establecidos.</p>";
     }
     echo $contenidoPrincipal;
-
 }
 ?>

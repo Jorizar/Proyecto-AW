@@ -10,28 +10,34 @@ if (!$app->usuarioLogueado()) {
     exit();
 }
 
+
+
 // Validamos la entrada 
+
 $pelicula_id = filter_input(INPUT_POST, 'pelicula_id', FILTER_SANITIZE_NUMBER_INT);
 $texto = filter_input(INPUT_POST, 'texto', FILTER_SANITIZE_SPECIAL_CHARS);
-$valoracion = filter_input(INPUT_POST, 'valoracion', FILTER_SANITIZE_NUMBER_INT);
-
-if (empty($pelicula_id) || empty($texto) || empty($valoracion)) {
-    echo "Error: Todos los campos son obligatorios.";
-    exit();
-}
+$valoracion = filter_input(INPUT_POST, 'valoracion', FILTER_VALIDATE_INT, [
+    'options' => ['min_range' => 1, 'max_range' => 10]
+]);
 
 $user_id = $app->getUsuarioId();
 
-//Creamos el nuevo comentario
-$comentario = Comentario::crea($user_id, $pelicula_id, $texto, $valoracion, 0);
-
-if ($comentario) {
-    $relativePath = '/AW/Proyecto-AW/vista_pelicula.php?id=' . urlencode($pelicula_id);
-    header('Location: ' . $relativePath);
-    exit();
-} else {
-    echo "Error: No se pudo guardar el comentario.";
-    exit();
+if (!$pelicula_id || !$texto || $valoracion === false) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Todos los campos son obligatorios y deben ser válidos.']);
+    exit;
 }
 
+$comentario = Comentario::crea($user_id, $pelicula_id, $texto, $valoracion, 0);
+
+
+if ($comentario) {
+    echo json_encode(['success' => 'Comentario agregado con éxito.']);
+} else {
+
+    http_response_code(500);
+    echo json_encode(['error' => 'Error al guardar el comentario.']);
+
+}
+exit;
 ?>

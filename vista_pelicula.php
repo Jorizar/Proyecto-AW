@@ -144,21 +144,16 @@ if (isset($_GET['id'])) {
     
         // Check if the current user has liked this comment
         $liked = Like::existe($app->getUsuarioId(), $comentarioId);
-        $likeButton = $liked ?
-        "<form action='includes/src/likes/procesar_like.php' method='post' style='display: inline;'>
-            <input type='hidden' name='action' value='undo'>
-            <input type='hidden' name='comentario_id' value='$comentarioId'>
-            <input type='hidden' name='pelicula_id' value='$movieId'>
-            <button type='submit' class='heart liked'>♥</button>
-        </form> <span>{$likesCount}</span>" :
-        "<form action='includes/src/likes/procesar_like.php' method='post' style='display: inline;'>
-            <input type='hidden' name='action' value='like'>
-            <input type='hidden' name='comentario_id' value='$comentarioId'>
-            <input type='hidden' name='pelicula_id' value='$movieId'>
-            <button type='submit' class='heart'>♡</button>
-        </form> <span>{$likesCount}</span>";
+        $likeButton = 
+        "<form class='comentarioLike' action='includes/src/likes/procesar_like.php' method='post' style='display: inline;'>
+        <input type='hidden' name='action' value='" . ($liked ? "undo" : "like") . "'>
+        <input type='hidden' name='comentario_id' value='$comentarioId'>
+        <input type='hidden' name='pelicula_id' value='$movieId'>
+        <button type='submit' class='heart " . ($liked ? "liked" : "") . "'>" . ($liked ? "♥" : "♡") . "</button>
+        </form> <span class='likes-count'>{$likesCount}</span>";
     
-        $comentariosHtml .= "<div class='comentario'>
+    
+        $comentariosHtml .= "<div class='comentario' data-comentario-id='{$comentarioId}'>
             <p><strong>$UserNombre</strong> dijo:</p>
             <p>$textoComentario</p>
             <p>Valoración: $valoracionComentario</p>
@@ -172,10 +167,10 @@ if (isset($_GET['id'])) {
         $contenidoPrincipal .= <<<EOF
         <div class="comentario-formulario">
             <h3>Añadir un comentario</h3>
-            <form action="includes/src/comentarios/procesar_comentario.php" method="post">
+            <form id="comentarioForm" action="includes/src/comentarios/procesar_comentario.php" method="post">
             <input type="hidden" name="pelicula_id" value="<?= $movieId ?>">
-            <textarea name="texto" required></textarea>
-            <select name="valoracion" required>
+            <textarea name="texto" id="comentario-texto" required></textarea>
+            <select name="valoracion" id="comentario-valoracion" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -191,6 +186,8 @@ if (isset($_GET['id'])) {
                 <button type="submit">Enviar comentario</button>
                 </form>
         </div>
+        <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="js/ValidarFormulario.js"></script>
         EOF;
     }
 

@@ -7,6 +7,9 @@ DROP TABLE IF EXISTS `listas`;
 DROP TABLE IF EXISTS `noticias`;
 DROP TABLE IF EXISTS `usuarios`;
 DROP TABLE IF EXISTS `peliculas`;
+DROP TABLE IF EXISTS `peliculas_lista`;
+DROP TABLE IF EXISTS `generos`;
+DROP TABLE IF EXISTS `reseñas`;
 
 -- --------------------------------------------------------
 
@@ -58,7 +61,6 @@ CREATE TABLE IF NOT EXISTS `peliculas_lista` (
   `pelicula_id` int(2) UNSIGNED NOT NULL,
   `lista_id` int(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 
 --
