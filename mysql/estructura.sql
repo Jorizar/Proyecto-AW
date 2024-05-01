@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `user_id` int(2) UNSIGNED NOT NULL,
   `pelicula_id` int(2) UNSIGNED NOT NULL,
   `texto` text NOT NULL,
-  `valoracion` int(2) UNSIGNED NOT NULL
+  `valoracion` int(2) UNSIGNED NOT NULL,
+  `hora` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
