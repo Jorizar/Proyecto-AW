@@ -70,7 +70,7 @@ footer {
 }
 
 .contenedor-login-registro {
-    background-color: rgba(127,96,3,255);
+    background-color: rgba(127,96,3,1);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -163,7 +163,7 @@ nav {
 }
 
 .menu a:hover {
-    color: rgba(127,96,3,255);
+    color: rgba(127,96,3,1);
 }
 
 .saludo-menu-container {
@@ -179,7 +179,7 @@ nav {
 
 .saludo-menu-container a:hover,
 .logo a:hover {
-    color: rgba(127,96,3,255);
+    color: rgba(127,96,3,1);
 }
 
 .contenedor-login-registro a:hover{
@@ -188,7 +188,7 @@ nav {
 
 
 nav a:hover {
-	color: rgba(127,96,3,255);
+	color: rgba(127,96,3,1);
 	text-decoration: underline;
 }
 
@@ -262,7 +262,7 @@ main {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: rgba(127,96,3,255);
+    color: rgba(127,96,3,1);
     background-color: #141414;
     margin-top: 10px;
     width: 100%;
@@ -275,7 +275,7 @@ main {
 .buscador button[type="submit"] {
     width: 75%;
     padding: 10px;
-    background-color: rgba(127,96,3,255);
+    background-color: rgba(127,96,3,1);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -294,7 +294,7 @@ main {
 
 
 .destacadas {
-    border-bottom: 5px solid rgba(127,96,3,255);
+    border-bottom: 5px solid rgba(127,96,3,1);
     width: 50%; /* Ancho del borde inferior */
 }
 
@@ -322,7 +322,7 @@ main {
 
 .indicadores button:hover,
 .indicadores button.activo {
-	background: rgba(127,96,3,255);
+	background: rgba(127,96,3,1);
 }
 
 
@@ -383,22 +383,22 @@ main {
 }
 
 .peliculas-container .pelicula span:hover, .busqueda-peliculas-container .pelicula span:hover {
-    color: rgba(127,96,3,255); 
+    color: rgba(127,96,3,1); 
 }
 
 .peliculas-container .pelicula img:hover ~ span, .busqueda-peliculas-container .pelicula img:hover ~ span{
     transform: translateY(20px); 
-    color: rgba(127,96,3,255); 
+    color: rgba(127,96,3,1); 
 }
 
 /* Efecto de zoom y resplandor al pasar el ratón sobre la imagen */
 .peliculas-container .pelicula img:hover, .busqueda-peliculas-container .pelicula img:hover{
-    box-shadow: 0 0 20px rgba(127,96,3,255); 
+    box-shadow: 0 0 20px rgba(127,96,3,1); 
     transform: scale(1.1); 
 }
 
 .peliculas-container .pelicula input[type="submit"] {
-    background-color: rgba(127, 96, 3, 255); 
+    background-color: rgba(127, 96, 3, 1); 
     color: #fff; 
     border: none;
     padding: 5px 10px;
@@ -440,7 +440,7 @@ main {
 
 .formAgregaPelLista button[type="submit"] {
     padding: 10px;
-    background-color: rgba(127,96,3,255);
+    background-color: rgba(127,96,3,1);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -453,7 +453,7 @@ main {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: rgba(127,96,3,255);
+    color: rgba(127,96,3,1);
     background-color: transparent;
     margin-top: 10px;
 }
@@ -509,7 +509,7 @@ main {
 }
 
 .noticia a:hover {
-    color: rgba(127,96,3,255); /* Cambia el color al pasar el cursor */
+    color: rgba(127,96,3,1); /* Cambia el color al pasar el cursor */
 }
 
 .imagen-perfil-cabecera {
@@ -556,7 +556,7 @@ main {
 }
 
 .enlace-perfil:hover {
-    color: rgba(127,96,3,255); /* Cambia el color al pasar el cursor */
+    color: rgba(127,96,3,1); /* Cambia el color al pasar el cursor */
     /* Otros estilos que desees aplicar al pasar el cursor */
 }
 
@@ -568,7 +568,7 @@ main {
 }
 
 .enlace-perfil-admin:hover {
-    color: rgba(127,96,3,255); /* Cambia el color al pasar el cursor */
+    color: rgba(127,96,3,1); /* Cambia el color al pasar el cursor */
     /* Otros estilos que desees aplicar al pasar el cursor */
 }
 
@@ -635,7 +635,7 @@ main {
     width: 30%; 
     margin: 0 auto; /* Centra horizontalmente el botón */
     padding: 10px; /* Añade espacio interno */
-    background-color: rgba(127,96,3,255); /* Color de fondo */
+    background-color: rgba(127,96,3,1); /* Color de fondo */
     color: #fff; 
     border: none; /* Quita el borde */
     border-radius: 4px; /* Bordes redondeados */
@@ -691,7 +691,7 @@ main {
     width: 30%; /* Ocupa el 50% del ancho disponible */
     margin: 0 auto; /* Centra horizontalmente el botón */
     padding: 10px; /* Añade espacio interno */
-    background-color: rgba(127,96,3,255); /* Color de fondo */
+    background-color: rgba(127,96,3,1); /* Color de fondo */
     color: #fff; /* Color del texto */
     border: none; /* Quita el borde */
     border-radius: 4px; /* Bordes redondeados */
@@ -751,7 +751,7 @@ main {
 .comentario-formulario select {
     width: calc(15% - 10px); /* Ancho del select */
     margin-left: 30px;
-    color: rgba(127,96,3,255);
+    color: rgba(127,96,3,1);
     background-color: transparent;
 }
 
@@ -760,7 +760,7 @@ main {
 .comentario-formulario button[type="submit"] {
     width: calc(82% - 20px); /* Ancho del botón */
     padding: 8px; /* Añade espacio interno */
-    background-color: rgba(127,96,3,255); /* Color de fondo del botón */
+    background-color: rgba(127,96,3,1); /* Color de fondo del botón */
     color: #fff; /* Color del texto del botón */
     border: none; /* Quita el borde */
     border-radius: 4px; /* Bordes redondeados */
@@ -803,7 +803,7 @@ main {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: rgba(127,96,3,255);
+    color: rgba(127,96,3,1);
     background-color: transparent;
     width: calc(100% - 20px); /* Ancho del select */
 }
@@ -819,7 +819,7 @@ main {
 .cambiar-plan-formulario button[type="submit"] {
     width: calc(100% - 20px);
     padding: 8px;
-    background-color: rgba(127,96,3,255);
+    background-color: rgba(127,96,3,1);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -862,7 +862,7 @@ main {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: rgba(127, 96, 3, 255);
+    color: rgba(127, 96, 3, 1);
     background-color: transparent;
     width: calc(100% - 20px); 
 }
@@ -878,7 +878,7 @@ main {
 .cambiar-datos-formulario button[type="submit"] {
     width: calc(70% - 20px);
     padding: 8px;
-    background-color: rgba(127, 96, 3, 255);
+    background-color: rgba(127, 96, 3, 1);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -918,7 +918,7 @@ main {
 .eliminar-favoritos-form button {
     width: auto; /* Ancho automático según el contenido */
     padding: 8px;
-    background-color: rgba(127, 96, 3, 255);
+    background-color: rgba(127, 96, 3, 1);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -990,12 +990,12 @@ main {
 .favorito:hover img,
 .favorito:hover p {
     transform: translateY(20px); /* Desplazamiento hacia abajo */
-    color: rgba(127,96,3,255); /* Cambio de color del título a rojo */
+    color: rgba(127,96,3,1); /* Cambio de color del título a rojo */
 }
 
 /* Efecto de zoom y resplandor al pasar el ratón sobre la portada */
 .favorito img:hover {
-    box-shadow: 0 0 20px rgba(127,96,3,255); /* Resplandor rojo */
+    box-shadow: 0 0 20px rgba(127,96,3,1); /* Resplandor rojo */
     transform: scale(1.1); /* Zoom del 10% */
 }
 
@@ -1030,7 +1030,7 @@ main {
 }
 
 .comentario form input[type="submit"] {
-    background-color: rgba(127, 96, 3, 255); /* Color de fondo del botón de eliminar */
+    background-color: rgba(127, 96, 3, 1); /* Color de fondo del botón de eliminar */
     color: #fff; /* Color del texto del botón de eliminar */
     border: none;
     padding: 5px 10px;
@@ -1076,7 +1076,7 @@ main {
 }
 
 .pelicula_admin form input[type="submit"] {
-    background-color: rgba(127, 96, 3, 255); /* Color de fondo del botón de eliminar */
+    background-color: rgba(127, 96, 3, 1); /* Color de fondo del botón de eliminar */
     color: #fff; /* Color del texto del botón de eliminar */
     border: none;
     padding: 5px 10px;
@@ -1113,11 +1113,11 @@ main {
 }
 
 .admin-usuarios-table th {
-    background-color: rgba(127, 96, 3, 255); 
+    background-color: rgba(127, 96, 3, 1); 
 }
 
 .admin-usuarios-table tr:hover {
-    background-color: rgba(127, 96, 3, 255);
+    background-color: rgba(127, 96, 3, 1);
 }
 
 .admin-usuarios-table td:last-child {
@@ -1125,7 +1125,7 @@ main {
 }
 
 .admin-usuarios-table input[type="submit"] {
-    background-color: rgba(127, 96, 3, 255); 
+    background-color: rgba(127, 96, 3, 1); 
     color: #fff; 
     border: none;
     padding: 5px 10px;
