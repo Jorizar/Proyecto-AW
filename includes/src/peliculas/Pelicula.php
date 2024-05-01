@@ -118,6 +118,7 @@ class Pelicula
                     'titulo' => $fila['titulo']
                 ];
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
@@ -139,6 +140,7 @@ class Pelicula
                     'val_imdb' => $fila['Val_IMDb']
                 ];
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
@@ -159,6 +161,7 @@ class Pelicula
                     'portada' => $fila['portada'],
                 ];
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
@@ -179,6 +182,7 @@ class Pelicula
                     'portada' => $fila['portada'],
                 ];
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }

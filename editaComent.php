@@ -5,10 +5,17 @@ require_once __DIR__.'/includes/config.php';
 use es\ucm\fdi\aw\comentarios\FormularioEditaComent;
 use es\ucm\fdi\aw\comentarios\FormularioEditaComentAdmin;
 
+$comentario_id = filter_input(INPUT_POST, 'ID_comentario', FILTER_SANITIZE_NUMBER_INT);
+
+if (empty($comentario_id)) {
+  echo "No hemos podido obtener el id del comentario";
+  exit();
+}
+
 
 if (!$app->tieneRol('admin')) {
 
-  $formEditorComents = new FormularioEditaComent();
+  $formEditorComents = new FormularioEditaComent($comentario_id);
   $formEditorComents = $formEditorComents->gestiona();
 
   $tituloPagina = 'Editar mis Comentarios';
@@ -22,14 +29,6 @@ if (!$app->tieneRol('admin')) {
   EOF;
 }
 else{
-
-  // Obtenemos el id de usuario
-  $comentario_id = filter_input(INPUT_POST, 'ID_comentario', FILTER_SANITIZE_NUMBER_INT);
-
-  if (empty($comentario_id)) {
-    echo "No hemos podido obtener el id del comentario ADMIN";
-    exit();
-  }
  
   $formEditorComentsAdmin = new FormularioEditaComentAdmin($comentario_id);
   $formEditorComentsAdmin = $formEditorComentsAdmin->gestiona();

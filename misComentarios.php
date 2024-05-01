@@ -19,7 +19,12 @@ if (!empty($comentarios)) {
         $peliculaId = htmlspecialchars($comentario->getPeliculaId());
         $peliculaTitulo = Pelicula::buscaTituloPorId($peliculaId);
 
-        
+
+        $editForm ="<form method='POST' action='editaComent.php'>
+                        <input type='hidden' name='ID_comentario' value='{$comentario->getComentarioId()}'>
+                        <input type='submit' value='Editar'>
+                    </form>";
+
         // Assuming you add a delete form or method
         $deleteForm = "<form method='POST' action='includes/src/comentarios/eliminar_comentario.php' onsubmit='return confirm(\"¿Estás seguro?\");'>
                             <input type='hidden' name='comentario_id' value='{$comentario->getComentarioId()}'>
@@ -30,6 +35,7 @@ if (!empty($comentarios)) {
                                 <p>Película: $peliculaTitulo</p>
                                 <p>Comentario: $textoComentario</p>
                                 <p>Valoración: $valoracionComentario</p>
+                                $editForm
                                 $deleteForm
                              </div>";
     }

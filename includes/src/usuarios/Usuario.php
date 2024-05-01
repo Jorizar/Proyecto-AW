@@ -300,6 +300,7 @@ class Usuario
                     'email' => $fila['email']
                 ];
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }

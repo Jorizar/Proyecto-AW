@@ -54,12 +54,12 @@ class FormularioEditaComentAdmin extends Formulario
                 </div>
                 <div class="texto_EditComentAdmin">
                     <label for="nuevo_texto">Comentario:</label>
-                    <textarea id="nuevo_texto" name="texto" rows="10" required>$textoComent</textarea>
+                    <textarea id="nuevo_texto" name="nuevo_texto" rows="10" required>$textoComent</textarea>
                     {$erroresCampos['nuevo_texto']}
                 </div>
                 <div class="valoracion_EditComentAdmin">
                     <label for="newvalor">Valoracion:</label>
-                    <select id="newvalor" name="valoracion">
+                    <select id="newvalor" name="newvalor">
                         $options
                     </select>
                     {$erroresCampos['nueva_Valor']}
@@ -75,8 +75,7 @@ class FormularioEditaComentAdmin extends Formulario
     }
 
     protected function procesaFormulario(&$datos)
-    {
-        echo 'Hemos llegado aqui con el id= '.$this->comentario_id.'';
+    {    
         $nuevoComent = trim($datos['nuevo_texto'] ?? '');
         if (!empty($nuevoComent)) {
             $nuevoComent = filter_var($nuevoComent, FILTER_SANITIZE_FULL_SPECIAL_CHARS);

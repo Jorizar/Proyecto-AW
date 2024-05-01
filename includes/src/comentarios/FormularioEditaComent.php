@@ -8,37 +8,64 @@ use es\ucm\fdi\aw\comentarios\Comentario;
 
 class FormularioEditaComent extends Formulario
 {
-    public function __construct()
+    protected $comentario_id = " ";
+
+    public function __construct($comentario_id)
     {
-        parent::__construct('formCambioDatos', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/admin_comentarios.php'), 'enctype' => 'multipart/form-data']);
+        parent::__construct('formCambioDatos', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/misComentarios.php'), 'enctype' => 'multipart/form-data']);
+        $this->comentario_id = $comentario_id;
     }
 
     protected function generaCamposFormulario(&$datos)
     {
-        $erroresCampos = self::generaErroresCampos(['nuevo_nombre', 'nuevo_email'], $this->errores, 'span', array('class' => 'error'));
+        $htmlComentId= '';
 
+        if (!empty($this->comentario_id)) {
+            $htmlComentId = "<input type='hidden' name='ID_comentario' value='{$this->comentario_id}'>";
+        }
+
+        $comentario = Comentario::buscarComentPorId($this->comentario_id);
+
+        $user = Comentario::traduceUser($comentario->getUserId());
+        $peli = Comentario::traducePeli($comentario->getPeliculaId());
+        $textoComent = $comentario->getTexto();
+        $antiguoValor = $comentario->getValoracion();
+
+        // Genera las opciones del desplegable
+        $options = '';
+        for ($i = 1; $i <= 10; $i++) {
+            $selected = ($i == $antiguoValor) ? "selected" : "";
+            $options .= "<option value='$i' $selected>$i</option>";
+        }
+
+        $erroresCampos = self::generaErroresCampos(['nuevo_texto', 'nueva_Valor'], $this->errores, 'span', array('class' => 'error'));
         // Se generan los campos del formulario para cambiar los datos del usuario.
         $html = <<<EOF
-        <div class="titulo_cambiarDatos">
+        <div class="titulo_editarComentarios">
         </div>
-        <div class="contenedor_cambiarDatos">
-            <div class="cambiar-datos-formulario">
-                <div class="nombre_cambioPlan">
-                    <label for="nuevo_nombre">Nuevo Nombre:</label>
-                    <input type="text" id="nuevo_nombre" name="nuevo_nombre">
-                    {$erroresCampos['nuevo_nombre']}
+        <div class="contenedor_editarComentarios">
+            <div class="editarComentarios-formulario">
+                    {$htmlComentId}
+                <div class="User_EditComent">
+                    <label for="nombreuserr">Usuario: $user</label>
                 </div>
-                <div class="email_cambioPlan">
-                    <label for="nuevo_email">Nuevo Correo Electrónico:</label>
-                    <input type="email" id="nuevo_email" name="nuevo_email">
-                    {$erroresCampos['nuevo_email']}
+                <div class="Peli_EditComent">
+                    <label for="nombrepelii">Pelicula: $peli</label>
                 </div>
-                <div class="fotos_cambioDatos-container">
-                    <label for="nueva_foto">Nueva Foto de Perfil:</label>
-                    <input type="file" id="nueva_foto" name="nueva_foto" accept="image/*" multiple="false">
+                <div class="texto_EditComent">
+                    <label for="nuevo_texto">Comentario:</label>
+                    <textarea id="nuevo_texto" name="nuevo_texto" rows="10" required>$textoComent</textarea>
+                    {$erroresCampos['nuevo_texto']}
+                </div>
+                <div class="valoracion_EditComent">
+                    <label for="newvalor">Valoracion:</label>
+                    <select id="newvalor" name="newvalor">
+                        $options
+                    </select>
+                    {$erroresCampos['nueva_Valor']}
                 </div>
                 <div>
-                    <button type="submit" name="cambiar_datos">Cambiar Datos</button>
+                    <button type="submit" name="cambiar_datos">Editar Comentario</button>
                 </div>
             </div>
         </div>
@@ -48,71 +75,18 @@ class FormularioEditaComent extends Formulario
     }
 
     protected function procesaFormulario(&$datos)
-    {
-
-        // Obtiene los nuevos datos introducidos por el usuario
-        // $nuevoNombre = trim($datos['nuevo_nombre'] ?? '');
-        // Lista blanca
-        if (isset($datos['nuevo_nombre']) && !empty(trim($datos['nuevo_nombre']))) {
-            // Obtiene los nuevos datos introducidos por el usuario
-            $nuevoNombre = trim($datos['nuevo_nombre']);
-
-            // Lista blanca
-            if (!preg_match('/^[a-zA-Z0-9_-]+$/', $nuevoNombre)) {
-                $this->errores['nuevo_nombre'] = 'El nombre solo puede contener letras, números y guiones';
-            }
-
-            if (!isset($this->errores['nuevo_nombre'])) {
-                // Comprobamos que no exista un usuario con ese nombre
-                $user = Usuario::buscaUsuario($nuevoNombre);
-                if ($user) {
-                    error_log('nombre_duplicado');
-                    $this->errores['nuevo_nombre'] = 'Alguien ya utiliza ese nombre de usuario';
-                } else {
-                    $_SESSION['nombre'] = $nuevoNombre;
-                    $result = Usuario::cambiarNombre($_SESSION['idUsuario'], $nuevoNombre);
-                }
-            }
+    {    
+        $nuevoComent = trim($datos['nuevo_texto'] ?? '');
+        if (!empty($nuevoComent)) {
+            $nuevoComent = filter_var($nuevoComent, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                Comentario::cambiarTexto($this->comentario_id, $nuevoComent); 
         }
 
-
-        $nuevoEmail = trim($datos['nuevo_email'] ?? '');
-        if (!empty($nuevoEmail)) {
-            $nuevoEmail = filter_var($nuevoEmail, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if (!filter_var($nuevoEmail, FILTER_VALIDATE_EMAIL)) {
-                $this->errores['nuevo_email'] = 'El email no es válido';
-            } else {
-                $result = Usuario::cambiarEmail($_SESSION['idUsuario'], $nuevoEmail);
-                $_SESSION['email'] = $nuevoEmail;
-            }
-        }
-
-
-        //Procesamo la foto que ha escogido cargar el usuario
-        if (isset($_FILES['nueva_foto'])) {
-            $filetype = pathinfo($_FILES['nueva_foto']['name'], PATHINFO_EXTENSION);
-            $filename = uniqid() . "." . $filetype;
-            $targetFilePath = 'img/fotosPerfil/' . $filename;
-            $filesize = $_FILES['nueva_foto']['name'];
-
-            if ($filesize > 1000000) {
-                $this->errores['nueva_foto'] = 'La imagen no puede ocupar más de 1 MB';
+        $valoracionNueva = ($datos['newvalor']) ? $datos['newvalor'] : '';
+            if (!empty($valoracionNueva)){
+                Comentario::cambiarValoracion($this->comentario_id,$valoracionNueva); 
             }
 
-            $allowTypes = array('jpg', 'png', 'jpeg');
-            if (in_array($filetype, $allowTypes)) { //Comprobamos que la extensión de la imagen se ajusta a las requeridas
-                if (move_uploaded_file($_FILES['nueva_foto']["tmp_name"], $targetFilePath)) {
-                    //Actualizar la foto en la base de datos
-                    $result = Usuario::actualizaFoto($_SESSION['idUsuario'], $targetFilePath);
-
-                    //Actualizar la foto en la sesión
-                    $_SESSION['fotoPerfil'] = $targetFilePath;
-                } else {
-                    $this->errores['nueva_foto'] = 'Hubo un error al subir el fichero';
-                }
-            } else {
-                $this->errores['nueva_foto'] = 'La imagen que ha seleccionado debe tener extensión .jpg, .png o .jpeg';
-            }
-        }
     }
+
 }

@@ -64,6 +64,9 @@ class Comentario
         while ($fila = $result->fetch_assoc()) {
             $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
         }
+        // Liberar los recursos del resultado
+        $stmt->close();
+        $result->free();
         return $comentarios;
     }
 
@@ -80,6 +83,9 @@ class Comentario
         while ($fila = $result->fetch_assoc()) {
             $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
         }
+        // Liberar los recursos del resultado
+        $stmt->close();
+        $result->free();
         return $comentarios;
     }
 
@@ -93,6 +99,7 @@ class Comentario
             while ($fila = $result->fetch_assoc()) {
                 $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
@@ -140,6 +147,10 @@ class Comentario
         
         $fila = $result->fetch_assoc();
         $comentario = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
+        
+        // Liberar los recursos del resultado
+        $stmt->close();
+        $result->free();
         
         return $comentario;
     }

@@ -80,6 +80,7 @@ class Noticia
             while ($fila = $result->fetch_assoc()) {
                 $noticias[] = new Noticia($fila['titulo'], $fila['post_id'], $fila['portada'], $fila['texto'], $fila['autor'], $fila['fecha']);
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
