@@ -2,6 +2,8 @@
 namespace es\ucm\fdi\aw\comentarios;
 
 use es\ucm\fdi\aw\Aplicacion;
+use es\ucm\fdi\aw\usuarios\Usuario;
+use es\ucm\fdi\aw\peliculas\Pelicula;
 
 class Comentario
 {
@@ -127,6 +129,60 @@ class Comentario
             return false;
         }
     }    
+
+    public static function buscarComentPorId($comentario_id){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT * FROM comentarios WHERE comentario_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $comentario_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $fila = $result->fetch_assoc();
+        $comentario = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
+        
+        return $comentario;
+    }
+
+    public static function traduceUser($user_id){
+       return Usuario::buscaNombrePorId($user_id);
+    }
+
+    public static function traducePeli($peli_id){
+        return Pelicula::buscaTituloPorId($peli_id);
+    }
+
+
+    public static function cambiarTexto($comentario_id, $nuevoComent){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE comentarios SET texto='%s' WHERE comentario_id=%d",
+            $conn->real_escape_string($nuevoComent),
+            $comentario_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarValoracion($comentario_id, $valoracionNueva){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE comentarios SET valoracion='%s' WHERE comentario_id=%d",
+            $conn->real_escape_string($valoracionNueva),
+            $comentario_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+    
 
     public function getTexto() {
         return $this->texto;

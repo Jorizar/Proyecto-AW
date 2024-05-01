@@ -10,7 +10,7 @@ class FormularioEditaPeli extends Formulario
     protected $pelicula_id;
 
     public function __construct($pelicula_id) {
-        parent::__construct('formCambioDatos', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/perfil.php'), 'enctype' => 'multipart/form-data']);
+        parent::__construct('formCambioDatos', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/admin_peliculas.php'), 'enctype' => 'multipart/form-data']);
         $this->pelicula_id = $pelicula_id;
     }
     

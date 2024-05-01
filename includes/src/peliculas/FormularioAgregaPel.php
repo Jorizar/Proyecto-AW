@@ -8,7 +8,7 @@ class FormularioAgregaPel extends Formulario
 {
     //TO DO
     public function __construct() {
-        parent::__construct('formAgregaPel', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/index.php'), 'enctype' => 'multipart/form-data']);
+        parent::__construct('formAgregaPel', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/admin_peliculas.php'), 'enctype' => 'multipart/form-data']);
     }
     
     //TO DO
