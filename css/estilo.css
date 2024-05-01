@@ -1013,12 +1013,59 @@ main {
 }
 
 /* Estilos para los comentarios */
-.comentario {
-    margin-bottom: 20px;
+
+.comentarios {
+    margin: 20px;
     padding: 10px;
-    background-color: #141414;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.comentario {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: #141414;
+}
+
+.profile-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.comentario-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comentario-body p {
+    margin: 5px 0;
+}
+
+.comentario-body {
+    font-style: italic;
+    color: #f0f0f0;
+    background-color: #111111;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.comentario-footer1 {
+    font-size: 85%;
+}
+
+.comentario-footer2 {
+    margin-top: 10px;
+}
+
+.likes-count {
+    margin-left: 5px;
 }
 
 .comentario p {
