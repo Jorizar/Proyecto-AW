@@ -193,8 +193,6 @@ class FormularioEditaPeli extends Formulario
                         //Actualizar la foto en la base de datos
                         $result = Pelicula::actualizaPortada($this->pelicula_id, $targetFilePath);
 
-                        //Actualizar la foto en la sesión
-                        $_SESSION['fotoPerfil'] = $targetFilePath;
                     } else {
                         $this->errores['portada'] = 'Hubo un error al subir el fichero';
                     }
