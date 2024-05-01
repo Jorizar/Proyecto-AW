@@ -121,6 +121,44 @@ class Comentario
         }
     }
 
+    public static function traducePeli($peli_id){
+        return Pelicula::buscaTituloPorId($peli_id);
+    }
+
+    public static function traduceUser($user_id){
+        return Usuario::buscaNombrePorId($user_id);
+    }
+
+    public static function cambiarTexto($comentario_id, $nuevoComent){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE comentarios SET texto='%s' WHERE comentario_id=%d",
+            $conn->real_escape_string($nuevoComent),
+            $comentario_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarValoracion($comentario_id, $valoracionNueva){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE comentarios SET valoracion='%s' WHERE comentario_id=%d",
+            $conn->real_escape_string($valoracionNueva),
+            $comentario_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
     public static function eliminarPorId($comentario_id) {
         $conn = Aplicacion::getInstance()->getConexionBd();
         $sql = "DELETE FROM comentarios WHERE comentario_id = ?";
