@@ -138,10 +138,14 @@ if (isset($_GET['id'])) {
         $textoComentario = htmlspecialchars($comentario->getTexto());
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $UserId = htmlspecialchars($comentario->getUserId());
-        $UserNombre = Usuario::buscaNombrePorId($UserId);
+        $usuario = Usuario::buscaPorId($UserId);  // Retrieve the entire user object
+        $UserNombre = $usuario->getNombreUsuario();  // Get user name from user object
+        $UserPhotoUrl = $usuario->getFoto();  // Get user photo URL from user object
         $comentarioId = $comentario->getComentarioId();
-        $likesCount = $comentario->getLikesCount(); // Get likes count from the comentarios object
-    
+        $likesCount = $comentario->getLikesCount();
+        $created_at = new DateTime($comentario->getHora());  // Assuming getHora() method
+        $formattedDate = $created_at->format('j/n/Y \a \l\a\s H:i');
+
         // Check if the current user has liked this comment
         $liked = Like::existe($app->getUsuarioId(), $comentarioId);
         $likeButton = 
@@ -151,16 +155,27 @@ if (isset($_GET['id'])) {
         <input type='hidden' name='pelicula_id' value='$movieId'>
         <button type='submit' class='heart " . ($liked ? "liked" : "") . "'>" . ($liked ? "♥" : "♡") . "</button>
         </form> <span class='likes-count'>{$likesCount}</span>";
-    
-    
+
         $comentariosHtml .= "<div class='comentario' data-comentario-id='{$comentarioId}'>
-            <p><strong>$UserNombre</strong> dijo:</p>
-            <p>$textoComentario</p>
-            <p>Valoración: $valoracionComentario</p>
-            $likeButton  <!-- Display the like or undo like button -->
+            <div class='comentario-header'>
+                <img src='$UserPhotoUrl' alt='Profile Photo' class='profile-photo'>
+                <strong>$UserNombre</strong>&nbsp;dijo:
+            </div>
+            <div class='comentario-body'>
+                <p>$textoComentario</p>
+            </div>
+            <div class='comentario-footer1'>
+                <p>Valoración: $valoracionComentario/10</p>
+                <p>Publicado el $formattedDate</p>
+            </div>
+            <div class='comentario-footer2'>
+                $likeButton
+            </div>
         </div>";
-    }     
+    }
     $contenidoPrincipal .= $comentariosHtml;
+
+
 
     // Revisa si el usuario está logueado para mostrarle la sección añadir comentario
     if ($app->usuarioLogueado()) {
