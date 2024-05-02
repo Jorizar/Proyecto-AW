@@ -16,6 +16,7 @@ if ($app->usuarioLogueado()) {
     $urlAdminComentarios = $app->resuelve('/admin_comentarios.php');
     $urlAdminPeliculas = $app->resuelve('/admin_peliculas.php');
     $urlAdminUsuarios = $app->resuelve('/admin_usuarios.php');
+    $urlAdminNoticias= $app->resuelve('/admin_noticias.php');
 
     // Contenido principal del perfil del usuario
     $contenidoPrincipal = <<<EOS
@@ -37,6 +38,7 @@ EOS;
         $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminComentarios . '">ADMINISTRAR COMENTARIOS</a><br>';
         $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminPeliculas . '">ADMINISTRAR PELÍCULAS</a><br>';
         $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminUsuarios . '">ADMINISTRAR USUARIOS</a><br>';
+        $contenidoPrincipal .= '<a class="enlace-perfil-admin" href="' . $urlAdminNoticias . '">ADMINISTRAR NOTICIAS</a><br>';
 
     }
 

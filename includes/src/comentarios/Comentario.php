@@ -2,6 +2,8 @@
 namespace es\ucm\fdi\aw\comentarios;
 
 use es\ucm\fdi\aw\Aplicacion;
+use es\ucm\fdi\aw\usuarios\Usuario;
+use es\ucm\fdi\aw\peliculas\Pelicula;
 
 class Comentario
 {
@@ -11,8 +13,9 @@ class Comentario
     private $texto;
     private $valoracion;
     private $likes_count = 0;
+    private $hora;  // Renamed created_at to hora
 
-    public function __construct($user_id, $pelicula_id, $texto, $valoracion, $comentario_id = null, $likes_count = 0)
+    public function __construct($user_id, $pelicula_id, $texto, $valoracion, $comentario_id = null, $likes_count = 0, $hora = null)
     {
         $this->comentario_id = $comentario_id;
         $this->user_id = $user_id;
@@ -20,11 +23,12 @@ class Comentario
         $this->texto = $texto;
         $this->valoracion = $valoracion;
         $this->likes_count = $likes_count;
+        $this->hora = $hora;  // Initialize the hora
     }
 
     public static function crea($user_id, $pelicula_id, $texto, $valoracion, $likes_count)
     {
-        $comentario = new Comentario($user_id, $pelicula_id, $texto, $valoracion, $likes_count);
+        $comentario = new Comentario($user_id, $pelicula_id, $texto, $valoracion, null, $likes_count);
         return $comentario->guarda();
     }
 
@@ -49,7 +53,6 @@ class Comentario
             return null;
         }
     }
-    
 
     public static function buscarPorPeliculaId($pelicula_id) {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -60,11 +63,12 @@ class Comentario
         $result = $stmt->get_result();
         $comentarios = [];
         while ($fila = $result->fetch_assoc()) {
-            $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
+            $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count'], $fila['hora']);
         }
+        $stmt->close();
+        $result->free();
         return $comentarios;
     }
-
 
     public static function buscarPorUsuarioId($user_id)
     {
@@ -76,8 +80,10 @@ class Comentario
         $result = $stmt->get_result();
         $comentarios = [];
         while ($fila = $result->fetch_assoc()) {
-            $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
+            $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count'], $fila['hora']);
         }
+        $stmt->close();
+        $result->free();
         return $comentarios;
     }
 
@@ -89,15 +95,15 @@ class Comentario
         $comentarios = [];
         if ($result) {
             while ($fila = $result->fetch_assoc()) {
-                $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count']);
+                $comentarios[] = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count'], $fila['hora']);
             }
+            $result->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
     
         return $comentarios;
     }
-    
 
     public function actualiza($texto, $valoracion)
     {
@@ -115,6 +121,44 @@ class Comentario
         }
     }
 
+    public static function traducePeli($peli_id){
+        return Pelicula::buscaTituloPorId($peli_id);
+    }
+
+    public static function traduceUser($user_id){
+        return Usuario::buscaNombrePorId($user_id);
+    }
+
+    public static function cambiarTexto($comentario_id, $nuevoComent){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE comentarios SET texto='%s' WHERE comentario_id=%d",
+            $conn->real_escape_string($nuevoComent),
+            $comentario_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
+    public static function cambiarValoracion($comentario_id, $valoracionNueva){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE comentarios SET valoracion='%s' WHERE comentario_id=%d",
+            $conn->real_escape_string($valoracionNueva),
+            $comentario_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
     public static function eliminarPorId($comentario_id) {
         $conn = Aplicacion::getInstance()->getConexionBd();
         $sql = "DELETE FROM comentarios WHERE comentario_id = ?";
@@ -127,6 +171,27 @@ class Comentario
             return false;
         }
     }    
+
+    public static function buscarComentPorId($comentario_id){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT * FROM comentarios WHERE comentario_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $comentario_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $fila = $result->fetch_assoc();
+        $comentario = new Comentario($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['comentario_id'], $fila['likes_count'], $fila['hora']);
+        
+        $stmt->close();
+        $result->free();
+        
+        return $comentario;
+    }
+
+    public function getHora() {
+        return $this->hora;
+    }
 
     public function getTexto() {
         return $this->texto;
@@ -147,3 +212,4 @@ class Comentario
         return $this->likes_count;
     }
 }
+?>

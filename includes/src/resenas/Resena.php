@@ -53,6 +53,7 @@ class Resena
         while ($fila = $result->fetch_assoc()) {
             $reseñas[] = new self($fila['user_id'], $fila['pelicula_id'], $fila['texto'], $fila['valoracion'], $fila['reseña_id']);
         }
+        $stmt->close(); // Liberar el recurso
         return $reseñas;
     }
 
@@ -66,6 +67,7 @@ class Resena
         } else {
             // Corrected error logging statement
             error_log("Error BD ({$conn->errno}): {$conn->error}");
+            $stmt->close(); 
             return false;
         }
     }

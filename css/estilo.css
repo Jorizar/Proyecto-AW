@@ -355,8 +355,8 @@ main {
     width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
     margin-bottom: 20px; /* Espacio entre las filas */
     text-align: center; /* Centramos el contenido */
-    margin-right: 85px;
-    /*margin-right: 8%;*/
+    margin-right: 8%;
+    /*margin-right: 85px;*/
 }
 
 /* Estilos para los títulos de las películas */
@@ -437,6 +437,25 @@ main {
 .next {
     right: 0;
 }
+
+/*Estrellas valoracion*/
+.star {
+    color: white; /* Color de las estrellas no iluminadas */
+}
+
+.star.filled {
+    color: yellow; /* Color de las estrellas iluminadas */
+}
+
+.linea-formAgregaPelLista,
+.linea-resenas-criticos {
+    border-bottom: 1px solid white; /* Línea negra */
+    margin-top: 10px; /* Separación entre el formulario y la línea */
+    width:45%;
+}
+
+
+    
 
 .formAgregaPelLista button[type="submit"] {
     padding: 10px;
@@ -708,7 +727,8 @@ main {
 
 
 /* Estilos para el formulario de comentarios */
-.comentario-formulario {
+.comentario-formulario,
+.contenedor_editarComentariosAdmin {
     width: 500px;
     text-align: left; /* Alinea todo el contenido a la izquierda */
     margin-bottom: 10px; /* Espaciado inferior */
@@ -731,7 +751,9 @@ main {
 }
 
 .comentario-formulario textarea,
-.comentario-formulario select {
+.comentario-formulario select, 
+.contenedor_editarComentariosAdmin textarea,
+.contenedor_editarComentariosAdmin select{
     padding: 8px; /* Añade espacio interno */
     border: 1px solid #ccc; /* Borde del campo */
     border-radius: 4px; /* Bordes redondeados */
@@ -743,37 +765,220 @@ main {
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
 }
 
-.comentario-formulario textarea {
+.comentario-formulario textarea,
+.contenedor_editarComentariosAdmin textarea {
     width: calc(80% - 10px); /* Ancho del textarea */
     height: 100px; /* Altura del textarea */
 }
 
-.comentario-formulario select {
+.comentario-formulario select,
+.contenedor_editarComentariosAdmin select {
     width: calc(15% - 10px); /* Ancho del select */
     margin-left: 30px;
     color: rgba(127,96,3,1);
     background-color: transparent;
 }
 
+.valoracion_EditComent{
+    margin-top: 10px;
+}
+
+/*Añadir Noticia*/
+/* Estilos para el contenedor del formulario */
+.agregar-noticia-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Estilos para el formulario */
+.agregar-noticia-container form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las etiquetas de los campos */
+.agregar-noticia-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilos para los campos de entrada */
+.agregar-noticia-container input[type="text"],
+.agregar-noticia-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el botón de enviar */
+.agregar-noticia-container button[type="submit"] {
+    cursor: pointer;
+    float: right;
+}
+
+
+
+/*Añadir película admin*/
+
+.agrega-pelicula {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414;
+}
+
+.campos-container {
+    margin-bottom: 20px;
+}
+
+.add-campo-titulo,
+.add-campo-director,
+.add-campo-anio,
+.add-campo-portada,
+.add-campo-sinopsis,
+.add-campo-imdb,
+.add-campo-genero,
+.add-campo-reparto {
+    margin-bottom: 20px;
+}
+
+.add-campo-titulo label,
+.add-campo-director label,
+.add-campo-anio label,
+.add-campo-portada label,
+.add-campo-sinopsis label,
+.add-campo-imdb label,
+.add-campo-genero label {
+    display: block;
+    font-weight: bold;
+}
+
+.add-campo-titulo input,
+.add-campo-director input,
+.add-campo-anio input,
+.add-campo-portada input,
+.add-campo-sinopsis textarea,
+.add-campo-imdb input,
+.add-campo-genero select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.add-campo-reparto label {
+    display: block;
+    font-weight: bold;
+}
+
+.reparto-item {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.reparto-item input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.reparto-item button {
+    padding: 10px 20px;
+    background-color: rgba(127, 96, 3, 1);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+
+/* Estilos para el botón de añadir */
+.anyadir-boton button[type="submit"]{
+
+    padding: 10px 20px;
+    background-color: rgba(127, 96, 3, 1);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.anyadir-boton button[type="submit"]:hover{
+    background-color: #141414;
+}
+
+/* Estilos para los botones de editar y eliminar */
+.editar-button,
+.eliminar-button {
+    background-color: rgba(127,96,3,1);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.editar-button{
+    margin-bottom: 10px;
+}
+
+.noticias_admin {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px; /* Espacio entre cada noticia */
+}
+
+.noticias_admin:last-child {
+    border-bottom: none; /* Eliminar borde inferior del último elemento */
+}
+
+/* Cambiar color del texto al pasar el cursor por encima */
+.editar-button:hover,
+.eliminar-button:hover {
+    background-color: #141414;
+}
+
+
 
 /* Estilos para el botón de enviar comentario */
-.comentario-formulario button[type="submit"] {
-    width: calc(82% - 20px); /* Ancho del botón */
-    padding: 8px; /* Añade espacio interno */
-    background-color: rgba(127,96,3,1); /* Color de fondo del botón */
-    color: #fff; /* Color del texto del botón */
-    border: none; /* Quita el borde */
-    border-radius: 4px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre él */
-    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
-    margin-top: 20px; /* Espaciado superior */
-    margin-bottom: 45px; /* Espaciado inferior */
-    float: left; /* Alinea el botón a la izquierda */
+.comentario-formulario button[type="submit"],
+.contenedor-etiqueta-campo button[type="submit"] {
+    width: calc(82% - 20px); 
+    padding: 8px; 
+    background-color: rgba(127,96,3,1); 
+    color: #fff; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    margin-top: 20px; 
+    margin-bottom: 45px; 
+    float: left; 
 }
 
-.comentario-formulario button[type="submit"]:hover {
+.comentario-formulario button[type="submit"]:hover,
+.contenedor-etiqueta-campo button[type="submit"]:hover {
     background-color: #141414; /* Cambia el color de fondo al pasar el ratón */
 }
+
+
+
+
+/*Editor comentarios*/
+
 
 
 .titulo_cambiarPlan{
@@ -1013,12 +1218,59 @@ main {
 }
 
 /* Estilos para los comentarios */
-.comentario {
-    margin-bottom: 20px;
+
+.comentarios {
+    margin: 20px;
     padding: 10px;
-    background-color: #141414;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.comentario {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: #141414;
+}
+
+.profile-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.comentario-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comentario-body p {
+    margin: 5px 0;
+}
+
+.comentario-body {
+    font-style: italic;
+    color: #f0f0f0;
+    background-color: #111111;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.comentario-footer1 {
+    font-size: 85%;
+}
+
+.comentario-footer2 {
+    margin-top: 10px;
+}
+
+.likes-count {
+    margin-left: 5px;
 }
 
 .comentario p {
@@ -1275,6 +1527,82 @@ main {
 .heart:hover {
     color: red;
 }
+
+
+/*Listas de películas*/
+.form_nueva_lista {
+    text-align: center; /* Centra todo el contenido */
+    width: 50%; /* Ajusta el ancho del formulario */
+    max-width: 20%; /* Establece un ancho máximo para el formulario */
+    margin: 0 auto; /* Centra horizontalmente el formulario */
+}
+
+.form_nueva_lista form {
+    padding: 20px; 
+}
+
+.form_nueva_lista input[type="text"] {
+    width: 100%; 
+    padding: 10px; 
+    margin-top: 10px; 
+    box-sizing: border-box; 
+}
+
+.form_nueva_lista form button {
+    background-color: rgba(127, 96, 3, 1); /* Fondo rojo del botón */
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    margin-top: 20px;
+}
+
+.form_nueva_lista form button:hover {
+    background-color: #141414; /* Cambia el color de fondo al pasar el cursor sobre el botón */
+}
+
+
+.enlace-mis-listas {
+    color: white;
+    text-decoration: none;
+}
+
+.enlace-mis-listas:hover {
+    color: rgba(127, 96, 3, 1);
+    text-decoration: none;
+}
+
+/*Formularios Mis Listas*/
+.form-ver-modificar {
+    margin-top: 10px; /* Ajusta el valor del margen según tus necesidades */
+}
+
+
+
+/*Icono para crear Lista*/
+.contenedor-titulo-icono {
+    display: flex; 
+    align-items: center; 
+}
+
+.tituloMisListas {
+    margin-right: 20px; 
+}
+
+.crearListaIcono {
+    font-size: 40px;
+    color: white;
+    transition: transform 0.3s ease;
+    text-decoration: none !important;
+}
+
+.crearListaIcono:hover {
+    transform: scale(1.5); 
+    color: rgba(127, 96, 3, 1);
+}
+
+
+
 
 /* Estilos para dispositivos con un ancho máximo de 600px */
 @media (max-width: 800px) {

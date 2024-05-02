@@ -81,6 +81,7 @@ if (isset($_GET['id'])) {
         // HTML para mostrar el botón de reseñas
         $resenasHtml = "<div class='resenas-criticos'>";
         $resenasHtml .= "<button onclick=\"location.href='ver_resenas.php?id=$movieId'\">Reseñas de críticos ($numResenas)</button>";
+        $resenasHtml .= "<div class='linea-resenas-criticos'></div>";
 
         // Verifica si el usuario es un crítico y muestra el botón para añadir reseñas
         if ($app->esCritico()) {
@@ -126,10 +127,15 @@ if (isset($_GET['id'])) {
         $formAgregaPelLista = new FormAgregaPelLista();
         $formAgregaPelLista = $formAgregaPelLista->gestiona();
         $contenidoPrincipal .= "<div class='formAgregaPelLista'>";
+        $contenidoPrincipal .= "<div class='contenido-formAgregaPelLista'>";
         $contenidoPrincipal .= $formAgregaPelLista;
+        $contenidoPrincipal .= "</div>";
+        $contenidoPrincipal .= "<div class='linea-formAgregaPelLista'></div>"; // Línea después del formulario
         $contenidoPrincipal .= "</div>";
     }
     $contenidoPrincipal .= $resenasHtml;
+    
+    
 
     // Muestra los comentarios
     $numComentarios = count($comentarios);
@@ -138,11 +144,14 @@ if (isset($_GET['id'])) {
         $textoComentario = htmlspecialchars($comentario->getTexto());
         $valoracionComentario = htmlspecialchars($comentario->getValoracion());
         $UserId = htmlspecialchars($comentario->getUserId());
-        $UserNombre = Usuario::buscaNombrePorId($UserId);
+        $usuario = Usuario::buscaPorId($UserId);  
+        $UserNombre = $usuario->getNombreUsuario();  
+        $UserPhotoUrl = $usuario->getFoto();  
         $comentarioId = $comentario->getComentarioId();
-        $likesCount = $comentario->getLikesCount(); // Get likes count from the comentarios object
-    
-        // Check if the current user has liked this comment
+        $likesCount = $comentario->getLikesCount();
+        $created_at = new DateTime($comentario->getHora());  
+        $formattedDate = $created_at->format('j/n/Y \a \l\a\s H:i');
+
         $liked = Like::existe($app->getUsuarioId(), $comentarioId);
         $likeButton = 
         "<form class='comentarioLike' action='includes/src/likes/procesar_like.php' method='post' style='display: inline;'>
@@ -151,16 +160,27 @@ if (isset($_GET['id'])) {
         <input type='hidden' name='pelicula_id' value='$movieId'>
         <button type='submit' class='heart " . ($liked ? "liked" : "") . "'>" . ($liked ? "♥" : "♡") . "</button>
         </form> <span class='likes-count'>{$likesCount}</span>";
-    
-    
+
         $comentariosHtml .= "<div class='comentario' data-comentario-id='{$comentarioId}'>
-            <p><strong>$UserNombre</strong> dijo:</p>
-            <p>$textoComentario</p>
-            <p>Valoración: $valoracionComentario</p>
-            $likeButton  <!-- Display the like or undo like button -->
+            <div class='comentario-header'>
+                <img src='$UserPhotoUrl' alt='Profile Photo' class='profile-photo'>
+                <strong>$UserNombre</strong>&nbsp;dijo:
+            </div>
+            <div class='comentario-body'>
+                <p>$textoComentario</p>
+            </div>
+            <div class='comentario-footer1'>
+                <p>Valoración: <span class='valoracion'>$valoracionComentario</span></p>
+                <p>Publicado el $formattedDate</p>
+            </div>
+            <div class='comentario-footer2'>
+                $likeButton
+            </div>
         </div>";
-    }     
+    }
     $contenidoPrincipal .= $comentariosHtml;
+
+
 
     // Revisa si el usuario está logueado para mostrarle la sección añadir comentario
     if ($app->usuarioLogueado()) {
@@ -197,4 +217,7 @@ if (isset($_GET['id'])) {
 
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
+
+echo '<script src="js/valoracion.js"></script>';
+
 ?>
