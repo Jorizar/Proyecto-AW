@@ -34,14 +34,15 @@ if (!empty($noticias)) {
 
     foreach ($noticias as $noticia) {
         $editForm = "<form method='POST' action='./admin_editaNoticia.php''>
-                            <input type='hidden' name='noticia_id' value='{$noticia->getID()}'>
-                            <input type='submit' value='Editar'>
-                        </form>";
+                <input type='hidden' name='noticia_id' value='{$noticia->getID()}'>
+                <input type='submit' value='Editar' class='editar-button'>
+            </form>";
 
         $deleteForm = "<form method='POST' action='includes/src/noticias/eliminar_noticia.php' onsubmit='return confirm(\"¿Estás seguro de que quieres eliminar esta noticia?\");'>
-                            <input type='hidden' name='noticia_id' value='{$noticia->getID()}'>
-                            <input type='submit' value='Eliminar'>
-                       </form>";
+                <input type='hidden' name='noticia_id' value='{$noticia->getID()}'>
+                <input type='submit' value='Eliminar' class='eliminar-button'>
+              </form>";
+
         
         $contenidoPrincipal .= "<div class='noticias_admin'>
                                 <p>ID: {$noticia->getID()} - Título: {$noticia->getTitulo()}</p>

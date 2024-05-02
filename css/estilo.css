@@ -783,6 +783,46 @@ main {
     margin-top: 10px;
 }
 
+/*Añadir Noticia*/
+/* Estilos para el contenedor del formulario */
+.agregar-noticia-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Estilos para el formulario */
+.agregar-noticia-container form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las etiquetas de los campos */
+.agregar-noticia-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilos para los campos de entrada */
+.agregar-noticia-container input[type="text"],
+.agregar-noticia-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el botón de enviar */
+.agregar-noticia-container button[type="submit"] {
+    cursor: pointer;
+    float: right;
+}
+
+
+
 /*Añadir película admin*/
 
 .agrega-pelicula {
@@ -864,10 +904,7 @@ main {
     cursor: pointer;
 }
 
-/* Estilos para errores */
-.error {
-    color: red;
-}
+
 
 /* Estilos para el botón de añadir */
 .anyadir-boton button[type="submit"]{
@@ -881,6 +918,36 @@ main {
 }
 
 .anyadir-boton button[type="submit"]:hover{
+    background-color: #141414;
+}
+
+/* Estilos para los botones de editar y eliminar */
+.editar-button,
+.eliminar-button {
+    background-color: rgba(127,96,3,1);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.editar-button{
+    margin-bottom: 10px;
+}
+
+.noticias_admin {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px; /* Espacio entre cada noticia */
+}
+
+.noticias_admin:last-child {
+    border-bottom: none; /* Eliminar borde inferior del último elemento */
+}
+
+/* Cambiar color del texto al pasar el cursor por encima */
+.editar-button:hover,
+.eliminar-button:hover {
     background-color: #141414;
 }
 

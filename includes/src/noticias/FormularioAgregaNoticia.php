@@ -23,7 +23,7 @@ class FormularioAgregaNoticia extends Formulario
         $htmlErroresGlobales
         <div class="agrega-noticia">
         </div>
-        <div class="campos-container">
+        <div class="agregar-noticia-container">
             <form action="tu_script.php" method="post" enctype="multipart/form-data">
                 <div class="add-campo-titulo">
                     <label for="titulo">Título:</label>
