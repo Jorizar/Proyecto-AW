@@ -14,27 +14,37 @@ $contenidoPrincipal = '<div class="admin-usuarios-container"><h3>Lista de Usuari
 $usuarios = Usuario::buscarTodos();
 
 if (!empty($usuarios)) {
-    $contenidoPrincipal .= '<table class="admin-usuarios-table"><thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Acción</th></tr></thead><tbody>';
-    foreach ($usuarios as $usuario) {
-        $contenidoPrincipal .= "<tr>
+    $contenidoPrincipal .= '<table class="admin-usuarios-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th colspan="2">Acción</th> <!-- colspan="2" para que abarque dos columnas -->
+                                </tr>
+                            </thead>
+                            <tbody>';
+                            foreach ($usuarios as $usuario) {
+                                $contenidoPrincipal .= "<tr>
                                     <td>" . htmlspecialchars($usuario['user_id']) . "</td>
                                     <td>" . htmlspecialchars($usuario['username']) . "</td>
                                     <td>" . htmlspecialchars($usuario['email']) . "</td>
                                     <td>
                                         <form method='post' action='cambioDatos.php'>
                                             <input type='hidden' name='usuario_id' value='" . $usuario['user_id'] . "'>
-                                            <input type='submit' value='Editar Datos');'>
+                                            <input type='submit' value='Editar Datos'>
                                         </form>
                                     </td>
                                     <td>
-                                        <form method='post' action='includes/src/usuarios/eliminar_usuario.php'>
+                                        <form method='post' action='includes/src/usuarios/eliminar_usuario.php' onsubmit='return confirm(\"¿Estás seguro de que deseas eliminar este usuario?\");'>
                                             <input type='hidden' name='usuario_id' value='" . $usuario['user_id'] . "'>
-                                            <input type='submit' value='Eliminar' onclick='return confirm(\"¿Estás seguro de que deseas eliminar este usuario?\");'>
+                                            <input type='submit' value='Eliminar'>
                                         </form>
                                     </td>
-                                </tr>";
-    }
-    $contenidoPrincipal .= '</tbody></table>';
+                            </tr>";
+}
+$contenidoPrincipal .= '</tbody></table>';
+
 } else {
     $contenidoPrincipal .= '<p>No hay usuarios registrados.</p>';
 }
