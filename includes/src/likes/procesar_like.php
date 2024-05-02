@@ -5,7 +5,7 @@ use es\ucm\fdi\aw\likes\Like;
 // Comprobamos si el usuario se ha logueado
 if (!$app->usuarioLogueado()) {
     //Redirigimos al usuario al login
-    header('Location: login.php'); 
+    header('Location: ./../../../login.php'); 
     exit();
 }
 

@@ -6,7 +6,7 @@ use es\ucm\fdi\aw\comentarios\Comentario;
 // Comprobamos si el usuario se ha logueado
 if (!$app->usuarioLogueado()) {
     //Redirigimos al usuario al login
-    header('Location: login.php'); 
+    header('Location: ./../../../login.php'); 
     exit();
 }
 

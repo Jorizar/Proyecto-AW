@@ -1366,14 +1366,26 @@ main {
 
 .admin-usuarios-table th {
     background-color: rgba(127, 96, 3, 1); 
+    text-align: center; 
 }
 
-.admin-usuarios-table tr:hover {
-    background-color: rgba(127, 96, 3, 1);
+.admin-usuarios-table th:nth-child(1), 
+.admin-usuarios-table td:nth-child(1),
+.admin-usuarios-table th:nth-child(2), 
+.admin-usuarios-table td:nth-child(2),
+.admin-usuarios-table th:nth-child(3), 
+.admin-usuarios-table td:nth-child(3) { 
+    text-align: left; 
+    width: 25%; 
+}
+
+.admin-usuarios-table th:last-child {
+    width: 20%; 
 }
 
 .admin-usuarios-table td:last-child {
     text-align: center; 
+    width: 10%; 
 }
 
 .admin-usuarios-table input[type="submit"] {
@@ -1386,9 +1398,18 @@ main {
     transition: background-color 0.3s ease;
 }
 
+
 .admin-usuarios-table input[type="submit"]:hover {
     background-color: #141414; 
 }
+
+
+.admin-usuarios-table tr:hover {
+    background-color: rgba(127, 96, 3, 1);
+}
+
+
+
 
 /* Style for the entire review block */
 .review {
