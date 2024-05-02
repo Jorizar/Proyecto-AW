@@ -25,16 +25,20 @@ class FormularioLogin extends Formulario
             <div class="login-usuario">
                 <label for="nombreUsuario">Nombre de usuario:</label>
                 <input id="nombreUsuario" type="text" name="nombreUsuario" value="$nombreUsuario" />
+                <span id="nombreUsuarioError" class="error"></span>
                 {$erroresCampos['nombreUsuario']}
             </div>
             <div class="login-password">
                 <label for="password">Contraseña:</label>
                 <input id="password" type="password" name="password" />
+                <span id="passwordError" class="error"></span>
                 {$erroresCampos['password']}
             </div>
             <div>
                 <button type="submit" name="login">Entrar</button>
             </div>
+            <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+            <script type="text/javascript" src="js/ValidarFormulario.js"></script>
         EOF;
         return $html;
     }

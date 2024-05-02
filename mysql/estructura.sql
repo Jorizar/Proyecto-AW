@@ -11,6 +11,9 @@ DROP TABLE IF EXISTS `peliculas_lista`;
 DROP TABLE IF EXISTS `generos`;
 DROP TABLE IF EXISTS `reseñas`;
 
+DROP TRIGGER IF EXISTS increment_like_count;
+DROP TRIGGER IF EXISTS decrement_like_count;
+
 -- --------------------------------------------------------
 
 --
