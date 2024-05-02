@@ -41,30 +41,30 @@ class FormularioEditaComentAdmin extends Formulario
         $erroresCampos = self::generaErroresCampos(['nuevo_texto', 'nueva_Valor'], $this->errores, 'span', array('class' => 'error'));
         // Se generan los campos del formulario para cambiar los datos del usuario.
         $html = <<<EOF
-        <div class="titulo_editarComentariosAdmin">
+        <div class="titulo_editarComentarios">
         </div>
-        <div class="contenedor_editarComentariosAdmin">
-            <div class="editarComentariosAdmin-formulario">
-                    {$htmlComentId}
-                <div class="User_EditComentAdmin">
+        <div class="contenedor_editarComentarios">
+            <div class="comentario-formulario">
+                {$htmlComentId}
+                <div class="User_EditComent contenedor-etiqueta-campo">
                     <label for="nombreuserr">Usuario: $user</label>
                 </div>
-                <div class="Peli_EditComentAdmin">
+                <div class="Peli_EditComent contenedor-etiqueta-campo">
                     <label for="nombrepelii">Pelicula: $peli</label>
                 </div>
-                <div class="texto_EditComentAdmin">
+                <div class="texto_EditComent contenedor-etiqueta-campo">
                     <label for="nuevo_texto">Comentario:</label>
                     <textarea id="nuevo_texto" name="nuevo_texto" rows="10" required>$textoComent</textarea>
                     {$erroresCampos['nuevo_texto']}
                 </div>
-                <div class="valoracion_EditComentAdmin">
+                <div class="valoracion_EditComent contenedor-etiqueta-campo">
                     <label for="newvalor">Valoracion:</label>
                     <select id="newvalor" name="newvalor">
                         $options
                     </select>
                     {$erroresCampos['nueva_Valor']}
                 </div>
-                <div>
+                <div class="contenedor-etiqueta-campo">
                     <button type="submit" name="cambiar_datos">Editar Comentario</button>
                 </div>
             </div>

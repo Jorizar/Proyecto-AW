@@ -44,27 +44,27 @@ class FormularioEditaComent extends Formulario
         <div class="titulo_editarComentarios">
         </div>
         <div class="contenedor_editarComentarios">
-            <div class="editarComentarios-formulario">
-                    {$htmlComentId}
-                <div class="User_EditComent">
+            <div class="comentario-formulario">
+                {$htmlComentId}
+                <div class="User_EditComent contenedor-etiqueta-campo">
                     <label for="nombreuserr">Usuario: $user</label>
                 </div>
-                <div class="Peli_EditComent">
+                <div class="Peli_EditComent contenedor-etiqueta-campo">
                     <label for="nombrepelii">Pelicula: $peli</label>
                 </div>
-                <div class="texto_EditComent">
+                <div class="texto_EditComent contenedor-etiqueta-campo">
                     <label for="nuevo_texto">Comentario:</label>
                     <textarea id="nuevo_texto" name="nuevo_texto" rows="10" required>$textoComent</textarea>
                     {$erroresCampos['nuevo_texto']}
                 </div>
-                <div class="valoracion_EditComent">
+                <div class="valoracion_EditComent contenedor-etiqueta-campo">
                     <label for="newvalor">Valoracion:</label>
                     <select id="newvalor" name="newvalor">
                         $options
                     </select>
                     {$erroresCampos['nueva_Valor']}
                 </div>
-                <div>
+                <div class="contenedor-etiqueta-campo">
                     <button type="submit" name="cambiar_datos">Editar Comentario</button>
                 </div>
             </div>
