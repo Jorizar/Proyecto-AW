@@ -438,6 +438,25 @@ main {
     right: 0;
 }
 
+/*Estrellas valoracion*/
+.star {
+    color: white; /* Color de las estrellas no iluminadas */
+}
+
+.star.filled {
+    color: yellow; /* Color de las estrellas iluminadas */
+}
+
+.linea-formAgregaPelLista,
+.linea-resenas-criticos {
+    border-bottom: 1px solid white; /* Línea negra */
+    margin-top: 10px; /* Separación entre el formulario y la línea */
+    width:45%;
+}
+
+
+    
+
 .formAgregaPelLista button[type="submit"] {
     padding: 10px;
     background-color: rgba(127,96,3,1);
