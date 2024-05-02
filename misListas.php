@@ -72,8 +72,8 @@ form;
 
 } else {
   $contenidoPrincipal=<<<EOS
-    <h2>Usuario no registrado!</h2>
-    <p>Debes iniciar sesión para ver el contenido.</p>
+    <h3>Mis Listas</h3>
+    <p>Debes iniciar sesión para poder crear Listas de Películas.</p>
   EOS;
 }
 

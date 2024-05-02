@@ -355,8 +355,8 @@ main {
     width: calc(25% - 10px); /* Establecemos el ancho de cada película (25% del contenedor menos el espacio entre ellas) */
     margin-bottom: 20px; /* Espacio entre las filas */
     text-align: center; /* Centramos el contenido */
-    margin-right: 85px;
-    /*margin-right: 8%;*/
+    margin-right: 8%;
+    /*margin-right: 85px;*/
 }
 
 /* Estilos para los títulos de las películas */
