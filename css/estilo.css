@@ -1342,6 +1342,82 @@ main {
     color: red;
 }
 
+
+/*Listas de películas*/
+.form_nueva_lista {
+    text-align: center; /* Centra todo el contenido */
+    width: 50%; /* Ajusta el ancho del formulario */
+    max-width: 20%; /* Establece un ancho máximo para el formulario */
+    margin: 0 auto; /* Centra horizontalmente el formulario */
+}
+
+.form_nueva_lista form {
+    padding: 20px; 
+}
+
+.form_nueva_lista input[type="text"] {
+    width: 100%; 
+    padding: 10px; 
+    margin-top: 10px; 
+    box-sizing: border-box; 
+}
+
+.form_nueva_lista form button {
+    background-color: rgba(127, 96, 3, 1); /* Fondo rojo del botón */
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    margin-top: 20px;
+}
+
+.form_nueva_lista form button:hover {
+    background-color: #141414; /* Cambia el color de fondo al pasar el cursor sobre el botón */
+}
+
+
+.enlace-mis-listas {
+    color: white;
+    text-decoration: none;
+}
+
+.enlace-mis-listas:hover {
+    color: rgba(127, 96, 3, 1);
+    text-decoration: none;
+}
+
+/*Formularios Mis Listas*/
+.form-ver-modificar {
+    margin-top: 10px; /* Ajusta el valor del margen según tus necesidades */
+}
+
+
+
+/*Icono para crear Lista*/
+.contenedor-titulo-icono {
+    display: flex; 
+    align-items: center; 
+}
+
+.tituloMisListas {
+    margin-right: 20px; 
+}
+
+.crearListaIcono {
+    font-size: 40px;
+    color: white;
+    transition: transform 0.3s ease;
+    text-decoration: none !important;
+}
+
+.crearListaIcono:hover {
+    transform: scale(1.5); 
+    color: rgba(127, 96, 3, 1);
+}
+
+
+
+
 /* Estilos para dispositivos con un ancho máximo de 600px */
 @media (max-width: 800px) {
     /* Estilos específicos para dispositivos móviles */
