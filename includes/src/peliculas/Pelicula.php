@@ -191,28 +191,41 @@ class Pelicula
     }
 
     //Inserta una pelicula nueva en la base de datos
-    private static function inserta($pelicula)
+    public static function inserta($pelicula)
     {
-        $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $query=sprintf("INSERT INTO peliculas(titulo, director, annio, genero, sinopsis, portada, reparto, Val_IMDb) VALUES ('%s', '%s', '%d', '%s', '%s', '%s', '%s', '%0.1f')"
-            , $conn->real_escape_string($pelicula->titulo)
-            , $conn->real_escape_string($pelicula->director)
-            , $conn->real_escape_string($pelicula->annio)
-            , $pelicula->genero
-            , $pelicula->sinopsis
-            , $conn->real_escape_string($pelicula->portada)
-            , $conn->real_escape_string($pelicula->reparto)
-            , $pelicula->val_imdb
-        );
-        if ( $conn->query($query) ) {
-            $pelicula->id = $conn->insert_id;
-            return $pelicula;
+    
+        // Prepare statement to avoid SQL injection
+        $sql = "INSERT INTO peliculas (titulo, director, annio, genero, sinopsis, portada, reparto, Val_IMDb) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+    
+        if ($stmt) {
+            $stmt->bind_param("ssissssd", 
+                $pelicula['titulo'],
+                $pelicula['director'],
+                $pelicula['anio'],
+                $pelicula['genero'],
+                $pelicula['sinopsis'],
+                $pelicula['imagen'],
+                $pelicula['reparto'],
+                $pelicula['imdb']
+            );
+    
+            if ($stmt->execute()) {
+                $pelicula['id'] = $conn->insert_id;
+                $stmt->close();
+                return $pelicula;
+            } else {
+                error_log("Error BD ({$stmt->errno}): {$stmt->error}");
+                $stmt->close();
+                return false;
+            }
         } else {
-            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            error_log("Error preparing statement: " . $conn->error);
             return false;
         }
     }
+    
     
     //Actualiza la información de la película en la base de datos
     private static function actualiza($pelicula)
