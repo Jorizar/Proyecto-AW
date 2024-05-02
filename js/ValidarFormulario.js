@@ -83,4 +83,44 @@ $(document).ready(function() {
             }
         });
     });
+    const form = document.getElementById('formRegistro');
+    form.addEventListener('submit', function(event) {
+        let hasErrors = false;
+        const nombreUsuario = document.getElementById('nombreUsuario').value;
+        const password = document.getElementById('password').value;
+        const password2 = document.getElementById('password2').value;
+        const email = document.getElementById('email').value;
+        const rol = document.getElementById('rol').value;
+        console.log("HOLO");
+        // Validación del nombre de usuario
+        if (!/^[a-zA-Z0-9_-]+$/.test(nombreUsuario)) {
+            alert('Nombre de usuario inválido.');
+            hasErrors = true;
+        }
+
+        // Validación de la contraseña
+        if (password.length < 8) {
+            alert('La contraseña debe tener al menos 8 caracteres.');
+            hasErrors = true;
+        } else if (password !== password2) {
+            alert('Las contraseñas no coinciden.');
+            hasErrors = true;
+        }
+
+        // Validación de email
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            alert('Email no válido.');
+            hasErrors = true;
+        }
+
+        // Validación del rol
+        if (rol !== 'free' && rol !== 'premium') {
+            alert('Seleccione un rol válido.');
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
+            event.preventDefault();
+        }
+    });
 });

@@ -75,10 +75,10 @@ class FormularioBuscaPel extends Formulario
     protected function procesaFormulario(&$datos)
     {
         // Recoger los datos del formulario
-        $tituloPelicula = isset($datos['tituloPelicula']) ? $datos['tituloPelicula'] : '';
-        $directorPelicula = isset($datos['directorPelicula']) ? $datos['directorPelicula'] : '';
-        $generoPelicula = ($datos['generoPelicula'] != -1) ? $datos['generoPelicula'] : '';
-        $annioPelicula = isset($datos['annioPelicula']) ? $datos['annioPelicula'] : '';
+            $tituloPelicula = isset($datos['tituloPelicula']) ? $datos['tituloPelicula'] : '';
+            $directorPelicula = isset($datos['directorPelicula']) ? $datos['directorPelicula'] : '';
+            $generoPelicula = ($datos['generoPelicula'] != -1) ? $datos['generoPelicula'] : '';
+            $annioPelicula = isset($datos['annioPelicula']) ? $datos['annioPelicula'] : '';
 
         if (count($this->errores) === 0) {
             //$peliculas contiene un array de películas si la búsqueda ha encontrado alguna coincidencia, false en caso contrario
