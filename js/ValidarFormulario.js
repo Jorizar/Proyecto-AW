@@ -82,50 +82,7 @@ $(document).ready(function() {
                 alert('Error al conectar al servidor. Por favor, intente más tarde.');
             }
         });
-    });
-   /* const form = document.getElementById('formRegistro');
-    form.addEventListener('submit', function(event) {
-        let hasErrors = false;
-        const nombreUsuario = document.getElementById('nombreUsuario').value;
-        const password = document.getElementById('password').value;
-        const password2 = document.getElementById('password2').value;
-        const email = document.getElementById('email').value;
-        const rol = document.getElementById('rol').value;
-        console.log("HOLO");
-        // Validación del nombre de usuario
-        if (!/^[a-zA-Z0-9_-]+$/.test(nombreUsuario)) {
-            alert('Nombre de usuario inválido.');
-            hasErrors = true;
-        }
-
-        // Validación de la contraseña
-        if (password.length < 8) {
-            alert('La contraseña debe tener al menos 8 caracteres.');
-            hasErrors = true;
-        } else if (password !== password2) {
-            alert('Las contraseñas no coinciden.');
-            hasErrors = true;
-        }
-
-        // Validación de email
-        if (!/\S+@\S+\.\S+/.test(email)) {
-            alert('Email no válido.');
-            hasErrors = true;
-        }
-
-        // Validación del rol
-        if (rol !== 'free' && rol !== 'premium') {
-            alert('Seleccione un rol válido.');
-            hasErrors = true;
-        }
-
-        if (hasErrors) {
-            event.preventDefault();
-        }
-    });*/
-
-
-    
+    });   
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -306,31 +263,4 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    
-
-    /*const formularioLogin = document.getElementById('formLogin');
-    formularioLogin.addEventListener('submit', function(event) {
-        const nombreUsuario = document.getElementById('nombreUsuario').value;
-        const password = document.getElementById('password').value;
-        let valid = true;
-
-        // Validar nombre de usuario: no vacío y cumple con el patrón
-        if (!nombreUsuario) {
-            alert('Por favor, ingrese su nombre de usuario.');
-            valid = false;
-        } else if (!/^[a-zA-Z0-9_-]+$/.test(nombreUsuario)) {
-            alert('El nombre de usuario solo puede contener letras, números y guiones.');
-            valid = false;
-        }
-
-        // Validar contraseña: no vacía
-        if (!password) {
-            alert('Por favor, ingrese su contraseña.');
-            valid = false;
-        }
-
-        if (!valid) {
-            event.preventDefault(); // Prevenir que el formulario se envíe
-        }
-    });*/
 });
