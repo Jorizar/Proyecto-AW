@@ -217,6 +217,12 @@ if (isset($_GET['id'])) {
         <script type="text/javascript" src="js/ValidarFormulario.js"></script>
         EOF;
     }
+    else if ($app->usuarioLogueado() && $usuarioYaComento) {
+        $contenidoPrincipal .= <<<EOF
+        <p>Ya has comentado esta película.</p>
+        <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+        EOF;
+    }
 
 } else {
     $contenidoPrincipal = '<h1>ID de película no especificado</h1>';
@@ -226,5 +232,6 @@ $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPr
 $app->generaVista('/plantillas/plantilla.php', $params);
 
 echo '<script src="js/valoracion.js"></script>';
+
 
 ?>
