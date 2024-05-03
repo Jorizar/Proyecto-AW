@@ -22,7 +22,7 @@ if(count($peliculasId) > 0){
         $peliculas[] = Pelicula::buscaPorId($peliculaId);
     }
     //Mostramos las películas de la búsqueda
-    $contenidoPrincipal .= '<div class="peliculas-container">';
+    $contenidoPrincipal .= '<div class="busqueda-peliculas-container">';
     foreach ($peliculas as $pelicula) {
         $id = $pelicula->getId();
         $titulo = $pelicula->getTitulo();

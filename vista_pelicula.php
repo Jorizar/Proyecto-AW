@@ -181,9 +181,16 @@ if (isset($_GET['id'])) {
     $contenidoPrincipal .= $comentariosHtml;
 
 
+    $usuarioYaComento = false; // Suponemos que el usuario aún no ha comentado
+
+    if ($app->usuarioLogueado()) {
+        $userId = $app->getUsuarioId();
+
+        $usuarioYaComento = Comentario::usuarioYaComentoPelicula($userId, $movieId);
+    }
 
     // Revisa si el usuario está logueado para mostrarle la sección añadir comentario
-    if ($app->usuarioLogueado()) {
+    if ($app->usuarioLogueado() && !$usuarioYaComento) {
         $contenidoPrincipal .= <<<EOF
         <div class="comentario-formulario">
             <h3>Añadir un comentario</h3>

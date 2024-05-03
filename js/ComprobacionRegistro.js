@@ -29,8 +29,7 @@ $(document).ready(function() {
 			$("#correoOK").hide();
 			$("#correoMAL").show();
 
-			campo[0].setCustomValidity(
-				"El correo debe ser válido y acabar por @ucm.es");
+			campo[0].setCustomValidity("El correo debe ser válido y acabar por @ucm.es");
 		}
 	});
 

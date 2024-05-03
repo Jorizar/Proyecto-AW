@@ -22,6 +22,7 @@ class Pelicula
     {   
         $conn = Aplicacion::getInstance()->getConexionBd();
         $sql = "SELECT * FROM peliculas WHERE 1=1";    
+
         if (!empty($titulo)) {
             $sql .= " AND LOWER(titulo) LIKE LOWER('%$titulo%')";
         }
@@ -32,10 +33,26 @@ class Pelicula
             $sql .= " AND genero = $genero";
         }
         if (!empty($annio)) {
-            $sql .= " AND annio = $annio";
+            if (strlen($annio) === 4) {
+                $sql .= " AND annio = $annio";
+            } elseif (strlen($annio) === 3) {
+                $decada_inicio = intval($annio) * 10;
+                $decada_fin = $decada_inicio + 9;
+                $sql .= " AND annio >= $decada_inicio AND annio <= $decada_fin";
+            } elseif (strlen($annio) === 2) {
+                $annio_inicio = intval($annio) * 100;
+                $annio_fin = $annio_inicio + 99;
+                $sql .= " AND annio >= $annio_inicio AND annio <= $annio_fin";
+            } else {
+                $annio_inicio = intval($annio) * 1000;
+                $annio_fin = $annio_inicio + 999;
+                $sql .= " AND annio >= $annio_inicio AND annio <= $annio_fin";
+            }
         }
+
         $result = $conn->query($sql);
         $peliculas = false;
+
         if ($result) {
             $peliculas = array();
             while($fila = $result->fetch_assoc()) {
@@ -45,8 +62,11 @@ class Pelicula
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
+
         return $peliculas;
     }
+
+
 
     public static function buscaPorTitulo($tituloPelicula)
     {
@@ -137,7 +157,7 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
-                    'val_imdb' => $fila['Val_IMDb']
+                    'val_IMDb' => $fila['Val_IMDb']
                 ];
             }
             $result->free();
@@ -150,7 +170,11 @@ class Pelicula
 
     public static function peliculasPorGenero($idGenero, $n){ //Devuelve las mejores n peliculas de un género
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $sql = "SELECT id, titulo, portada FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC LIMIT $n";
+        if ($n >0) {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC LIMIT $n";
+        } else {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC";
+        }
         $result = $conn->query($sql);
         $peliculas = [];
         if ($result) {
@@ -159,6 +183,7 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
+                    'val_IMDb' => $fila['Val_IMDb']
                 ];
             }
             $result->free();
@@ -171,8 +196,12 @@ class Pelicula
 
     public static function peliculasPorAnnio($annio_inf, $annio_sup, $n) { //Devuelve las mejores n peliculas de un periodo de años
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $sql = "SELECT id, titulo, portada FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC LIMIT $n";
-        $result = $conn->query($sql);
+        if ($n>0) {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC LIMIT $n";
+        } else {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC";
+        }
+            $result = $conn->query($sql);
         $peliculas = [];
         if ($result) {
             while ($fila = $result->fetch_assoc()) {
@@ -180,6 +209,7 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
+                    'val_IMDb' => $fila['Val_IMDb']
                 ];
             }
             $result->free();

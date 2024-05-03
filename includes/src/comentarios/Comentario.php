@@ -189,6 +189,20 @@ class Comentario
         return $comentario;
     }
 
+    public static function usuarioYaComentoPelicula($user_id, $pelicula_id) {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $sql = "SELECT * FROM comentarios WHERE user_id = ? AND pelicula_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ii', $user_id, $pelicula_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $yaComento = $result->num_rows > 0;
+        $stmt->close();
+        $result->free();
+        return $yaComento;
+    }
+    
+
     public function getHora() {
         return $this->hora;
     }
