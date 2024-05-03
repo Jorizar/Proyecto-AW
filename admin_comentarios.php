@@ -29,7 +29,7 @@ if (!empty($comentarios)) {
                         <input type='submit' value='Editar'>
                     </form>";
         
-        $deleteForm = "<form method='POST' action='includes/src/comentarios/eliminar_comentario_admin.php' onsubmit='return confirm(\"¿Estás seguro?\");'>
+        $deleteForm = "<form method='POST' action='includes/src/comentarios/eliminar_comentario.php' onsubmit='return confirm(\"¿Estás seguro?\");'>
                             <input type='hidden' name='comentario_id' value='{$comentario->getComentarioId()}'>
                             <input type='submit' value='Eliminar'>
                        </form>";
