@@ -61,7 +61,7 @@ function peliculasGeneros() {
 }
 function peliculasDecada() {
     $contenidoPrincipal = '';
-    for ($i = 1930; $i <= 2000; $i += 10) {
+    for ($i = 1970; $i <= 2000; $i += 10) {
         $resultDecada = Pelicula::peliculasPorAnnio($i, $i+10, -1);
         if ($resultDecada && count($resultDecada) > 0) {
             $decada = str_replace("19", "", $i);
@@ -84,7 +84,7 @@ function mostrarCarrusel($result, $nombreGrupo){
         return "<p>No hay peliculas.</p>";
     }
     $contenidoPrincipal = '';
-    // Agregar el encabezado "Peliculas mejor valoradas"
+    
     $contenidoPrincipal .= '<div class="destacadas">';
     $contenidoPrincipal .= '<h1>'.$nombreGrupo.'</h1>';
     $contenidoPrincipal .= '</div>';
@@ -97,7 +97,7 @@ function mostrarCarrusel($result, $nombreGrupo){
     $contenidoPrincipal .= '<div class="indicadores">';
     $contenidoPrincipal .= '</div>'; 
 
-    // Continuar con el contenido principal
+    
     $contenidoPrincipal .= '<div class="carrusel">';
     $contenidoPrincipal .= '<div class="peliculas-container">';
 
