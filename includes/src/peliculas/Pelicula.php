@@ -137,7 +137,7 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
-                    'val_imdb' => $fila['Val_IMDb']
+                    'val_IMDb' => $fila['Val_IMDb']
                 ];
             }
             $result->free();
@@ -150,7 +150,11 @@ class Pelicula
 
     public static function peliculasPorGenero($idGenero, $n){ //Devuelve las mejores n peliculas de un género
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $sql = "SELECT id, titulo, portada FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC LIMIT $n";
+        if ($n >0) {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC LIMIT $n";
+        } else {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE genero = $idGenero ORDER BY Val_IMDb DESC";
+        }
         $result = $conn->query($sql);
         $peliculas = [];
         if ($result) {
@@ -159,6 +163,7 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
+                    'val_IMDb' => $fila['Val_IMDb']
                 ];
             }
             $result->free();
@@ -171,8 +176,12 @@ class Pelicula
 
     public static function peliculasPorAnnio($annio_inf, $annio_sup, $n) { //Devuelve las mejores n peliculas de un periodo de años
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $sql = "SELECT id, titulo, portada FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC LIMIT $n";
-        $result = $conn->query($sql);
+        if ($n>0) {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC LIMIT $n";
+        } else {
+            $sql = "SELECT id, titulo, portada, Val_IMDb FROM peliculas WHERE annio >= $annio_inf AND annio < $annio_sup ORDER BY annio ASC";
+        }
+            $result = $conn->query($sql);
         $peliculas = [];
         if ($result) {
             while ($fila = $result->fetch_assoc()) {
@@ -180,6 +189,7 @@ class Pelicula
                     'id' => $fila['id'],
                     'titulo' => $fila['titulo'],
                     'portada' => $fila['portada'],
+                    'val_IMDb' => $fila['Val_IMDb']
                 ];
             }
             $result->free();
