@@ -49,6 +49,13 @@ class FormularioAgregaNoticia extends Formulario
                     <textarea id="texto" name="texto" placeholder="Añade aquí la noticia" rows="10" required></textarea>
                     {$erroresCampos['texto']}
                 </div>
+                <div class="add-campo-rol">
+                    <label for="suscripcion">Suscripción:</label>
+                    <select id="suscripcion" name="suscripcion">
+                    <option value="0">free</option>
+                    <option value="1">€ Premium €</option>
+                    </select>
+                </div>
                 <div class="anyadir-boton">
                     <button type="submit" name="add">Añadir</button>
                 </div>
@@ -69,6 +76,7 @@ class FormularioAgregaNoticia extends Formulario
         $fecha = isset($datos['fecha']) ? $datos['fecha'] : '';
         $texto = isset($datos['texto']) ? $datos['texto'] : '';
         $portada = isset($_FILES['portada']) ? $_FILES['portada']: '';
+        $rol = isset($datos['suscripcion']) ? $datos['suscripcion'] : '';
 
          // Comprobamos si exxiste una pelicula con ese mismo titulo
          $noticias = Noticia::buscaPorTitulo($titulo);
@@ -109,7 +117,7 @@ class FormularioAgregaNoticia extends Formulario
 
         if (count($this->errores) === 0) {
             //$peliculas contiene un array de películas si la búsqueda ha encontrado alguna coincidencia, false en caso contrario
-            $noticia = Noticia::crea($titulo, $portada, $texto, $autor, $fecha);
+            $noticia = Noticia::crea($titulo, $portada, $texto, $autor, $fecha, $rol);
         
             if ($noticia === false) {
                 echo "Error: No se ha podido crear la pelicula";

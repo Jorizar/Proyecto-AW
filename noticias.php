@@ -2,41 +2,47 @@
 require_once __DIR__.'/includes/config.php';
 
 use es\ucm\fdi\aw\Aplicacion;
-
+use es\ucm\fdi\aw\noticias\Noticia;
 $tituloPagina = 'Noticias';
 $contenidoPrincipal = '';
 // Obtener la instancia de la aplicación
 $app = Aplicacion::getInstance();
 
 // Obtener la conexión a la base de datos desde la instancia de la aplicación
-$conexion = $app->getConexionBd();
+$result = Noticia::buscarTodas(5);
 
-// Obtener las 5 últimas noticias de la base de datos
-$query = "SELECT titulo, post_id, portada, texto, autor, fecha FROM noticias";
-$result = $conexion->query($query);
-
-if ($result && $result->num_rows > 0) {
+if ($result && count($result) > 0) {
     // Construir el contenido de las noticias
     $contenidoPrincipal = '<h2>Noticias</h2><div class="noticias">';
-    while ($row = $result->fetch_assoc()) {
-        $idNoticia = $row['post_id']; 
-        $tituloNoticia = $row['titulo'];
-        $portadaNoticia = $row['portada']; 
-        $nombreAutor = $row['autor'];
-        $fechaNoticia = $row['fecha'];
-     
-
-        // Agregar el HTML de cada noticia
+    foreach ($result as $row) {
+        $idNoticia = $row->getID(); 
+        $tituloNoticia = $row->getTitulo();
+        $portadaNoticia = $row->getPortada(); 
+        $nombreAutor = $row->getAutor();
+        $fechaNoticia = $row->getFecha();
+        $rolVisualizacion = $row->getRol();
+        
         $contenidoPrincipal .= "<div class='noticia'>";
-        $contenidoPrincipal .= "<img src='$portadaNoticia' alt='Portada' class='portada-noticia'>"; 
-        $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia</a></h3>";
+        $contenidoPrincipal .= "<img src='$portadaNoticia' alt='Portada' class='portada-noticia'>";
+    
+        // Verificar el rol para determinar la acción del enlace
+        if ($rolVisualizacion == 1) {
+            if (!$app->usuarioLogueado() || $_SESSION['rol'] == "free") {
+                $contenidoPrincipal .= "<h3><a href='login.php'>$tituloNoticia (Solo para Usuarios € Premium €)</a></h3>";
+            } else {
+                // Rol == 0, puede ver la noticia
+                $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia. (Solo para Usuarios € Premium €)</a></h3>";
+            }
+        } else {
+            $contenidoPrincipal .= "<h3><a href='login.php'>$tituloNoticia</a></h3>";
+        }        
+    
         $contenidoPrincipal .= "<p class='autor'><i>$nombreAutor</i> </p>";
         $contenidoPrincipal .= "<p class='fecha'>$fechaNoticia</p>";
-        //$contenidoPrincipal .= "<p>$contenidoNoticia</p>";
         $contenidoPrincipal .= "</div>";
     }
     $contenidoPrincipal .= '</div>';
-} else {
+    } else {
     $contenidoPrincipal = "<p>No se encontraron noticias.</p>";
 }
 

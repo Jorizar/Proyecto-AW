@@ -11,8 +11,9 @@ class Noticia
     private $texto;
     private $autor;
     private $fecha;
+    private $rol;
 
-    public function __construct($titulo, $post_id=null, $portada, $texto, $autor, $fecha)
+    public function __construct($titulo, $post_id=null, $portada, $texto, $autor, $fecha, $rol)
     {
         $this->titulo = $titulo;
         $this->post_id = $post_id;
@@ -20,6 +21,7 @@ class Noticia
         $this->texto = $texto;
         $this->autor = $autor;
         $this->fecha = $fecha;
+        $this->rol = $rol;
     }
 
     public function getTitulo() {
@@ -40,20 +42,23 @@ class Noticia
     public function getFecha() {
         return $this->fecha;
     }
+    public function getRol() {
+        return $this->rol;
+    }
 
-    public static function crea($titulo, $portada, $texto, $autor, $fecha)
+    public static function crea($titulo, $portada, $texto, $autor, $fecha, $rol)
     { //Falla el id (se crea 0)
-        $noticia = new Noticia($titulo, null, $portada, $texto, $autor, $fecha);
+        $noticia = new Noticia($titulo, null, $portada, $texto, $autor, $fecha, $rol);
         return $noticia->guarda();
     }
 
     private function guarda()
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $sql = "INSERT INTO noticias (titulo, portada, texto, autor, fecha) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO noticias (titulo, portada, texto, autor, fecha, rol) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param('sssss', $this->titulo, $this->portada, $this->texto, $this->autor, $this->fecha);
+            $stmt->bind_param('sssssi', $this->titulo, $this->portada, $this->texto, $this->autor, $this->fecha, $this->rol);
             if ($stmt->execute()) {
                 $this->comentario_id = $stmt->insert_id;
                 $stmt->close();
@@ -70,15 +75,19 @@ class Noticia
     }
     
 
-    public static function buscarTodas() {
+    public static function buscarTodas($n) {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        $sql = "SELECT * FROM noticias";
+        if ($n >0) {
+            $sql = "SELECT * FROM noticias LIMIT $n";
+        } else {
+            $sql = "SELECT * FROM noticias LIMIT $n";
+        }
         $result = $conn->query($sql);
     
         $noticias = [];
         if ($result) { 
             while ($fila = $result->fetch_assoc()) {
-                $noticias[] = new Noticia($fila['titulo'], $fila['post_id'], $fila['portada'], $fila['texto'], $fila['autor'], $fila['fecha']);
+                $noticias[] = new Noticia($fila['titulo'], $fila['post_id'], $fila['portada'], $fila['texto'], $fila['autor'], $fila['fecha'], $fila['rol']);
             }
             $result->free();
         } else {
@@ -111,7 +120,7 @@ class Noticia
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $noticias = new Noticia($fila['titulo'], $fila['post_id'], $fila['portada'], $fila['texto'], $fila['autor'], $fila['fecha']);
+                $noticias = new Noticia($fila['titulo'], $fila['post_id'], $fila['portada'], $fila['texto'], $fila['autor'], $fila['fecha'], $fila['rol']);
             }
             $rs->free();
         } else {
@@ -154,7 +163,7 @@ class Noticia
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $result = new Noticia($fila['titulo'], $fila['post_id'], $fila['portada'], $fila['texto'], $fila['autor'], $fila['fecha']);
+                $result = new Noticia($fila['titulo'], $fila['post_id'], $fila['portada'], $fila['texto'], $fila['autor'], $fila['fecha'], $fila['rol']);
             }
             $rs->free();
         } else {

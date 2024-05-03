@@ -77,7 +77,8 @@ CREATE TABLE IF NOT EXISTS `noticias` (
   `portada` varchar(100) DEFAULT NULL,
   `texto` text NOT NULL,
   `autor` varchar(40) NOT NULL,
-  `fecha` varchar(20) NOT NULL
+  `fecha` varchar(20) NOT NULL,
+  `rol` int(1) DEFAULT 0 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

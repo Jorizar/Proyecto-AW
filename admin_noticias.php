@@ -28,7 +28,7 @@ $contenidoPrincipal .= "<div class= 'añadirNoticia'>
 
 $contenidoPrincipal .= '<h3>Todas las Noticias</h3>';
 
-$noticias = Noticia::buscarTodas();
+$noticias = Noticia::buscarTodas(0);
 
 if (!empty($noticias)) {
 
