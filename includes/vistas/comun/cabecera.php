@@ -33,8 +33,6 @@ function mostrarPerfil()
 }
 
 ?>
-
-<body>
 <header>
     <div class="logo">
         <a href="<?= $app->resuelve('/index.php')?>">
@@ -57,4 +55,3 @@ function mostrarPerfil()
     </div>
 </header>
 
-</body>
