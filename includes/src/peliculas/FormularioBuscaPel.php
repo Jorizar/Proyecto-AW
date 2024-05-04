@@ -73,13 +73,19 @@ class FormularioBuscaPel extends Formulario
     }
     
     protected function procesaFormulario(&$datos)
-    {
-        // Recoger los datos del formulario
-            $tituloPelicula = isset($datos['tituloPelicula']) ? $datos['tituloPelicula'] : '';
-            $directorPelicula = isset($datos['directorPelicula']) ? $datos['directorPelicula'] : '';
-            $generoPelicula = ($datos['generoPelicula'] != -1) ? $datos['generoPelicula'] : '';
-            $annioPelicula = isset($datos['annioPelicula']) ? $datos['annioPelicula'] : '';
+{
+    // Recoger los datos del formulario
+    $tituloPelicula = isset($datos['tituloPelicula']) ? $datos['tituloPelicula'] : '';
+    $directorPelicula = isset($datos['directorPelicula']) ? $datos['directorPelicula'] : '';
+    $generoPelicula = ($datos['generoPelicula'] != -1) ? $datos['generoPelicula'] : '';
+    $annioPelicula = isset($datos['annioPelicula']) ? $datos['annioPelicula'] : '';
 
+
+    if ($annioPelicula === '0') {
+        // Limpiar la variable de sesión de búsqueda de películas
+        unset($_SESSION['busquedaPeliculas']);
+        $this->errores[] = "Por favor, introduce un año de estreno válido.";
+    } else {
         if (count($this->errores) === 0) {
             //$peliculas contiene un array de películas si la búsqueda ha encontrado alguna coincidencia, false en caso contrario
             $peliculas = Pelicula::buscaPelicula($tituloPelicula, $directorPelicula, $generoPelicula, $annioPelicula);
@@ -92,4 +98,6 @@ class FormularioBuscaPel extends Formulario
             }
         }
     }
+}
+
 }
