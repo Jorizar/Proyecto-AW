@@ -75,13 +75,11 @@ class Noticia
     }
     
 
-    public static function buscarTodas($n) {
+    public static function buscarTodas() {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        if ($n >0) {
-            $sql = "SELECT * FROM noticias LIMIT $n";
-        } else {
-            $sql = "SELECT * FROM noticias LIMIT $n";
-        }
+        
+        $sql = "SELECT * FROM noticias";
+      
         $result = $conn->query($sql);
     
         $noticias = [];

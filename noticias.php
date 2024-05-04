@@ -9,7 +9,7 @@ $contenidoPrincipal = '';
 $app = Aplicacion::getInstance();
 
 // Obtener la conexión a la base de datos desde la instancia de la aplicación
-$result = Noticia::buscarTodas(5);
+$result = Noticia::buscarTodas();
 
 if ($result && count($result) > 0) {
     // Construir el contenido de las noticias

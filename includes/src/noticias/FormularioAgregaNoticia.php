@@ -100,9 +100,8 @@ class FormularioAgregaNoticia extends Formulario
                 }
 
             $allowTypes = array('jpg', 'png', 'jpeg');
-            if(in_array($filetype, $allowTypes)){ // Comprobamos que la extensión de la imagen se ajusta a las requeridas
+            if(in_array($filetype, $allowTypes)){ 
                 if(move_uploaded_file($_FILES['portada']["tmp_name"], $targetFilePath)) {
-                    // Guardar la ruta de la portada en la variable $portada
                     $portada = './' . $targetFilePath;
                 } else {
                     $this->errores['portada'] = 'Hubo un error al subir el fichero';
