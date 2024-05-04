@@ -14,7 +14,7 @@ INSERT INTO `usuarios` (`username`, `password`, `user_id`, `rol`, `email`, `foto
 ('user', '$2a$12$WF1/Gum.Y7voVfeQXFzJgOS.b.8T9MoFLUlv8/pPnVltM2PV8PtHS', 1, 'premium', 'user@gmail.com', './img/fotosPerfil/2.png'),
 ('admin', '$2a$12$Gk7ChJIjOlbckeYWvQgWEeaR7dLOirztJPWszesu2Trxb3cgdwJrm', 2, 'admin', 'admin@gmail.com', './img/fotosPerfil/admin.png'),
 ('critico', '$2a$12$xZ8cPwpRwobjsLwknsMAp.X8IFFGVUZs2BmcrtbXPP.5V.L.RNHxe', 3, 'critico', 'critico@gmail.com', './img/fotosPerfil/1.png'),
-('free', '$2a$12$jdFGSCXyzLyl/3dAHho5bu7L2tWPqEIQ08oPLkBO5XaxOme.QNMd.', 4, 'premium', 'user2@gmail.com', './img/fotosPerfil/1.png'),
+('free', '$2a$12$jdFGSCXyzLyl/3dAHho5bu7L2tWPqEIQ08oPLkBO5XaxOme.QNMd.', 4, 'free', 'user2@gmail.com', './img/fotosPerfil/1.png'),
 ('premium', '$2a$12$UdlTk8bnmPvPItUbKrOHT.sAj0s0LMdIVauHVWcxLQg2yxr64GeR2
 ', 5, 'premium', 'premium@gmail.com', './img/fotosPerfil/1.png'),
 ('quentin_tarantino', '$2a$12$n1gsoBoizdiuHSlKjPtlW.yIKVq03QxHBuDYH.mxJhGo2noZOd4OO', 7, 'director', 'quentin@gmail.com', './img/fotosPerfil/quentin.png'),
