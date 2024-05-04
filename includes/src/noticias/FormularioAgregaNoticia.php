@@ -24,7 +24,6 @@ class FormularioAgregaNoticia extends Formulario
         <div class="agrega-noticia">
         </div>
         <div class="agregar-noticia-container">
-            <form action="tu_script.php" method="post" enctype="multipart/form-data">
                 <div class="add-campo-titulo">
                     <label for="titulo">Título:</label>
                     <input id="titulo" type="text" name="titulo" required/>
@@ -59,7 +58,6 @@ class FormularioAgregaNoticia extends Formulario
                 <div class="anyadir-boton">
                     <button type="submit" name="add">Añadir</button>
                 </div>
-            </form>
         </div>
     EOS;
         return $html;
