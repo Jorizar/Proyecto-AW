@@ -25,11 +25,15 @@ if ($result && count($result) > 0) {
         $contenidoPrincipal .= "<div class='noticia'>";
         $contenidoPrincipal .= "<img src='$portadaNoticia' alt='Portada' class='portada-noticia'>";
     
-        // Verificar el rol para determinar la acción del enlace
+
         if ($rolVisualizacion == 1) {
-            if (!$app->usuarioLogueado() || $_SESSION['rol'] == "free") {
+            if (!$app->usuarioLogueado()) {
+                $contenidoPrincipal .= "<h3><a href='login.php'>$tituloNoticia (Solo para Usuarios € Premium €)</a></h3>";
+            } 
+            elseif ($_SESSION['rol'] == "free") {
                 $contenidoPrincipal .= "<h3><a href='cambioPlan.php'>$tituloNoticia (Solo para Usuarios € Premium €)</a></h3>";
-            } else {
+            } 
+            else {
                 // Rol == 0, puede ver la noticia
                 $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia (Solo para Usuarios € Premium €)</a></h3>";
             }
