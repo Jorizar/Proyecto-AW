@@ -28,21 +28,22 @@ if ($result && count($result) > 0) {
 
         if ($rolVisualizacion == 1) {
             if (!$app->usuarioLogueado()) {
-                $contenidoPrincipal .= "<h3><a href='login.php'>$tituloNoticia (Solo para Usuarios € Premium €)</a></h3>";
+                $contenidoPrincipal .= "<h3><a href='login.php'>$tituloNoticia <span class='solo-premium'> (Noticia Premium €)</span></a></h3>";
             } 
             elseif ($_SESSION['rol'] == "free") {
-                $contenidoPrincipal .= "<h3><a href='cambioPlan.php'>$tituloNoticia (Solo para Usuarios € Premium €)</a></h3>";
+                $contenidoPrincipal .= "<h3><a href='cambioPlan.php'>$tituloNoticia <span class='solo-premium'> (Noticia Premium €)</span></a></h3>";
             } 
             else {
                 // Rol == 0, puede ver la noticia
-                $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia (Solo para Usuarios € Premium €)</a></h3>";
+                $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia <span class='solo-premium'> (Noticia Premium €)</span></a></h3>";
             }
         } else {
-            $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia</a></h3>";        }        
-    
+            $contenidoPrincipal .= "<h3><a href='ver_noticia.php?id=$idNoticia'>$tituloNoticia</a></h3>";        
+        }        
+        
         $contenidoPrincipal .= "<p class='autor'><i>$nombreAutor</i> </p>";
         $contenidoPrincipal .= "<p class='fecha'>$fechaNoticia</p>";
-        $contenidoPrincipal .= "</div>";
+        $contenidoPrincipal .= "</div>";        
     }
     $contenidoPrincipal .= '</div>';
     } else {
