@@ -531,6 +531,11 @@ main {
     color: rgba(127,96,3,1); /* Cambia el color al pasar el cursor */
 }
 
+.solo-premium {
+    color: rgb(99, 195, 96);
+    text-shadow: 2px 2px 5px rgb(17, 104, 14);
+}
+
 .imagen-perfil-cabecera {
     width: 50px; /* Ancho de la imagen de perfil */
     height: 50px; /* Altura de la imagen de perfil */
