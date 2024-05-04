@@ -84,7 +84,7 @@ class FormularioBuscaPel extends Formulario
     if ($annioPelicula === '0') {
         // Limpiar la variable de sesión de búsqueda de películas
         unset($_SESSION['busquedaPeliculas']);
-        $this->errores[] = "Por favor, introduce un año de estreno válido.";
+        $this->errores[] = "Introduce un año de estreno válido";
     } else {
         if (count($this->errores) === 0) {
             //$peliculas contiene un array de películas si la búsqueda ha encontrado alguna coincidencia, false en caso contrario
