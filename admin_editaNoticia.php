@@ -20,7 +20,6 @@ if (empty($id_noticia)) {
 $formCambioDatos = new FormularioEditaNoticia($id_noticia);
 $formCambioDatos = $formCambioDatos->gestiona();
 
-echo "El id de la noticia es: ".$id_noticia."";
 
 $tituloPagina = 'Cambiar Datos de la Noticia';
 $contenidoPrincipal=<<<EOF
