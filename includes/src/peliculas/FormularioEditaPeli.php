@@ -16,54 +16,44 @@ class FormularioEditaPeli extends Formulario
     
     protected function generaCamposFormulario(&$datos)
     {
-            // Obtener la película con el ID proporcionado
         $pelicula = Pelicula::buscaPorId($this->pelicula_id);
-
-        // Si no se encuentra la película, mostrar mensaje de error
         if (!$pelicula) {
             return "No se encontró la película con el ID {$this->pelicula_id}.";
         }
-
-        // Obtener los valores de la película para prellenar los campos del formulario
-            $tituloP = $pelicula->getTitulo();
-            $directorP = $pelicula->getDirector();
-            $annioP = $pelicula->getAnnio();
-            $sinopsisP = $pelicula->getSinopsis();
-            $imdbP = $pelicula->getVal_IMDb();
-            $repartoP = $pelicula->getReparto();
-
-
-            //Obtenemos los géneros de las películas
+    
+        $tituloP = $pelicula->getTitulo();
+        $directorP = $pelicula->getDirector();
+        $annioP = $pelicula->getAnnio();
+        $sinopsisP = $pelicula->getSinopsis();
+        $imdbP = $pelicula->getVal_IMDb();
+        $repartoP = $pelicula->getReparto();
+        $repartoArray = json_decode($repartoP, true);
+    
         $generos = Pelicula::getGeneros();
-
-        $erroresCampos = self::generaErroresCampos(['tituloPelicula', 'directorPelicula', 'annioPelicula', 'generoPelicula',  'sinopsisPelicula', 'portada', 'reparto', 'imdb'], $this->errores, 'span', array('class' => 'error'));
-
-        $htmlpeliId= '';
-
-        if (!empty($this->pelicula_id)) {
-            $htmlpeliId = "<input type='hidden' name='id_peli' value='{$this->pelicula_id}'>";
-        }
-
-        // Se generan los campos del formulario para cambiar los datos del usuario.
+        $erroresCampos = self::generaErroresCampos(
+            ['tituloPelicula', 'directorPelicula', 'annioPelicula', 'generoPelicula', 'sinopsisPelicula', 'portada', 'reparto', 'imdb'], 
+            $this->errores, 
+            'span', 
+            array('class' => 'error')
+        );
+    
         $html = <<<EOF
-        <div class="titulo_cambiarDatosPel">
-        </div>
         <div class="contenedor_cambiarDatosPel">
             <div class="cambiar-datos-peli-formulario">
-                {$htmlpeliId}
+                <input type='hidden' name='id_peli' value='{$this->pelicula_id}'>
                 <div class="add-campo-titulo">
                     <label for="tituloPelicula">Título:</label>
-                    <input id="tituloPelicula" type="text" name="tituloPelicula"  placeholder="$tituloP"/>
+                    <input id="tituloPelicula" type="text" name="tituloPelicula" placeholder="$tituloP"/>
                     {$erroresCampos['tituloPelicula']}
                 </div>
                 <div class="add-campo-director">
                     <label for="directorPelicula">Director:</label>
-                    <input id="directorPelicula" type="text" name="directorPelicula"    value="$directorP"/>
+                    <input id="directorPelicula" type="text" name="directorPelicula" value="$directorP"/>
                     {$erroresCampos['directorPelicula']}
                 </div>
                 <div class="add-campo-anio">
                     <label for="annioPelicula">Año de estreno:</label>
-                    <input id="annioPelicula" type="text" name="annioPelicula"  value="$annioP"/>
+                    <input id="annioPelicula" type="text" name="annioPelicula" value="$annioP"/>
                     {$erroresCampos['annioPelicula']}
                 </div>
                 <div class="portada-container">
@@ -77,39 +67,51 @@ class FormularioEditaPeli extends Formulario
                     {$erroresCampos['sinopsisPelicula']}
                 </div>
                 <div class="add-campo-reparto">
-                    <label for="reparto">Actores/Personajes (separados por comas entre diferentes actores):</label>
-                    <textarea id="reparto" name="reparto" rows="5">$repartoP</textarea>
-                    {$erroresCampos['reparto']}
+                    <label>Actores/Personajes:</label>
+                    <div id="reparto-container">
+    EOF;
+        foreach ($repartoArray as $item) {
+            $actor = htmlspecialchars($item['nombre'], ENT_QUOTES);
+            $personaje = htmlspecialchars($item['personaje'], ENT_QUOTES);
+            $html .= <<<EOF
+                        <div class="reparto-item">
+                            <input type="text" name="actor[]" placeholder="Nombre del actor" required value="$actor">
+                            <input type="text" name="personaje[]" placeholder="Personaje" required value="$personaje">
+                            <button type="button" class="eliminar-campo">Eliminar</button>
+                        </div>
+    EOF;
+        }
+        $html .= <<<EOF
+                    </div>
+                    <button type="button" id="agregar-campo">Agregar Actor/Personaje</button>
                 </div>
                 <div class="add-campo-genero">
                     <label for="generoPelicula">Género:</label>
                     <select id="generoPelicula" name="generoPelicula">
                         <option value="-1">Seleccionar</option>
-                        {$erroresCampos['generoPelicula']}
     EOF;
-    
-        if ($generos != false) {
-            foreach ($generos as $id => $genero) {
-                $html .= "<option value='$id'>$genero</option>";
-            }
-            $html .= "</select>{$erroresCampos['generoPelicula']}</div>";
+        foreach ($generos as $id => $genero) {
+            $selected = ($id == $pelicula->getGenero()) ? 'selected' : '';
+            $html .= "<option value='$id' $selected>$genero</option>";
         }
-    
         $html .= <<<EOF
+                    </select>
+                </div>
                 <div class="add-campo-imdb">
                     <label for="imdb">Puntuación en IMDb:</label>
-                    <input id="imdb" type="text" name="imdb"    value="$imdbP" />
-                    {$erroresCampos['imdb']}
+                    <input id="imdb" type="text" name="imdb" value="$imdbP" />
                 </div>
                 <div>
                     <button type="submit" name="cambiar_datos">Cambiar Datos</button>
                 </div>
             </div>
         </div>
+        <script src="js/reparto.js"></script>
     EOF;
     
         return $html;
     }
+    
 
     protected function procesaFormulario(&$datos)
     {
@@ -200,6 +202,38 @@ class FormularioEditaPeli extends Formulario
                     $this->errores['portada'] = 'La imagen que ha seleccionado debe tener extensión .jpg, .png o .jpeg'; 
                 }
 
+            }
+
+                    // Processing actor and character data
+            $repartoActores = $datos['actor'] ?? [];
+            $repartoPersonajes = $datos['personaje'] ?? [];
+
+            $reparto = [];
+            foreach ($repartoActores as $index => $actor) {
+                if (!empty($actor) && !empty($repartoPersonajes[$index])) {
+                    $reparto[] = [
+                        'nombre' => trim($actor),
+                        'personaje' => trim($repartoPersonajes[$index])
+                    ];
+                }
+            }
+
+            $jsonReparto = json_encode($reparto);
+
+            if (!empty($jsonReparto)) {
+                $result = Pelicula::actualizaReparto($this->pelicula_id, $jsonReparto);
+                if (!$result) {
+                    $this->errores['reparto'] = "Error al actualizar el reparto de la película.";
+                }
+            }
+
+            // Verify if there are any errors before redirection
+            if (!empty($this->errores)) {
+                return $this->generaCamposFormulario($datos); // Redisplay the form with errors
+            } else {
+                // Redirect to the admin page or elsewhere upon successful update
+                header('Location: ' . $this->urlRedireccion);
+                exit();
             }
 
             $relativePath = '/AW/Proyecto-AW/admin_peliculas.php';
