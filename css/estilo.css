@@ -862,6 +862,7 @@ main {
 .add-campo-anio label,
 .add-campo-portada label,
 .add-campo-sinopsis label,
+.add-campo-reparto label,
 .add-campo-imdb label,
 .add-campo-genero label {
     display: block;
@@ -873,6 +874,7 @@ main {
 .add-campo-anio input,
 .add-campo-portada input,
 .add-campo-sinopsis textarea,
+.add-campo-reparto textarea,
 .add-campo-imdb input,
 .add-campo-genero select {
     width: 100%;
@@ -882,36 +884,9 @@ main {
     box-sizing: border-box;
 }
 
-.add-campo-reparto label {
-    display: block;
-    font-weight: bold;
-}
 
-.reparto-item {
 
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 10px;
-}
 
-.reparto-item input {
-    flex: 1;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.reparto-item button {
-    padding: 10px 20px;
-    background-color: rgba(127, 96, 3, 1);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
 
 

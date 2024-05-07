@@ -78,7 +78,7 @@ class FormularioEditaPeli extends Formulario
                 </div>
                 <div class="add-campo-reparto">
                     <label for="reparto">Actores/Personajes (separados por comas entre diferentes actores):</label>
-                    <input id="reparto" type="text" name="reparto" value="$repartoP"/>
+                    <textarea id="reparto" name="reparto" rows="5">$repartoP</textarea>
                     {$erroresCampos['reparto']}
                 </div>
                 <div class="add-campo-genero">

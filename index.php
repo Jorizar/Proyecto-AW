@@ -22,11 +22,6 @@ $contenidoPrincipal .= <<<BUSCADOR
         </div>
 BUSCADOR;
 
-// Obtener la instancia de la aplicación
-$app = \es\ucm\fdi\aw\Aplicacion::getInstance();
-
-// Obtener la conexión a la base de datos desde la instancia de la aplicación
-$conexion = $app->getConexionBd();
 
 // Se muestran los Carruseles de Peliculas.
 $contenidoPrincipal .= mostrarCarruselesPeliculas();
