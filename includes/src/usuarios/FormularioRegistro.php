@@ -36,25 +36,25 @@ class FormularioRegistro extends Formulario
             <div class="registro-usuario">
                 <label for="nombreUsuario">Nombre de usuario:</label>
                 <input id="nombreUsuario" type="text" name="nombreUsuario" value="$nombreUsuario" />
-                <div id="nombreUsuarioError" class="error" style="display: none;"></div>
+                <span id="nombreUsuarioError" class="error"</span>
                 {$erroresCampos['nombreUsuario']}
             </div>
             <div class="registro-password">
                 <label for="password">Contraseña:</label>
                 <input id="password" type="password" name="password" />
-                <div id="passwordError" class="error" style="display: none;"></div>
+                <span id="passwordError" class="error"</span>
                 {$erroresCampos['password']}
             </div>
             <div class="registro-password2">
                 <label for="password2">Repite la contraseña:</label>
                 <input id="password2" type="password" name="password2" />
-                <div id="password2Error" class="error" style="display: none;"></div>
+                <span id="password2Error" class="error"</span>
                 {$erroresCampos['password2']}
             </div>
             <div class="registro-email">
                 <label for="email">Introduce el email:</label>
                 <input id="email" type="email" name="email" />
-                <div id="emailError" class="error" style="display: none;"></div>
+                <span id="emailError" class="error"</span>
                 {$erroresCampos['email']}
             </div>
             <div class="registro-rol">
