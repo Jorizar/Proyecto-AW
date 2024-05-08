@@ -537,6 +537,20 @@ class Pelicula
         }
     }
 
+    public static function actualizaReparto($pelicula_id, $jsonReparto) {
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET reparto='%s' WHERE id=%d",
+            $conn->real_escape_string($jsonReparto),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
+
     public static function cambiarGenero($pelicula_id,$generoPelicula){
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("UPDATE peliculas SET genero='%s' WHERE id=%d",
