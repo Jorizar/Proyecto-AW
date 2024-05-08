@@ -551,4 +551,19 @@ class Pelicula
             return false;
         }
     }
+
+    public static function cambiarReparto($pelicula_id,$nuevoReparto){
+        $conn = Aplicacion::getInstance()->getConexionBd();
+        $query = sprintf("UPDATE peliculas SET reparto='%s' WHERE id=%d",
+            $conn->real_escape_string($nuevoReparto),
+            $pelicula_id
+        );
+        if ($conn->query($query)) {
+            return true;
+        } 
+        else {
+            error_log("Error BD ({$conn->errno}): {$conn->error}");
+            return false;
+        }
+    }
 }
