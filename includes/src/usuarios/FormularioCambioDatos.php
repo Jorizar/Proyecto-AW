@@ -26,13 +26,13 @@ class FormularioCambioDatos extends Formulario
                 <div class="nombre_cambioPlan">
                     <label for="nuevo_nombre">Nuevo Nombre:</label>
                     <input type="text" id="nuevo_nombre" name="nuevo_nombre">
-                    <div id="nuevo_nombreError" class="error" style="display: none;"></div>
+                    <span id="nuevo_nombreError" class="error"></span>
                     {$erroresCampos['nuevo_nombre']}
                 </div>
                 <div class="email_cambioPlan">
                     <label for="nuevo_email">Nuevo Correo Electrónico:</label>
                     <input type="email" id="nuevo_email" name="nuevo_email">
-                    <div id="nuevo_emailError" class="error" style="display: none;"></div>
+                    <span id="nuevo_emailError" class="error"></span>
                     {$erroresCampos['nuevo_email']}
                 </div>
                 <div class="fotos_cambioDatos-container">

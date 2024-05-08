@@ -14,6 +14,7 @@ class FormAgregaPelLista extends Formulario
     protected function generaCamposFormulario(&$datos)
     {
         
+        
          // Se generan los mensajes de error si existen.
          $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
          $erroresCampos = self::generaErroresCampos(['lista_seleccionada'], $this->errores, 'span', array('class' => 'error'));
@@ -21,6 +22,11 @@ class FormAgregaPelLista extends Formulario
          // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
         //Hacemos una consulta para obtener las listas del usuario
         $listas_user = Lista::getListasUser($_SESSION['idUsuario']);
+        
+        if (count($listas_user) == 0) {
+
+            return "Crea una lista para poder añadirla";
+        }
 
          $html = <<<EOS
          $htmlErroresGlobales
