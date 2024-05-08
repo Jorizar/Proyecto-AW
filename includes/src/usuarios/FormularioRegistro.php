@@ -158,7 +158,7 @@ class FormularioRegistro extends Formulario
         if ($usuario) {
             $this->errores[] = "El usuario ya existe";
         } else {
-            $usuario = Usuario::crea($nombreUsuario, $password, $id, $rol, $email, $foto);
+            $usuario = Usuario::crea($nombreUsuario, $password, null, $rol, $email, $foto);
             $app = Aplicacion::getInstance();
             if (!$app->tieneRol('admin')) {
             $app->login($usuario);
