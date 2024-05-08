@@ -73,13 +73,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (texto.length === 0 || texto.length > 500) { // Suponiendo un máximo de 500 caracteres
                 alert("Por favor, asegúrate de que tu comentario no esté vacío y no exceda los 500 caracteres.");
-                //event.preventDefault();
+
                 return;
             }
 
             if (valoracion < 1 || valoracion > 10) {
                 alert("La valoración debe estar entre 1 y 10.");
-                //event.preventDefault();
+
                 return;
             }
             $.ajax({
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 data: formData,
                 success: function(data) {
                     location.reload();
-                    //alert("Datos enviados correctamente");
+
                 },
                 error: function() {
                     alert("Error en el envío de datos");
