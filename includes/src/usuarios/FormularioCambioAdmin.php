@@ -35,11 +35,13 @@ class FormularioCambioAdmin extends Formulario
                 <div class="nombre_cambioPlan">
                     <label for="nuevo_nombre">Nuevo Nombre:</label>
                     <input type="text" id="nuevo_nombre" name="nuevo_nombre">
+                    <span id="nuevo_nombreError" class="error"></span>
                     {$erroresCampos['nuevo_nombre']}
                 </div>
                 <div class="email_cambioPlan">
                     <label for="nuevo_email">Nuevo Correo Electrónico:</label>
                     <input type="email" id="nuevo_email" name="nuevo_email">
+                    <span id="nuevo_emailError" class="error"></span>
                     {$erroresCampos['nuevo_email']}
                 </div>
                 <div class="fotos_cambioDatos-container">
@@ -51,6 +53,8 @@ class FormularioCambioAdmin extends Formulario
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="js/validarFormulario.js"></script>
 
         EOF;
         return $html;
