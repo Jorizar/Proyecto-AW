@@ -3,16 +3,16 @@
 /**
  * Parámetros de conexión a la BD
  */
-define('BD_HOST', 'localhost');
-define('BD_NAME', 'proyectoaw');
-define('BD_USER', 'proyectoAW');
-define('BD_PASS', '');
+define('BD_HOST', 'vm012.swarm.test');
+define('BD_NAME', '7thArt');
+define('BD_USER', 'sevenart');
+define('BD_PASS', 'sevenart');
 
 /**
  * Parámetros de configuración utilizados para generar las URLs y las rutas a ficheros en la aplicación
  */
 define('RAIZ_APP', __DIR__);
-define('RUTA_APP', '/AW/Proyecto-AW');
+define('RUTA_APP', '/AW/Proyecto-AW'); //HAY QUE CAMBIAR ESTO PARA QUE FUNCIONE EN LA RAIZ DEL VPS
 define('RUTA_IMGS', RUTA_APP.'img/');
 define('RUTA_CSS', RUTA_APP.'css/');
 define('RUTA_JS', RUTA_APP.'js/');
