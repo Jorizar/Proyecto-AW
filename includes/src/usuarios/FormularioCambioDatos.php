@@ -97,7 +97,7 @@ class FormularioCambioDatos extends Formulario
             $filetype = pathinfo($_FILES['nueva_foto']['name'], PATHINFO_EXTENSION);
             $filename = uniqid() . "." . $filetype;
             $targetFilePath = 'img/fotosperfil/' . $filename;
-            $filesize = $_FILES['nueva_foto']['name'];
+            $filesize = $_FILES['nueva_foto']['size'];
 
             if ($filesize > 1000000) {
                 $this->errores['nueva_foto'] = 'La imagen no puede ocupar más de 1 MB';
