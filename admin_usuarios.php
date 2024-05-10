@@ -50,7 +50,7 @@ $contenidoPrincipal .= '</tbody></table>';
 }
 
 // Formulario para añadir un nuevo usuario
-    $formRegistro = new \es\ucm\fdi\aw\usuarios\FormularioRegistro();
+    $formRegistro = new \es\ucm\fdi\aw\usuarios\FormularioRegistroAdmin();
     $formRegistro = $formRegistro->gestiona();
     
     $contenidoPrincipal .= "  <div class= 'registro-formulario'>

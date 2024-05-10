@@ -4,10 +4,10 @@ namespace es\ucm\fdi\aw\usuarios;
 use es\ucm\fdi\aw\Aplicacion;
 use es\ucm\fdi\aw\Formulario;
 
-class FormularioRegistro extends Formulario
+class FormularioRegistroAdmin extends Formulario
 {
     public function __construct() {
-        parent::__construct('formRegistro', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/index.php')]);
+        parent::__construct('formRegistro', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/admin_usuarios.php')]);
     }
     
     protected function generaCamposFormulario(&$datos)
@@ -21,7 +21,8 @@ class FormularioRegistro extends Formulario
     // Opciones para el campo de selección de roles
     $opcionesRol = [
         'free' => 'Free',
-        'premium' => '€ Premium €'
+        'premium' => '€ Premium €',
+        'critico' => 'Critico de Cine'
     ];
     
     // Genera las opciones HTML para el campo de selección de roles
@@ -145,7 +146,7 @@ class FormularioRegistro extends Formulario
     }
 
     $rol = $datos['rol'] ?? '';
-    if (!in_array($rol, ['free', 'premium'])) {
+    if (!in_array($rol, ['free', 'premium','critico'])) {
         $this->errores['rol'] = 'Elige un rol válido';
     }
 
@@ -157,8 +158,6 @@ class FormularioRegistro extends Formulario
             $this->errores[] = "El usuario ya existe";
         } else {
             $usuario = Usuario::crea($nombreUsuario, $password, null, $rol, $email, $foto);
-            $app = Aplicacion::getInstance();
-            $app->login($usuario); 
         }
     }
 }
