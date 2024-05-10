@@ -20,7 +20,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'includes/src/likes/procesar_like.php', // Asegúrate de que la URL es correcta
+            url: './includes/src/likes/procesar_like.php', // Asegúrate de que la URL es correcta
             data: formData,
             dataType: 'json', // Esperando una respuesta JSON
             success: function(response) {
