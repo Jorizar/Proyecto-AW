@@ -733,7 +733,7 @@ main {
 
 /* Estilos para el formulario de comentarios */
 .comentario-formulario,
-.contenedor_editarComentariosAdmin {
+.cambiar-datos-noticia-formulario {
     width: 500px;
     text-align: left; /* Alinea todo el contenido a la izquierda */
     margin-bottom: 10px; /* Espaciado inferior */
@@ -745,20 +745,22 @@ main {
     margin-bottom: 8px; /* Espaciado inferior */
 }
 
-.comentario-formulario form {
+.comentario-formulario form,
+.cambiar-datos-noticia-formulario form {
     padding: 20px; /* Añade espacio interno */
     background-color: #141414; /* Color de fondo del formulario */
 }
 
 
-.comentario-formulario label {
+.comentario-formulario label,
+.cambiar-datos-noticia-formulario label {
     display: block; /* Convertimos la etiqueta en un bloque para que ocupe todo el ancho */
 }
 
 .comentario-formulario textarea,
-.comentario-formulario select, 
-.contenedor_editarComentariosAdmin textarea,
-.contenedor_editarComentariosAdmin select{
+.comentario-formulario select,
+.cambiar-datos-noticia-formulario textarea,
+.cambiar-datos-noticia-formulario select{
     padding: 8px; /* Añade espacio interno */
     border: 1px solid #ccc; /* Borde del campo */
     border-radius: 4px; /* Bordes redondeados */
@@ -770,14 +772,19 @@ main {
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
 }
 
+.cambiar-datos-noticia-formulario label {
+    display: block;
+    margin-top: 15px; /* Ajusta el espacio inferior entre cada etiqueta y campo */
+}
+
 .comentario-formulario textarea,
-.contenedor_editarComentariosAdmin textarea {
+.cambiar-datos-noticia-formulario textarea {
     width: calc(80% - 10px); /* Ancho del textarea */
     height: 100px; /* Altura del textarea */
 }
 
 .comentario-formulario select,
-.contenedor_editarComentariosAdmin select {
+.cambiar-datos-noticia-formulario select {
     width: calc(15% - 10px); /* Ancho del select */
     margin-left: 30px;
     color: rgba(127,96,3,1);
@@ -939,6 +946,7 @@ main {
 
 /* Estilos para el botón de enviar comentario */
 .comentario-formulario button[type="submit"],
+.cambiar-datos-noticia-formulario button[type="submit"],
 .contenedor-etiqueta-campo button[type="submit"] {
     width: calc(82% - 20px); 
     padding: 8px; 
@@ -954,6 +962,7 @@ main {
 }
 
 .comentario-formulario button[type="submit"]:hover,
+.cambiar-datos-noticia-formulario button[type="submit"]:hover,
 .contenedor-etiqueta-campo button[type="submit"]:hover {
     background-color: #141414; /* Cambia el color de fondo al pasar el ratón */
 }
