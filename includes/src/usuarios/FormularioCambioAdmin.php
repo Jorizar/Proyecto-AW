@@ -104,7 +104,7 @@ class FormularioCambioAdmin extends Formulario
         if (isset($_FILES['nueva_foto'])) {
             $filetype = pathinfo($_FILES['nueva_foto']['name'], PATHINFO_EXTENSION);
             $filename = uniqid() . "." . $filetype;
-            $targetFilePath = 'img/fotosperfil/' . $filename;
+            $targetFilePath = 'img/fotosPerfil/' . $filename;
             $filesize = $_FILES['nueva_foto']['name'];
 
             if ($filesize > 1000000) {
