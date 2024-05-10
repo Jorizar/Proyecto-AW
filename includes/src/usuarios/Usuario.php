@@ -19,7 +19,7 @@ class Usuario
     
     public static function crea($nombreUsuario, $password, $id, $rol, $email, $foto)
     {
-        $foto = './img/fotosperfil/1.png';
+        $foto = './img/fotosPerfil/1.png';
         $hashedPassword = self::hashPassword($password);
         $user = new Usuario($nombreUsuario, $hashedPassword, $id, $rol, $email, $foto);
         return $user->guarda();
