@@ -45,31 +45,31 @@ class FormularioEditaNoticia extends Formulario
         <div class="contenedor_cambiarDatosNoticia">
             <div class="cambiar-datos-noticia-formulario">
                 {$htmlNoticiaId}
-                <div class="edit-campo-titulo">
+                <div class="edit-campo-titulo contenedor-etiqueta-campo">
                     <label for="titulo">Título:</label>
                     <input id="titulo" type="text" name="titulo"  placeholder="$tituloN"/>
                     {$erroresCampos['titulo']}
                 </div>
-                <div class="edit-campo-autor">
+                <div class="edit-campo-autor contenedor-etiqueta-campo">
                     <label for="autor">Autor:</label>
                     <input id="autor" type="text" name="autor" value="$autorN"/>
                     {$erroresCampos['autor']}
                 </div>
-                <div class="edit-campo-fecha">
+                <div class="edit-campo-fecha contenedor-etiqueta-campo">
                     <label for="fecha">Fecha de la Noticia:</label>
                     <input id="fecha" type="text" name="fecha" value="$fechaN"/>
                     {$erroresCampos['fecha']}
                 </div>
-                <div class="edit-campo-portada">
+                <div class="edit-campo-portada contenedor-etiqueta-campo">
                     <label for="portada">Portada de la Noticia:</label>
                     <input id="portada" type="file" name="portada" accept="image/*" >
                 </div>
-                <div class="edit-campo-texto">
+                <div class="edit-campo-texto contenedor-etiqueta-campo">
                     <label for="texto">Texto de la Noticia:</label>
                     <textarea id="texto" name="texto" rows="10" >$textoN</textarea>
                     {$erroresCampos['texto']}
                 </div>
-                <div>
+                <div class="contenedor-etiqueta-campo">
                     <button type="submit" name="cambiar_datosNoticia">Cambiar Datos</button>
                 </div>
             </div>
