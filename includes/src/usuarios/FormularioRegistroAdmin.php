@@ -67,6 +67,7 @@ class FormularioRegistroAdmin extends Formulario
             <div>
                 <button type="submit" name="registro">Registrar</button>
             </div>
+        </fieldset>
         <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
         <script type="text/javascript" src="js/validarFormulario.js"></script>
         EOF;

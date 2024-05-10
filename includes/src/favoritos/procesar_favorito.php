@@ -12,7 +12,7 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
         $resultado = Favorito::crea($userId, $pelicula_id);
 
         if ($resultado) {
-            $relativePath = './../../../vista_pelicula.php?id=' . urlencode($pelicula_id);
+            $relativePath = '/vista_pelicula.php?id=' . urlencode($pelicula_id);
             header('Location: ' . $relativePath);
             exit();
         } else {
@@ -26,7 +26,7 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
         $resultado = Favorito::eliminaPorIdUsuarioYIdPelicula($userId, $pelicula_id);
 
         if ($resultado) {
-            $relativePath = './../../../vista_pelicula.php?id=' . urlencode($pelicula_id);
+            $relativePath = '/vista_pelicula.php?id=' . urlencode($pelicula_id);
             header('Location: ' . $relativePath);
             exit();
         } else {
