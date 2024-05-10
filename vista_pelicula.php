@@ -215,6 +215,7 @@ if (isset($_GET['id'])) {
         </div>
         <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
         <script type="text/javascript" src="js/ValidarFormulario.js"></script>
+        <script src="js/valoracion.js"></script>
         EOF;
     }
     else if ($app->usuarioLogueado() && $usuarioYaComento) {
@@ -222,6 +223,7 @@ if (isset($_GET['id'])) {
         <p>Ya has comentado esta película.</p>
         <script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
         <script type="text/javascript" src="js/ValidarFormulario.js"></script>
+        <script src="js/valoracion.js"></script>
         EOF;
     }
 
@@ -232,7 +234,6 @@ if (isset($_GET['id'])) {
 $params = ['tituloPagina' => $tituloPagina, 'contenidoPrincipal' => $contenidoPrincipal];
 $app->generaVista('/plantillas/plantilla.php', $params);
 
-echo '<script src="js/valoracion.js"></script>';
 
 
 ?>
