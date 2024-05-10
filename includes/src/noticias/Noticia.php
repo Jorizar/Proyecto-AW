@@ -69,7 +69,7 @@ class Noticia
                 return null;
             }
         } else {
-            error_log("Error preparing statement: " . $conn->error);
+            error_log("Error: " . $conn->error);
             return null;
         }
     }
@@ -111,7 +111,6 @@ class Noticia
     public static function buscaPorTitulo($titulo)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        //$query = sprintf("SELECT * FROM peliculas WHERE LOWER(titulo) LIKE LOWER('%$tituloPelicula%')");
         $query = "SELECT * FROM noticias WHERE LOWER(titulo) LIKE LOWER('%$titulo%')";
         $rs = $conn->query($query);
         $result = false;

@@ -83,7 +83,7 @@ class FormularioEditaNoticia extends Formulario
     {
         
         echo "El id de la noticia es: ".$this->id_noticia."";
-//NUEVO TITULO
+        //NUEVO TITULO
         $nuevoTitulo = trim($datos['titulo'] ?? '');
         $nuevoTitulo = filter_var($nuevoTitulo, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if(!empty($nuevoTitulo)){
@@ -98,26 +98,26 @@ class FormularioEditaNoticia extends Formulario
                 Noticia::cambiarTítulo($this->id_noticia,$nuevoTitulo);
             }
         }
-// NUEVO AUTOR
+        // NUEVO AUTOR
         $nuevoAutor = trim($datos['autor'] ?? '');
         $nuevoAutor = filter_var($nuevoAutor, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if(!empty($nuevoAutor)){
             Noticia::cambiarAutor($this->id_noticia,$nuevoAutor);   
         }
-// NUEVA FECHA
+        // NUEVA FECHA
         $nuevaFecha = trim($datos['fecha'] ?? '');
         $nuevaFecha = filter_var($nuevaFecha, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if(!empty($nuevaFecha)){
             Noticia::cambiarFecha($this->id_noticia,$nuevaFecha);   
         }
-// NUEVO TEXTO
+        // NUEVO TEXTO
         $nuevoTexto = trim($datos['texto'] ?? '');
         $nuevoTexto = filter_var($nuevoTexto, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if(!empty($nuevoTexto)){
             Noticia::cambiarTexto($this->id_noticia,$nuevoTexto);   
         }
 
-// Procesamos la portada de la noticia
+        // Procesamos la portada de la noticia
 
         $portada = isset($_FILES['portada']) ? $_FILES['portada']: '';
          
@@ -151,7 +151,7 @@ class FormularioEditaNoticia extends Formulario
         }
 
       
-        $relativePath = '/AW/Proyecto-AW/admin_noticias.php';
+        $relativePath = '/admin_noticias.php';
         header('Location: ' . $relativePath);
         exit();
 

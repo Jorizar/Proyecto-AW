@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
 
         $resenas = Resena::buscarPorPeliculaId($movieId);
 
-        ob_start(); // Start output buffering
+        ob_start(); 
         ?>
         <div class="movie-info">
             <h1><?php echo htmlspecialchars($titulo); ?></h1>
@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
         } else {
             echo "<p>No hay reseñas disponibles para esta película.</p>";
         }
-        $contenidoPrincipal = ob_get_clean(); // End output buffering and clean up
+        $contenidoPrincipal = ob_get_clean(); 
     } else {
         $contenidoPrincipal = "<h1>Película no encontrada.</h1>";
     }

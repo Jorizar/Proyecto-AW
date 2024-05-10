@@ -1395,73 +1395,70 @@ main {
 
 
 
-/* Style for the entire review block */
+/* Estilo para reviews */
 .review {
-    margin-bottom: 20px; /* Adds space between review blocks */
-    border-bottom: 1px solid #ccc; /* Adds a line below each review for clear separation */
-    padding-bottom: 20px; /* Adds some padding at the bottom of each review */
+    margin-bottom: 20px; 
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 20px; 
 }
 
-/* Style for critic's information */
+/* Estilo criticos */
 .info-critico {
-    display: flex; /* Uses flexbox for layout */
-    align-items: center; /* Aligns items vertically center */
-    margin-bottom: 10px; /* Adds some space below the critic info before the review text */
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 10px; 
 }
 
-/* Style for the critic's photo */
 .foto-critico {
-    width: 60px; /* Sets a fixed width for the photo */
-    height: 60px; /* Sets a fixed height for the photo */
-    border-radius: 50%; /* Makes the photo circular */
-    margin-right: 15px; /* Adds space between the photo and the critic's name */
-    object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%; 
+    margin-right: 15px; 
+    object-fit: cover; 
 }
 
-/* Style for the review text */
+
 .review p {
-    margin: 5px 0; /* Adds top and bottom margin to each paragraph in the review */
-    line-height: 1.6; /* Increases line spacing for better readability */
+    margin: 5px 0; 
+    line-height: 1.6; 
 }
 
-/* Style for the valuation text */
+
 .review p:last-child {
-    font-weight: bold; /* Makes the last paragraph (valuation) bold */
-    color: #ebbe44; /* Optional: changes the color to blue for emphasis */
+    font-weight: bold; 
+    color: #ebbe44; 
 }
 
-/* Base style for review buttons */
+
 .resenas-criticos button {
-    width: auto; /* Width adjusts to content */
-    padding: 10px 20px; /* Comfortable padding */
-    background-color: #7f6003; /* Deep gold color */
-    color: white; /* Text color */
-    border: none; /* No borders */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    margin-top: 10px; /* Margin on the top */
-    margin-bottom: 10px; /* Margin on the bottom */
-    display: block; /* Makes it a block element to fill the space */
-    text-align: center; /* Centers the text inside */
+    width: auto; 
+    padding: 10px 20px; 
+    background-color: rgba(127,96,3,1); 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+    margin-top: 10px;
+    margin-bottom: 10px; 
+    display: block; 
+    text-align: center; 
 }
 
-/* Hover effect for review buttons */
+
 .resenas-criticos button:hover {
-    background-color: #141414; /* Dark gray on hover for contrast */
+    background-color: #141414; 
 }
 
-/* Additional styles to visually distinguish the button for adding reviews */
-.resenas-criticos button:nth-child(2) { /* Assuming the second button is 'Reseñar esta película' */
-    background-color: #5a924f; /* A green shade for add review button */
+.resenas-criticos button:nth-child(2) { 
+    background-color: #5a924f; 
 }
 
-/* Hover effect specifically for the 'Reseñar esta película' button */
+
 .resenas-criticos button:nth-child(2):hover {
-    background-color: #427337; /* Darker green on hover */
+    background-color: #427337; 
 }
 
-/* General styling for the specific form container */
 .resena-form-container {
     max-width: 600px;
     margin: 20px auto;
@@ -1501,7 +1498,7 @@ main {
     display: block;
     width: auto;
     padding: 10px 20px;
-    background-color: #7f6003;
+    background-color: rgba(127, 96, 3, 1);
     color: white;
     font-size: 16px;
     border: none;
@@ -1514,7 +1511,7 @@ main {
 }
 
 .resena-form-container button[type="submit"]:hover {
-    background-color: #4b3800;
+    background-color: rgba(127, 96, 3, 1);
 }
 
 .heart {
@@ -1581,7 +1578,6 @@ main {
 .form-ver-modificar {
     margin-top: 10px; /* Ajusta el valor del margen según tus necesidades */
 }
-
 
 
 /*Icono para crear Lista*/

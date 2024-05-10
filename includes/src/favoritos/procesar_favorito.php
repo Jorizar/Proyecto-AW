@@ -39,7 +39,7 @@ if ($app->usuarioLogueado()) { // Verificar si el usuario está autenticado
     }
 } else {
     // Si el usuario no está autenticado, redirigirlo a la página de inicio de sesión
-    $relativePath = '/AW/Proyecto-AW/login.php';
+    $relativePath = '/login.php';
     header('Location: ' . $relativePath);
     exit();
 }

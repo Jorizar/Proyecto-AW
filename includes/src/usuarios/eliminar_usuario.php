@@ -18,7 +18,7 @@ if (empty($usuario_id)) {
 $resultado = Usuario::borraPorId($usuario_id);
 
 if ($resultado) {
-    $relativePath = '/AW/Proyecto-AW/admin_usuarios.php';
+    $relativePath = '/admin_usuarios.php';
     header('Location: ' . $relativePath);
     exit();
 } else {

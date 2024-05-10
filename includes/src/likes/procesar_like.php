@@ -9,7 +9,7 @@ if (!$app->usuarioLogueado()) {
     exit();
 }
 
-$user_id = $app->getUsuarioId();  // Assuming you have a method to get the current user ID
+$user_id = $app->getUsuarioId();  
 $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 $comentario_id = filter_input(INPUT_POST, 'comentario_id', FILTER_VALIDATE_INT);
 $pelicula_id = filter_input(INPUT_POST, 'pelicula_id', FILTER_VALIDATE_INT);

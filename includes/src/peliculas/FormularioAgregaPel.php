@@ -86,7 +86,6 @@ class FormularioAgregaPel extends Formulario
 
     protected function procesaFormulario(&$datos)
     {
-        // Extract and sanitize input data
         $tituloPelicula = $datos['tituloPelicula'] ?? null;
         $directorPelicula = $datos['directorPelicula'] ?? null;
         $generoPelicula = $datos['generoPelicula'] ?? null;
@@ -97,19 +96,17 @@ class FormularioAgregaPel extends Formulario
         $imdbPelicula = $datos['imdb'] ?? null;
         $portadaPelicula = $_FILES['portada'] ?? null;
     
-        // Validate required fields
+
         if (!$tituloPelicula || !$directorPelicula || !$generoPelicula || !$annioPelicula || !$sinopsisPelicula || !$imdbPelicula || $generoPelicula == '-1' || empty($portadaPelicula)) {
             $this->errores[] = "Todos los campos son obligatorios. Por favor, completa el formulario completamente.";
             return $this->generaCamposFormulario($datos);
         }
-    
-        // Validate actors and characters
+
         if (empty($repartoActores) || empty($repartoPersonajes) || count($repartoActores) != count($repartoPersonajes)) {
             $this->errores[] = "Debes proporcionar al menos un actor y su personaje y asegurarte que cada actor tiene un personaje asignado.";
             return $this->generaCamposFormulario($datos);
         }
     
-        // Format actors and characters into JSON
         $reparto = [];
         foreach ($repartoActores as $index => $actor) {
             if (!empty($actor) && !empty($repartoPersonajes[$index])) {
@@ -121,12 +118,10 @@ class FormularioAgregaPel extends Formulario
         }
         $jsonReparto = json_encode($reparto);
     
-        // Validate and upload the movie cover image
         if ($portadaPelicula['error'] == UPLOAD_ERR_OK) {
             $tempPath = $portadaPelicula['tmp_name'];
             $uploadPath = 'img/portadas/' . basename($portadaPelicula['name']);
     
-            // Check file size and type
             if ($portadaPelicula['size'] > 1000000) {
                 $this->errores[] = "El archivo de la portada debe ser menor a 1MB.";
                 return $this->generaCamposFormulario($datos);
@@ -148,7 +143,6 @@ class FormularioAgregaPel extends Formulario
             return $this->generaCamposFormulario($datos);
         }
     
-        // Proceed to store the new movie in the database
         if (empty($this->errores)) {
             $success = Pelicula::inserta([
                 'titulo' => $tituloPelicula,
@@ -165,7 +159,6 @@ class FormularioAgregaPel extends Formulario
                 $this->errores[] = "No se pudo registrar la película en la base de datos.";
                 return $this->generaCamposFormulario($datos);
             } else {
-                // Redirect on success
                 header('Location: ' . $this->urlRedireccion);
                 exit;
             }

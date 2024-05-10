@@ -71,7 +71,6 @@ class Pelicula
     public static function buscaPorTitulo($tituloPelicula)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
-        //$query = sprintf("SELECT * FROM peliculas WHERE LOWER(titulo) LIKE LOWER('%$tituloPelicula%')");
         $query = "SELECT * FROM peliculas WHERE LOWER(titulo) LIKE LOWER('%$tituloPelicula%')";
         $rs = $conn->query($query);
         $result = false;
@@ -111,18 +110,18 @@ class Pelicula
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query = sprintf("SELECT titulo FROM peliculas WHERE id = %d", $idPelicula);
         $rs = $conn->query($query);
-        $titulo = null; // Default to null if not found
+        $titulo = null; 
     
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $titulo = $fila['titulo']; // Retrieve the title
+                $titulo = $fila['titulo']; 
             }
             $rs->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
-        return $titulo; // Return the movie title or null if not found
+        return $titulo; 
     }
     
     public static function buscarTodas() {
@@ -225,7 +224,6 @@ class Pelicula
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
     
-        // Prepare statement to avoid SQL injection
         $sql = "INSERT INTO peliculas (titulo, director, annio, genero, sinopsis, portada, reparto, Val_IMDb) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
     
@@ -263,30 +261,26 @@ class Pelicula
         $result = false;
         $conn = Aplicacion::getInstance()->getConexionBd();
     
-        // Check if $conn is a valid connection
         if ($conn->connect_error) {
             error_log("Connection failed: " . $conn->connect_error);
             return false;
         }
     
-        // Prepare query
         $query = sprintf("UPDATE peliculas SET titulo = '%s', director='%s', annio='%d', genero='%s', sinopsis='%s', portada='%s', reparto = '%s', Val_IMDb = '%d' WHERE id=%d"
             , $conn->real_escape_string($pelicula->titulo)
             , $conn->real_escape_string($pelicula->director)
             , $pelicula->annio
             , $conn->real_escape_string($pelicula->genero)
             , $conn->real_escape_string($pelicula->sinopsis)
-            , $conn->real_escape_string($pelicula->portada) // Assuming $portada was meant to be $pelicula->portada
+            , $conn->real_escape_string($pelicula->portada) 
             , $conn->real_escape_string($pelicula->reparto)
             , $pelicula->Val_IMDb
             , $pelicula->id
         );
-    
-        // Execute query
+
         if ($conn->query($query) === TRUE) {
             return $pelicula;
         } else {
-            // Log errors
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             return false;
         }

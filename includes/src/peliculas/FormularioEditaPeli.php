@@ -116,7 +116,6 @@ class FormularioEditaPeli extends Formulario
     protected function procesaFormulario(&$datos)
     {
             
-            // NUEVO TITULO?
             $nuevoTitulo = trim($datos['tituloPelicula'] ?? '');
             $nuevoTitulo = filter_var($nuevoTitulo, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevoTitulo)){
@@ -132,14 +131,12 @@ class FormularioEditaPeli extends Formulario
                 }
             }
 
-            //NUEVO DIRECTOR ?
             $nuevoDirector = trim($datos['directorPelicula'] ?? '');
             $nuevoDirector = filter_var($nuevoDirector, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevoDirector)){
                 $result = Pelicula::cambiarDirector($this->pelicula_id,$nuevoDirector);   
             }
 
-            //NUEVO AÑO ?
             $nuevoAnnio = trim($datos['annioPelicula'] ?? '');
             $nuevoAnnio = filter_var($nuevoAnnio, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevoAnnio)){
@@ -152,14 +149,12 @@ class FormularioEditaPeli extends Formulario
                 }  
             }
 
-            //NUEVA SINOPSIS ?
             $nuevaSinopsis = trim($datos['sinopsisPelicula'] ?? '');
             $nuevaSinopsis = filter_var($nuevaSinopsis, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevaSinopsis)){
                 $result = Pelicula::cambiarSinopsis($this->pelicula_id,$nuevaSinopsis); 
             }
 
-            //NUEVA NOTA IMdB ?
             $nuevoIMdB = trim($datos['imdb'] ?? '');
             $nuevoIMdB = filter_var($nuevoIMdB, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if(!empty($nuevoIMdB)){
@@ -177,7 +172,7 @@ class FormularioEditaPeli extends Formulario
             }
             
     
-            //Procesamo la portada que ha escogido cargar el usuario
+            //Procesamos la portada que ha escogido cargar el usuario
             if(isset($_FILES['portada'])){
                 $filetype = pathinfo($_FILES['portada']['name'], PATHINFO_EXTENSION);
                 $filename = uniqid() . "." . $filetype;
@@ -204,7 +199,6 @@ class FormularioEditaPeli extends Formulario
 
             }
 
-                    // Processing actor and character data
             $repartoActores = $datos['actor'] ?? [];
             $repartoPersonajes = $datos['personaje'] ?? [];
 
@@ -227,16 +221,14 @@ class FormularioEditaPeli extends Formulario
                 }
             }
 
-            // Verify if there are any errors before redirection
             if (!empty($this->errores)) {
-                return $this->generaCamposFormulario($datos); // Redisplay the form with errors
+                return $this->generaCamposFormulario($datos); 
             } else {
-                // Redirect to the admin page or elsewhere upon successful update
                 header('Location: ' . $this->urlRedireccion);
                 exit();
             }
 
-            $relativePath = '/AW/Proyecto-AW/admin_peliculas.php';
+            $relativePath = '/admin_peliculas.php';
             header('Location: ' . $relativePath);
             exit();
             

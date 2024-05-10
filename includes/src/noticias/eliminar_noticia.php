@@ -19,7 +19,7 @@ if (empty($id)) {
 $resultado = Noticia::borraPorId($id);
 
 if ($resultado) {
-    $relativePath = '/AW/Proyecto-AW/admin_noticias.php';
+    $relativePath = '/admin_noticias.php';
     header('Location: ' . $relativePath);
     exit();
 } else {

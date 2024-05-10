@@ -6,12 +6,11 @@ use es\ucm\fdi\aw\Formulario;
 
 class FormularioAgregaNoticia extends Formulario
 {
-    //TO DO
+
     public function __construct() {
         parent::__construct('formAgregaNoticia', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/index.php'), 'enctype' => 'multipart/form-data']);
     }
     
-    //TO DO
     protected function generaCamposFormulario(&$datos)
     {
         // Se generan los mensajes de error si existen.
@@ -63,9 +62,6 @@ class FormularioAgregaNoticia extends Formulario
         return $html;
     }
     
-
-    
-    //TO DO
     protected function procesaFormulario(&$datos)
     {
         // Recoger los datos del formulario
@@ -81,7 +77,7 @@ class FormularioAgregaNoticia extends Formulario
          if ($noticias === true) {
              $this->errores[] = "Ya existe una noticia con ese titulo, prueba de nuevo";
          } 
-         // lOS DATOS ESTAN VACIOS?
+  
          if($autor === '' || $fecha === '' || $texto === '' ){
             $this->errores[] = "No puede haber campos vacios, rellene todos los campos";    
          }
@@ -113,14 +109,13 @@ class FormularioAgregaNoticia extends Formulario
         }
 
         if (count($this->errores) === 0) {
-            //$peliculas contiene un array de películas si la búsqueda ha encontrado alguna coincidencia, false en caso contrario
             $noticia = Noticia::crea($titulo, $portada, $texto, $autor, $fecha, $rol);
         
             if ($noticia === false) {
                 echo "Error: No se ha podido crear la pelicula";
                 exit();
             } else {
-                $relativePath = '/AW/Proyecto-AW/admin_noticias.php';
+                $relativePath = '/admin_noticias.php';
                 header('Location: ' . $relativePath);
                 exit();
             }

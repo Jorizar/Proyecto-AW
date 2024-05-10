@@ -5,7 +5,6 @@ use es\ucm\fdi\aw\Aplicacion;
 
 class Lista{
      //Funciones relacionadas con la creación/consulta y eliminación de listas
-
      public static function creaListaPeliculas($user_id, $nombre_lista){
         $conn = Aplicacion::getInstance()->getConexionBd();
         $query=sprintf("INSERT INTO listas(user_id, nombre_lista) VALUES ('%d', '%s')"

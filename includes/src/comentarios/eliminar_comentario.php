@@ -23,12 +23,12 @@ $resultado = Comentario::eliminarPorId($comentario_id);
 
 if ($resultado) {
     if (!$app->tieneRol('admin')) {
-        $relativePath = '/AW/Proyecto-AW/misComentarios.php';
+        $relativePath = '/misComentarios.php';
         header('Location: ' . $relativePath);
         exit();
     }
     else{
-        $relativePath = '/AW/Proyecto-AW/admin_comentarios.php';
+        $relativePath = '/admin_comentarios.php';
         header('Location: ' . $relativePath);
         exit();
     }

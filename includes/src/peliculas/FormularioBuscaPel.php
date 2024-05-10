@@ -9,12 +9,10 @@ use es\ucm\fdi\aw\peliculas\Pelicula;
 
 class FormularioBuscaPel extends Formulario
 {
-    //TO DO
     public function __construct() {
         parent::__construct('formBuscaPel', ['urlRedireccion' => Aplicacion::getInstance()->resuelve('/busqueda.php')]);
     }
     
-    //TO DO
     protected function generaCamposFormulario(&$datos)
     {
          //Obtenemos los géneros de las películas
@@ -87,7 +85,6 @@ class FormularioBuscaPel extends Formulario
         $this->errores[] = "Introduce un año de estreno válido";
     } else {
         if (count($this->errores) === 0) {
-            //$peliculas contiene un array de películas si la búsqueda ha encontrado alguna coincidencia, false en caso contrario
             $peliculas = Pelicula::buscaPelicula($tituloPelicula, $directorPelicula, $generoPelicula, $annioPelicula);
         
             if ($peliculas === false) {

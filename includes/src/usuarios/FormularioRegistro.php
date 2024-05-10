@@ -119,7 +119,6 @@ class FormularioRegistro extends Formulario
     } else {
         // Fortaleza de la contraseña
         $puntos = 0;
-        //$puntos += mb_strlen($password) >= 8 ? 4 : 0; // Longitud de la contraseña
         $puntos += preg_match('/[A-Z]/', $password) ? 2 : 0; // Sumar puntos si hay letras mayúsculas
         $puntos += preg_match('/[a-z]/', $password) ? 1 : 0; // Sumar puntos si hay letras minúsculas
         $puntos += preg_match('/[0-9]/', $password) ? 2 : 0; // Sumar puntos si hay números

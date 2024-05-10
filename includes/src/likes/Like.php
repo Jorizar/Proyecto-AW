@@ -17,14 +17,12 @@ class Like
         $this->id = $id;
     }
 
-    // Creates a like and saves it to the database
     public static function crea($user_id, $comentario_id)
     {
         $like = new Like($user_id, $comentario_id);
         return $like->guarda() ? $like : null;
     }
 
-    // Saves a like in the database
     private function guarda()
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -45,7 +43,7 @@ class Like
         return false;
     }
 
-    // Checks if a like exists for a given user and comment
+   
     public static function existe($user_id, $comentario_id)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -58,7 +56,7 @@ class Like
         return $existe;
     }
 
-    // Deletes a like based on user and comment id
+ 
     public static function elimina($user_id, $comentario_id)
     {
         $conn = Aplicacion::getInstance()->getConexionBd();
@@ -69,7 +67,7 @@ class Like
         return $resultado;
     }
 
-    // Getters
+   
     public function getId()
     {
         return $this->id;

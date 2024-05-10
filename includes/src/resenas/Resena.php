@@ -65,14 +65,12 @@ class Resena
         if ($stmt->execute()) {
             return true;
         } else {
-            // Corrected error logging statement
             error_log("Error BD ({$conn->errno}): {$conn->error}");
             $stmt->close(); 
             return false;
         }
     }
 
-    // Getter methods
     public function getTexto() {
         return $this->texto;
     }

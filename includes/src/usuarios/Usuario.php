@@ -73,13 +73,13 @@ class Usuario
         if ($rs) {
             $fila = $rs->fetch_assoc();
             if ($fila) {
-                $UserNombre = $fila['username']; // Retrieve the title
+                $UserNombre = $fila['username']; 
             }
             $rs->free();
         } else {
             error_log("Error BD ({$conn->errno}): {$conn->error}");
         }
-        return $UserNombre; // Return the movie title or null if not found
+        return $UserNombre; 
     }
     
     private static function hashPassword($password)

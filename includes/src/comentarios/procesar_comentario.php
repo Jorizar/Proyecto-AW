@@ -10,9 +10,6 @@ if (!$app->usuarioLogueado()) {
     exit();
 }
 
-
-
-
 $pelicula_id = filter_input(INPUT_POST, 'pelicula_id', FILTER_SANITIZE_NUMBER_INT);
 $texto = filter_input(INPUT_POST, 'texto', FILTER_SANITIZE_SPECIAL_CHARS);
 $valoracion = filter_input(INPUT_POST, 'valoracion', FILTER_VALIDATE_INT, [

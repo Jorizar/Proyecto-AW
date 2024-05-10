@@ -19,7 +19,7 @@ if (empty($pelicula_id)) {
 $resultado = Pelicula::borraPorId($pelicula_id);
 
 if ($resultado) {
-    $relativePath = '/AW/Proyecto-AW/admin_peliculas.php';
+    $relativePath = '/admin_peliculas.php';
     header('Location: ' . $relativePath);
     exit();
 } else {

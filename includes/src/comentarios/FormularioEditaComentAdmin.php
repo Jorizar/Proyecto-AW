@@ -86,11 +86,6 @@ class FormularioEditaComentAdmin extends Formulario
             if (!empty($valoracionNueva)){
                 Comentario::cambiarValoracion($this->comentario_id,$valoracionNueva); 
             }
-
-
-        
-         //header("Location: admin_comentarios.php");
-        // exit(); 
     }
 
 }

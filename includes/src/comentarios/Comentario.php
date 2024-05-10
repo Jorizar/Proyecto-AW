@@ -13,7 +13,7 @@ class Comentario
     private $texto;
     private $valoracion;
     private $likes_count = 0;
-    private $hora;  // Renamed created_at to hora
+    private $hora;  
 
     public function __construct($user_id, $pelicula_id, $texto, $valoracion, $comentario_id = null, $likes_count = 0, $hora = null)
     {
@@ -23,7 +23,7 @@ class Comentario
         $this->texto = $texto;
         $this->valoracion = $valoracion;
         $this->likes_count = $likes_count;
-        $this->hora = $hora;  // Initialize the hora
+        $this->hora = $hora; 
     }
 
     public static function crea($user_id, $pelicula_id, $texto, $valoracion, $likes_count)

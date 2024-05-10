@@ -8,7 +8,7 @@ use es\ucm\fdi\aw\peliculas\Pelicula;
 class FormAgregaPelLista extends Formulario
 {
     public function __construct() {
-        parent::__construct('formAgregaPel' /*['urlRedireccion' => Aplicacion::getInstance()->resuelve('/misListas.php')]*/);
+        parent::__construct('formAgregaPel');
     }
     
     protected function generaCamposFormulario(&$datos)
@@ -19,7 +19,7 @@ class FormAgregaPelLista extends Formulario
          $htmlErroresGlobales = self::generaListaErroresGlobales($this->errores);
          $erroresCampos = self::generaErroresCampos(['lista_seleccionada'], $this->errores, 'span', array('class' => 'error'));
  
-         // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
+        // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
         //Hacemos una consulta para obtener las listas del usuario
         $listas_user = Lista::getListasUser($_SESSION['idUsuario']);
         
